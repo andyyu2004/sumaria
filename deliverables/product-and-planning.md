@@ -6,7 +6,7 @@
  
 #### Q1: What are you planning to build?
 
-We are planning to build a website that helps volunteering organizations manage and broadcast their events, and volunteers find the best event that best suits their skills.
+We are planning to build a website that helps volunteering organizations manage and broadcast their events, and volunteers find the best event that best suits their skills. There is currently no management system (at least not well-known) that is (solely) designed and dedicated for volunteers and volunteering activities and this is the problem we want to solve.
 
 ##### Objectives
 * Better display event data of organizations in a user friendly app.
@@ -27,7 +27,7 @@ Link to Xtensio: https://csc301persona.xtensio.com/7cl2qj6b
 
 #### Q3: Why would your users choose your product? What are they using today to solve their problem/need?
 
-Organizations would use this product for the larger database of volunteers. They would be able to reach more volunteers compare to competing products and have the convenience it brings in contacting volunteers and organizing events. Volunteers would use this product to join events. 
+Organizations would use this product to gain access to a large database of volunteers. They would be able to reach more volunteers compare to competing products (see below, many existing products are either providing this service as a side product of their main focus or have incomplete functionality in the view of volunteers and also a lot of them are not even possible to be considered for volunteer organizations due to prices as well as priorities) and have the convenience it brings in contacting volunteers and organizing events. And for individual/group volunteers, they would use this product to join events that best suit their needs (through our search utility and the matching system). We can provide a centralized platform for both organizations and volunteers.
 
 Currently, organizations are using the following:
 
@@ -54,6 +54,7 @@ Unlike LinkedIn and Indeed, the product will be geared towards nonprofits and vo
 For the front-end, we will be using react.js to build the user interface and the css framework Bootstrap to assist with styling.
 For the back-end, we will be using the express.js web framework on top of node.js, and 
 MongoDB + Mongoose ODM for the database.
+We decide to use CircleCI for CI/CD. However, we might switch to GCP depend on the circumstances.
 
 
 #### Q5: What are the user stories that make up the MVP?
