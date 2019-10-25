@@ -37,16 +37,20 @@ To manage volunteers:
  * Oracle
  * Google Sheets
  * Salesforce
+ 
 To find new volunteers:
  * LinkedIn
  * Indeed
  * CharityVillage
+ * Schools
+ * Volunteer Centers
+ * From the Organization's own internal network and connections.
 
 Our product would help meet these two needs so organizations will not have to use two separate products to find versus manage volunteers. It will have more features tailored towards these tasks compared to current free solutions many nonprofits are using such as Excel. For example, unlike keeping a spreadsheet of volunteers and their information, our product would allow organizations to easily email groups of volunteers. 
 
 It will also be easier for volunteers to join events: rather than having to get back to the organization by email, phone, navigating to their specific website, etc, they will only have to follow a link in the email sent to them to join an event.
 
-Unlike LinkedIn and Indeed, the product will be geared towards nonprofits and volunteers specifically. Not only that, the product is expected to reach a greater database of volunteers compared to competing products like Blackbaud as organizations will not only be able to access volunteers associated with their own organization but all organizations that are using the product.
+Unlike LinkedIn and Indeed, the product will be geared towards nonprofits and volunteers specifically. Not only that, the product is expected to reach a greater database of volunteers compared to competing products like Blackbaud as organizations will not only be able to access volunteers associated with their own organization but all organizations that are using the product. Hence this will reduce the overhead of organizations looking in different locations (Schools, Volunteer Centers...) for volunteers.
 
 
 #### Q4: How will you build it?
