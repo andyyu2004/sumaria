@@ -47,9 +47,9 @@ router.post("/account", (req,res) => {
     if (!req.body.username || !req.body.password) return res.status(400).json({error: true, message: "Bad Request"});
     try {
         var user = await controllers.user.create(req.body.username, req.body.password);
+        res.session.user = user;
         return res.json(user);
     } catch(e) {
         return res.status(500).json({error: true, message: "Server Error"})
     }
-
 })
