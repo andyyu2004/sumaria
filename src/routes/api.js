@@ -1,7 +1,8 @@
 var express = require("express");
     router = express.Router(),
     controllers = {
-        user: require("./../controllers/User")
+        user: require("./../controllers/User"),
+        company: require("./../controllers/Company")
     },
     cookieSession = require("cookie-session");
   
@@ -43,13 +44,34 @@ router.post("/account/login", async (req,res) => {
 
 })
 
-router.post("/account", (req,res) => {
+router.post("/account", async (req,res) => {
     if (!req.body.username || !req.body.password) return res.status(400).json({error: true, message: "Bad Request"});
     try {
         var user = await controllers.user.create(req.body.username, req.body.password);
         res.session.user = user;
-        return res.json(user);
+        return res.json({error: false, user});
     } catch(e) {
         return res.status(500).json({error: true, message: "Server Error"})
+    }
+})
+
+
+router.post("/company", async (req,res) => {
+    if (!req.body.name) return res.status(400).json({error: true, message: "Bad Request"})
+    try {
+        var company = await controllers.company.create(req.body.name);
+        res.json({error: false, company});
+    } catch(e) {
+        res.status(500).json({error: true, message: "Server Error"})
+    }
+})
+
+router.get("/company/:id", async (req,res) => {
+    try {
+        var company = await controllers.company.get(req.params.id);
+        if (!company) return res.status(404).json({error: true, message: "Company not found"})
+        res.json({error: false, company});
+    } catch(e) {
+        res.status(500).json({error: true, message: "Server Error"});
     }
 })
