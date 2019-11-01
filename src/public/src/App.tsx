@@ -1,5 +1,5 @@
 import React from 'react';
-import { Home, Login } from './views';
+import { Home, Login, Browse } from './views';
 import { Router } from '@reach/router';
 import './App.css';
 
@@ -8,6 +8,7 @@ const App: React.FC = () => {
     <Router>
       <Home path="/"/>
       <Login path="login" />
+      <Browse path="browse" />
     </Router>
   );
 }

@@ -1,0 +1,60 @@
+{
+    "events": [
+      {
+        "id": 0,
+        "name": "Toronto Marathon XYZ",
+        "date": "2019-10-15T09:00:00.000Z",
+        "posteddate": "2019-10-05T09:00:00.000Z",
+        "skills": [
+          "leadership"
+        ],
+        "address": "290 Bremner Blvd, Toronto, ON M5V 3L9",
+        "description": "A maration to support ABC",
+        "organizer": "123 Foundation"
+      },
+      {
+        "id": 1,
+        "name": "Peer Mentoring",
+        "date": "2019-09-15T13:00:00.000Z",
+        "posteddate": "2018-10-05T09:00:00.000Z",
+        "skills": [
+          "math",
+          "english",
+          "leadership",
+          "writing"
+        ],
+        "address": "290 Bremner Blvd, Toronto, ON M5V 3L9",
+        "description": "A learning experience to empower students.",
+        "organizer": "456 schools"
+      },
+      {
+        "id": 2,
+        "name": "Can Drive",
+        "date": "2019-11-12T16:00:00.000Z",
+        "posteddate": "2019-11-01T09:00:00.000Z",
+        "skills": [
+          "french",
+          "communication",
+          "leadership"
+        ],
+        "address": "123 Cavendish Blvd, Montreal, Quebec H4T 1M8",
+        "description": "Collecting cans for EFG",
+        "organizer": "789 Organization"
+      },
+      {
+        "id": 3,
+        "name": "Peer Mentoring Toronto",
+        "date": "2019-09-15T13:00:00.000Z",
+        "posteddate": "2018-10-05T09:00:00.000Z",
+        "skills": [
+          "Spanish",
+          "Latin",
+          "German",
+          "writing"
+        ],
+        "address": "290 Bremner Blvd, Toronto, ON M5V 3L9",
+        "description": "A learning experience to empower students.",
+        "organizer": "456 schools"
+      }
+    ]
+}
