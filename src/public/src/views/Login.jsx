@@ -1,15 +1,7 @@
 import React from 'react'
-import sumariaLogo from '../assets/images/logos/SumariaLogoSample.jpeg'
+import SumariaLogo from '../assets/images/logos/SumariaLogoSample.jpeg'
 
-const loginStyle = {
-  backgroundColor: 'white',
-  font: 'inherit',
-  border: '1px solid blue',
-  padding: '8px',
-  cursor: 'pointer'
-};
-
-const loginContainer = {
+const LoginContainer = {
   "width":"100%",
   "minHeight":"100vh",
   "display":"flex",
@@ -20,7 +12,7 @@ const loginContainer = {
   "background":"linear-gradient(111deg, #1a2353, #2c42b2, #6a7cda, #c6ccf0)"
 }
 
-const loginForm = {
+const LoginForm = {
   "width": "220px",
   "background": "#fff",
   "borderRadius": "20px",
@@ -34,7 +26,7 @@ const loginForm = {
   alignItems: "center"
 }
 
-const loginInput = {
+const LoginInput = {
   "fontFamily": "Roboto",
   "fontSize": "15px",
   "lineHeight": "2",
@@ -48,7 +40,7 @@ const loginInput = {
   "margin": "4px"
 }
 
-const loginInputFocus = {
+const LoginInputFocus = {
   "display": "block",
   "position": "absolute",
   "borderRadius": "20px",
@@ -61,7 +53,7 @@ const loginInputFocus = {
   "color": "#5fb1e3"
 }
 
-const loginButton = {
+const LoginButton = {
   "width": "180px",
   "display": "flex",
   "flexWrap": "wrap",
@@ -84,14 +76,14 @@ const loginButton = {
 
 }
 
-const forgetPwd = {
+const ForgetPwd = {
   "fontFamily": "Roboto",
   "fontSize": "13.5px",
   "lineHeight": "2",
   "color": "#b48080"
 }
 
-const createAccount = {
+const CreateAccount = {
   "fontFamily": "Roboto",
   "fontSize": "13.5px",
   "lineHeight": "2",
@@ -99,31 +91,31 @@ const createAccount = {
 
 const Login = props => {
   return (
-    <div className="limiter">
-  <div style={loginContainer}>
+    <div>
+  <div style={LoginContainer}>
     <div className="loginBox">
-        <img src={sumariaLogo} alt="Sumaria" style={{borderRadius: "50%"}} />
-      <form style={loginForm}>
+        <img src={SumariaLogo} alt="Sumaria" style={{borderRadius: "50%"}} />
+      <form style={LoginForm}>
         <div data-validate="Valid email is required: example@sumaria.ca">
-          <input style={loginInput} type="text" name="email" placeholder="Email" />
-          <span style={loginInputFocus} />
+          <input style={LoginInput} type="text" name="email" placeholder="Email" />
+          <span style={LoginInputFocus} />
           <span className="symbol">
             <i className="fa fa-envelope" aria-hidden="true" />
           </span>
         </div>
         <div data-validate="Password is required">
-          <input style={loginInput} type="password" name="pass" placeholder="Password" />
-          <span style={loginInputFocus} />
+          <input style={LoginInput} type="password" name="pass" placeholder="Password" />
+          <span style={LoginInputFocus} />
           <span className="symbol">
             <i className="fa fa-lock" aria-hidden="true" />
           </span>
         </div>
         <div>
-          <button style={loginButton}>
+          <button style={LoginButton}>
             Login
           </button>
         </div>
-        <div style={forgetPwd}>
+        <div style={ForgetPwd}>
           <span>
             Forgot
           </span>
@@ -131,7 +123,7 @@ const Login = props => {
             Username / Password?
           </a>
         </div>
-        <div style={createAccount}>
+        <div style={CreateAccount}>
           <a href="/register">
             Create your Account
             <i className="fa fa-long-arrow-right m-l-5" aria-hidden="true" />
