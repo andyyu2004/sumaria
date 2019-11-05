@@ -1,8 +1,6 @@
 import React, { useState } from 'react'
 import { navigate } from '@reach/router'
-//import { Redirect } from 'react-router';
-//import API from '../api';
-
+// import { Redirect } from 'react-router';
 
 const ResetContainer = {
   "width": "100%",
@@ -109,34 +107,27 @@ const Reset = props => {
   }
 
   return (
-<div>
-  <div style={ResetContainer}>
-    <div style={ResetForm}>
-      <div className="text-center">
-          <h3><i className="fa fa-lock fa-4x" /></h3>
-        <h2 className="text-center">Forgot Password?</h2>
-        <p className="text-center" style={ResetText}>We got your back. You can reset your password here.</p>
-        <div className="panel-body">
-          <form id="register-form" role="form" onSubmit={HandleReset} autoComplete="off" className="form">
-            <div className="form-group">
-              <div className="input-group">
-                <span className="input-group-addon"><i className="glyphicon glyphicon-envelope color-blue" /></span>
-                <input id="email" name="email" style={EmailInput} value={email} onChange={e => setEmail(e.target.value)} placeholder="Email" className="form-control" type="email" />
-              </div>
+    <div>
+      <div style={ResetContainer}>
+        <div style={ResetForm}>
+          <div className="text-center">
+            <h3><i className="fa fa-lock fa-4x" /></h3>
+            <h2 className="text-center">Forgot Password?</h2>
+            <p className="text-center" style={ResetText}>We got your back. You can reset your password here.</p>
+            <div className="panel-body">
+              <form id="register-form" role="form" onSubmit={HandleReset} autoComplete="off" className="form">
+                <div className="form-group">
+                  <div className="input-group">
+                    <span className="input-group-addon"><i className="glyphicon glyphicon-envelope color-blue" /></span>
+                    <input id="email" name="email" style={EmailInput} value={email} onChange={e => setEmail(e.target.value)} placeholder="Email" className="form-control" type="email" />
+                  </div>
+                </div>
+              </form>
             </div>
-            <div className="form-group">
-              <input name="recover-submit" style={SubmitButton} className="btn btn-lg btn-primary btn-block" defaultValue="Reset Password" type="submit" />
-            </div>
-            <input type="hidden" className="hide" name="token" id="token" defaultValue /> 
-          </form>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
-
-
-
   );
 };
 

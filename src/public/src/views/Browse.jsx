@@ -1,5 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import Card from 'react-bootstrap/Card';
+import Col from 'react-bootstrap/Col';
+import Form from 'react-bootstrap/Form';
+import Row from 'react-bootstrap/Row';
 import data from "../mockdata.json";
+import './Browse.css';
 
 /**
  * Formats the list of events in an unordered list.
@@ -12,33 +17,32 @@ import data from "../mockdata.json";
 const BrowseEntries = ({event}) => {
   const { name, date, posteddate, skills, address, description, organizer } = event;
   return (
-    <li>{name}
+    <Card className='event-post'>
+      <h4>{name}</h4>
       <ul>
-        <li>
-          Date:
-          {new Date(date).toDateString()}
-        </li>
-        <li>
-          Posted Date:
-          {new Date(posteddate).toDateString()}
-        </li>
-        <li>
-          Skills Required:
+        <Row>
+          <Col>Event Date: {new Date(date).toDateString()}</Col>
+          <Col>Posted Date: {new Date(posteddate).toDateString()}</Col>
+        </Row>
+        <Row>
+          <Col>Organizer: {organizer}</Col>
+        </Row>
+        <Row>
+          <Col>Address: {address}</Col>
+        </Row>
+        Skills Required:
+        <Row>
+          <Col>
           <ul> 
             {skills.map(skill => <li key={skill}>{skill}</li>)}
           </ul>
-        </li>
-        <li>
-          Address: {address}
-        </li>
-        <li>
-          Description: {description}
-        </li>
-        <li>
-          Organizer: {organizer}
-        </li>
+          </Col>
+        </Row>
+        <Row>
+          <Col>Description: {description}</Col>
+        </Row>
       </ul>
-    </li>)
+    </Card>)
 }
 
 const Browse = props => {
@@ -51,19 +55,21 @@ const Browse = props => {
     .filter(e => e.skills.some(s => s.toUpperCase().includes(skill.toUpperCase())));
  
   return (
-    <div>
+    <div className='event-container'>
       <h1>Browse For Events</h1>
-      <input
-        placeholder="Search for a skill..."
-        onChange={e => setSkill(e.target.value)}/>
-      <input
-        placeholder="Search for an event..."
-        onChange={e => setKeyword(e.target.value)}/>
+      <Form.Row>
+        <Form.Group>
+          <Form.Control placeholder="Search for a skill..." onChange={e => setSkill(e.target.value)}/>
+        </Form.Group>
+        <Form.Group>
+          <Form.Control placeholder="Search for an event..." onChange={e => setKeyword(e.target.value)}/>
+        </Form.Group>
+      </Form.Row>
       <ul>
         {events_filtered.map(event => <BrowseEntries event={event}/>)}
       </ul>
     </div>
-    );
+  );
 };
 
 export default Browse;

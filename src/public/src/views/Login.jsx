@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 import SumariaLogo from '../assets/images/logos/SumariaLogoSample.jpeg'
+import API from '../api'
 
 const LoginContainer = {
   "width":"100%",
@@ -73,8 +74,9 @@ const LoginButton = {
   "OTransition": "all 0.4s",
   "MozTransition": "all 0.4s",
   "transition": "all 0.4s"
-
 }
+
+
 
 const ForgetPwd = {
   "fontFamily": "Roboto",
@@ -89,51 +91,67 @@ const CreateAccount = {
   "lineHeight": "2",
 }
 
-const Login = props => {
+
+const Login = props => {  
+  
+  const [inputs, setInputs] = useState({
+    username: "",
+    password: "",
+  });
+
+  const { username, password } = inputs;
+
+  const onSubmit = async e => {
+    e.preventDefault()
+    
+    const res = await API.login(username, password);
+    console.log(res)
+  };
+
+
   return (
     <div>
-  <div style={LoginContainer}>
-    <div className="loginBox">
-        <img src={SumariaLogo} alt="Sumaria" style={{borderRadius: "50%"}} />
-      <form style={LoginForm}>
-        <div data-validate="Valid email is required: example@sumaria.ca">
-          <input style={LoginInput} type="text" name="email" placeholder="Email" />
-          <span style={LoginInputFocus} />
-          <span className="symbol">
-            <i className="fa fa-envelope" aria-hidden="true" />
-          </span>
+      <div style={LoginContainer}>
+        <div className="loginBox">
+            <img src={SumariaLogo} alt="Sumaria" style={{borderRadius: "50%"}} />
+          <form style={LoginForm} onSubmit={onSubmit}>
+            <div data-validate="Valid email is required: example@sumaria.ca"> 
+              <input style={LoginInput} type="text" name="email" placeholder="Email" value={username} onChange={e => setInputs({ ...inputs, username: e.target.value })} />
+              <span style={LoginInputFocus} />
+              <span className="symbol">
+                <i className="fa fa-envelope" aria-hidden="true" />
+              </span>
+            </div>
+            <div data-validate="Password is required">
+              <input style={LoginInput} type="password" name="pass" placeholder="Password" value={password} onChange={e => setInputs({ ...inputs, password: e.target.value })} />
+              <span style={LoginInputFocus} />
+              <span className="symbol">
+                <i className="fa fa-lock" aria-hidden="true" />
+              </span>
+            </div>
+            <div>
+              <button style={LoginButton}>
+                Login
+              </button>
+            </div>
+            <div style={ForgetPwd}>
+              <span>
+                Forgot
+              </span>
+              <a href="/reset">
+                Username / Password?
+              </a>
+            </div>
+            <div style={CreateAccount}>
+              <a href="/register">
+                Create your Account
+                <i className="fa fa-long-arrow-right m-l-5" aria-hidden="true" />
+              </a>
+            </div>
+          </form>
         </div>
-        <div data-validate="Password is required">
-          <input style={LoginInput} type="password" name="pass" placeholder="Password" />
-          <span style={LoginInputFocus} />
-          <span className="symbol">
-            <i className="fa fa-lock" aria-hidden="true" />
-          </span>
-        </div>
-        <div>
-          <button style={LoginButton}>
-            Login
-          </button>
-        </div>
-        <div style={ForgetPwd}>
-          <span>
-            Forgot
-          </span>
-          <a href="/reset">
-            Username / Password?
-          </a>
-        </div>
-        <div style={CreateAccount}>
-          <a href="/register">
-            Create your Account
-            <i className="fa fa-long-arrow-right m-l-5" aria-hidden="true" />
-          </a>
-        </div>
-      </form>
+      </div>
     </div>
-  </div>
-</div>
-
   );
 };
 

@@ -1,0 +1,13 @@
+.event-container {
+    margin:auto;
+    width:85vw;
+}
+
+.event-post {
+    margin:10px;
+    padding:10px;
+}
+
+ul li .horizontal {
+    display:inline;
+}
