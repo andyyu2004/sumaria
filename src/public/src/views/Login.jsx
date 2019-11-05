@@ -22,9 +22,9 @@ const LoginForm = {
   "flexWrap": "wrap",
   "justifyContent": "space-between",
   "padding": "30px 30px 30px 30px",
-  margin: "20px",
-  justifyContent: "center",
-  alignItems: "center"
+  "margin": "20px",
+  "justifyContent": "center",
+  "alignItems": "center"
 }
 
 const LoginInput = {
