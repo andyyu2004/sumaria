@@ -56,5 +56,52 @@
         "description": "A learning experience to empower students.",
         "organizer": "456 schools"
       }
+    ],
+    "user":[
+      {
+        "id": 0,
+        "username": "helloworld",
+        "description": "A volunteer user",
+        "password": "password1",
+        "email": "email@gmail.com",
+        "type": "Volunteer",
+        "events": [3, 2]
+      },
+      {
+        "id": 1,
+        "username": "user2",
+        "description": "An organization head",
+        "password": "password2",
+        "email": "email2@gmail.com",
+        "type": "Admin",
+        "events": [3]
+      },
+      {
+        "id": 2,
+        "username": "anotheruser",
+        "description": "Another organization head",
+        "password": "password3",
+        "email": "email3@gmail.com",
+        "type": "Volunteer",
+        "events": [4]
+      },
+      {
+        "id": 3,
+        "username": "newuser",
+        "description": "High School Student",
+        "password": "password3",
+        "email": "email3@gmail.com",
+        "type": "Volunteer",
+        "events": [4]
+      },
+      {
+        "id": 4,
+        "username": "head",
+        "description": "Another organization head",
+        "password": "password3",
+        "email": "anotherEmail@yahoo.com",
+        "type": "Admin",
+        "events": [1]
+      }
     ]
 }
