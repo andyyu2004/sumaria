@@ -1,2 +1,2 @@
 /** Put components in this folder */
-export {}
+export { default as DisplayEvent } from './DisplayEvent';
