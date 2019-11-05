@@ -75,3 +75,5 @@ router.get("/company/:id", async (req,res) => {
         res.status(500).json({error: true, message: "Server Error"});
     }
 })
+
+module.exports = router;
