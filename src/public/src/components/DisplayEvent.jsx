@@ -1,4 +1,8 @@
 import React from 'react';
+import Card from 'react-bootstrap/Card';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
+import '../views/Browse.css'
 
 /**
  * Formats the list of events in an unordered list.
@@ -11,31 +15,32 @@ import React from 'react';
 const DisplayEvent = ({event}) => {
     const { name, date, posteddate, skills, address, description, organizer } = event;
     return (
-      <li>{name}
+        <Card className='event-post'>
+        <h4>{name}</h4>
         <ul>
-          <li>
-            Date: {new Date(date).toDateString()}
-          </li>
-          <li>
-            Posted Date: {new Date(posteddate).toDateString()}
-          </li>
-          <li>
-            Skills Required:
+          <Row>
+            <Col>Event Date: {new Date(date).toDateString()}</Col>
+            <Col>Posted Date: {new Date(posteddate).toDateString()}</Col>
+          </Row>
+          <Row>
+            <Col>Organizer: {organizer}</Col>
+          </Row>
+          <Row>
+            <Col>Address: {address}</Col>
+          </Row>
+          Skills Required:
+          <Row>
+            <Col>
             <ul> 
               {skills.map(skill => <li key={skill}>{skill}</li>)}
             </ul>
-          </li>
-          <li>
-            Address: {address}
-          </li>
-          <li>
-            Description: {description}
-          </li>
-          <li>
-            Organizer: {organizer}
-          </li>
+            </Col>
+          </Row>
+          <Row>
+            <Col>Description: {description}</Col>
+          </Row>
         </ul>
-      </li>)
+      </Card>)
   };
 
   export default DisplayEvent;
