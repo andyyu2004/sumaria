@@ -1,5 +1,5 @@
 import React from 'react';
-import { Home, Login, Reset, Browse, ResetSent } from './views';
+import { Home, Login, Reset, Browse, ResetSent, AddEvent } from './views';
 import { Router } from '@reach/router';
 import './App.css';
 import { Header } from './components';
@@ -16,6 +16,7 @@ const App: React.FC = () => {
         <Browse path="browse" />
         <ChatView path="chat" />
         <ResetSent path="reset/sent" />
+        <AddEvent path="addevent" />
       </Router>
     </div>
   );
