@@ -1,5 +1,5 @@
 import React from 'react';
-import { Home, Login, Browse } from './views';
+import { Home, Login, Browse, ImportExcel, Profile } from './views';
 import { Router } from '@reach/router';
 import './App.css';
 
@@ -9,6 +9,8 @@ const App: React.FC = () => {
       <Home path="/"/>
       <Login path="login" />
       <Browse path="browse" />
+      <ImportExcel path="import" />
+      <Profile path="profile" />
     </Router>
   );
 }
