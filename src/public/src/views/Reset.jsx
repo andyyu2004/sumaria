@@ -1,5 +1,8 @@
-import React from 'react'
-import { Redirect } from 'react-router';
+import React, { useState } from 'react'
+import { navigate } from '@reach/router'
+//import { Redirect } from 'react-router';
+//import API from '../api';
+
 
 const ResetContainer = {
   "width": "100%",
@@ -89,14 +92,22 @@ const ResetText = {
   "lineHeight": "1",
 }
 
-const HandleReset = function (e) {
-  //alert('reset');
-  e.preventDefault();
-  return <Redirect to="/reset/sent" />;
-  // go to /reset/sent
-}
-
 const Reset = props => {
+
+  const [email, setEmail] = useState("");
+
+  const HandleReset = async function (e) {
+    //alert('reset');
+    e.preventDefault();
+    console.log(email);
+    //let resp = await API.resetP();
+    navigate('/reset/sent');
+    //window.location.hash = "#/reset/sent";
+    //return <Redirect to="/reset/sent" />;
+    // go to /reset/sent
+
+  }
+
   return (
 <div>
   <div style={ResetContainer}>
@@ -110,7 +121,7 @@ const Reset = props => {
             <div className="form-group">
               <div className="input-group">
                 <span className="input-group-addon"><i className="glyphicon glyphicon-envelope color-blue" /></span>
-                <input id="email" name="email" style={EmailInput} placeholder="Email" className="form-control" type="email" />
+                <input id="email" name="email" style={EmailInput} value={email} onChange={e => setEmail(e.target.value)} placeholder="Email" className="form-control" type="email" />
               </div>
             </div>
             <div className="form-group">
