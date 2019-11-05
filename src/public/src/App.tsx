@@ -16,11 +16,11 @@ const App: React.FC = () => {
   ];
 
   return (
-    <div style={{ display: "flex", flexDirection: "column" }}>
+    <div className="app">
       <Header title="Sumaria" />
-      <div style={{ display: "flex", top: "70px", position: "absolute" }}>
+      <div className="app-body">
         <Sidebar entries={sidebarEntries} />
-        <Router style={{ flex: 7 }}>
+        <Router className="app-main">
           <Home path="/" />
           <Login path="login" />
           <Reset path="reset" />

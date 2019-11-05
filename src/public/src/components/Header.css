@@ -1,0 +1,32 @@
+.header-container {
+    background-color: #444444;
+	height: 70px;
+}
+
+.small-icon {
+    width: 40px;
+    margin-right: 10px;
+}
+
+#navbar-brand {
+    padding: 10px;
+}
+
+#navbar-brand:hover {
+    background-color: lightblue;
+}
+
+#logoutButton {
+	margin: 10px;
+    border: none;
+    padding: 5px 12px;
+    text-align: center;
+    color: white;
+    font-size: 15px;
+}
+
+#logoutButton:hover {
+    background-color: #deebfc;
+}
+
+#logoutButton:focus {outline:0;}

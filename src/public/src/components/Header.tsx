@@ -6,7 +6,7 @@ import usericon from '../assets/images/profile_pic_placeholder.png';
 // import { AppState } from '../reducers';
 // import { UserState } from '../reducers/userReducer';
 // import { UserType } from '../types';
-// import './Header.css';
+import './Header.css';
 
 type PropTypes = {
   title: string,
@@ -33,23 +33,25 @@ const Header: React.FC<PropTypes> = ({ title, subtitle }) => {
   const userType = UserType.None;
 
   return (
-    <Navbar bg="light" variant="light">
-    <Navbar.Brand id="navbar-brand" onClick={() => navigate("/")}><b>{title}</b></Navbar.Brand>
-    <Navbar.Text>{subtitle}</Navbar.Text>
+    // <div className="header-container">
+      <Navbar bg="light" variant="light">
+      <Navbar.Brand id="navbar-brand" onClick={() => navigate("/")}><b>{title}</b></Navbar.Brand>
+      <Navbar.Text>{subtitle}</Navbar.Text>
 
-    {/* This creates the spacing, don't remove */}
-    <Nav className="mr-auto">
-      {/* <Nav.Link href="#home">Home</Nav.Link>*/}
-    </Nav>
-    
-    {userType !== UserType.None
-      /** If logged in, then take user to dashboard if admin else take to profile, else redirect to login screen */
-      ? (<div>
-          <img src={usericon} className="small-icon" onClick={() => navigate(`/${userType === UserType.Admin ? 'admin' : 'profile'}`)} alt="profilepic" /> 
-          <Button id="logoutButton" type="button" onClick={handleLogout}>Logout</Button>
-        </div>)
-      : <Link to="/login">Log In/Sign Up</Link>} 
-  </Navbar>
+      {/* This creates the spacing, don't remove */}
+      <Nav className="mr-auto">
+        {/* <Nav.Link href="#home">Home</Nav.Link>*/}
+      </Nav>
+      
+      {userType !== UserType.None
+        /** If logged in, then take user to dashboard if admin else take to profile, else redirect to login screen */
+        ? (<div>
+            <img src={usericon} className="small-icon" onClick={() => navigate(`/${userType === UserType.Admin ? 'admin' : 'profile'}`)} alt="profilepic" /> 
+            <Button id="logoutButton" type="button" onClick={handleLogout}>Logout</Button>
+          </div>)
+        : <Link to="/login">Log In/Sign Up</Link>} 
+      </Navbar>
+    // </div>
   );
 };
 

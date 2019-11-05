@@ -1,14 +1,14 @@
 .sidebar {
-    background-color:#F0F0F0;
+    background-color: #fafafa;
     text-align: center;
-    height: 100%;
-    flex: 6; 
+    width: 200px;
 }
 
 .tabs { 
     text-align: center;
     height: 20px;
-    background-color:#ffffff;
+    background-color: lightgray;
+    border: gray;
 }
 
 .tabText {

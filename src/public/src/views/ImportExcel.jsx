@@ -4,18 +4,18 @@ import XLSX from 'xlsx';
 // From SheetJS Community Edition
 // https://github.com/SheetJS/sheetjs
 function handleFile(e, setExcel) {
-    var files = e.target.files, f = files[0];
-    var reader = new FileReader();
-    var result = []
+    const files = e.target.files, f = files[0];
+    const reader = new FileReader();
+    const result = []
     reader.onload = function(e) {
-      var data = new Uint8Array(e.target.result);
-      var workbook = XLSX.read(data, {type: 'array'});
+      const data = new Uint8Array(e.target.result);
+      const workbook = XLSX.read(data, {type: 'array'});
       console.log(workbook);
       /* DO SOMETHING WITH workbook HERE */
-      var sheetNames = workbook.SheetNames;
-      var sheet = workbook.Sheets[sheetNames[0]];
-      var length = Object.keys(sheet).length;
-      for (var i=0; i < (length-2)/2; i++){
+      const sheetNames = workbook.SheetNames;
+      const sheet = workbook.Sheets[sheetNames[0]];
+      const length = Object.keys(sheet).length;
+      for (let i = 0; i < (length-2)/2; i++){
         result.push([sheet["A"+(i+1)]["v"], sheet["B"+(i+1)]["v"]]);
       }
       setExcel(result);
