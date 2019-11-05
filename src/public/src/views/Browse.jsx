@@ -1,12 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import Card from 'react-bootstrap/Card';
+import Col from 'react-bootstrap/Col';
+import Form from 'react-bootstrap/Form';
+import Row from 'react-bootstrap/Row';
 import data from "../mockdata.json";
 import { DisplayEvent } from '../components';
-import Card from 'react-bootstrap/Card'
-import Form from 'react-bootstrap/Form'
 import style from 'bootstrap/dist/css/bootstrap.css';
 import './Browse.css'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
 
 /**
  * Formats the list of events in an unordered list.
@@ -71,7 +71,7 @@ const Browse = props => {
         {eventsFiltered.map(event => <DisplayEvent key={event.id} event={event}/>)}
       </ul>
     </div>
-    );
+  );
 };
 
 export default Browse;

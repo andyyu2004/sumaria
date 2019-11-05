@@ -6,3 +6,4 @@ export { default as Profile } from './Profile';
 export { default as AddEvent } from './AddEvent';
 export { default as Reset} from './Reset';
 export { default as ResetSent} from './ResetSent';
+export { default as ChatView } from './ChatView';
