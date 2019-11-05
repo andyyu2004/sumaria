@@ -5,6 +5,7 @@ import './App.css';
 import { Header } from './components';
 import ChatView from './views/ChatView';
 import Sidebar from './components/Sidebar';
+import Footer from './components/Footer';
 
 /* Pass some nullary as callback */
 const sidebarEntries: [string, () => void][] = [
@@ -33,7 +34,8 @@ const App: React.FC = () => {
           <AddEvent path="addevent" />
           <Registration path="register" />
         </Router>
-      </div>  
+        <Footer /> 
+      </div> 
     </div>
   );
 };

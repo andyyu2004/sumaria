@@ -1,0 +1,12 @@
+.mw-170 {
+    min-width: 300px !important;
+}
+
+.input-group-addon {
+    text-align: left !important;
+    font-family: Arial;
+}
+
+.signup-form {
+    margin: 5px 5px 5px 50px;
+}

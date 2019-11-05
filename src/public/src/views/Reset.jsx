@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { navigate } from '@reach/router'
 // import { Redirect } from 'react-router';
 
-const ResetContainer = {
+const resetContainer = {
   "width": "100%",
   "minHeight": "100vh",
   "display": "flex",
@@ -13,8 +13,8 @@ const ResetContainer = {
   "background": "linear-gradient(111deg, #6a11cb, #6a7cda, #2575fc)"
 }
 
-const ResetForm = {
-  "width": "205px",
+const resetForm = {
+  "width": "400px",
   "background": "#fff",
   "borderRadius": "20px",
   "overflow": "hidden",
@@ -27,7 +27,7 @@ const ResetForm = {
   alignItems: "center"
 }
 
-const EmailInput = {
+const emailInput = {
   "fontFamily": "Roboto",
   "fontSize": "15px",
   "lineHeight": "2",
@@ -41,7 +41,7 @@ const EmailInput = {
   "margin": "4px"
 }
 
-const EmailInputFocus = {
+const emailInputFocus = {
   "display": "block",
   "position": "absolute",
   "borderRadius": "20px",
@@ -54,7 +54,7 @@ const EmailInputFocus = {
   "color": "#5fb1e3"
 }
 
-const SubmitButton = {
+const submitButton = {
   "width": "180px",
   "display": "flex",
   "flexWrap": "wrap",
@@ -77,14 +77,14 @@ const SubmitButton = {
 
 }
 
-const ForgetPwd = {
+const forgetPwd = {
   "fontFamily": "Roboto",
   "fontSize": "13.5px",
   "lineHeight": "1",
   "color": "#b48080"
 }
 
-const ResetText = {
+const resetText = {
   "fontFamily": "Arial",
   "fontSize": "13.5px",
   "lineHeight": "1",
@@ -94,7 +94,7 @@ const Reset = props => {
 
   const [email, setEmail] = useState("");
 
-  const HandleReset = async function (e) {
+  const handleReset = async function (e) {
     //alert('reset');
     e.preventDefault();
     console.log(email);
@@ -108,18 +108,18 @@ const Reset = props => {
 
   return (
     <div>
-      <div style={ResetContainer}>
-        <div style={ResetForm}>
+      <div style={resetContainer}>
+        <div style={resetForm}>
           <div className="text-center">
             <h3><i className="fa fa-lock fa-4x" /></h3>
             <h2 className="text-center">Forgot Password?</h2>
-            <p className="text-center" style={ResetText}>We got your back. You can reset your password here.</p>
+            <p className="text-center" style={resetText}>We got your back. You can reset your password here.</p>
             <div className="panel-body">
-              <form id="register-form" role="form" onSubmit={HandleReset} autoComplete="off" className="form">
+              <form id="register-form" role="form" onSubmit={handleReset} autoComplete="off" className="form">
                 <div className="form-group">
                   <div className="input-group">
                     <span className="input-group-addon"><i className="glyphicon glyphicon-envelope color-blue" /></span>
-                    <input id="email" name="email" style={EmailInput} value={email} onChange={e => setEmail(e.target.value)} placeholder="Email" className="form-control" type="email" />
+                    <input id="email" name="email" style={emailInput} value={email} onChange={e => setEmail(e.target.value)} placeholder="Email" className="form-control" type="email" />
                   </div>
                 </div>
               </form>

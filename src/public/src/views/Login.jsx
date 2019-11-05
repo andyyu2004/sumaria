@@ -2,19 +2,19 @@ import React, { useState } from 'react'
 import SumariaLogo from '../assets/images/logos/SumariaLogoSample.jpeg'
 import API from '../api'
 
-const LoginContainer = {
-  "width":"100%",
-  "minHeight":"100vh",
-  "display":"flex",
-  "flexWrap":"wrap",
-  "justifyContent":"center",
-  "alignItems":"center",
-  "padding":"15px",
-  "background":"linear-gradient(111deg, #1a2353, #2c42b2, #6a7cda, #c6ccf0)"
+const loginContainer = {
+  "width": "100%",
+  "minHeight": "100vh",
+  "display": "flex",
+  "flexWrap": "wrap",
+  "justifyContent": "center",
+  "alignItems": "center",
+  "padding": "15px",
+  "background": "linear-gradient(111deg, #1a2353, #2c42b2, #6a7cda, #c6ccf0)"
 }
 
-const LoginForm = {
-  "width": "220px",
+const loginForm = {
+  "width": "280px",
   "background": "#fff",
   "borderRadius": "20px",
   "overflow": "hidden",
@@ -27,7 +27,7 @@ const LoginForm = {
   "alignItems": "center"
 }
 
-const LoginInput = {
+const loginInput = {
   "fontFamily": "Roboto",
   "fontSize": "15px",
   "lineHeight": "2",
@@ -35,13 +35,18 @@ const LoginInput = {
   "display": "block",
   "width": "186px",
   "background": "#e6e6fa",
-  "height": "20px",
+  "height": "25px",
   "borderRadius": "10px",
   "padding": "8px",
-  "margin": "4px"
+  "margin": "4px 4px 10px 30px",
 }
 
-const LoginInputFocus = {
+const symbol = {
+  "float": "left",
+  "margin": "3px"
+}
+
+const loginInputFocus = {
   "display": "block",
   "position": "absolute",
   "borderRadius": "20px",
@@ -54,12 +59,11 @@ const LoginInputFocus = {
   "color": "#5fb1e3"
 }
 
-const LoginButton = {
+const loginButton = {
   "width": "180px",
   "display": "flex",
   "flexWrap": "wrap",
   "justifyContent": "center",
-  "paddingTop": "20px",
   "fontFamily": "Roboto",
   "fontSize": "15px",
   "lineHeight": "2",
@@ -69,7 +73,8 @@ const LoginButton = {
   "borderRadius": "20px",
   "background": "#829eff",
   "alignItems": "center",
-  "padding": "0 20px",
+  "padding": "0px 20px",
+  "margin": "10px 0px 10px 0px",
   "WebkitTransition": "all 0.4s",
   "OTransition": "all 0.4s",
   "MozTransition": "all 0.4s",
@@ -78,22 +83,22 @@ const LoginButton = {
 
 
 
-const ForgetPwd = {
+const forgetPwd = {
   "fontFamily": "Roboto",
   "fontSize": "13.5px",
   "lineHeight": "2",
   "color": "#b48080"
 }
 
-const CreateAccount = {
+const createAccount = {
   "fontFamily": "Roboto",
   "fontSize": "13.5px",
   "lineHeight": "2",
 }
 
 
-const Login = props => {  
-  
+const Login = props => {
+
   const [inputs, setInputs] = useState({
     username: "",
     password: "",
@@ -103,7 +108,7 @@ const Login = props => {
 
   const onSubmit = async e => {
     e.preventDefault()
-    
+
     const res = await API.login(username, password);
     console.log(res)
   };
@@ -111,38 +116,35 @@ const Login = props => {
 
   return (
     <div>
-      <div style={LoginContainer}>
+      <div style={loginContainer}>
         <div className="loginBox">
-            <img src={SumariaLogo} alt="Sumaria" style={{borderRadius: "50%"}} />
-          <form style={LoginForm} onSubmit={onSubmit}>
-            <div data-validate="Valid email is required: example@sumaria.ca"> 
-              <input style={LoginInput} type="text" name="email" placeholder="Email" value={username} onChange={e => setInputs({ ...inputs, username: e.target.value })} />
-              <span style={LoginInputFocus} />
-              <span className="symbol">
+          <img src={SumariaLogo} alt="Sumaria" style={{ borderRadius: "50%" }} />
+          <form style={loginForm} onSubmit={onSubmit}>
+            <div data-validate="Valid email is required: example@sumaria.ca">
+              <span className="symbol" style={symbol}>
                 <i className="fa fa-envelope" aria-hidden="true" />
               </span>
+              <input style={loginInput} type="text" name="email" placeholder="Email" value={username} onChange={e => setInputs({ ...inputs, username: e.target.value })} />
+              <span style={loginInputFocus} />
             </div>
             <div data-validate="Password is required">
-              <input style={LoginInput} type="password" name="pass" placeholder="Password" value={password} onChange={e => setInputs({ ...inputs, password: e.target.value })} />
-              <span style={LoginInputFocus} />
-              <span className="symbol">
+              <span className="symbol" style={symbol}>
                 <i className="fa fa-lock" aria-hidden="true" />
               </span>
+              <input style={loginInput} type="password" name="pass" placeholder="Password" value={password} onChange={e => setInputs({ ...inputs, password: e.target.value })} />
+              <span style={loginInputFocus} />
             </div>
             <div>
-              <button style={LoginButton}>
+              <button style={loginButton}>
                 Login
               </button>
             </div>
-            <div style={ForgetPwd}>
+            <div style={forgetPwd}>
               <span>
-                Forgot
+                Forgot <a href="/reset">Username / Password?</a>
               </span>
-              <a href="/reset">
-                Username / Password?
-              </a>
             </div>
-            <div style={CreateAccount}>
+            <div style={createAccount}>
               <a href="/register">
                 Create your Account
                 <i className="fa fa-long-arrow-right m-l-5" aria-hidden="true" />

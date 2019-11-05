@@ -48,21 +48,21 @@ const ResetSent = props => {
   redirectLogin();
 
   return (
-<div>
-  <div style={ResetContainer}>
-    <div style={ResetForm}>
-      <div className="text-center" style={ResetText}>
-          <h3><i className="fa fa-unlock-alt fa-4x" /></h3>
-        <h2 className="text-center">Dear user:</h2>
-        <p>Your password reset email has been sent.</p>
-        <p>You should receive a password reset link shortly.</p>
-        <p>Redirect to home page in {sec} seconds...</p>
-        <div className="panel-body">
+    <div>
+      <div style={ResetContainer}>
+        <div style={ResetForm}>
+          <div className="text-center" style={ResetText}>
+              <h3><i className="fa fa-unlock-alt fa-4x" /></h3>
+            <h2 className="text-center">Dear user:</h2>
+            <p>Your password reset email has been sent.</p>
+            <p>You should receive a password reset link shortly.</p>
+            <p>Redirect to <a href="/">home</a> page in {sec} seconds...</p>
+            <div className="panel-body">
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
   );
 };
 
