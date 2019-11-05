@@ -6,15 +6,14 @@ import { Header } from './components';
 import ChatView from './views/ChatView';
 import Sidebar from './components/Sidebar';
 
+/* Pass some nullary as callback */
+const sidebarEntries: [string, () => void][] = [
+  ["Chat", () => navigate('/chat')],
+  ["Browse", () => navigate('/browse')],
+  ["View2", () => {}],
+];
+
 const App: React.FC = () => {
-
-  /* Pass the navigate function as a callback */
-  const sidebarEntries: [string, () => void][] = [
-    ["Chat", () => navigate('/chat')],
-    ["Browse", () => navigate('/browse')],
-    ["View2", () => {}],
-  ];
-
   return (
     <div className="app">
       <Header title="Sumaria" />
