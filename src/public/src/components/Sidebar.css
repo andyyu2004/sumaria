@@ -2,6 +2,7 @@
     background-color:#F0F0F0;
     text-align: center;
     height: 100%;
+    flex: 6; 
 }
 
 .tabs { 
