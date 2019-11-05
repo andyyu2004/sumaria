@@ -8,9 +8,11 @@ import Sidebar from './components/Sidebar';
 
 /* Pass some nullary as callback */
 const sidebarEntries: [string, () => void][] = [
+  ["Home", () => navigate('/')],
   ["Chat", () => navigate('/chat')],
   ["Browse", () => navigate('/browse')],
-  ["View2", () => {}],
+  ["Import", () => navigate('/import')],
+  ["Add Event", () => navigate('/addevent')],
 ];
 
 const App: React.FC = () => {

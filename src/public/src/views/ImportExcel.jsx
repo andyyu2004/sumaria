@@ -1,15 +1,18 @@
 import React, { useState } from 'react'
-import XLSX from 'xlsx';
+import xlsx from 'xlsx';
 
-// From SheetJS Community Edition
-// https://github.com/SheetJS/sheetjs
-function handleFile(e, setExcel) {
+const ImportExcel = props => {
+  const [excel, setExcel] = useState([["firstname", "lastname"], ["a", "b"]]);
+
+  // From SheetJS Community Edition
+  // https://github.com/SheetJS/sheetjs
+  const handleFile = e => {
     const files = e.target.files, f = files[0];
     const reader = new FileReader();
     const result = []
     reader.onload = function(e) {
       const data = new Uint8Array(e.target.result);
-      const workbook = XLSX.read(data, {type: 'array'});
+      const workbook = xlsx.read(data, {type: 'array'});
       console.log(workbook);
       /* DO SOMETHING WITH workbook HERE */
       const sheetNames = workbook.SheetNames;
@@ -21,16 +24,12 @@ function handleFile(e, setExcel) {
       setExcel(result);
     };
     reader.readAsArrayBuffer(f);
-}
-
-
-const ImportExcel = props => {
-  const [excel, setExcel] = useState([["firstname", "lastname"], ["a", "b"]]);
+  }
 
   return (
     <div>
       <h1>Import Names For Events</h1>
-      <input type="file" onChange={e => handleFile(e, setExcel)}></input>
+      <input type="file" onChange={handleFile}></input>
       <ul>
         {excel.map(name => <li key={name}>{name[0]} {name[1]}</li>)}
       </ul>

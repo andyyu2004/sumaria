@@ -1,10 +1,9 @@
-import React from 'react'
-import Form from 'react-bootstrap/Form';
-import Col from 'react-bootstrap/Col';
-import Container from 'react-bootstrap/Container';
+import 'bootstrap/dist/css/bootstrap.css';
+import React from 'react';
 import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card'
-import style from 'bootstrap/dist/css/bootstrap.css';
+import Card from 'react-bootstrap/Card';
+import Col from 'react-bootstrap/Col';
+import Form from 'react-bootstrap/Form';
 import './AddEvent.css';
 
 const AddEvent = props => {
@@ -24,15 +23,15 @@ const AddEvent = props => {
           <Form.Row>
             <Form.Group as={Col} controlId="formStartDate">
                 <Form.Label>Start Date</Form.Label>
-                <input type="date" class="form-control" />
+                <input type="date" className="form-control" />
             </Form.Group>
             <Form.Group as={Col} controlId="formEndDate">
                 <Form.Label>End Date</Form.Label>
-                <input type="date" class="form-control"/>
+                <input type="date" className="form-control"/>
             </Form.Group>
             <Form.Group as={Col} controlId="formVolunteerNum">
                 <Form.Label>Number of Volunteers Needed</Form.Label>
-                <input type="number" class="form-control"/>
+                <input type="number" className="form-control"/>
             </Form.Group>
           </Form.Row>
           <Form.Group controlId="formSkills">
