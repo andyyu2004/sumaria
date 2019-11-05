@@ -38,7 +38,8 @@ const BrowseEntries = ({event}) => {
           Organizer: {organizer}
         </li>
       </ul>
-    </li>)
+    </li>
+  )
 }
 
 const Browse = props => {
@@ -63,7 +64,7 @@ const Browse = props => {
         {events_filtered.map(event => <BrowseEntries event={event}/>)}
       </ul>
     </div>
-    );
+  );
 };
 
 export default Browse;

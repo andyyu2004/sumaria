@@ -1,0 +1,15 @@
+.chatmsg {
+    margin: 0px;
+}
+
+.chat-container {
+    background-color: lightgrey;
+}
+
+.chat-options-container {
+    background-color: grey;
+}
+
+.error {
+    color: red;
+}
