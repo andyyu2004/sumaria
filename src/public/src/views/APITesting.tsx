@@ -5,6 +5,7 @@ import { Result } from '../types/Result';
 import { useDispatch } from 'react-redux';
 import { setUser } from '../actions/actionCreators';
 import { UserResponse } from '../types/api';
+import { UserType } from '../types/User';
 
 /**
  * Component for making test api calls 
@@ -24,7 +25,6 @@ const APITesting: React.FC<RouteComponentProps> = () => {
 
     /** One monadic approach */
     const mresult = await API.monad.msignup(username, password);
-    // dispatch(setUser({ username: user.username }))
     Result.match<UserResponse, string, void>(
       mresult,
       (user: UserResponse) => setMessage(`Signed up user: username = ${user.username}`),
@@ -36,7 +36,8 @@ const APITesting: React.FC<RouteComponentProps> = () => {
     Result.match(
       await API.monad.mlogin(username, password),
       user => {
-        setMessage(`Succesfully logged in: username = ${user.username}`)
+        setMessage(`Succesfully logged in: username = ${user.username}`);
+        dispatch(setUser({ username: user.username, usertype: UserType.Volunteer }));
       },
       err => setMessage(`${err} - Login Failed`),
     )
@@ -53,7 +54,7 @@ const APITesting: React.FC<RouteComponentProps> = () => {
           onChange={e => setUsername(e.target.value)} 
           value={username} />
         <input 
-          type="text" 
+          type="password" 
           onChange={e => setPassword(e.target.value)} 
           value={password} />
         <button onClick={handleSignup}>Signup Test</button>

@@ -5,17 +5,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import usericon from '../assets/images/profile_pic_placeholder.png';
 import { AppState } from '../types/states';
 import './Header.css';
-import { User } from '../types/User';
+import { User, UserType } from '../types/User';
 
 type PropTypes = {
   title: string,
   subtitle?: string,
-};
-
-enum UserType {
-  Admin = "ADMIN",
-  Regular = "REGULAR",
-  None = "NONE", // i.e. not logged in
 };
 
 const Header: React.FC<PropTypes> = ({ title, subtitle }) => {
@@ -23,15 +17,16 @@ const Header: React.FC<PropTypes> = ({ title, subtitle }) => {
   // const { userType } = useSelector<AppState, UserState>(state => state.user)
   const dispatch = useDispatch();
 
-  const user = useSelector<AppState, User>(state => state.user!);
+  const { user, socket } = useSelector<AppState, AppState>(state => state);
+  const usertype: UserType = user.usertype;
 
   const handleLogout = (e: MouseEvent<HTMLElement>) => {
       e.preventDefault();
+      socket && socket.close();
       navigate('/');
       dispatch({ type: "LOGOUT" });
   };
 
-  const userType = UserType.None;
 
   return (
     // <div className="header-container">
@@ -44,10 +39,10 @@ const Header: React.FC<PropTypes> = ({ title, subtitle }) => {
         {/* <Nav.Link href="#home">Home</Nav.Link>*/}
       </Nav>
       <h5>{user.username}</h5>
-      {userType !== UserType.None
+      {usertype !== UserType.None
         /** If logged in, then take user to dashboard if admin else take to profile, else redirect to login screen */
         ? (<div>
-            <img src={usericon} className="small-icon" onClick={() => navigate(`/${userType === UserType.Admin ? 'admin' : 'profile'}`)} alt="profilepic" /> 
+            <img src={usericon} className="small-icon" onClick={() => navigate(`/${usertype === UserType.Admin ? 'admin' : 'profile'}`)} alt="profilepic" /> 
             <Button id="logoutButton" type="button" onClick={handleLogout}>Logout</Button>
           </div>)
         : <Link to="/login">Log In/Sign Up</Link>} 

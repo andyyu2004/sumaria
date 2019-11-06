@@ -30,7 +30,19 @@ export const Result = {
             case "ok": return f(x.value);
             case "err": return x;
         }
+    },
+
+    isErr<T, E>(x: Result<T, E>): boolean {
+        switch (x.tag) {
+            case "ok": return false;
+            case "err": return true;
+        }
+    },
+
+    isOk<T, E>(x: Result<T, E>): boolean {
+        return !this.isErr(x);
     }
+
 };
 
 /*

@@ -4,12 +4,20 @@
 
 .chat-container {
     background-color: lightgrey;
+    flex: 4;
 }
 
 .chat-options-container {
     background-color: grey;
+    flex: 1
 }
 
 .error {
     color: red;
+}
+
+.message-input-form {
+    position: fixed;   
+    bottom: 0;
+    width: 100%;
 }

@@ -38,7 +38,7 @@ export async function mlogin(username: string, password: string): Promise<Result
             username,
             password,
         })).data;
-        console.log(data);
+        
         return data.error
             ? { tag: "err", err: data.message }
             : { tag: "ok", value: data.user };
