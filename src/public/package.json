@@ -30,6 +30,7 @@
     "typescript": "3.6.4",
     "xlsx": "^0.15.1"
   },
+  "proxy": "http://localhost",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

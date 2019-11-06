@@ -1,11 +1,12 @@
 import React, { FormEvent, useCallback, useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import socketio from 'socket.io-client';
-import { apiGetMessages } from '../api/chat';
-import { AppState, Message, User, Conversation } from '../types';
-import Popup from 'reactjs-popup';
-import { ToastContainer, toast, ToastPosition } from 'react-toastify';
+import { useSelector } from 'react-redux';
+import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Popup from 'reactjs-popup';
+import { apiGetMessages } from '../api/chat';
+import { AppState } from '../types/states';
+import { Conversation, Message } from '../types/Chat';
+import { User } from '../types/User';
 import './Chat.css';
 
 type PropType = {

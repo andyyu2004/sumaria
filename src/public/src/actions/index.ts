@@ -1,4 +1,5 @@
-import { User, Conversation } from "../types";
+import { Conversation } from "../types/Chat";
+import { User } from "../types/User";
 
 export type Action 
     = SetUserAction

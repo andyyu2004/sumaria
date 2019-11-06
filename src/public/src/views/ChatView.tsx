@@ -2,8 +2,8 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../actions/actionCreators';
 import { Conversations, ChatLogin } from '../components';
-import { AppState } from '../types';
 import { RouteComponentProps } from '@reach/router';
+import { AppState } from '../types/states';
 
 export function id<T>(x: T) { return x; }
 

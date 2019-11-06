@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
 import SumariaLogo from '../assets/images/logos/SumariaLogoSample.jpeg'
 import API from '../api'
+import { Result } from '../types/Result'
+import { useDispatch } from 'react-redux'
+import { setUser } from '../actions/actionCreators'
 
 const loginContainer = {
   "width": "100%",
@@ -105,14 +108,12 @@ const Login = props => {
   });
 
   const { username, password } = inputs;
+  const dispatch = useDispatch();
 
   const onSubmit = async e => {
     e.preventDefault()
 
-    const res = await API.login(username, password);
-    console.log(res)
   };
-
 
   return (
     <div>

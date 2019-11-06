@@ -1,5 +1,5 @@
 import React from 'react';
-import { Home, Login, Reset, Browse, ResetSent, AddEvent, Registration, ImportExcel, Profile } from './views';
+import { Home, Login, Reset, Browse, ResetSent, AddEvent, Registration, ImportExcel, Profile, APITesting } from './views';
 import { Router, navigate } from '@reach/router';
 import './App.css';
 import { Header } from './components';
@@ -14,6 +14,7 @@ const sidebarEntries: [string, () => void][] = [
   ["Browse", () => navigate('/browse')],
   ["Import", () => navigate('/import')],
   ["Add Event", () => navigate('/addevent')],
+  ["API", () => navigate('/api')],
 ];
 
 const App: React.FC = () => {
@@ -33,9 +34,10 @@ const App: React.FC = () => {
           <ResetSent path="reset/sent" />
           <AddEvent path="addevent" />
           <Registration path="register" />
+          <APITesting path="api" />
         </Router>
-        <Footer /> 
       </div> 
+      <Footer /> 
     </div>
   );
 };

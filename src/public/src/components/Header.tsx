@@ -3,10 +3,9 @@ import React, { MouseEvent } from 'react';
 import { Button, Nav, Navbar } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import usericon from '../assets/images/profile_pic_placeholder.png';
-// import { AppState } from '../reducers';
-// import { UserState } from '../reducers/userReducer';
-// import { UserType } from '../types';
+import { AppState } from '../types/states';
 import './Header.css';
+import { User } from '../types/User';
 
 type PropTypes = {
   title: string,
@@ -23,6 +22,8 @@ const Header: React.FC<PropTypes> = ({ title, subtitle }) => {
   
   // const { userType } = useSelector<AppState, UserState>(state => state.user)
   const dispatch = useDispatch();
+
+  const user = useSelector<AppState, User>(state => state.user!);
 
   const handleLogout = (e: MouseEvent<HTMLElement>) => {
       e.preventDefault();
@@ -42,7 +43,7 @@ const Header: React.FC<PropTypes> = ({ title, subtitle }) => {
       <Nav className="mr-auto">
         {/* <Nav.Link href="#home">Home</Nav.Link>*/}
       </Nav>
-      
+      <h5>{user.username}</h5>
       {userType !== UserType.None
         /** If logged in, then take user to dashboard if admin else take to profile, else redirect to login screen */
         ? (<div>
