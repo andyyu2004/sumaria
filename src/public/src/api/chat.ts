@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { User } from '../types';
+import { User } from '../types/User';
 
 export async function apilogin(username: string, firstname: string, surname: string): Promise<User> {
     console.log("Before login")

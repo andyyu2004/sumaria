@@ -3,11 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addNewConversation, setConversations } from '../actions/actionCreators';
 import { apiGetConversations, apiNewConversation as apiCreateConversation } from '../api/chat';
 import { Chat } from '../components';
-import { AppState, Conversation } from '../types';
 import Sidebar from './Sidebar';
+import { AppState } from '../types/states';
+import { Conversation } from '../types/Chat';
 
 const Conversations = () => {
-  const userid = useSelector<AppState, string>(state => state.user!._id);
+  const userid = useSelector<AppState, string>(state => state.user!._id!);
   const convos = useSelector<AppState, Conversation[]>(state => state.conversations);
 
   const [currConvoIndex, setCurrentConvoIndex] = useState<number>(0);

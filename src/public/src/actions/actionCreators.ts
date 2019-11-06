@@ -1,11 +1,17 @@
-import { User, Conversation } from "../types";
+import { Conversation } from "../types/Chat";
 import { SetUserAction, AddConversationAction, SetConversationsAction, LogoutAction } from ".";
+import { User } from "../types/User";
 
 export const setUserAsync: (dispatch: any) => (user: User) => SetUserAction = dispatch => user =>
     dispatch({
         type: "SET_USER",
         user,
     });
+
+export const setUser: (user: User) => SetUserAction = user => ({
+    type: "SET_USER",
+    user,
+});
 
 export const addNewConversation: (dispatch: any) => (conv: Conversation) => AddConversationAction = dispatch => conv =>
     dispatch({

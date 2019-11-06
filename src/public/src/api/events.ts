@@ -4,4 +4,3 @@ export async function getEvents(): Promise<Event[]> {
     return mockdata.events;
 }
 
-
