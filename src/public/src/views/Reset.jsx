@@ -20,11 +20,10 @@ const resetForm = {
   "overflow": "hidden",
   "display": "flex",
   "flexWrap": "wrap",
-  "justifyContent": "space-between",
+  "justifyContent": "center",
+  "alignItems": "center",
   "padding": "30px 30px 30px 30px",
-  margin: "20px",
-  justifyContent: "center",
-  alignItems: "center"
+  "margin": "20px"
 }
 
 const emailInput = {
@@ -33,12 +32,12 @@ const emailInput = {
   "lineHeight": "2",
   "color": "#c6c6c6",
   "display": "block",
-  "width": "186px",
+  "width": "206px",
   "background": "#e6e6fa",
   "height": "20px",
   "borderRadius": "10px",
   "padding": "8px",
-  "margin": "4px"
+  "margin": "4px 30px 4px 4px"
 }
 
 const emailInputFocus = {
@@ -55,25 +54,24 @@ const emailInputFocus = {
 }
 
 const submitButton = {
-  "width": "180px",
-  "display": "flex",
-  "flexWrap": "wrap",
-  "justifyContent": "center",
+  "width": "186px",
+  "display": "block",
   "paddingTop": "20px",
   "fontFamily": "Roboto",
   "fontSize": "15px",
   "lineHeight": "2",
-  "color": "#0c0d6b",
+  "color": "#07094a",
   "textTransform": "uppercase",
-  "height": "40px",
+  "height": "30px",
   "borderRadius": "20px",
   "background": "#829eff",
-  "alignItems": "center",
   "padding": "0 20px",
+  "margin": "10px 100px 0px 100px",
   "WebkitTransition": "all 0.4s",
   "OTransition": "all 0.4s",
   "MozTransition": "all 0.4s",
-  "transition": "all 0.4s"
+  "transition": "all 0.4s",
+  "textAlign": "center"
 
 }
 
@@ -90,6 +88,11 @@ const resetText = {
   "lineHeight": "1",
 }
 
+const symbol = {
+  "float": "left",
+  "margin": "2px 2px 2px 30px"
+}
+
 const Reset = props => {
 
   const [email, setEmail] = useState("");
@@ -97,7 +100,7 @@ const Reset = props => {
   const handleReset = async function (e) {
     //alert('reset');
     e.preventDefault();
-    console.log(email);
+    //console.log(email);
     //let resp = await API.resetP();
     navigate('/reset/sent');
     //window.location.hash = "#/reset/sent";
@@ -118,9 +121,14 @@ const Reset = props => {
               <form id="register-form" role="form" onSubmit={handleReset} autoComplete="off" className="form">
                 <div className="form-group">
                   <div className="input-group">
-                    <span className="input-group-addon"><i className="glyphicon glyphicon-envelope color-blue" /></span>
-                    <input id="email" name="email" style={emailInput} value={email} onChange={e => setEmail(e.target.value)} placeholder="Email" className="form-control" type="email" />
+                    <div style={symbol}>
+                    <i className="far fa-envelope" aria-hidden="true" />
+                    </div>
+                    <input id="email" name="email" style={emailInput} value={email} onChange={e => setEmail(e.target.value)} placeholder="Email" className="form-control" type="email" required />
                   </div>
+                </div>
+                <div class="form-group" >
+                  <input name="recover-submit" className="form-control" style={submitButton} defaultValue="Reset" type="submit" />
                 </div>
               </form>
             </div>

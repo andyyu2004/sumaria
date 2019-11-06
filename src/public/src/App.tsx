@@ -1,5 +1,5 @@
 import React from 'react';
-import { Home, Login, Reset, Browse, ResetSent, AddEvent, Registration, ImportExcel, Profile } from './views';
+import { Home, Login, Reset, Browse, ResetSent, AddEvent, Registration, ImportExcel, Profile, RegisterSuccess } from './views';
 import { Router, navigate } from '@reach/router';
 import './App.css';
 import { Header } from './components';
@@ -33,6 +33,7 @@ const App: React.FC = () => {
           <ResetSent path="reset/sent" />
           <AddEvent path="addevent" />
           <Registration path="register" />
+          <RegisterSuccess path="register/success" />
         </Router>
         <Footer /> 
       </div> 

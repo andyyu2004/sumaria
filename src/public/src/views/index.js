@@ -7,3 +7,4 @@ export { default as Registration } from './Registration';
 export { default as AddEvent } from './AddEvent';
 export { default as ImportExcel} from './ImportExcel';
 export { default as Profile} from './ImportExcel';
+export { default as RegisterSuccess} from './RegisterSuccess';
