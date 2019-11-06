@@ -3,10 +3,11 @@ export type User = {
     surname?: string;
     username?: string;
     _id?: string;
-    usertype?: UserType;
+    usertype: UserType;
 };
 
 export enum UserType {
     Volunteer,
+    Admin,
     None,
 };

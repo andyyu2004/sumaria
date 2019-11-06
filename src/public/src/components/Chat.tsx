@@ -71,17 +71,18 @@ const Chat: React.FC<PropType> = ({ conversation }) => {
   };
 
   return (
-    <div className="flex-container">
+    <div className="chat-flex-container">
       <div className="chat-container" key="chat-view-container">
         <h5>Conversation Id: {conversation._id}</h5>
         {messages.map(({ message, _id, username }) => <p className="chatmsg" key={_id}>{username}: {message}</p>)}
-        <form onSubmit={sendMessage} key="message-form">
+        <form onSubmit={sendMessage} key="message-form" className="message-input-form">
           <input 
             key="message-input"
+            className="message-input-box"
             value={message} 
             onChange={e => setMessage(e.target.value)} 
             placeholder="message..." />
-          <input type="submit" className='nostyle-button' value="Send Message" />
+          <input type="submit" className='message-submit-button' value="Send Message" />
         </form>
       </div>  
 

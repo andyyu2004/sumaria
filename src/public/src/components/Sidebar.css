@@ -2,6 +2,7 @@
     background-color: #fafafa;
     text-align: center;
     width: 200px;
+    border-right: grey 2px solid;
 }
 
 .tabs { 
