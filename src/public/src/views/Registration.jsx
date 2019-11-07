@@ -37,25 +37,6 @@ const registerContainer = {
   "background": "linear-gradient(115deg, #ffac81 1%, #ff928b 74%)"
 }
 
-const ResetForm = {
-  "width": "305px",
-  "background": "#fff",
-  "borderRadius": "20px",
-  "overflow": "hidden",
-  "display": "flex",
-  "flexWrap": "wrap",
-  "justifyContent": "space-between",
-  "padding": "30px 30px 30px 30px",
-  "margin": "20px"
-}
-
-const ResetText = {
-  "fontFamily": "Arial",
-  "fontSize": "13.5px",
-  "lineHeight": "1",
-}
-
-
 
 const Registration = props => {
 
@@ -131,7 +112,7 @@ const Registration = props => {
   function generatePassword() {
     var length = 12,
       charSet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
-      pwd = "";
+      pwd = Math.floor(Math.random()*10) + charSet[Math.floor(Math.random()*51)];
     for (var i = 0, n = charSet.length; i < length; ++i) {
       pwd += charSet.charAt(Math.floor(Math.random() * n));
     }
@@ -223,7 +204,7 @@ const Registration = props => {
               <div className="form-group">
                 <div className="col-sm-7">
                   <div className="input-group">
-                    <span className="input-group-addon mw-170">User Type <MDBIcon icon="asterisk" className="pointer text ast" data-tip="This cannot be changed after registration. You have to submit a request if you wish to change this." />
+                    <span className="input-group-addon mw-300">User Type <MDBIcon icon="asterisk" className="pointer text ast" data-tip="This cannot be changed after registration. You have to submit a request if you wish to change this." />
                     </span>
                     <select id="user_type" className="form-control" required value={userType} onChange={e => check_user_type(e.target.value)}>
                       <option value='none' disabled hidden>Choose here</option>
@@ -232,14 +213,15 @@ const Registration = props => {
                       <option value="admin">Admin</option>
                       <option value="debug">This is for debuging only</option>
                     </select>
-                  </div>
+                    </div>
                   <div className="input-group" id="org_name_div">
-                    <span className="input-group-addon mw-170">Organization Name</span>
+                    <span className="input-group-addon mw-300">Organization Name</span>
                     <input disabled={orgNameD} placeholder={orgNamePH} type="text" className="form-control" name="organization_name" id="organization_name" pattern="^[a-zA-Z0-9!@#\$%\^&\*\)\(+=._-]{1,64}$" value={orgName} onChange={e => setOrgName(e.target.value)} />
                   </div>
                   <div className="input-group" id="auth_key_div">
-                    <span className="input-group-addon mw-170">Authetication Key</span>
+                    <span className="input-group-addon mw-340">Authetication Key</span>
                     <input disabled={authKeyD} placeholder={authKeyPH} type="text" className="form-control" name="auth_key" id="auth_key" pattern="^[a-zA-Z0-9]{32}$" value={authKey} onChange={e => setAuthKey(e.target.value)} />
+                    <MDBIcon icon="question" className="pointer text qt" data-tip="Admin only. If you are an admin of an organization but you have not obtained one, please contact Sumaria Support." />
                   </div>
                 </div>
               </div>
@@ -249,15 +231,15 @@ const Registration = props => {
               <div className="form-group">
                 <div className="col-sm-7">
                   <div className="input-group">
-                    <span className="input-group-addon mw-170">User Name</span>
+                    <span className="input-group-addon mw-300">User Name <MDBIcon icon="asterisk" className="pointer text ast" data-tip="Username must satisfy the following: (1) Contain alphanumeric characters only (with the exception of underscore '_' and dashe '-' in between) (2) Start with a letter (3) With a length range from 3 to 15" /></span>
                     <input id="user_name" type="text" className="form-control" placeholder="username" required pattern="^[A-Za-z][A-Za-z0-9]*(?:[ _-][A-Za-z0-9]+)*$" minLength={3} maxLength={15} value={username} onChange={e => setUsername(e.target.value)} />
                   </div>
                   <div className="input-group">
-                    <span className="input-group-addon mw-170">Sumaria Key</span>
+                    <span className="input-group-addon mw-300">Sumaria Key <MDBIcon icon="asterisk" className="pointer text ast" data-tip="Password must satisfy the following: (1) Be a minimum of 8 characters in length (2) Contain at least one letter and one number" /></span>
                     <input id="password" type="password" className="form-control" placeholder="●●●●●●●●●●●●●●●●" required pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,64}$" value={password} onChange={e => setPassword(e.target.value)} />
                   </div>
                   <div className="input-group">
-                    <span className="input-group-addon mw-170">Repeat Key</span>
+                    <span className="input-group-addon mw-300">Repeat Key  <MDBIcon icon="asterisk" className="pointer text ast" data-tip="Type the same password again" /></span>
                     <input type="password" className="form-control" name="re_password" id="re_password" value={rePassword} onChange={e => setRePassword(e.target.value)} onBlur={validatePwd} />
                   </div>
                 </div>
@@ -268,19 +250,23 @@ const Registration = props => {
               <div className="form-group">
                 <div className="col-sm-7">
                   <div className="input-group">
-                    <span className="input-group-addon mw-170">First Name</span>
+                    <span className="input-group-addon mw-300">First Name <MDBIcon icon="asterisk" className="pointer text ast" data-tip="Name on the passport" /></span>
                     <input type="text" className="form-control" name="first_name" id="first_name" pattern="^[a-zA-Z]{1,64}$" value={firstName} onChange={e => setFirstName(e.target.value)} required />
                   </div>
                   <div className="input-group">
-                    <span className="input-group-addon mw-170">Middle Name</span>
+                    <span className="input-group-addon mw-300">Prefer Name</span>
+                    <input type="text" className="form-control" name="prefer_name" id="prefer_name" pattern="^[a-zA-Z]{1,64}$" value={firstName} onChange={e => setFirstName(e.target.value)} required />
+                  </div>
+                  <div className="input-group">
+                    <span className="input-group-addon mw-300">Middle Name</span>
                     <input type="text" className="form-control" name="middle_name" id="middle_name" pattern="^[a-zA-Z]{1,64}$" value={middleName} onChange={e => setMiddleName(e.target.value)} />
                   </div>
                   <div className="input-group">
-                    <span className="input-group-addon mw-170">Last Name</span>
+                    <span className="input-group-addon mw-300">Last Name <MDBIcon icon="asterisk" className="pointer text ast" data-tip="Name on the passport" /></span>
                     <input type="text" className="form-control" name="last_name" id="last_name" pattern="^[a-zA-Z]{1,64}$" value={lastName} onChange={e => setLastName(e.target.value)} required />
                   </div>
                   <div className="input-group">
-                    <span className="input-group-addon mw-170">Gender</span>
+                    <span className="input-group-addon mw-300">Gender <MDBIcon icon="asterisk" className="pointer text ast" data-tip="Biological sex" /></span>
                     <select id="gender" className="form-control" required value={gender} onChange={e => setGender(e.target.value)} >
                       <option value="none" disabled hidden>Choose here</option>
                       <option value="male">Male</option>
@@ -291,34 +277,34 @@ const Registration = props => {
                 </div>
                 <div className="col-sm-7">
                   <div className="input-group">
-                    <span className="input-group-addon mw-170">Birth Date</span>
+                    <span className="input-group-addon mw-300">Birth Date <MDBIcon icon="asterisk" className="pointer text ast" data-tip="Two-digit month + two-digit day + four-digit year" /></span>
                     <input type="text" className="form-control" name="birth_date" id="birth_date" placeholder="MM-DD-YYYY" pattern="^(0?[1-9]|1[012])[\/\-](0?[1-9]|[12][0-9]|3[01])[\/\-]\d{4}$" value={bdate} onChange={e => setBdate(e.target.value)} />
                   </div>
                   <div className="input-group">
-                    <span className="input-group-addon mw-170">Phone Number</span>
+                    <span className="input-group-addon mw-300">Phone Number</span>
                     <input type="text" className="form-control" name="phone_number" id="phone_number" placeholder="416-1234567" pattern="^\d+-?\d+$" value={phone} onChange={e => setPhone(e.target.value)} />
                   </div>
                   <div className="input-group">
-                    <span className="input-group-addon mw-170">Email</span>
+                    <span className="input-group-addon mw-300">Email <MDBIcon icon="asterisk" className="pointer text ast" data-tip="This will be the default contact method (you can change it in the settings)" /></span>
                     <input type="email" className="form-control" name="email" id="email" required pattern="^(([^<>()\[\]\\.,;:\s@&quot;]+(\.[^<>()\[\]\\.,;:\s@&quot;]+)*)|(&quot;.+&quot;))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$" value={email} onChange={e => setEmail(e.target.value)} />
                   </div>
                 </div>
               </div>
             </div>
 
-            <h4 style={{ display: 'inline' }}>Geo-Position</h4>&nbsp;&nbsp;<MDBIcon icon="info-circle" data-tip="Your geographical location is essential for getting events near you" aria-hidden="true" />
+            <h4 style={{ display: 'inline' }}>Geo-Position</h4>&nbsp;&nbsp;<MDBIcon icon="info-circle" data-tip="Your geographical location will only be used to find events near you" aria-hidden="true" />
             <br />
             <div className="well form-horizontal">
               <div className="form-group">
                 <div className="col-sm-7">
                   <div className="input-group">
-                    <span className="input-group-addon mw-170">Address</span>
+                    <span className="input-group-addon mw-300">Address <MDBIcon icon="asterisk" className="pointer text ast" data-tip="We will never share your information without your permission" /></span>
                     <input id="txt-geocode-address" type="text" className="form-control" placeholder="123 Street Name, City, Province" required value={addr} onChange={e => setAddr(e.target.value)} />
                   </div>
                   <div className="input-group">
                   </div>
                   <div className="input-group">
-                    <span className="input-group-addon mw-170">Department/Unit</span>
+                    <span className="input-group-addon mw-300">Department/Unit</span>
                     <input type="text" className="form-control" name="address_additional" id="txt-geocode-address-additional" placeholder="Unit 123" value={addr2} onChange={e => setAddr2(e.target.value)} />
                   </div>
                 </div>

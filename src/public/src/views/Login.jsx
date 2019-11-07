@@ -26,7 +26,6 @@ const loginForm = {
   "justifyContent": "space-between",
   "padding": "30px 30px 30px 30px",
   "margin": "20px",
-  "justifyContent": "center",
   "alignItems": "center"
 }
 

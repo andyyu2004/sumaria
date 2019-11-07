@@ -22,7 +22,6 @@ const ResetForm = {
   "justifyContent": "space-between",
   "padding": "30px 30px 30px 30px",
   "margin": "20px",
-  "justifyContent": "center",
   "alignItems": "center"
 }
 
@@ -38,11 +37,18 @@ const ResetSent = props => {
 
   const [sec, setSec] = useState(5);
 
+
   const redirectLogin = e => {
+    /*
     setInterval(() => {
       setSec(sec-1);
       if (sec === 0) navigate('/login');
     }, 1000);
+    */
+    setTimeout(() => {
+      //clearInterval(cd);
+      navigate('/login');
+   }, 4000);
   }
 
   redirectLogin();
