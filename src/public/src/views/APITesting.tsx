@@ -17,13 +17,7 @@ const APITesting: React.FC<RouteComponentProps> = () => {
   const [message, setMessage] = useState<string>("");
 
   const handleSignup = async () => {
-
-    /** Non-monadic appraoch */
-    // const res = await API.signup(username, password);
-    // console.log(res);
-
-    /** One monadic approach */
-    const res = await API.msignup(username, password);
+    const res = await API.signup(username, password);
     res.match(
       (err: string) => setMessage(`${err} - Probably empty username/password`),
       (user: UserResponse) => setMessage(`Signed up user: username = ${user.username}`),
@@ -31,12 +25,12 @@ const APITesting: React.FC<RouteComponentProps> = () => {
   };
 
   const handleLogin = async () => {
-    const res = await API.mlogin(username, password);
+    const res = await API.login(username, password);
     res.match(
       err => setMessage(`${err} - Login Failed`),
       user => {
         setMessage(`Succesfully logged in: username = ${user.username}`);
-        dispatch(setUser({ username: user.username, usertype: UserType.Volunteer }));
+        dispatch(setUser({ username: user.username, usertype: UserType.Volunteer, events: [] }));
       },
     )
   };

@@ -2,7 +2,8 @@
     background-color: #fafafa;
     text-align: center;
     width: 200px;
-    border-right: grey 2px solid;
+    border-top: lightgrey 1px solid;
+    border-right: lightgrey 1px solid;
     min-width: 150px;
     height: auto;
 }

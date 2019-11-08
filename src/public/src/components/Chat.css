@@ -3,10 +3,11 @@
 }
 
 .chat-container {
-    background-color: lightgrey;
     flex: 4;
-    height: 100%;
-    overflow-y: scroll;
+    /* height: 100%; */
+    border-top: light,grey 1px solid;
+    display: flex;
+    flex-direction: column;
 }
 
 .chat-flex-container {
@@ -16,16 +17,26 @@
 }
 
 .chat-options-container {
-    background-color: grey;
-    flex: 1
+    background-color: lightgrey;
+    flex: 1;
 }
 
 .error {
     color: red;
 }
 
+.message-container {
+    flex: 1;
+    overflow-y: scroll;
+}
+
 .message-input-form {
-    position: fixed;   
-    bottom: 45px;
+    bottom: 0;
+    display: flex;
+    height: 30px;
+    width: 100%;
+}
+
+.message-input-box {
     width: 100%;
 }

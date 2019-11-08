@@ -70,9 +70,11 @@ const Chat: React.FC<PropType> = ({ conversation }) => {
 
   return (
     <div className="chat-flex-container">
-      <div className="chat-container" key="chat-view-container" ref={chatRef}>
-        <h5>Conversation Id: {conversation._id}</h5>
-        {messages.map(({ message, _id, username }) => <p className="chatmsg" key={_id}>{username}: {message}</p>)}
+      <div className="chat-container" key="chat-view-container">
+        <h5>{conversation.name} ({conversation._id})</h5>
+      <div className="message-container" ref={chatRef}>
+          {messages.map(({ message, _id, username }) => <p className="chatmsg" key={_id}>{username}: {message}</p>)}
+        </div>
         <form onSubmit={sendMessage} key="message-form" className="message-input-form">
           <input 
             key="message-input"

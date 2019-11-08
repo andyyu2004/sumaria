@@ -23,7 +23,7 @@ const Header: React.FC<PropTypes> = ({ title, subtitle }) => {
   const dispatch = useDispatch();
 
   const { user, socket, notifications } = useSelector<AppState, AppState>(state => state);
-  const usertype: UserType = user.usertype;
+  const usertype: UserType = user.usertype as UserType;
 
   const handleLogout = (e: MouseEvent<HTMLElement>) => {
       e.preventDefault();

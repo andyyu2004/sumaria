@@ -7,7 +7,11 @@ export interface Either<L, R> {
     match<T>(f: (l: L) => T, g: (r: R) => T): T;
     isLeft(): boolean;
     isRight(): boolean;
+    /** Unwraps right */
     unwrap(): R | void;
+    /** Unwraps the left */
+    err(): L | void; 
+    unwrapOrElse(f: (l: L) => R): R;
 }
 
 export class Right<L, R> implements Either<L, R> {
@@ -39,6 +43,14 @@ export class Right<L, R> implements Either<L, R> {
     }
 
     unwrap() {
+        return this.val;
+    }
+    
+    err() {
+        throw new Error("Expected Left, found Right");
+    }
+
+    unwrapOrElse(f: (l: L) => R): R {
         return this.val;
     }
 
@@ -74,6 +86,14 @@ export class Left<L, R> implements Either<L, R> {
 
     unwrap() {
         throw new Error("Unwrap of left either!");
+    }
+
+    err() {
+        return this.val;
+    }
+
+    unwrapOrElse(f: (l: L) => R): R {
+        return f(this.val);
     }
 
 }

@@ -43,11 +43,12 @@ const Conversations = () => {
   return (
     <div className="conversations-container">
       <div>
-        <form onSubmit={createConversation} name="newconversationform">
+        <span>Chat Header</span>
+        {/* <form onSubmit={createConversation} name="newconversationform">
           <label>Create new conversation</label>
           <input onChange={e => setNewname(e.target.value)} value={newname} />
           <input type="submit" value="submit" />
-        </form>
+        </form> */}
       </div>
       
       <div className="conversations-flex-container">

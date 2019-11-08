@@ -5,7 +5,7 @@ import { UserType } from "../types/User";
 import uuid from 'uuid/v4';
 
 const initialState: AppState = {
-    user: { usertype: UserType.None },
+    user: { usertype: UserType.None, id: -1, events: [] },
     conversations: [],
     notifications: [
         { message: "Test Notification 0", id: uuid() },

@@ -1,14 +1,13 @@
 import axios from 'axios';
+import mockdata from '../mockdata.json';
 import { UserResponse } from '../types/api';
 import { Either, Left, Right } from '../types/Either';
-import { id } from '../util';
+import { User } from '../types/User';
 
 /** Don't want an error to be thrown on client side error */
 axios.defaults.validateStatus = status => status >= 200 && status < 500;
 
-/** API comes in pairs of functions with different methods of error handling */
-
-export async function msignup(username: string, password: string): Promise<Either<string, UserResponse>> {
+export async function signup(username: string, password: string): Promise<Either<string, UserResponse>> {
     try {
         const data = (await axios.post("/api/account", {
             username,
@@ -24,12 +23,12 @@ export async function msignup(username: string, password: string): Promise<Eithe
     }
 }
 
-export async function signup(username: string, password: string): Promise<UserResponse | string> {
-    return (await msignup(username, password)).match<UserResponse | string>(id, id);
-}
+// export async function signup(username: string, password: string): Promise<UserResponse | string> {
+//     return (await msignup(username, password)).match<UserResponse | string>(id, id);
+// }
 
 /** Currently the response is identical from the server as signup */
-export async function mlogin(username: string, password: string): Promise<Either<string, UserResponse>> {
+export async function login(username: string, password: string): Promise<Either<string, UserResponse>> {
     try {
         const data = (await axios.post("/api/account/login", {
             username,
@@ -46,8 +45,9 @@ export async function mlogin(username: string, password: string): Promise<Either
 }
 
 
-export async function login(username: string, password: string): Promise<UserResponse | string> {
-    return (await mlogin(username, password)).match<UserResponse | string>(id, id);
+export async function getUserByUsername(username: string): Promise<Either<string, User>> {
+    const users = mockdata.users;
+    const user = users.find(x => x.username === username);
+    if (!user) return new Left(`Could not find user with username ${username}`);
+    return new Right(user);
 }
-
-
