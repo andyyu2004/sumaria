@@ -7,10 +7,8 @@ const API = {
     getEvents,
     getProfiles,
     signup,
-    monad: {
-        msignup,
-        mlogin,
-    },
+    msignup,
+    mlogin,
 };
 
 export default API;

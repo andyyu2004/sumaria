@@ -4,8 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Conversations } from '../components';
 import { AppState } from '../types/states';
 import "./ChatView.css";
-
-export function id<T>(x: T) { return x; }
+import { id } from '../util';
 
 const ChatView: React.FC<RouteComponentProps> = () => {
   // const { userid, firstname, surname } = state;

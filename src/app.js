@@ -19,6 +19,8 @@ app.use("/", routes.public);
 const server = http.createServer(app);
 const io = socketio.listen(server);
 
+const PORT = process.env.PORT || 80;
+
 mongoose.connect(DB_CONNECTION_STRING, { 
     useUnifiedTopology: true,
     useNewUrlParser: true,
@@ -27,8 +29,7 @@ mongoose.connect(DB_CONNECTION_STRING, {
         console.error(e);
         return;
     }
-    // Start HTTP server on port 80
-    server.listen(80);
+    server.listen(PORT, () => console.log(`Listening on port ${PORT}`));
 });
 
 

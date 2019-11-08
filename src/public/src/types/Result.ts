@@ -73,8 +73,3 @@ export const Result = {
     If the result has tag error, a map will just return the error again
     output : { tag: "err", err: "Something went wrong" };
 */
-
-
-
-
-

@@ -24,22 +24,21 @@ const APITesting: React.FC<RouteComponentProps> = () => {
     // console.log(res);
 
     /** One monadic approach */
-    const mresult = await API.monad.msignup(username, password);
-    Result.match<UserResponse, string, void>(
-      mresult,
-      (user: UserResponse) => setMessage(`Signed up user: username = ${user.username}`),
+    const res = await API.msignup(username, password);
+    res.match(
       (err: string) => setMessage(`${err} - Probably empty username/password`),
+      (user: UserResponse) => setMessage(`Signed up user: username = ${user.username}`),
     );
   };
 
   const handleLogin = async () => {
-    Result.match(
-      await API.monad.mlogin(username, password),
+    const res = await API.mlogin(username, password);
+    res.match(
+      err => setMessage(`${err} - Login Failed`),
       user => {
         setMessage(`Succesfully logged in: username = ${user.username}`);
         dispatch(setUser({ username: user.username, usertype: UserType.Volunteer }));
       },
-      err => setMessage(`${err} - Login Failed`),
     )
   };
 

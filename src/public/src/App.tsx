@@ -10,6 +10,7 @@ import { useDispatch } from 'react-redux';
 import { setUser } from './actions/actionCreators';
 import { UserType } from './types/User';
 import API from './api';
+import { Left } from './types/Either';
 
 
 const App: React.FC = () => {
@@ -31,6 +32,8 @@ const App: React.FC = () => {
     }],
   ];
 
+  const t = new Left("");
+  
   return (
     <div className="app">
       <Header title="Sumaria" />
