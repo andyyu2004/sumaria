@@ -22,9 +22,11 @@ const Header: React.FC<PropTypes> = ({ title, subtitle }) => {
 
   const handleLogout = (e: MouseEvent<HTMLElement>) => {
       e.preventDefault();
+      console.log(socket);
       socket && socket.close();
       navigate('/');
       dispatch({ type: "LOGOUT" });
+      console.log(socket);
   };
 
 

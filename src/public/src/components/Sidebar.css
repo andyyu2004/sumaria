@@ -3,6 +3,7 @@
     text-align: center;
     width: 200px;
     border-right: grey 2px solid;
+    min-width: 150px;
 }
 
 .tabs { 

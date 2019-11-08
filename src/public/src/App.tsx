@@ -32,8 +32,6 @@ const App: React.FC = () => {
     }],
   ];
 
-  const t = new Left("");
-  
   return (
     <div className="app">
       <Header title="Sumaria" />
