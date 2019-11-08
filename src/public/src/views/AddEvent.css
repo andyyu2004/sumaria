@@ -4,3 +4,9 @@
     margin:auto;
     padding:20px;
 }
+
+.symbol {
+    position: relative;
+    top: -10px;
+    left: -2px;
+}

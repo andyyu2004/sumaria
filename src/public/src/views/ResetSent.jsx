@@ -13,7 +13,7 @@ const ResetContainer = {
 }
 
 const ResetForm = {
-  "width": "305px",
+  "width": "355px",
   "background": "#fff",
   "borderRadius": "20px",
   "overflow": "hidden",
@@ -62,7 +62,7 @@ const ResetSent = props => {
             <h2 className="text-center">Dear user:</h2>
             <p>Your password reset email has been sent.</p>
             <p>You should receive a password reset link shortly.</p>
-            <p>Redirect to <a href="/">home</a> page in {sec} seconds...</p>
+            <p>Redirect to <a href="/login">home</a> page in {sec} seconds...</p>
             <div className="panel-body">
             </div>
           </div>
