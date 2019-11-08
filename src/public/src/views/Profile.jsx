@@ -2,21 +2,38 @@ import React, { useState, useEffect } from 'react';
 import { DisplayEvent } from '../components';
 import API from '../api';
 
-async function fetchEvents(setEvents, setUserInfo, setUserEvents) {
-  const events = (await API.getEvents());
-  const userInfo = (await API.getProfiles());
-  setEvents(events);
-  setUserInfo(userInfo[0]);
-  setUserEvents((userInfo[0]["events"]).sort((x, y) => (events[x].date).localeCompare(events[y].date)));
-}
-
 const Profile = props => {
+  const errorUser = {
+    "id": -1,
+    "username": "N/A",
+    "description": "N/A",
+    "password": "N/A",
+    "email": "N/A",
+    "type": "N/A",
+    "events": [0]
+  };
 
   const [events, setEvents] = useState([]);
-  const [userInfo, setUserInfo] = useState([]);
+  const [userInfo, setUserInfo] = useState(errorUser);
   const [userEvents, setUserEvents] = useState([]);
+
+  async function fetchEvents() {
+    const userProfiles = await API.getProfiles();
+    const eventInfo = await API.getEvents();
+    eventInfo.match(
+      (err) => setEvents(err),
+      (events) => setEvents(events),
+    );
+    userProfiles.match(
+      (err) => setUserInfo(err),
+      (user) => setUserInfo(user[0]),
+    );
+    setUserEvents(userInfo["events"].sort((x, y) => (events[x].date).localeCompare(events[y].date)));
+  }
   
-  useEffect(() => { fetchEvents(setEvents, setUserInfo, setUserEvents); }, []);
+  // Not sure of useEffect is needed. But it doesn't work with it.
+  // useEffect(() => { fetchEvents(); }, []);
+  fetchEvents();
 
   return (
     <div>

@@ -22,7 +22,13 @@ const Browse = props => {
 
   const [events, setEvents] = useState([]);
   
-  const fetchEvents = async () => setEvents(await API.getEvents());
+  const fetchEvents = async () => {
+    const eventInfo = await API.getEvents();
+    eventInfo.match(
+      (err) => setEvents(err),
+      (events) => setEvents(events),
+    );
+  };
   useEffect(() => { fetchEvents(); }, []);
 
   const eventsFiltered = events

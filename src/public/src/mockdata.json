@@ -1,6 +1,16 @@
 {
     "events": [
       {
+        "id": -1,
+        "name": "N/A",
+        "date": "2019-10-15T09:00:00.000Z",
+        "posteddate": "2019-10-05T09:00:00.000Z",
+        "skills": [],
+        "address": "N/A",
+        "description": "N/A",
+        "organizer": "N/A"
+      },
+      {
         "id": 0,
         "name": "Toronto Marathon XYZ",
         "date": "2019-10-15T09:00:00.000Z",
