@@ -1,6 +1,8 @@
 .event-container {
     margin:auto;
-    width:85vw;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 100%;
 }
 
 .event-post {

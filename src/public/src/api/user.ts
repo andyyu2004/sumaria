@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { UserResponse } from '../types/api';
-import { Result } from '../types/Result';
-import { Left, Right, Either } from '../types/Either';
+import { Either, Left, Right } from '../types/Either';
 import { id } from '../util';
 
 /** Don't want an error to be thrown on client side error */

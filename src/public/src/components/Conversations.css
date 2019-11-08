@@ -1,15 +1,13 @@
 .conversations-container {
     width: 100%;
     height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
-.chat-container {
-    
-}
-
-.chat-flex-container {
-	display: flex;
-	width: 100%;
+.conversations-flex-container {
+    display: flex;
+    flex: 1;
     height: 100%;
 }
 

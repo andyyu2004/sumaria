@@ -4,6 +4,7 @@
     width: 200px;
     border-right: grey 2px solid;
     min-width: 150px;
+    height: auto;
 }
 
 .tabs { 

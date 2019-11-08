@@ -1,9 +1,8 @@
-import React, { FormEvent, useState, MouseEvent } from 'react'
 import { RouteComponentProps } from '@reach/router';
-import API from '../api';
-import { Result } from '../types/Result';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { setUser } from '../actions/actionCreators';
+import API from '../api';
 import { UserResponse } from '../types/api';
 import { UserType } from '../types/User';
 

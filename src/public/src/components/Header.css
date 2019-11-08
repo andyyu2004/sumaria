@@ -1,6 +1,9 @@
 .header-container {
-    background-color: #444444;
-	height: 70px;
+    /* background-color: #444444; */
+    height: 70px;
+    width: 100vw;
+    position: fixed;
+    z-index: 1;
 }
 
 .small-icon {

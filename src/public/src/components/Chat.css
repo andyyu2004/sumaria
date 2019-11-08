@@ -5,6 +5,14 @@
 .chat-container {
     background-color: lightgrey;
     flex: 4;
+    height: 100%;
+    overflow-y: scroll;
+}
+
+.chat-flex-container {
+    display: flex;
+    width: 100%;
+    height: 100%;
 }
 
 .chat-options-container {
@@ -18,6 +26,6 @@
 
 .message-input-form {
     position: fixed;   
-    bottom: 0;
+    bottom: 45px;
     width: 100%;
 }
