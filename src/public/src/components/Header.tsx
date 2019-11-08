@@ -7,6 +7,10 @@ import { AppState } from '../types/states';
 import './Header.css';
 import { User, UserType } from '../types/User';
 
+const headerText = {
+  "color": "white",
+}
+
 type PropTypes = {
   title: string,
   subtitle?: string,
@@ -30,8 +34,8 @@ const Header: React.FC<PropTypes> = ({ title, subtitle }) => {
 
   return (
     // <div className="header-container">
-      <Navbar bg="light" variant="light">
-      <Navbar.Brand id="navbar-brand" onClick={() => navigate("/")}><b>{title}</b></Navbar.Brand>
+      <Navbar bg="success" variant="light">
+      <Navbar.Brand style={headerText} className='header-title' id="navbar-brand" onClick={() => navigate("/")}><b>{title}</b></Navbar.Brand>
       <Navbar.Text>{subtitle}</Navbar.Text>
 
       {/* This creates the spacing, don't remove */}
@@ -45,7 +49,7 @@ const Header: React.FC<PropTypes> = ({ title, subtitle }) => {
             <img src={usericon} className="small-icon" onClick={() => navigate(`/${usertype === UserType.Admin ? 'admin' : 'profile'}`)} alt="profilepic" /> 
             <Button id="logoutButton" type="button" onClick={handleLogout}>Logout</Button>
           </div>)
-        : <Link to="/login">Log In/Sign Up</Link>} 
+        : <Link to="/login" style={headerText}>Log In/Sign Up</Link>} 
       </Navbar>
     // </div>
   );

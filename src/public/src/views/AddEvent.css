@@ -4,3 +4,7 @@
     margin:auto;
     padding:20px;
 }
+
+.add-event-outer {
+    background-color: var(--main-bg-color);
+}

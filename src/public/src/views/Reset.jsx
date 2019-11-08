@@ -1,30 +1,9 @@
 import React, { useState } from 'react'
 import { navigate } from '@reach/router'
+import InputGroup from 'react-bootstrap/InputGroup'
+import Button from 'react-bootstrap/Button'
+import './Reset.css'
 // import { Redirect } from 'react-router';
-
-const resetContainer = {
-  "width": "100%",
-  "minHeight": "100vh",
-  "display": "flex",
-  "flexWrap": "wrap",
-  "justifyContent": "center",
-  "alignItems": "center",
-  "padding": "15px",
-  "background": "linear-gradient(111deg, #6a11cb, #6a7cda, #2575fc)"
-}
-
-const resetForm = {
-  "width": "400px",
-  "background": "#fff",
-  "borderRadius": "20px",
-  "overflow": "hidden",
-  "display": "flex",
-  "flexWrap": "wrap",
-  "justifyContent": "center",
-  "alignItems": "center",
-  "padding": "30px 30px 30px 30px",
-  "margin": "20px"
-}
 
 const emailInput = {
   "fontFamily": "Roboto",
@@ -111,9 +90,22 @@ const Reset = props => {
 
   return (
     <div>
-      <div style={resetContainer}>
-        <div style={resetForm}>
-          <div className="text-center">
+      <div className='reset-container'>
+        <div className='reset-form'>
+          <i className="fa fa-lock fa-8x reset-icon"/>
+          <h2 className="text-center">Forgot Password?</h2>
+          <p className="text-center">We got your back. You can reset your password here.</p>
+          <form id="register-form" role="form" onSubmit={handleReset} autoComplete="off" className="form">
+            <InputGroup>
+              <i className="fa fa-envelope reset-small-icon" aria-hidden="true" />
+              <input id="email" name="email" className='form-control' value={email} 
+              onChange={e => setEmail(e.target.value)} placeholder="Email" className="form-control" type="email" required />
+            </InputGroup>
+            <Button variant='success' className='reset-button' name="recover-submit" defaultValue="Reset" type="submit" block>Submit</Button>
+
+          </form>
+          
+          {/* <div className="text-center">
             <h3><i className="fa fa-lock fa-4x" /></h3>
             <h2 className="text-center">Forgot Password?</h2>
             <p className="text-center" style={resetText}>We got your back. You can reset your password here.</p>
@@ -132,7 +124,7 @@ const Reset = props => {
                 </div>
               </form>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

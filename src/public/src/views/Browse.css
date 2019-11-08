@@ -1,13 +1,18 @@
-.event-container {
-    margin:auto;
+.browse-container {
+    padding:20px;
+    padding-left:40px;
+    padding-right:40px;
     width:85vw;
+    background-color: var(--main-bg-color);
+    margin-bottom:0px;
 }
 
-.event-post {
+.browse-post {
     margin:10px;
+    margin-bottom:0px;
     padding:10px;
 }
 
-ul li .horizontal {
-    display:inline;
+.browse-input {
+    margin-left:10px;
 }

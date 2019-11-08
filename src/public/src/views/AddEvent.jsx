@@ -4,11 +4,11 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
-import './AddEvent.css';
+import './AddEvent.css'
 
 const AddEvent = props => {
   return (
-    <div>
+    <div className='add-event-outer'>
       <Card className='add-event-container'>
         <h1>Add Event</h1>
         <Form>
