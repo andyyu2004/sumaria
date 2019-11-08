@@ -1,12 +1,22 @@
-import React from 'react'
-import data from "../mockdata.json";
+import React, { useState, useEffect } from 'react';
 import { DisplayEvent } from '../components';
+import API from '../api';
 
+async function fetchEvents(setEvents, setUserInfo, setUserEvents) {
+  const events = (await API.getEvents());
+  const userInfo = (await API.getProfiles());
+  setEvents(events);
+  setUserInfo(userInfo[0]);
+  setUserEvents((userInfo[0]["events"]).sort((x, y) => (events[x].date).localeCompare(events[y].date)));
+}
 
 const Profile = props => {
-  const userInfo = data.user[0];
-  const eventInfo = data.events;
-  const userEvents = (userInfo["events"]).sort((x, y) => (eventInfo[x].date).localeCompare(eventInfo[y].date));
+
+  const [events, setEvents] = useState([]);
+  const [userInfo, setUserInfo] = useState([]);
+  const [userEvents, setUserEvents] = useState([]);
+  
+  useEffect(() => { fetchEvents(setEvents, setUserInfo, setUserEvents); }, []);
 
   return (
     <div>
@@ -19,7 +29,7 @@ const Profile = props => {
       <div> {userInfo["description"]} </div>
       <h3>Your Upcoming Events</h3>
       <ul>
-        {userEvents.map(eventId => <DisplayEvent key={eventId} event={eventInfo[eventId]}/>)}
+        {userEvents.map(eventId => <DisplayEvent key={eventId} event={events[eventId]}/>)}
       </ul>
     </div>
     );
