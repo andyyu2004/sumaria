@@ -42,13 +42,16 @@ const Conversations = () => {
 
   return (
     <div className="conversations-container">
-      <h4>Conversations</h4>
-      <form onSubmit={createConversation} name="newconversationform">
-        <label>Create new conversation</label>
-        <input onChange={e => setNewname(e.target.value)} value={newname} />
-        <input type="submit" value="submit" />
-      </form>
-      <div className="chat-flex-container">
+      <div>
+        <span>Chat Header</span>
+        {/* <form onSubmit={createConversation} name="newconversationform">
+          <label>Create new conversation</label>
+          <input onChange={e => setNewname(e.target.value)} value={newname} />
+          <input type="submit" value="submit" />
+        </form> */}
+      </div>
+      
+      <div className="conversations-flex-container">
         <Sidebar text="Conversations" entries={convos.map((c, i) => [c.name, () => setCurrentConvoIndex(i)])} />
         {convos[currConvoIndex] && <Chat conversation={convos[currConvoIndex]} /> }
       </div>

@@ -110,7 +110,7 @@ const Reset = props => {
             <h2 className="text-center">Forgot Password?</h2>
             <p className="text-center" style={resetText}>We got your back. You can reset your password here.</p>
             <div className="panel-body">
-              <form id="register-form" role="form" onSubmit={handleReset} autoComplete="off" className="form">
+              <form id="register-form" onSubmit={handleReset} autoComplete="off" className="form">
                 <div className="form-group">
                   <div className="input-group">
                     <div style={symbol}>

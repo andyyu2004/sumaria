@@ -1,19 +1,31 @@
 .app {
   /* background-color: white; */
 	/* width: 100vw; */
-	min-height: 100vh;
+	width: auto;
 	display: flex;
 	flex-direction: column;
 }
 
-
 .app-body {
-	flex: 1;
+	/* Space for header */
+	margin-top: 70px;
+	/* flex: 1; */
 	display: flex;
-	/* min-height: 100vh; */
+	width: auto;
+	/* Need height for scoll */
+	min-height: 100vh;
 	position: relative;
 }
 
 .app-main {
 	flex: 1;
+}
+
+
+.small-generic-icon {
+	width: 20px;
+}
+
+.small-generic-icon:hover {
+	/* background-color: grey; */
 }

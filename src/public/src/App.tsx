@@ -11,7 +11,6 @@ import { setUser } from './actions/actionCreators';
 import { UserType } from './types/User';
 import API from './api';
 
-
 const App: React.FC = () => {
 
   const dispatch = useDispatch();
@@ -26,7 +25,7 @@ const App: React.FC = () => {
     ["Quick Login", async () => {
       await API.signup("sdf", "sdf");
       await API.login("sdf", "sdf");
-      dispatch(setUser({ username: "sdf", usertype: UserType.Volunteer }));
+      dispatch(setUser({ username: "sdf", usertype: "volunteer", id: 100, events: [] }));
       navigate("/chat");
     }],
   ];

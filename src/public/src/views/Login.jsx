@@ -20,7 +20,8 @@ const Login = props => {
   const dispatch = useDispatch();
 
   const onSubmit = async e => {
-    e.preventDefault()
+    e.preventDefault();
+    console.log(username, password);
 
   };
 

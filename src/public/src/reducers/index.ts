@@ -1,16 +1,22 @@
-import { combineReducers } from "redux"
-import { Action } from "../actions";
-import { UserType } from "../types/User";
-import { AppState } from "../types/states";
 import socketio from 'socket.io-client';
+import { Action } from "../actions";
+import { AppState } from "../types/states";
+import { UserType } from "../types/User";
+import uuid from 'uuid/v4';
 
 const initialState: AppState = {
-    user: { usertype: UserType.None },
+    user: { usertype: UserType.None, id: -1, events: [] },
     conversations: [],
+    notifications: [
+        { message: "Test Notification 0", id: uuid() },
+        { message: "Test Notification 1", id: uuid() },
+    ],
 }
 
 // const rootReducer = combineReducers(user)
 const rootReducer = (state: AppState = initialState, action: Action) => {
+    const { conversations, notifications, user } = state;
+
     switch (action.type) {
         case "SET_USER": {
             const { user } = action;
@@ -26,7 +32,6 @@ const rootReducer = (state: AppState = initialState, action: Action) => {
         }
 
         case "ADD_CONVERSATION": {
-            const { conversations } = state;
             const { conv } = action;
             return {
               ...state,
@@ -41,11 +46,29 @@ const rootReducer = (state: AppState = initialState, action: Action) => {
                 conversations,
             }
         }
+
+        case "NEW_NOTIFICATION": {
+            const { notification } = action;
+            return {
+                ...state,
+                notifications: [notification, ...notifications]
+            };
+        }
+
+        case "DISMISS_NOTIFICATION": {
+            const { id } = action;
+            const newNotifications = [...notifications];
+            const index = newNotifications.findIndex(n => n.id === id);
+            newNotifications.splice(index, 1);
+            return {
+                ...state,
+                notifications: newNotifications,
+            };
+        }
     
         case "LOGOUT": {
             return {
-                user: { usertype: UserType.None },
-                conversations: [],
+                ...initialState,
             };
         }
 

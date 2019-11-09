@@ -1,14 +1,15 @@
-import { getEvents } from './events';
-import { login, signup, msignup, mlogin, } from './user';
+import { getEvents, getEventsByIds, getEventsByUsername } from './events';
+import { getUsers } from './profiles';
+import { signup, login, getUserByUsername } from './user';
 
 const API = {
-    login,
     getEvents,
+    getUsers,
     signup,
-    monad: {
-        msignup,
-        mlogin,
-    },
+    login,
+    getUserByUsername,
+    getEventsByIds,
+    getEventsByUsername,
 };
 
 export default API;

@@ -1,9 +1,8 @@
-import React, { FormEvent, useState, MouseEvent } from 'react'
 import { RouteComponentProps } from '@reach/router';
-import API from '../api';
-import { Result } from '../types/Result';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { setUser } from '../actions/actionCreators';
+import API from '../api';
 import { UserResponse } from '../types/api';
 import { UserType } from '../types/User';
 
@@ -18,28 +17,21 @@ const APITesting: React.FC<RouteComponentProps> = () => {
   const [message, setMessage] = useState<string>("");
 
   const handleSignup = async () => {
-
-    /** Non-monadic appraoch */
-    // const res = await API.signup(username, password);
-    // console.log(res);
-
-    /** One monadic approach */
-    const mresult = await API.monad.msignup(username, password);
-    Result.match<UserResponse, string, void>(
-      mresult,
-      (user: UserResponse) => setMessage(`Signed up user: username = ${user.username}`),
+    const res = await API.signup(username, password);
+    res.match(
       (err: string) => setMessage(`${err} - Probably empty username/password`),
+      (user: UserResponse) => setMessage(`Signed up user: username = ${user.username}`),
     );
   };
 
   const handleLogin = async () => {
-    Result.match(
-      await API.monad.mlogin(username, password),
+    const res = await API.login(username, password);
+    res.match(
+      err => setMessage(`${err} - Login Failed`),
       user => {
         setMessage(`Succesfully logged in: username = ${user.username}`);
-        dispatch(setUser({ username: user.username, usertype: UserType.Volunteer }));
+        dispatch(setUser({ username: user.username, usertype: UserType.Volunteer, events: [] }));
       },
-      err => setMessage(`${err} - Login Failed`),
     )
   };
 

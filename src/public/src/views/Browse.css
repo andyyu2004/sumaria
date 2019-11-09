@@ -5,6 +5,12 @@
     width:85vw;
     background-color: var(--main-bg-color);
     margin-bottom:0px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 100%;
+}
+
+.event-container {
 }
 
 .browse-post {
