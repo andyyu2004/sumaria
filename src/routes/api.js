@@ -4,6 +4,7 @@ var express = require("express");
         user: require("./../controllers/User"),
         company: require("./../controllers/Company"),
         conv: require("../controllers/Converstions"),
+        event: require("./../controllers/Event")
     },
     cookieSession = require("cookie-session");
   
@@ -33,8 +34,7 @@ router.post("/account/login", async (req,res) => {
         if (user == false) return res.status(401).json({error: true, message: "Invalid username or password"})
         // Login success
         
-        // Commented out below for now, session is undefined
-        // res.session.user = user;
+        res.session = {user};
         res.status(200).json({error: false, user})
 
 
@@ -70,6 +70,16 @@ router.post("/company", async (req,res) => {
     }
 })
 
+router.post("/event", async (req,res) => {
+    if (!req.body.name || !req.body.date) return res.status(400).json({error: true, message: "Bad Request"})
+    try {
+        var event = await controllers.event.create(req.body.name, req.session.user._id, req.body.date);
+        res.json({error: false, event})
+    } catch(e) {
+        return res.status(500).json({error: true, message: "Server Error"})
+    }
+})
+
 router.get("/company/:id", async (req,res) => {
     try {
         var company = await controllers.company.get(req.params.id);
@@ -79,6 +89,26 @@ router.get("/company/:id", async (req,res) => {
         res.status(500).json({error: true, message: "Server Error"});
     }
 })
+router.get("/event/:id", async(req,res) => {
+    try {
+        var event = await controllers.event.get(req.params.id);
+        res.json({error: false, event})
+    } catch(e) {
+        return res.status(500).json({error: true, message: "Server Error"})
+    }
+})
+
+router.get("/event/:id/participants", async (req,res) => {
+    try {
+        var participants = await controllers.event.getEventParticipants(req.params.id)
+        res.json({error: false, participants})
+    } catch(e) {
+        return res.status(500).json({error: true, message: "Server Error"})
+    }
+})
+
+
+
 
 
 /* TODO Needs some error handling probably */
