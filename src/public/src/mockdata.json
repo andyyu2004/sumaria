@@ -1,6 +1,16 @@
 {
     "events": [
       {
+        "id": -1,
+        "name": "N/A",
+        "date": "2019-10-15T09:00:00.000Z",
+        "posteddate": "2019-10-05T09:00:00.000Z",
+        "skills": [],
+        "address": "N/A",
+        "description": "N/A",
+        "organizer": "N/A"
+      },
+      {
         "id": 0,
         "name": "Toronto Marathon XYZ",
         "date": "2019-10-15T09:00:00.000Z",
@@ -57,14 +67,14 @@
         "organizer": "456 schools"
       }
     ],
-    "user":[
+    "users":[
       {
         "id": 0,
         "username": "helloworld",
         "description": "A volunteer user",
         "password": "password1",
         "email": "email@gmail.com",
-        "type": "Volunteer",
+        "usertype": "Volunteer",
         "events": [3, 2]
       },
       {
@@ -73,7 +83,7 @@
         "description": "An organization head",
         "password": "password2",
         "email": "email2@gmail.com",
-        "type": "Admin",
+        "usertype": "Admin",
         "events": [3]
       },
       {
@@ -82,7 +92,7 @@
         "description": "Another organization head",
         "password": "password3",
         "email": "email3@gmail.com",
-        "type": "Volunteer",
+        "usertype": "Volunteer",
         "events": [4]
       },
       {
@@ -91,7 +101,7 @@
         "description": "High School Student",
         "password": "password3",
         "email": "email3@gmail.com",
-        "type": "Volunteer",
+        "usertype": "Volunteer",
         "events": [4]
       },
       {
@@ -100,7 +110,7 @@
         "description": "Another organization head",
         "password": "password3",
         "email": "anotherEmail@yahoo.com",
-        "type": "Admin",
+        "usertype": "Admin",
         "events": [1]
       }
     ]

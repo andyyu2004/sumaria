@@ -18,6 +18,9 @@ function generateSalt() {
 }
 
 async function create(username, password) {
+    const prevUser = await User.findOne({ username });
+    if (prevUser) return false;
+
     var salt = generateSalt();
     password = hash(password + salt);
     var user = new User({username, password, salt})
@@ -26,10 +29,9 @@ async function create(username, password) {
 }
 
 async function login(username, password) {
-    var user = await User.find({username});
+    var user = await User.findOne({ username });
     // User not found
     if (!user) return null;
-
     var enc_password = hash(password + user.salt);
     // Correct login
     if (enc_password == user.password) {

@@ -1,31 +1,9 @@
 import React, { useState } from 'react'
 import { navigate } from '@reach/router'
+import InputGroup from 'react-bootstrap/InputGroup'
+import Button from 'react-bootstrap/Button'
+import './Reset.css'
 // import { Redirect } from 'react-router';
-
-const resetContainer = {
-  "width": "100%",
-  "minHeight": "100vh",
-  "display": "flex",
-  "flexWrap": "wrap",
-  "justifyContent": "center",
-  "alignItems": "center",
-  "padding": "15px",
-  "background": "linear-gradient(111deg, #6a11cb, #6a7cda, #2575fc)"
-}
-
-const resetForm = {
-  "width": "400px",
-  "background": "#fff",
-  "borderRadius": "20px",
-  "overflow": "hidden",
-  "display": "flex",
-  "flexWrap": "wrap",
-  "justifyContent": "space-between",
-  "padding": "30px 30px 30px 30px",
-  margin: "20px",
-  justifyContent: "center",
-  alignItems: "center"
-}
 
 const emailInput = {
   "fontFamily": "Roboto",
@@ -33,12 +11,12 @@ const emailInput = {
   "lineHeight": "2",
   "color": "#c6c6c6",
   "display": "block",
-  "width": "186px",
+  "width": "206px",
   "background": "#e6e6fa",
   "height": "20px",
   "borderRadius": "10px",
   "padding": "8px",
-  "margin": "4px"
+  "margin": "4px 30px 4px 4px"
 }
 
 const emailInputFocus = {
@@ -55,25 +33,24 @@ const emailInputFocus = {
 }
 
 const submitButton = {
-  "width": "180px",
-  "display": "flex",
-  "flexWrap": "wrap",
-  "justifyContent": "center",
+  "width": "186px",
+  "display": "block",
   "paddingTop": "20px",
   "fontFamily": "Roboto",
   "fontSize": "15px",
   "lineHeight": "2",
-  "color": "#0c0d6b",
+  "color": "#07094a",
   "textTransform": "uppercase",
-  "height": "40px",
+  "height": "30px",
   "borderRadius": "20px",
   "background": "#829eff",
-  "alignItems": "center",
   "padding": "0 20px",
+  "margin": "10px 100px 0px 100px",
   "WebkitTransition": "all 0.4s",
   "OTransition": "all 0.4s",
   "MozTransition": "all 0.4s",
-  "transition": "all 0.4s"
+  "transition": "all 0.4s",
+  "textAlign": "center"
 
 }
 
@@ -90,6 +67,11 @@ const resetText = {
   "lineHeight": "1",
 }
 
+const symbol = {
+  "float": "left",
+  "margin": "2px 2px 2px 30px"
+}
+
 const Reset = props => {
 
   const [email, setEmail] = useState("");
@@ -97,7 +79,7 @@ const Reset = props => {
   const handleReset = async function (e) {
     //alert('reset');
     e.preventDefault();
-    console.log(email);
+    //console.log(email);
     //let resp = await API.resetP();
     navigate('/reset/sent');
     //window.location.hash = "#/reset/sent";
@@ -108,23 +90,42 @@ const Reset = props => {
 
   return (
     <div>
-      <div style={resetContainer}>
-        <div style={resetForm}>
-          <div className="text-center">
+      <div className='reset-container'>
+        <div className='reset-form'>
+          <i className="fa fa-lock fa-8x reset-icon"/>
+          <h2 className="text-center">Forgot Password?</h2>
+          <p className="text-center">We got your back. You can reset your password here.</p>
+          <form id="register-form" role="form" onSubmit={handleReset} autoComplete="off" className="form">
+            <InputGroup>
+              <i className="fa fa-envelope reset-small-icon" aria-hidden="true" />
+              <input id="email" name="email" className='form-control' value={email} 
+              onChange={e => setEmail(e.target.value)} placeholder="Email" className="form-control" type="email" required
+              pattern="^(([^<>()\[\]\\.,;:\s@&quot;]+(\.[^<>()\[\]\\.,;:\s@&quot;]+)*)|(&quot;.+&quot;))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$" />
+            </InputGroup>
+            <Button variant='success' className='reset-button' name="recover-submit" defaultValue="Reset" type="submit" block>Submit</Button>
+
+          </form>
+          
+          {/* <div className="text-center">
             <h3><i className="fa fa-lock fa-4x" /></h3>
             <h2 className="text-center">Forgot Password?</h2>
             <p className="text-center" style={resetText}>We got your back. You can reset your password here.</p>
             <div className="panel-body">
-              <form id="register-form" role="form" onSubmit={handleReset} autoComplete="off" className="form">
+              <form id="register-form" onSubmit={handleReset} autoComplete="off" className="form">
                 <div className="form-group">
                   <div className="input-group">
-                    <span className="input-group-addon"><i className="glyphicon glyphicon-envelope color-blue" /></span>
-                    <input id="email" name="email" style={emailInput} value={email} onChange={e => setEmail(e.target.value)} placeholder="Email" className="form-control" type="email" />
+                    <div style={symbol}>
+                    <i className="far fa-envelope" aria-hidden="true" />
+                    </div>
+                    <input id="email" name="email" style={emailInput} value={email} onChange={e => setEmail(e.target.value)} placeholder="Email" className="form-control" type="email" required />
                   </div>
+                </div>
+                <div class="form-group" >
+                  <input name="recover-submit" className="form-control" style={submitButton} defaultValue="Reset" type="submit" />
                 </div>
               </form>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

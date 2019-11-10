@@ -1,22 +1,35 @@
 import React from 'react';
-import { Home, Login, Reset, Browse, ResetSent, AddEvent, Registration, ImportExcel, Profile } from './views';
+import { Home, Login, Reset, Browse, ResetSent, AddEvent, Registration, ImportExcel, Profile, APITesting, RegisterSuccess } from './views';
 import { Router, navigate } from '@reach/router';
 import './App.css';
 import { Header } from './components';
 import ChatView from './views/ChatView';
 import Sidebar from './components/Sidebar';
 import Footer from './components/Footer';
-
-/* Pass some nullary as callback */
-const sidebarEntries: [string, () => void][] = [
-  ["Home", () => navigate('/')],
-  ["Chat", () => navigate('/chat')],
-  ["Browse", () => navigate('/browse')],
-  ["Import", () => navigate('/import')],
-  ["Add Event", () => navigate('/addevent')],
-];
+import { useDispatch } from 'react-redux';
+import { setUser } from './actions/actionCreators';
+import { UserType } from './types/User';
+import API from './api';
 
 const App: React.FC = () => {
+
+  const dispatch = useDispatch();
+  /* Pass some nullary function as callback */
+  const sidebarEntries: [string, () => void][] = [
+    ["Home", () => navigate('/')],
+    ["Chat", () => navigate('/chat')],
+    ["Browse", () => navigate('/browse')],
+    ["Import", () => navigate('/import')],
+    ["Add Event", () => navigate('/addevent')],
+    ["API", () => navigate('/api')],
+    ["Quick Login", async () => {
+      await API.signup("sdf", "sdf");
+      await API.login("sdf", "sdf");
+      dispatch(setUser({ username: "sdf", usertype: "volunteer", id: 100, events: [] }));
+      navigate("/chat");
+    }],
+  ];
+
   return (
     <div className="app">
       <Header title="Sumaria" />
@@ -33,9 +46,11 @@ const App: React.FC = () => {
           <ResetSent path="reset/sent" />
           <AddEvent path="addevent" />
           <Registration path="register" />
+          <APITesting path="api" />
+          <RegisterSuccess path="register/success" />
         </Router>
-        <Footer /> 
       </div> 
+      <Footer /> 
     </div>
   );
 };

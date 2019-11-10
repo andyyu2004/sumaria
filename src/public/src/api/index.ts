@@ -1,20 +1,15 @@
-import mockdata from '../mockdata.json';
-import { getEvents } from './events';
-
-type LoginResult = {
-    skdfjlsdf: "sdf"
-};
-
-async function login(username: string, password: string): Promise<LoginResult> {
-    const res = await fetch('/api/');
-    return {
-        skdfjlsdf: "sdf"
-    };
-}
+import { getEvents, getEventsByIds, getEventsByUsername } from './events';
+import { getUsers } from './profiles';
+import { signup, login, getUserByUsername } from './user';
 
 const API = {
-    login,
     getEvents,
+    getUsers,
+    signup,
+    login,
+    getUserByUsername,
+    getEventsByIds,
+    getEventsByUsername,
 };
 
 export default API;

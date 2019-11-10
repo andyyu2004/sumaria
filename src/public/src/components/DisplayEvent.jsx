@@ -12,10 +12,10 @@ import '../views/Browse.css'
  * @param {string} skill The skill to filter events.
  * @returns {JSX.Element}
  */
-const DisplayEvent = ({event}) => {
+const DisplayEvent = ({ event }) => {
     const { name, date, posteddate, skills, address, description, organizer } = event;
     return (
-        <Card className='event-post'>
+        <Card className='browse-post'>
         <h4>{name}</h4>
         <ul>
           <Row>

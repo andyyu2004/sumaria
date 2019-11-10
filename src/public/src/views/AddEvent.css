@@ -1,6 +1,21 @@
 .add-event-container {
     display:block;
-    width:75vw;
+    width:70vw;
     margin:auto;
     padding:20px;
+    background-color:white;
+}
+
+.add-event-outer {
+    background-color: var(--main-bg-color);
+}
+
+.add-event-title{
+    text-align:center;
+}
+
+.symbol {
+    position: relative;
+    top: -10px;
+    left: -2px;
 }

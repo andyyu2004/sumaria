@@ -1,11 +1,28 @@
-import { User, Conversation } from "../types";
-import { SetUserAction, AddConversationAction, SetConversationsAction, LogoutAction } from ".";
+import { Conversation } from "../types/Chat";
+import { SetUserAction, AddConversationAction, SetConversationsAction, LogoutAction, NewNotificationAction, DismissNotificationAction } from ".";
+import { User } from "../types/User";
+import { TNotification } from "../types/notifications";
 
 export const setUserAsync: (dispatch: any) => (user: User) => SetUserAction = dispatch => user =>
     dispatch({
         type: "SET_USER",
         user,
     });
+
+export const setUser: (user: User) => SetUserAction = user => ({
+    type: "SET_USER",
+    user,
+});
+
+export const newNotification: (notification: TNotification) => NewNotificationAction = notification => ({
+    type: "NEW_NOTIFICATION",
+    notification,
+});
+
+export const dismissNotification: (id: string) => DismissNotificationAction = id => ({
+    type: "DISMISS_NOTIFICATION",
+    id,
+});
 
 export const addNewConversation: (dispatch: any) => (conv: Conversation) => AddConversationAction = dispatch => conv =>
     dispatch({

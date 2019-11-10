@@ -1,0 +1,38 @@
+.reset-container {
+    background-color: var(--main-bg-color);
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    padding:15px;
+    align-items:center;
+}
+
+.reset-form {
+    background-color:white;
+    width:400px;
+    border-radius:20px;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    align-items:center;
+    padding:30px;
+    margin:20px;
+}
+
+.reset-icon {
+    margin:auto;
+    padding-bottom:15px;
+    color: var(--secondary-color);
+}
+
+.reset-small-icon {
+    margin-right:7px;
+    margin-top:12px;
+    color: var(--secondary-color);
+}
+
+.reset-button {
+    margin:auto;
+    display:block;
+    margin-top:15px;
+}

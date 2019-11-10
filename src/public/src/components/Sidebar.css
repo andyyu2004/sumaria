@@ -1,14 +1,16 @@
 .sidebar {
-    background-color: #fafafa;
+    background-color: white;
     text-align: center;
     width: 200px;
+    min-width: 150px;
+    height: auto;
 }
 
 .tabs { 
     text-align: center;
-    height: 20px;
-    background-color: lightgray;
-    border: gray;
+    background-color: white;
+    padding:5px;
+    font-size:15px;
 }
 
 .tabText {
@@ -20,5 +22,6 @@
 }
 
 .tabs:hover {
-    background-color: lightblue;
+    background-color: var(--success);
+    color:white;
 }
