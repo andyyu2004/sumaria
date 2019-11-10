@@ -6,8 +6,12 @@ import ReactTooltip from 'react-tooltip';
 import './registration.css';
 import { navigate } from '@reach/router';
 import Form from 'react-bootstrap/Form';
-import Col from 'react-bootstrap/Col'
-import Button from 'react-bootstrap/Button'
+import Col from 'react-bootstrap/Col';
+import Button from 'react-bootstrap/Button';
+import { signup } from '../api/user';
+//import { Either, Left, Right } from '../types/Either';
+
+
 //import { FormGroup, FormControl, InputGroup } from 'react-bootstrap';
 //import { navigate } from '@reach/router';
 //import algoliasearch from 'algoliasearch/lite';
@@ -44,7 +48,8 @@ const Registration = props => {
   const [password, setPassword] = useState('');
   const [rePassword, setRePassword] = useState('');
   const [firstName, setFirstName] = useState('');
-  const [middleName, setMiddleName] = useState('');
+  const [preferName, setPreferName] = useState('');
+  //const [middleName, setMiddleName] = useState('');
   const [lastName, setLastName] = useState('');
   const [gender, setGender] = useState('none');
   const [bdate, setBdate] = useState('');
@@ -81,13 +86,41 @@ const Registration = props => {
     }
   }
 
-  const saveUser = () => {
-    navigate('/register/success');
+  const validateAuthKey = (k) => {
+    // db validation?
+    return true;
   }
 
-  const validateSignUp = () => {
+  const saveUser = () => {
+    console.log(username, password);
+    let resp = signup(username, password);
+    //console.log(resp);
+    return resp;
+  }
 
-    saveUser();
+  const validateSignUp = async (e) => {
+    e.preventDefault();
+    if (userType === 'admin'){
+      let valid = await validateAuthKey(authKey);
+      if (!valid){
+        alert('Invalid Authetication Key');
+        return false;
+      }
+    }
+    let sav = await saveUser();
+    console.log(sav);
+    if (sav.val){
+      if (sav.val.username){
+        console.log(sav.val.username);
+      } else{
+        console.log(sav.val);
+      }
+    } else{
+      console.log(sav);
+      return false;
+    }
+
+    navigate('/register/success');
 
   }
 
@@ -171,8 +204,9 @@ const Registration = props => {
     setPassword(pwd);
     setRePassword(pwd);
     setFirstName(generateName());
-    if (Math.floor(Math.random()) > 0.5) {
-      setMiddleName(generateName());
+    if (Math.random() > 0.5) {
+      //setMiddleName(generateName());
+      setPreferName(generateName());
     }
     setLastName(generateName());
     setGender(generateGender());
@@ -257,7 +291,7 @@ const Registration = props => {
               <Form.Group as={Col}>
                 <Form.Label>Preferred Name</Form.Label>
                 <input type="text" className="form-control" name="prefer_name" id="prefer_name" pattern="^[a-zA-Z]{1,64}$" 
-                value={firstName} onChange={e => setFirstName(e.target.value)} required />
+                value={preferName} onChange={e => setPreferName(e.target.value)} />
               </Form.Group>
               <Form.Group as={Col}>
                 <Form.Label>Last Name</Form.Label>
@@ -298,7 +332,7 @@ const Registration = props => {
               value={email} onChange={e => setEmail(e.target.value)} />
             </Form.Group>
             <div className='register-header'>Location
-              <MDBIcon icon="asterisk" className="pointer text register-icon" data-tip="We will never share your information without your permission" />
+              <MDBIcon icon="info-circle" className="pointer text register-icon" data-tip="We will never share your information without your permission" />
             </div>
             <Form.Row>
               <Form.Group as={Col}>

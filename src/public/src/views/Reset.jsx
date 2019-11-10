@@ -99,7 +99,8 @@ const Reset = props => {
             <InputGroup>
               <i className="fa fa-envelope reset-small-icon" aria-hidden="true" />
               <input id="email" name="email" className='form-control' value={email} 
-              onChange={e => setEmail(e.target.value)} placeholder="Email" className="form-control" type="email" required />
+              onChange={e => setEmail(e.target.value)} placeholder="Email" className="form-control" type="email" required
+              pattern="^(([^<>()\[\]\\.,;:\s@&quot;]+(\.[^<>()\[\]\\.,;:\s@&quot;]+)*)|(&quot;.+&quot;))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$" />
             </InputGroup>
             <Button variant='success' className='reset-button' name="recover-submit" defaultValue="Reset" type="submit" block>Submit</Button>
 
