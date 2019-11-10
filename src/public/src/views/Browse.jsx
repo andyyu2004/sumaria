@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import Form from 'react-bootstrap/Form';
+import Col from 'react-bootstrap/Col'
 import { DisplayEvent } from '../components';
-import './Browse.css';
 import API from '../api';
+import './Browse.css'
 
 const Browse = props => {
   const [skill, setSkill] = useState("");
@@ -37,19 +38,19 @@ const Browse = props => {
     .filter(e => e.skills.some(s => s.toUpperCase().includes(skill.toUpperCase())));
  
   return (
-    <div className='event-container'>
+    <div className='browse-container'>
       <h1>Browse For Events</h1>
       <Form.Row>
-        <Form.Group>
+        <Form.Group as={Col} xs={3} className='browse-input'>
           <Form.Control placeholder="Search for a skill..." onChange={e => setSkill(e.target.value)}/>
         </Form.Group>
-        <Form.Group>
+        <Form.Group as={Col} xs={3}>
           <Form.Control placeholder="Search for an event..." onChange={e => setKeyword(e.target.value)}/>
         </Form.Group>
       </Form.Row>
-      <ul>
+      <div>
         {eventsFiltered.map(event => <DisplayEvent key={event.id} event={event}/>)}
-      </ul>
+      </div>
     </div>
   );
 };

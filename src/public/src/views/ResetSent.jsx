@@ -1,37 +1,6 @@
 import React, { useState } from 'react'
 import { navigate } from '@reach/router';
-
-const ResetContainer = {
-  "width": "100%",
-  "minHeight": "100vh",
-  "display": "flex",
-  "flexWrap": "wrap",
-  "justifyContent": "center",
-  "alignItems": "center",
-  "padding": "15px",
-  "background": "linear-gradient(-111deg, #6a11cb, #6a7cda, #2575fc)"
-}
-
-const ResetForm = {
-  "width": "355px",
-  "background": "#fff",
-  "borderRadius": "20px",
-  "overflow": "hidden",
-  "display": "flex",
-  "flexWrap": "wrap",
-  "justifyContent": "space-between",
-  "padding": "30px 30px 30px 30px",
-  "margin": "20px",
-  "alignItems": "center"
-}
-
-const ResetText = {
-  "fontFamily": "Arial",
-  "fontSize": "13.5px",
-  "lineHeight": "1",
-}
-
-
+import './Reset.css'
 
 const ResetSent = props => {
 
@@ -55,10 +24,10 @@ const ResetSent = props => {
 
   return (
     <div>
-      <div style={ResetContainer}>
-        <div style={ResetForm}>
-          <div className="text-center" style={ResetText}>
-              <h3><i className="fa fa-unlock-alt fa-4x" /></h3>
+      <div className='reset-container'>
+        <div className='reset-form'>
+          <div className="text-center">
+              <h3><i className="fa fa-unlock-alt fa-4x reset-icon" /></h3>
             <h2 className="text-center">Dear user:</h2>
             <p>Your password reset email has been sent.</p>
             <p>You should receive a password reset link shortly.</p>

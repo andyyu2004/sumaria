@@ -56,10 +56,9 @@ const AddEvent = props => {
 
 
   return (
-    <div>
-      <Card className='add-event-container'>
-        <h1>Add Event</h1>
-        <Form onSubmit={(e) => handleSubmit(e)}>
+    <div className='add-event-outer'>
+        <Form className='add-event-container' onSubmit={(e) => handleSubmit(e)}>
+        <h2 className='add-event-title'>Add Event</h2>
           <Form.Group controlId="formEventName">
               <Form.Label>Event Name</Form.Label>
               <Form.Control placeholder="Enter event name" value={eventName} onChange={e => setEventName(e.target.value)}  maxLength={64} required />
@@ -94,7 +93,6 @@ const AddEvent = props => {
               Create Event
           </Button>
         </Form>
-        </Card>
     </div>
   );
 }

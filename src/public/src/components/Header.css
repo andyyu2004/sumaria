@@ -4,6 +4,11 @@
     width: 100vw;
     position: fixed;
     z-index: 1;
+    background-color: var(--success);
+}
+
+.header-title {
+    font-weight:100;
 }
 
 .small-icon {
@@ -16,7 +21,9 @@
 }
 
 #navbar-brand:hover {
-    background-color: lightblue;
+    background-color: #1f9651;
+    border:solid white 1px;
+    transition:1s;
 }
 
 #logoutButton {
