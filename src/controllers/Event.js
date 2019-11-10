@@ -1,8 +1,8 @@
 let Event = require("./../models/Event"),
     EventParticipant = require("./../models/EventParticipant");
 
-async function create(name, creator, date) {
-    var event = new Event({name, creator, date});
+async function create(name, organizer, date, description) {
+    var event = new Event({name, organizer, date, postDate: new Date(), description});
     await event.save();
     return event;
 }

@@ -71,9 +71,9 @@ router.post("/company", async (req,res) => {
 })
 
 router.post("/event", async (req,res) => {
-    if (!req.body.name || !req.body.date) return res.status(400).json({error: true, message: "Bad Request"})
+    if (!req.body.name || !req.body.date || req.body.description) return res.status(400).json({error: true, message: "Bad Request"})
     try {
-        var event = await controllers.event.create(req.body.name, req.session.user._id, req.body.date);
+        var event = await controllers.event.create(req.body.name, req.session.user._id, req.body.date, req.body.description);
         res.json({error: false, event})
     } catch(e) {
         return res.status(500).json({error: true, message: "Server Error"})
