@@ -1,16 +1,14 @@
-import React, { useState } from 'react'
-import SumariaLogo from '../assets/images/logos/sumaria_logo.png'
-import API from '../api'
-import { Result } from '../types/Result'
-import { useDispatch } from 'react-redux'
-import { setUser } from '../actions/actionCreators'
-import InputGroup from 'react-bootstrap/InputGroup'
-import Form from 'react-bootstrap/Form'
-import './Login.css'
-import Button from 'react-bootstrap/Button'
-import { login, getUserByUsername } from '../api/user';
-import { validate } from '@babel/types'
 import { navigate } from '@reach/router'
+import React, { useState } from 'react'
+import Button from 'react-bootstrap/Button'
+import Form from 'react-bootstrap/Form'
+import InputGroup from 'react-bootstrap/InputGroup'
+import { useDispatch } from 'react-redux'
+import API from '../api'
+import SumariaLogo from '../assets/images/logos/sumaria_logo.png'
+import './Login.css'
+import { UserType } from '../types/User'
+import { setUser } from '../actions/actionCreators'
 
 const Login = props => {
 
@@ -47,20 +45,22 @@ const Login = props => {
     e.preventDefault();
     console.log(username, password);
     if (!validateLoginParams(username, password)){
+      /* TODO: Do some sort of display to the user */
       return false;
     }
-    let findUser = await getUserByUsername(username);
-    console.log(findUser.val);
-    if (findUser.val){
-      let login = await login(username, password);
-      console.log(login.val);
-      if (login.val){
-        navigate('/');
-      } else{
-        alert('Login failed');
-      }
-    }
 
+    const res = await API.login(username, password);
+    res.match(
+      err => {
+        // setMessage(`${err} - Login Failed`),
+        /* TODO: Do some sort of display to the user */
+      },
+      user => {
+        // setMessage(`Succesfully logged in: username = ${user.username}`);
+        dispatch(setUser({ username: user.username, usertype: UserType.Volunteer, events: [] }));
+        navigate("/");
+      },
+    );
   };
 
   return (

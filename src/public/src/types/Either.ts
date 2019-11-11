@@ -19,24 +19,24 @@ export interface IEither<L, R> {
 
 export class Right<L, R> implements IEither<L, R> {
 
-    constructor(private val: R) {}
+    constructor(private rval: R) {}
 
     tag = "right";
 
     map<T>(f: (x: R) => T): IEither<L, T> {
-        return new Right<L, T>(f(this.val));
+        return new Right<L, T>(f(this.rval));
     }
 
     map_left<T>(f: (x: L) => T): IEither<T, R> {
-        return new Right(this.val);
+        return new Right(this.rval);
     }
 
     bind<T>(f: (x: R) => IEither<L, T>): IEither<L, T> {
-        return f(this.val);
+        return f(this.rval);
     }
 
     match<T>(f: (l: L) => T, g: (r: R) => T): T {
-        return g(this.val);
+        return g(this.rval);
     }
 
     isLeft(): boolean {
@@ -48,7 +48,7 @@ export class Right<L, R> implements IEither<L, R> {
     }
 
     unwrap() {
-        return this.val;
+        return this.rval;
     }
     
     err() {
@@ -56,31 +56,31 @@ export class Right<L, R> implements IEither<L, R> {
     }
 
     unwrapOrElse(f: (l: L) => R): R {
-        return this.val;
+        return this.rval;
     }
 
 }
 
 export class Left<L, R> implements IEither<L, R> {
 
-    constructor(private val: L) { }
+    constructor(private lval: L) { }
 
     tag = "left";
 
     map<T>(f: (x: R) => T): IEither<L, T> {
-        return new Left(this.val);
+        return new Left(this.lval);
     }
 
     map_left<T>(f: (x: L) => T): IEither<T, R> {
-        return new Left(f(this.val));
+        return new Left(f(this.lval));
     }
 
     bind<T>(f: (x: R) => IEither<L, T>): IEither<L, T> {
-        return new Left(this.val);
+        return new Left(this.lval);
     }
 
     match<T>(f: (l: L) => T, g: (r: R) => T): T {
-        return f(this.val);
+        return f(this.lval);
     }
 
     isLeft(): boolean {
@@ -96,11 +96,11 @@ export class Left<L, R> implements IEither<L, R> {
     }
 
     err() {
-        return this.val;
+        return this.lval;
     }
 
     unwrapOrElse(f: (l: L) => R): R {
-        return f(this.val);
+        return f(this.lval);
     }
 
 }

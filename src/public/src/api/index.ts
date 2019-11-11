@@ -1,6 +1,6 @@
 import { getEvents, getEventsByIds, getEventsByUsername, addEvent, getEventById } from './events';
 import { getUsers } from './profiles';
-import { signup, login, getUserByUsername } from './user';
+import { signup, login } from './user';
 import { createCompany, getCompanyById } from './company';
 
 const API = {
@@ -8,7 +8,6 @@ const API = {
     getUsers,
     signup,
     login,
-    getUserByUsername,
     getEventsByIds,
     getEventsByUsername,
     addEvent,

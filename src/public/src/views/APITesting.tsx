@@ -1,4 +1,4 @@
-import { RouteComponentProps } from '@reach/router';
+import { RouteComponentProps, navigate } from '@reach/router';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { setUser } from '../actions/actionCreators';
@@ -31,8 +31,9 @@ const APITesting: React.FC<RouteComponentProps> = () => {
       user => {
         setMessage(`Succesfully logged in: username = ${user.username}`);
         dispatch(setUser({ username: user.username, usertype: UserType.Volunteer, events: [] }));
+        navigate("/");
       },
-    )
+    );
   };
 
 

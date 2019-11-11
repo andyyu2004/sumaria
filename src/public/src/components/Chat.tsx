@@ -33,7 +33,7 @@ const Chat: React.FC<PropType> = ({ conversation }) => {
     fetchMessages();
   }, [fetchMessages]);
 
-  /** Socket initialization and destruction */
+  /** Socket listener initialization and destruction */
   useEffect(() => {
     socket.emit('enter-conversation', conversation._id);
     socket.on('refresh-messages', fetchMessages);
@@ -108,7 +108,6 @@ const Chat: React.FC<PropType> = ({ conversation }) => {
           </div>
         </Popup>
       </div>
-
     </div>
   );
 };

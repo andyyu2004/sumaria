@@ -45,9 +45,9 @@ export async function login(username: string, password: string): Promise<IEither
 }
 
 
-export async function getUserByUsername(username: string): Promise<IEither<string, User>> {
-    const users = mockdata.users;
-    const user = users.find(x => x.username === username);
-    if (!user) return new Left(`Could not find user with username ${username}`);
-    return new Right(user);
-}
+// export async function getUserByUsername(username: string): Promise<IEither<string, User>> {
+//     const users = mockdata.users;
+//     const user = users.find(x => x.username === username);
+//     if (!user) return new Left(`Could not find user with username ${username}`);
+//     return new Right(user);
+// }
