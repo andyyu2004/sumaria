@@ -9,6 +9,8 @@ import SumariaLogo from '../assets/images/logos/sumaria_logo.png'
 import './Login.css'
 import { UserType } from '../types/User'
 import { setUser } from '../actions/actionCreators'
+import { ToastContainer, toast } from 'react-toastify';
+
 
 const Login = props => {
 
@@ -22,7 +24,9 @@ const Login = props => {
 
   const validateLoginParams = (u, p) => {
     if (u.length < 3 || u.length > 15 || !/^[A-Za-z][A-Za-z0-9]*(?:[ _-][A-Za-z0-9]+)*$/.test(u)){
-      alert('Invalid username!');
+      toast.error('Invalid username!', {
+        position: toast.POSITION.TOP_CENTER
+      });
       setInputs({
         username: "",
         password: "",
@@ -30,7 +34,9 @@ const Login = props => {
       return false;
     } else{
       if (!/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,64}$/.test(p)){
-        alert('Invalid password!');
+        toast.error('Invalid password!', {
+          position: toast.POSITION.TOP_CENTER
+        });
         setInputs({
           username: "",
           password: "",
@@ -45,18 +51,27 @@ const Login = props => {
     e.preventDefault();
     console.log(username, password);
     if (!validateLoginParams(username, password)){
-      /* TODO: Do some sort of display to the user */
       return false;
     }
 
     const res = await API.login(username, password);
     res.match(
       err => {
+        console.log(err);
         // setMessage(`${err} - Login Failed`),
-        /* TODO: Do some sort of display to the user */
+        toast.error(err, {
+          position: toast.POSITION.TOP_CENTER
+        });
+        setInputs({
+          username: "",
+          password: "",
+        });
       },
       user => {
         // setMessage(`Succesfully logged in: username = ${user.username}`);
+        toast.success('Successfully logged in: ' + user.username, {
+          position: toast.POSITION.TOP_CENTER
+        });
         dispatch(setUser({ username: user.username, usertype: UserType.Volunteer, events: [] }));
         navigate("/");
       },

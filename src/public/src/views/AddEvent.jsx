@@ -10,6 +10,7 @@ import Form from 'react-bootstrap/Form';
 import ReactTooltip from 'react-tooltip';
 import './AddEvent.css';
 import API from "../api";
+import { toast } from 'react-toastify';
 
 
 const AddEvent = props => {
@@ -36,8 +37,18 @@ const AddEvent = props => {
     // console.log(event);
     const res = await API.addEvent(event);
     res.match(
-      err => console.log(err),
-      event => console.log(`Successfully added event: returned event = ${event}`),
+      err => {
+        console.log(err);
+        toast.error(err, {
+          position: toast.POSITION.TOP_CENTER
+        });
+      },
+      event => {
+        console.log(`Successfully added event: returned event = ${event}`);
+        toast.success("Successfully added event: " + event, {
+          position: toast.POSITION.TOP_CENTER
+        });
+      }
     );
     
   };
@@ -49,7 +60,12 @@ const AddEvent = props => {
       var e = endDate.split("-");
       var sy = s[0], sm = s[1], sd = s[2];
       var ey = e[0], em = e[1], ed = e[2];
-      if (sy > ey && sm > em && sd < ed) alert('End date cannot be earlier than start date!');;
+      if (sy > ey && sm > em && sd < ed) {
+        //alert('End date cannot be earlier than start date!');
+        toast.error('End date cannot be earlier than start date!', {
+          position: toast.POSITION.TOP_CENTER
+        });
+      }
     }
   };
 

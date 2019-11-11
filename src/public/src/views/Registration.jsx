@@ -8,7 +8,9 @@ import { navigate } from '@reach/router';
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
-import { signup } from '../api/user';
+import API from '../api';
+import { toast } from 'react-toastify';
+//import { signup } from '../api/user';
 //import { Either, Left, Right } from '../types/Either';
 
 
@@ -93,7 +95,7 @@ const Registration = props => {
 
   const saveUser = () => {
     console.log(username, password);
-    let resp = signup(username, password);
+    let resp = API.signup(username, password);
     //console.log(resp);
     return resp;
   }
@@ -103,30 +105,38 @@ const Registration = props => {
     if (userType === 'admin'){
       let valid = await validateAuthKey(authKey);
       if (!valid){
-        alert('Invalid Authetication Key');
+        //alert('Invalid Authetication Key');
+        toast.error('Invalid Authetication Key', {
+          position: toast.POSITION.TOP_CENTER
+        });
         return false;
       }
     }
-    let sav = await saveUser();
-    console.log(sav);
-    if (sav.val){
-      if (sav.val.username){
-        console.log(sav.val.username);
-      } else{
-        console.log(sav.val);
-      }
-    } else{
-      console.log(sav);
-      return false;
-    }
-
-    navigate('/register/success');
-
+    let res = await saveUser();
+    //console.log(res);
+    res.match(
+      err => {
+        console.log(err);
+        toast.error(err, {
+          position: toast.POSITION.TOP_CENTER
+        });
+      },
+      user => {
+        toast.success('Registration successful: ' + user.username, {
+          position: toast.POSITION.TOP_CENTER
+        });
+        console.log(user);
+        navigate('/register/success');
+      },
+    );
   }
 
   const validatePwd = () => {
     if (password !== rePassword) {
-      alert("Your password does not match! Please re-enter your password.");
+      //alert("Your password does not match! Please re-enter your password.");
+      toast.error("Your password does not match! Please re-enter your password.", {
+        position: toast.POSITION.TOP_CENTER
+      });
       setPassword('');
       setRePassword('');
       return false;
@@ -192,7 +202,10 @@ const Registration = props => {
   function generateAddress() {
     var randomAddress = [
       "27 King's College Cir, Toronto, Ontario",
-      "1265 Military Trail, Scarborough, Ontario"
+      "1265 Military Trail, Scarborough, Ontario",
+      "3359 Mississauga Rd, Mississauga, ON",
+      "300 Borough Dr, Toronto, ON",
+      "1 Blue Jays Way, Toronto, ON"
     ];
     return randomAddress[Math.floor(Math.random()*randomAddress.length)];
   }

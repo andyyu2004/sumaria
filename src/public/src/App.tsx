@@ -10,6 +10,12 @@ import { useDispatch } from 'react-redux';
 import { setUser, logout } from './actions/actionCreators';
 import { UserType } from './types/User';
 import API from './api';
+import { toast } from 'react-toastify';
+
+toast.configure({
+  autoClose: 3000,
+  draggable: true
+});
 
 const App: React.FC = () => {
 
