@@ -61,7 +61,7 @@ const AddEvent = props => {
       var e = endDate.split("-");
       var sy = s[0], sm = s[1], sd = s[2];
       var ey = e[0], em = e[1], ed = e[2];
-      if (sy > ey && sm > em && sd < ed) {
+      if (sy > ey || sm > em || sd > ed) {
         //alert('End date cannot be earlier than start date!');
         toast.error('End date cannot be earlier than start date!', {
           position: toast.POSITION.TOP_CENTER
@@ -73,6 +73,7 @@ const AddEvent = props => {
 
   return (
     <div className='add-event-outer'>
+      <ReactTooltip place="right" />
       <Form className='add-event-container' onSubmit={(e) => handleSubmit(e)}>
         <h2 className='add-event-title'>Add Event</h2>
           <Form.Group controlId="formEventName">

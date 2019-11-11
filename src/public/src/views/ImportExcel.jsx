@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { OutTable, ExcelRenderer } from 'react-excel-renderer';
 // import xlsx from 'xlsx';
 import "./ImportExcel.css";
+import { toast } from 'react-toastify';
 
 
 const ImportExcel = props => {
@@ -16,8 +17,13 @@ const ImportExcel = props => {
   const handleFile = e => {
     const file = e.target.files[0];
     ExcelRenderer(file, (err, res) => {
-      if (err) return console.log(err);
-      setSheet(res); 
+      if (err){
+        //return console.log(err);
+        return toast.error(err, {
+          position: toast.POSITION.TOP_CENTER
+        });
+      }
+      setSheet(res);
     });
   }
 
