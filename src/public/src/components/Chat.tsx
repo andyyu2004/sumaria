@@ -43,6 +43,7 @@ const Chat: React.FC<PropType> = ({ conversation }) => {
     return () => { 
       socket.emit('leave-conversation', conversation._id); 
       socket.removeListener('refresh-messages', fetchMessages);
+      socket.removeListener('err'); 
     };
     
   }, [conversation, socket, fetchMessages]);
@@ -73,7 +74,11 @@ const Chat: React.FC<PropType> = ({ conversation }) => {
       <div className="chat-container" key="chat-view-container">
         <h5>{conversation.name} ({conversation._id})</h5>
       <div className="message-container" ref={chatRef}>
-          {messages.map(({ message, _id, username }) => <p className="chatmsg" key={_id}>{username}: {message}</p>)}
+        {messages.map(({ message, _id, username, createdAt }) => {
+          const date = new Date(createdAt);
+          const formatted = `${date.getHours()}:${date.getMinutes().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})}`;
+          return <p className="chatmsg" key={_id}>{username}@{formatted}: {message}</p>
+        })}
         </div>
         <form onSubmit={sendMessage} key="message-form" className="message-input-form">
           <input 

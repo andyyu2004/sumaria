@@ -7,7 +7,7 @@ import ChatView from './views/ChatView';
 import Sidebar from './components/Sidebar';
 import Footer from './components/Footer';
 import { useDispatch } from 'react-redux';
-import { setUser } from './actions/actionCreators';
+import { setUser, logout } from './actions/actionCreators';
 import { UserType } from './types/User';
 import API from './api';
 
@@ -23,6 +23,7 @@ const App: React.FC = () => {
     ["Add Event", () => navigate('/addevent')],
     ["API", () => navigate('/api')],
     ["Quick Login", async () => {
+      dispatch(logout());
       await API.signup("sdf", "sdf");
       await API.login("sdf", "sdf");
       dispatch(setUser({ username: "sdf", usertype: "volunteer", id: 100, events: [] }));

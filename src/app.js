@@ -29,6 +29,7 @@ mongoose.connect(DB_CONNECTION_STRING, {
         console.error(e);
         return;
     }
+    // mongoose.connection.db.dropDatabase();
     server.listen(PORT, () => console.log(`Listening on port ${PORT}`));
 });
 
@@ -58,7 +59,7 @@ io.on('connection', socket => {
     socket.on('new-message', async ({ sender, message, conversationId }) => {
         // console.log("new message", message);
         await controllers.conv.appendMessage(conversationId, sender, message);
-        io.in(conversationId).emit("refresh-messages");
+        io.in(conversationId).emit("refresh-messages", sender, message, conversationId);
     });
 
     socket.on('add-user', async ({ conversationId, username }) => {
@@ -70,7 +71,7 @@ io.on('connection', socket => {
             conversation.members.forEach(username => {
                 if (!socketmap[username]) return;
                 console.log("Emitting to", username, socketmap[username]);
-                io.to(socketmap[username]).emit("refresh-conversations")
+                io.to(socketmap[username]).emit("refresh-conversations");
             });
         } catch (err) {
             return socket.emit("err", err.message);

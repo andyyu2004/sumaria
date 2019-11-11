@@ -44,11 +44,11 @@ const Conversations = () => {
     <div className="conversations-container">
       <div>
         <span>Chat Header</span>
-        {/* <form onSubmit={createConversation} name="newconversationform">
+        <form onSubmit={createConversation} name="newconversationform">
           <label>Create new conversation</label>
           <input onChange={e => setNewname(e.target.value)} value={newname} />
           <input type="submit" value="submit" />
-        </form> */}
+        </form>
       </div>
       
       <div className="conversations-flex-container">

@@ -1,5 +1,6 @@
 .chatmsg {
     margin: 0px;
+    text-align: left;
 }
 
 .chat-container {
@@ -28,6 +29,7 @@
 .message-container {
     flex: 1;
     overflow-y: scroll;
+    text-align: left;
 }
 
 .message-input-form {

@@ -1,12 +1,14 @@
 
 
 export type Event =  {
-    id: number,
+    id?: number,
     name: string,
     date: string,
-    posteddate: string,
+    enddate?: string
+    posteddate?: string,
     skills: string[],
     address: string,
+    numVolunteers?: number,
     description: string,
-    organizer: string,
+    organizer?: string,
 };
