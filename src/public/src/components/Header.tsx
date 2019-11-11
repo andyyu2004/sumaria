@@ -72,7 +72,7 @@ const Header: React.FC<PropTypes> = ({ title, subtitle }) => {
             <Dropdown.Menu>
               {notifications.length
                 ? notifications.map(n => <Notification notification={n} key={n.id} />)
-                : <h6>No notifications</h6>
+                : <h6 className='notification-message'>No notifications</h6>
               }
             </Dropdown.Menu>
           </Dropdown>
@@ -80,7 +80,7 @@ const Header: React.FC<PropTypes> = ({ title, subtitle }) => {
             <img src={usericon} className="small-icon" onClick={() => navigate(`/${usertype === UserType.Admin ? 'admin' : 'profile'}`)} alt="profilepic" /> 
             <Button id="logoutButton" type="button" className='header-button' onClick={handleLogout}>Logout</Button>
           </div></>)
-        : <Link to="/login" className='header-text'>Log In/Sign Up</Link>} 
+        : <Link to="/login" className='header-text header-login'>Log In/Sign Up</Link>} 
       </Navbar>
     </div>
   );

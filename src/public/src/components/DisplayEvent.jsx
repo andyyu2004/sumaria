@@ -15,12 +15,12 @@ import '../views/Browse.css'
 const DisplayEvent = ({ event }) => {
     const { name, date, posteddate, skills, address, description, organizer } = event;
     return (
-        <Card className='browse-post'>
+        <div className='browse-post'>
         <h4>{name}</h4>
         <ul>
           <Row>
             <Col>Event Date: {new Date(date).toDateString()}</Col>
-            <Col>Posted Date: {new Date(posteddate).toDateString()}</Col>
+            <Col className='browse-post-date'>Posted Date: {new Date(posteddate).toDateString()}</Col>
           </Row>
           <Row>
             <Col>Organizer: {organizer}</Col>
@@ -40,7 +40,7 @@ const DisplayEvent = ({ event }) => {
             <Col>Description: {description}</Col>
           </Row>
         </ul>
-      </Card>)
+      </div>)
   };
 
   export default DisplayEvent;
