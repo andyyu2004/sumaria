@@ -12,10 +12,6 @@ import Notification from './Notification';
 import { newNotification } from '../actions/actionCreators';
 import uuid from 'uuid/v4';
 
-const headerText = {
-  "color": "white",
-}
-
 type PropTypes = {
   title: string,
   subtitle?: string,
@@ -57,8 +53,8 @@ const Header: React.FC<PropTypes> = ({ title, subtitle }) => {
 
   return (
     <div className="header-container">
-      <Navbar bg="success" variant="light">
-      <Navbar.Brand style={headerText} className='header-title' id="navbar-brand" onClick={() => navigate("/")}><b>{title}</b></Navbar.Brand>
+      <Navbar variant="light">
+      <Navbar.Brand className='header-text' id="navbar-brand" onClick={() => navigate("/")}><b>{title}</b></Navbar.Brand>
       <Navbar.Text>{subtitle}</Navbar.Text>
 
       {/* This creates the spacing, don't remove */}
@@ -67,9 +63,9 @@ const Header: React.FC<PropTypes> = ({ title, subtitle }) => {
       </Nav>
       {usertype !== UserType.None
         /** If logged in, then take user to dashboard if admin else take to profile, else redirect to login screen */
-        ? (<><h5>{user.username}</h5>
+        ? (<><h5 className='header-username'>{user.username}</h5>
           <Dropdown>
-            <Dropdown.Toggle id="notification-toggle">
+            <Dropdown.Toggle className='header-button header-notification' id="notification-toggle">
               <img src={notificationicon} alt="Notifications" className="small-generic-icon" />
               <span>{notifications.length}</span>
             </Dropdown.Toggle>
@@ -82,9 +78,9 @@ const Header: React.FC<PropTypes> = ({ title, subtitle }) => {
           </Dropdown>
           <div>
             <img src={usericon} className="small-icon" onClick={() => navigate(`/${usertype === UserType.Admin ? 'admin' : 'profile'}`)} alt="profilepic" /> 
-            <Button id="logoutButton" type="button" onClick={handleLogout}>Logout</Button>
+            <Button id="logoutButton" type="button" className='header-button' onClick={handleLogout}>Logout</Button>
           </div></>)
-        : <Link to="/login" style={headerText}>Log In/Sign Up</Link>} 
+        : <Link to="/login" className='header-text'>Log In/Sign Up</Link>} 
       </Navbar>
     </div>
   );

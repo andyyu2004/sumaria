@@ -16,7 +16,7 @@ import { toast } from 'react-toastify';
 const AddEvent = props => {
 
   const [eventName, setEventName] = useState('');
-  const [organizers, setOrganizers] = useState('');
+  const [eventAddress, setAddress] = useState('');
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [numV, setNumV] = useState('');
@@ -30,6 +30,7 @@ const AddEvent = props => {
       name: eventName,
       date: startDate,
       enddate: endDate,
+      address: eventAddress,
       skills: skills.split(",").map(s => s.trim()),
       description,
       numVolunteers: parseInt(numV),
@@ -78,9 +79,9 @@ const AddEvent = props => {
               <Form.Label>Event Name</Form.Label>
               <Form.Control placeholder="Enter event name" value={eventName} onChange={e => setEventName(e.target.value)}  maxLength={64} required />
           </Form.Group>
-          <Form.Group controlId="formOrganizers">
-            <Form.Label>Organizers</Form.Label><ReactTooltip place="right" /><span className="symbol"><MDBIcon icon="question" className="pointer text qt" data-tip="Separate the organizers by comma" /></span>
-            <Form.Control placeholder="Enter organizer name(s) (I think the way Cameron's designed it, we just use the person who submits it as the sole organiser)" value={organizers} onChange={e => setOrganizers(e.target.value)} />
+          <Form.Group controlId="formAddress">
+            <Form.Label>Address</Form.Label>
+            <Form.Control placeholder="Enter event location" value={eventAddress} onChange={e => setAddress(e.target.value)} />
           </Form.Group>
           <Form.Row>
             <Form.Group as={Col} controlId="formStartDate">
