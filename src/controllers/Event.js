@@ -7,6 +7,13 @@ async function create(name, organizer, date, description) {
     return event;
 }
 
+async function getAll() {
+	console.log("before getAll");
+	console.log(await Event.find({}).exec());
+    return await Event.find({});
+
+}
+
 async function get(eventID) {
     return Event.findOne({_id: eventID}).lean().exec()
 }
@@ -21,4 +28,4 @@ async function getEventParticipants(eventID) {
     return users.map(u => u.user);
 }
 
-module.exports = {create, get, getUserEvents, getEventParticipants}
+module.exports = {create, getAll, get, getUserEvents, getEventParticipants}

@@ -22,9 +22,12 @@ router.use(
     })
 );
 
+
+console.log("api")
 router.use(require("body-parser").json())
 
 router.post("/account/login", async (req,res) => {
+    console.log("??")
     if (!req.body.username || !req.body.password) return res.status(400).end("Bad Request");
     try {
         var user = await controllers.user.login(req.body.username, req.body.password);
@@ -74,7 +77,7 @@ router.post("/event", async (req,res) => {
     console.log(req.body);
     if (!req.body.name || !req.body.date || !req.body.description) return res.status(400).json({error: true, message: "Bad Request"})
     try {
-        var event = await controllers.event.create(req.body.name, req.session.user._id, req.body.date, req.body.description);
+        var event = await controllers.event.create(req.body.name, req.body.organizer, req.body.date, req.body.description);
         res.json({error: false, event})
     } catch(e) {
         console.log(e);
@@ -91,6 +94,20 @@ router.get("/company/:id", async (req,res) => {
         res.status(500).json({error: true, message: "Server Error"});
     }
 })
+
+router.get("/events", async(req,res) => {
+    console.log("before get before");
+    try {
+        console.log("before get");
+        var events = await controllers.event.getAll();
+        console.log("after get");
+        res.json({error: false, events})
+    } catch(e) {
+        console.log("TEST");
+        return res.status(500).json({error: true, message: "Server Error"})
+    }
+})
+    
 router.get("/event/:id", async(req,res) => {
     try {
         var event = await controllers.event.get(req.params.id);
@@ -110,6 +127,8 @@ router.get("/event/:id/participants", async (req,res) => {
 })
 
 
+
+router.get("*", (req, res) => res.status(404).send("404"));
 
 
 

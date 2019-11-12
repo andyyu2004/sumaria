@@ -9,9 +9,15 @@ export async function addEvent(event: Event): Promise<Either<string, Event>> {
     return data.error ? new Left(data.message) : new Right(data.event);
 }
 
-/** Return all events */
-export async function getEvents(): Promise<IEither<string, Event[]>> {
-    return new Right(mockdata.events);
+// /** Return all events */
+// export async function getEvents(): Promise<IEither<string, Event[]>> {
+//     return new Right(mockdata.events);
+// }
+
+/** Given an eventid, return all the participants */
+export async function getEvents(): Promise<Either<string, Event[]>> {
+    const { data } = await axios.get(`/api/events`); // TODO Note this data structure returns undefined.
+    return data.error ? new Left(data.message) : new Right(data.events);
 }
 
 /** Given a username, return all the events the user is participating in */
@@ -25,7 +31,7 @@ export async function getEventParticipantsByEventId(id: string): Promise<Either<
     return data.error ? new Left(data.message) : new Right(data.participants);
 }
 
-export async function getEventById(id: string) {
+export async function getEventById(id: string):  Promise<Either<string, Event>> {
     const { data } = await axios.get(`/api/event/${id}`);
     return data.error ? new Left(data.message) : new Right(data.event);
 }

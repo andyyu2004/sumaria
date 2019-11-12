@@ -13,20 +13,22 @@ import '../views/Browse.css'
  * @returns {JSX.Element}
  */
 const DisplayEvent = ({ event }) => {
-    const { name, date, posteddate, skills, address, description, organizer } = event;
+    const { date, description, name, postDate, skills, address, organizer } = event;
+    const tempAddress = "temp";
+    const tempOrganizer = "temp";
     return (
         <Card className='browse-post'>
         <h4>{name}</h4>
         <ul>
           <Row>
             <Col>Event Date: {new Date(date).toDateString()}</Col>
-            <Col>Posted Date: {new Date(posteddate).toDateString()}</Col>
+            <Col>Posted Date: {new Date(postDate).toDateString()}</Col>
           </Row>
           <Row>
-            <Col>Organizer: {organizer}</Col>
+            <Col>Organizer: {tempOrganizer}</Col>
           </Row>
           <Row>
-            <Col>Address: {address}</Col>
+            <Col>Address: {tempAddress}</Col>
           </Row>
           Skills Required:
           <Row>

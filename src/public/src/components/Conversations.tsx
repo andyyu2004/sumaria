@@ -40,6 +40,7 @@ const Conversations = () => {
     };
   }, [refreshConversations, socket]);
 
+  // TODO line 55 error. convos undef.
   return (
     <div className="conversations-container">
       <div>
@@ -51,7 +52,7 @@ const Conversations = () => {
         </form>
       </div>
       
-      <div className="conversations-flex-container">
+      <div className="conversations-flex-container"> 
         <Sidebar text="Conversations" entries={convos.map((c, i) => [c.name, () => setCurrentConvoIndex(i)])} />
         {convos[currConvoIndex] && <Chat conversation={convos[currConvoIndex]} /> }
       </div>

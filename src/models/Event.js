@@ -5,8 +5,9 @@ var schema = mongoose.Schema({
         type: String
     },
     organizer: {
-        type: mongoose.Types.ObjectId,
-        ref: 'User'
+        type: String
+        // type: mongoose.Types.ObjectId,
+        // ref: 'User'
     },
     date: {
         type: Date

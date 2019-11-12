@@ -5,4 +5,3 @@ import { User } from '../types/User.js';
 export async function getUsers(): Promise<IEither<string, User[]>> {
     return new Right(mockdata.users);
 }
- 

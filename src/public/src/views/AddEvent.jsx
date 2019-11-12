@@ -28,11 +28,12 @@ const AddEvent = props => {
     e.preventDefault();
     const event = {
       name: eventName,
+      organizer: organizers,
       date: startDate,
-      enddate: endDate,
-      skills: skills.split(",").map(s => s.trim()),
-      description,
-      numVolunteers: parseInt(numV),
+      // enddate: endDate,
+      // skills: skills.split(",").map(s => s.trim()),
+      description: description,
+      // numVolunteers: parseInt(numV),
     };
     // console.log(event);
     const res = await API.addEvent(event);
