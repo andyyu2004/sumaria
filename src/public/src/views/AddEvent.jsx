@@ -22,19 +22,20 @@ const AddEvent = props => {
   const [numV, setNumV] = useState('');
   const [skills, setSkills] = useState('');
   const [description, setDescription]= useState('');
+  const organizer = "randomname";
 
 
   const handleSubmit = async e => {
     e.preventDefault();
     const event = {
       name: eventName,
-      // organizer: organizers,
+      organizer: organizer,
       date: startDate,
       enddate: endDate,
-      address: eventAddress,
-      skills: skills.split(",").map(s => s.trim()),
-      description,
-      numVolunteers: parseInt(numV),
+      // address: eventAddress,
+      // skills: skills.split(",").map(s => s.trim()),
+      description: description,
+      // numVolunteers: parseInt(numV),
     };
     // console.log(event);
     const res = await API.addEvent(event);
