@@ -10,6 +10,7 @@ import './Login.css'
 import { UserType } from '../types/User'
 import { setUser } from '../actions/actionCreators'
 import { ToastContainer, toast } from 'react-toastify';
+//import 'react-toastify/dist/ReactToastify.minimal.css';
 
 
 const Login = props => {

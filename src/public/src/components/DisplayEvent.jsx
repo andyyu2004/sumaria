@@ -17,12 +17,12 @@ const DisplayEvent = ({ event }) => {
     const tempAddress = "temp";
     const tempOrganizer = "temp";
     return (
-        <Card className='browse-post'>
+        <div className='browse-post'>
         <h4>{name}</h4>
         <ul>
           <Row>
             <Col>Event Date: {new Date(date).toDateString()}</Col>
-            <Col>Posted Date: {new Date(postDate).toDateString()}</Col>
+            <Col className='browse-post-date'>Posted Date: {new Date(postDate).toDateString()}</Col>
           </Row>
           <Row>
             <Col>Organizer: {tempOrganizer}</Col>
@@ -42,7 +42,7 @@ const DisplayEvent = ({ event }) => {
             <Col>Description: {description}</Col>
           </Row>
         </ul>
-      </Card>)
+      </div>)
   };
 
   export default DisplayEvent;

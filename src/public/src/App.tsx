@@ -14,7 +14,8 @@ import { toast } from 'react-toastify';
 
 toast.configure({
   autoClose: 3000,
-  draggable: true
+  draggable: true,
+  draggablePercent: 50
 });
 
 const App: React.FC = () => {

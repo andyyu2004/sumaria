@@ -7,7 +7,41 @@
     background-color: var(--success);
 }
 
-.header-title {
+.header-username {
+    margin-right:15px;
+    color:white;
+    position:relative;
+    top:5px;
+}
+
+.header-login {
+    margin-right:15px;
+}
+
+.header-button {
+    background-color:white !important;
+    border-color:white !important;
+    color:black !important;
+}
+
+.header-notification {
+    margin-right:15px;
+}
+
+.notification-button-group {
+    margin:2px;
+}
+
+.notification-button {
+    width:150px;
+}
+
+.notification-message {
+    text-align:center;
+}
+
+.header-text {
+    color:white !important;
     font-weight:100;
 }
 
