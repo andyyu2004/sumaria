@@ -1,5 +1,5 @@
 import { Link, navigate } from '@reach/router';
-import React, { MouseEvent, useEffect } from 'react';
+import React, { MouseEvent, useEffect, useCallback } from 'react';
 import { Button, Nav, Navbar, Dropdown } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import usericon from '../assets/images/profile_pic_placeholder.png';
@@ -31,10 +31,10 @@ const Header: React.FC<PropTypes> = ({ title, subtitle }) => {
       socket && socket.close();
       navigate('/');
       dispatch({ type: "LOGOUT" });
-      console.log(socket);
+      // console.log(socket);
   };
 
-  const newMessageNotification = (sender: string, message: string, convId: string) => {
+  const newMessageNotification = useCallback((sender: string, message: string, convId: string) => {
     /* Don't need own message notification */
     if (sender === user.username) return;
     dispatch(newNotification({
@@ -42,14 +42,14 @@ const Header: React.FC<PropTypes> = ({ title, subtitle }) => {
       message: `Message '${message}' from ${sender}`,
       // cb, use the convId and redirect user to that conversation or something
     }));
-  };
+  }, [dispatch, user.username]);
 
   useEffect(() => {
     socket && socket.on('refresh-messages', newMessageNotification);
     return () => {
       socket && socket.removeListener('refresh-message', newMessageNotification);
     };
-  }, [socket]);
+  }, [socket, newMessageNotification]);
 
   return (
     <div className="header-container">

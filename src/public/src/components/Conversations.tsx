@@ -1,12 +1,13 @@
 import React, { FormEvent, useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 import { addNewConversation, setConversations } from '../actions/actionCreators';
-import { apiGetConversations, apiNewConversation as apiCreateConversation } from '../api/chat';
+import API from '../api';
 import { Chat } from '../components';
-import Sidebar from './Sidebar';
-import { AppState } from '../types/states';
 import { Conversation } from '../types/Chat';
+import { AppState } from '../types/states';
 import "./Conversations.css";
+import Sidebar from './Sidebar';
 
 const Conversations = () => {
   const username = useSelector<AppState, string>(state => state.user.username!);
@@ -20,15 +21,19 @@ const Conversations = () => {
   
   const createConversation = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!newname) return;
-    const { conversation } = await apiCreateConversation(username, newname);
-    addNewConversation(dispatch)(conversation);
+    if (!newname) return toast.info("Can't create chat with empty name");
+    (await API.createNewConversation(username, newname)).match(
+      err => toast.error(err),
+      addNewConversation(dispatch),
+    );
   };
 
   const refreshConversations = useCallback(async () => {
-    const { conversations } = await apiGetConversations(username);
-    console.log("Refreshing conversations");
-    setConversations(dispatch)(conversations);
+    (await API.getConversations(username)).match(
+      err => toast.error(err),
+      setConversations(dispatch),
+    );
+    
   }, [dispatch, username]);
 
   /** Refresh conversations on page load and on 'refresh-conversations' event */

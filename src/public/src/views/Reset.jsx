@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
 import { navigate } from '@reach/router'
-import InputGroup from 'react-bootstrap/InputGroup'
+import React, { useState } from 'react'
 import Button from 'react-bootstrap/Button'
+import InputGroup from 'react-bootstrap/InputGroup'
 import './Reset.css'
 // import { Redirect } from 'react-router';
 

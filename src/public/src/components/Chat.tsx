@@ -1,11 +1,11 @@
-import React, { FormEvent, useCallback, useEffect, useState, useRef } from 'react';
+import React, { FormEvent, useCallback, useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Popup from 'reactjs-popup';
-import { apiGetMessages } from '../api/chat';
-import { AppState } from '../types/states';
+import API from '../api';
 import { Conversation, Message } from '../types/Chat';
+import { AppState } from '../types/states';
 import { User } from '../types/User';
 import './Chat.css';
 
@@ -24,8 +24,9 @@ const Chat: React.FC<PropType> = ({ conversation }) => {
   const chatRef: any = useRef();
 
   const fetchMessages = useCallback(async () => {
-    const { messages } = await apiGetMessages(conversation._id);
-    setMessages(messages);
+    // const { messages } = await apiGetMessages(conversation._id);
+    (await API.getMessages(conversation._id)).match(err => toast.error(err), setMessages);
+
     if (chatRef.current) chatRef.current.scrollTop = chatRef.current.scrollHeight;
   }, [conversation]);
 

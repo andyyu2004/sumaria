@@ -24,13 +24,13 @@ export const dismissNotification: (id: string) => DismissNotificationAction = id
     id,
 });
 
-export const addNewConversation: (dispatch: any) => (conv: Conversation) => AddConversationAction = dispatch => conv =>
+export const addNewConversation: (dispatch: any) => (conv: Conversation) => void = dispatch => conv =>
     dispatch({
         type: "ADD_CONVERSATION",
         conv,
     });
 
-export const setConversations: (dispatch: any) => (conv: Conversation) => SetConversationsAction = dispatch => conversations =>
+export const setConversations: (dispatch: any) => (conv: Conversation[]) => void = dispatch => conversations =>
     dispatch({
         type: "SET_CONVERSATIONS",
         conversations,

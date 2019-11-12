@@ -1,5 +1,5 @@
 import mockdata from '../mockdata.json';
-import { IEither, Right, Left, Either } from '../types/Either';
+import { Right, Left, Either } from '../types/Either';
 import { Event } from '../types/events';
 import axios from 'axios';
 import { User } from '../types/User.js';
@@ -31,7 +31,7 @@ export async function getEventParticipantsByEventId(id: string): Promise<Either<
     return data.error ? new Left(data.message) : new Right(data.participants);
 }
 
-export async function getEventById(id: string):  Promise<Either<string, Event>> {
+export async function getEventById(id: string): Promise<Either<string, Event>> {
     const { data } = await axios.get(`/api/event/${id}`);
     return data.error ? new Left(data.message) : new Right(data.event);
 }

@@ -3,7 +3,7 @@ var express = require("express");
     controllers = {
         user: require("./../controllers/User"),
         company: require("./../controllers/Company"),
-        conv: require("../controllers/Converstions"),
+        conv: require("../controllers/Conversation"),
         event: require("./../controllers/Event")
     },
     cookieSession = require("cookie-session");
@@ -22,12 +22,9 @@ router.use(
     })
 );
 
-
-console.log("api")
 router.use(require("body-parser").json())
 
 router.post("/account/login", async (req,res) => {
-    console.log("??")
     if (!req.body.username || !req.body.password) return res.status(400).end("Bad Request");
     try {
         var user = await controllers.user.login(req.body.username, req.body.password);
@@ -96,11 +93,8 @@ router.get("/company/:id", async (req,res) => {
 })
 
 router.get("/events", async(req,res) => {
-    console.log("before get before");
     try {
-        console.log("before get");
-        var events = await controllers.event.getAll();
-        console.log("after get");
+        const events = await controllers.event.getAll();
         res.json({error: false, events})
     } catch(e) {
         console.log("TEST");
@@ -126,17 +120,11 @@ router.get("/event/:id/participants", async (req,res) => {
     }
 })
 
-
-
-router.get("*", (req, res) => res.status(404).send("404"));
-
-
-
 /* TODO Needs some error handling probably */
 
 router.post('/createconversation', async (req, res) => {
     const { name, userid } = req.body;
-    console.log("create conversation");
+    // console.log("create conversation");
     const conversation = await controllers.conv.createConversation(name, userid);
     res.status(200).json({ conversation });
 });
@@ -156,5 +144,8 @@ router.get('/messages/:conversationId', async (req, res) => {
     // console.log(messages);
     res.status(200).json({ messages });
 });
+
+
+router.get("*", (req, res) => res.status(404).send("404"));
 
 module.exports = router;

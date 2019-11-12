@@ -3,8 +3,7 @@
 	/* width: 100vw; */
 	width: auto;
 	display: flex;
-	height: auto;
-	min-height:100vh;
+	height:100vh;
 	flex-direction: column;
 }
 
@@ -16,7 +15,6 @@
 	width: auto;
 	/* Need height for scoll */
 	height: 100%;
-	min-height:100vh;
 	font-family: "Roboto", sans-serif;
 }
 
