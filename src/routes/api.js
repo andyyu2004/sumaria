@@ -92,9 +92,24 @@ router.post("/sessioninfo", async (req,res) => {
     }
 })
 
+router.get("/userinfobyusername/:username", async (req,res) => {
+    try {
+        // console.log("Getting Username Outside");
+        // console.log(req.params.username)
+        var user = await controllers.user.getByUsername(req.params.username);
+        console.log(user);
+        if (!user) return res.status(404).json({error: true, message: "User not found"})
+        res.json({error: false, user});
+    } catch(e){
+        return res.status(500).json({error: true, message: "Server Error"})
+    }
+})
+
 router.get("/userinfo/:id", async (req,res) => {
     try {
-        var user = await controllers.user.getById(req.params.id);
+        // console.log("Getting User Outside");
+        var user = await controllers.user.getBy(req.params.id);
+        // console.log(user);
         if (!user) return res.status(404).json({error: true, message: "User not found"})
         res.json({error: false, user});
     } catch(e){

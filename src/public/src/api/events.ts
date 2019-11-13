@@ -16,7 +16,7 @@ export async function addEvent(event: Event): Promise<Either<string, Event>> {
 
 /** Given an eventid, return all the participants */
 export async function getEvents(): Promise<Either<string, Event[]>> {
-    const { data } = await axios.get(`/api/events`); // TODO Note this data structure returns undefined.
+    const { data } = await axios.get(`/api/events`);
     return data.error ? new Left(data.message) : new Right(data.events);
 }
 
