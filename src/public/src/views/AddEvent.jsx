@@ -63,7 +63,7 @@ const AddEvent = props => {
       var e = endDate.split("-");
       var sy = s[0], sm = s[1], sd = s[2];
       var ey = e[0], em = e[1], ed = e[2];
-      if (sy > ey || (sy <= ey && sm > em) || (sy <= ey && sm <= em && sd > ed)) {
+      if (sy > ey || (sy == ey && sm > em) || (sy == ey && sm == em && sd > ed)) {
         //alert('End date cannot be earlier than start date!');
         toast.error('End date cannot be earlier than start date!', {
           position: toast.POSITION.TOP_CENTER
