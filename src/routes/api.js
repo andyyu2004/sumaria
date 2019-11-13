@@ -124,7 +124,7 @@ router.get("/events", async(req,res) => {
     
 router.get("/event/:id", async(req,res) => {
     try {
-        var event = await controllers.event.get(req.params.id);
+        var event = await controllers.event.getById(req.params.id);
         res.json({error: false, event})
     } catch(e) {
         return res.status(500).json({error: true, message: "Server Error"})
