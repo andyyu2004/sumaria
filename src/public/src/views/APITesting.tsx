@@ -30,7 +30,12 @@ const APITesting: React.FC<RouteComponentProps> = () => {
       err => setMessage(`${err} - Login Failed`),
       user => {
         setMessage(`Succesfully logged in: username = ${user.username}`);
-        dispatch(setUser({ username: user.username, usertype: UserType.Volunteer, events: [] }));
+        dispatch(setUser({ 
+          username: user.username, 
+          usertype: UserType.Volunteer, 
+          _id: user._id,
+          events: [] 
+        }));
         navigate("/");
       },
     );

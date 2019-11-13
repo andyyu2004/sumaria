@@ -9,10 +9,10 @@ axios.defaults.validateStatus = status => status >= 200 && status < 500;
 
 export async function signup(username: string, password: string): Promise<IEither<string, UserResponse>> {
     try {
-        const data = (await axios.post("/api/account", {
+        const { data } = await axios.post("/api/account", {
             username,
             password,
-        })).data;
+        });
         return data.error
             ? new Left(data.message)
             : new Right(data.user);
@@ -30,11 +30,11 @@ export async function signup(username: string, password: string): Promise<IEithe
 /** Currently the response is identical from the server as signup */
 export async function login(username: string, password: string): Promise<IEither<string, UserResponse>> {
     try {
-        const data = (await axios.post("/api/account/login", {
+        const { data } = await axios.post("/api/account/login", {
             username,
             password,
-        })).data;
-        
+        });
+        console.log(data);
         return data.error
             ? new Left(data.message)
             : new Right(data.user);
