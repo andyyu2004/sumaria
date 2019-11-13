@@ -82,9 +82,29 @@ router.post("/event", async (req,res) => {
     }
 })
 
+router.post("/sessioninfo", async (req,res) => {
+    if (!req.session.user) return res.status(400).json({error: true, message: "Bad Request"})
+    try {
+        var session = req.session.user
+        res.json({error: false, session})
+    } catch(e){
+        return res.status(500).json({error: true, message: "Server Error"})
+    }
+})
+
+router.get("/userinfo/:id", async (req,res) => {
+    try {
+        var user = await controllers.user.getById(req.params.id);
+        if (!user) return res.status(404).json({error: true, message: "User not found"})
+        res.json({error: false, user});
+    } catch(e){
+        return res.status(500).json({error: true, message: "Server Error"})
+    }
+})
+
 router.get("/company/:id", async (req,res) => {
     try {
-        var company = await controllers.company.get(req.params.id);
+        var company = await controllers.company.getById(req.params.id);
         if (!company) return res.status(404).json({error: true, message: "Company not found"})
         res.json({error: false, company});
     } catch(e) {
