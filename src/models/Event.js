@@ -20,6 +20,18 @@ var schema = mongoose.Schema({
     },
     skills: {
         type: Array
+    },    
+    endDate: {
+        type: Date
+    },
+    numVolunteers: {
+        type: Number
+    },
+    Address: {
+        type: String
+    },
+    City: {
+        type: String
     }
 
 })
