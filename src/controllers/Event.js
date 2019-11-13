@@ -14,7 +14,7 @@ async function getAll() {
 
 }
 
-async function get(eventID) {
+async function getById(eventID) {
     return Event.findOne({_id: eventID}).lean().exec()
 }
 
@@ -28,4 +28,4 @@ async function getEventParticipants(eventID) {
     return users.map(u => u.user);
 }
 
-module.exports = {create, getAll, get, getUserEvents, getEventParticipants}
+module.exports = {create, getAll, getById, getUserEvents, getEventParticipants}

@@ -42,4 +42,8 @@ async function login(username, password) {
     return false;
 }
 
-module.exports = {login, create}
+async function getById(id){
+    return User.findOne({_id: id}).lean().exec();
+}
+
+module.exports = {login, create, getById}
