@@ -7,11 +7,8 @@ async function create(name) {
     return company;
 }
 
-async function get(id) {
+async function getById(id) {
     return Company.findOne({_id: id}).lean().exec();
 }
 
-
-
-
-module.exports = {create, get}
+module.exports = {create, getById}
