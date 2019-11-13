@@ -4,7 +4,7 @@
         "id": -1,
         "name": "N/A",
         "date": "2019-10-15T09:00:00.000Z",
-        "posteddate": "2019-10-05T09:00:00.000Z",
+        "postDate": "2019-10-05T09:00:00.000Z",
         "skills": [],
         "address": "N/A",
         "description": "N/A",
@@ -14,7 +14,7 @@
         "id": 0,
         "name": "Toronto Marathon XYZ",
         "date": "2019-10-15T09:00:00.000Z",
-        "posteddate": "2019-10-05T09:00:00.000Z",
+        "postDate": "2019-10-05T09:00:00.000Z",
         "skills": [
           "leadership"
         ],
@@ -26,7 +26,7 @@
         "id": 1,
         "name": "Peer Mentoring",
         "date": "2019-09-15T13:00:00.000Z",
-        "posteddate": "2018-10-05T09:00:00.000Z",
+        "postDate": "2018-10-05T09:00:00.000Z",
         "skills": [
           "math",
           "english",
@@ -41,7 +41,7 @@
         "id": 2,
         "name": "Can Drive",
         "date": "2019-11-12T16:00:00.000Z",
-        "posteddate": "2019-11-01T09:00:00.000Z",
+        "postDate": "2019-11-01T09:00:00.000Z",
         "skills": [
           "french",
           "communication",
@@ -55,7 +55,7 @@
         "id": 3,
         "name": "Peer Mentoring Toronto",
         "date": "2019-09-15T13:00:00.000Z",
-        "posteddate": "2018-10-05T09:00:00.000Z",
+        "postDate": "2018-10-05T09:00:00.000Z",
         "skills": [
           "Spanish",
           "Latin",

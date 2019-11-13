@@ -43,7 +43,19 @@ async function login(username, password) {
 }
 
 async function getById(id){
-    return User.findOne({_id: id}).lean().exec();
+    // console.log("Getting User");
+    // console.log(id);
+    // console.log(await User.find());
+    console.log(await User.findOne({_id: id}).lean().exec());
+    return await User.findOne({_id: id}).lean().exec();
 }
 
-module.exports = {login, create, getById}
+async function getByUsername(username){
+    console.log("Getting User by Username");
+    console.log(username);
+    // console.log(await User.find());
+    console.log(await User.findOne({"username": username }));
+    return await User.findOne({"username": username });
+}
+
+module.exports = {login, create, getById, getByUsername}
