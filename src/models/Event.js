@@ -5,8 +5,9 @@ var schema = mongoose.Schema({
         type: String
     },
     organizer: {
-        type: mongoose.Types.ObjectId,
-        ref: 'User'
+        type: String
+        // type: mongoose.Types.ObjectId,
+        // ref: 'User'
     },
     date: {
         type: Date
@@ -19,6 +20,18 @@ var schema = mongoose.Schema({
     },
     skills: {
         type: Array
+    },    
+    endDate: {
+        type: Date
+    },
+    numVolunteers: {
+        type: Number
+    },
+    Address: {
+        type: String
+    },
+    City: {
+        type: String
     }
 
 })

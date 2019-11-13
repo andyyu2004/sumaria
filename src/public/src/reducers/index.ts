@@ -67,9 +67,7 @@ const rootReducer = (state: AppState = initialState, action: Action) => {
         }
     
         case "LOGOUT": {
-            return {
-                ...initialState,
-            };
+            return initialState;
         }
 
         default: return state;

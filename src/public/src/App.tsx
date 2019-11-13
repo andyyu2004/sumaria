@@ -58,7 +58,7 @@ const App: React.FC = () => {
           <RegisterSuccess path="register/success" />
         </Router>
       </div> 
-      <Footer /> 
+      {/* <Footer />  Do we really need this? */}
     </div>
   );
 };

@@ -3,7 +3,7 @@ var express = require("express");
     controllers = {
         user: require("./../controllers/User"),
         company: require("./../controllers/Company"),
-        conv: require("../controllers/Converstions"),
+        conv: require("../controllers/Conversation"),
         event: require("./../controllers/Event")
     },
     cookieSession = require("cookie-session");
@@ -74,7 +74,7 @@ router.post("/event", async (req,res) => {
     console.log(req.body);
     if (!req.body.name || !req.body.date || !req.body.description) return res.status(400).json({error: true, message: "Bad Request"})
     try {
-        var event = await controllers.event.create(req.body.name, req.session.user._id, req.body.date, req.body.description);
+        var event = await controllers.event.create(req.body.name, req.body.organizer, req.body.date, req.body.description);
         res.json({error: false, event})
     } catch(e) {
         console.log(e);
@@ -82,15 +82,46 @@ router.post("/event", async (req,res) => {
     }
 })
 
+router.post("/sessioninfo", async (req,res) => {
+    if (!req.session.user) return res.status(400).json({error: true, message: "Bad Request"})
+    try {
+        var session = req.session.user
+        res.json({error: false, session})
+    } catch(e){
+        return res.status(500).json({error: true, message: "Server Error"})
+    }
+})
+
+router.get("/userinfo/:id", async (req,res) => {
+    try {
+        var user = await controllers.user.getById(req.params.id);
+        if (!user) return res.status(404).json({error: true, message: "User not found"})
+        res.json({error: false, user});
+    } catch(e){
+        return res.status(500).json({error: true, message: "Server Error"})
+    }
+})
+
 router.get("/company/:id", async (req,res) => {
     try {
-        var company = await controllers.company.get(req.params.id);
+        var company = await controllers.company.getById(req.params.id);
         if (!company) return res.status(404).json({error: true, message: "Company not found"})
         res.json({error: false, company});
     } catch(e) {
         res.status(500).json({error: true, message: "Server Error"});
     }
 })
+
+router.get("/events", async(req,res) => {
+    try {
+        const events = await controllers.event.getAll();
+        res.json({error: false, events})
+    } catch(e) {
+        console.log("TEST");
+        return res.status(500).json({error: true, message: "Server Error"})
+    }
+})
+    
 router.get("/event/:id", async(req,res) => {
     try {
         var event = await controllers.event.get(req.params.id);
@@ -109,15 +140,11 @@ router.get("/event/:id/participants", async (req,res) => {
     }
 })
 
-
-
-
-
 /* TODO Needs some error handling probably */
 
 router.post('/createconversation', async (req, res) => {
     const { name, userid } = req.body;
-    console.log("create conversation");
+    // console.log("create conversation");
     const conversation = await controllers.conv.createConversation(name, userid);
     res.status(200).json({ conversation });
 });
@@ -137,5 +164,8 @@ router.get('/messages/:conversationId', async (req, res) => {
     // console.log(messages);
     res.status(200).json({ messages });
 });
+
+
+router.get("*", (req, res) => res.status(404).send("404"));
 
 module.exports = router;

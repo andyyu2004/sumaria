@@ -1,5 +1,7 @@
 # Sumaria
 
+This document is still being edited and will be done by Wednesday.
+
 ## Iteration 1
 
  * Start date: Monday, October 28, 2019
@@ -110,7 +112,7 @@ Our third meeting of this iteration would be on Monday, November 11, 2019 at 8:0
 
 #### Partner Meetings
 
-Link to Meeting Minutes: (In progress)
+Link to Meeting Minutes: https://docs.google.com/document/d/1c8ssEQglWxmkUtylTjcAXWcFLGLx5mSaI6JSww7P3po/edit?usp=sharing
 
 #### Artifacts
 

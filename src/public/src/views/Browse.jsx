@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import * as fuse from 'fuse.js';
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col'
 import { DisplayEvent } from '../components';
@@ -7,7 +8,7 @@ import './Browse.css'
 
 const Browse = props => {
   const [skill, setSkill] = useState("");
-  const [keyword, setKeyword] = useState("");  
+  const [keyword, setKeyword] = useState("");   
 
   /** An example how to fetch async data */
   // Old code: const events = data.events;
@@ -33,10 +34,33 @@ const Browse = props => {
   
   useEffect(() => { fetchEvents(); }, []);
 
-  const eventsFiltered = events
-    .filter(e => e.name.toUpperCase().includes(keyword.toUpperCase()))
-    .filter(e => e.skills.some(s => s.toUpperCase().includes(skill.toUpperCase())));
- 
+  const optionsName = {
+    shouldSort: false,
+    threshold: 0.6,
+    location: 0,
+    distance: 100,
+    maxPatternLength: 32,
+    minMatchCharLength: 0,
+    keys: [
+      "name"
+    ]
+  }
+
+  const optionsSkills = {
+    shouldSort: false,
+    threshold: 0.6,
+    location: 0,
+    distance: 100,
+    maxPatternLength: 32,
+    minMatchCharLength: 1,
+    keys: [
+      "skills"
+    ]
+  }
+
+  let eventsFiltered = skill ? (new fuse(events, optionsSkills)).search(skill) : events;
+  eventsFiltered = keyword ? (new fuse(eventsFiltered, optionsName)).search(keyword) : eventsFiltered;
+
   return (
     <div className='browse-container'>
       <h1>Browse For Events</h1>
@@ -49,7 +73,7 @@ const Browse = props => {
         </Form.Group>
       </Form.Row>
       <div>
-        {eventsFiltered.map(event => <DisplayEvent key={event.id} event={event}/>)}
+        {eventsFiltered.map(event => <DisplayEvent key={event._id} event={event}/>)}
       </div>
     </div>
   );

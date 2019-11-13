@@ -22,6 +22,12 @@ var schema = mongoose.Schema({
     },
     creationDate: {
         type: Date
+    },
+    email: {
+        type: String
+    },
+    telephone: {
+        type: String
     }
 })
 

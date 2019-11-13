@@ -2,6 +2,7 @@ import { getEvents, getEventsByIds, getEventsByUsername, addEvent, getEventById 
 import { getUsers } from './profiles';
 import { signup, login } from './user';
 import { createCompany, getCompanyById } from './company';
+import { createNewConversation, getConversations, getMessages } from './chat';
 
 const API = {
     getEvents,
@@ -14,6 +15,9 @@ const API = {
     getEventById,
     createCompany,
     getCompanyById,
+    createNewConversation,
+    getConversations,
+    getMessages,
 };
 
 export default API;
