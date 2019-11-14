@@ -1,73 +1,70 @@
-# YOUR PRODUCT/TEAM NAME
-
- > _Note:_ This document is meant to be written during (or shortly after) your review meeting, which should happen fairly close to the due date.      
- >      
- > _Suggestion:_ Have your review meeting a day or two before the due date. This way you will have some time to go over (and edit) this document, and all team members should have a chance to make their contribution.
-
+# Sumaria
 
 ## Iteration XX - Review & Retrospect
 
- * When: FILL IN THE DATE WHEN YOU ACTUALLY HAD YOUR REVIEW MEETING
- * Where: PHYSICAL LOCATION AND/OR ONLINE
-
-## Process - Reflection
-
-(Optional) Short introduction
+ * When: November 11, 2019
+ * Where: Bahen Centre for Information Technology
 
 #### Decisions that turned out well
 
 List process-related (i.e. team organization) decisions that, in retrospect, turned out to be successful.
 
+* Split into a front-end and back-end team
+  the teams were able to do their work fairly independently of each other with little fuss
 
- * 2 - 4 decisions.
- * Ordered from most to least important.
- * Explain why (i.e. give a supporting argument) you consider a decision to be successful.
- * Feel free to refer/link to process artifact(s).
+* Use MongoDB
+
 
 #### Decisions that did not turn out as well as we hoped
 
 List process-related (i.e. team organization) decisions that, in retrospect, were not as successful as you thought they would be.
 
- * 2 - 4 decisions.
- * Ordered from most to least important.
- * Feel free to refer/link to process artifact(s).
+* Scrum methodology
+  Was not successful because as a group of 7 (later became 6) we found it hard to meet up frequently and plan project tasks every sprint cycle (weekly)
 
 
 #### Planned changes
 
 List any process-related changes you are planning to make (if there are any)
 
- * Ordered from most to least important.
- * Explain why you are making a change.
+* Change software development process from Scrum to Kanban
+  Gives more flexibility
+  Continuous flow instead of segmented sprints
 
 
 ## Product - Review
 
 #### Goals and/or tasks that were met/completed:
 
- * From most to least important.
- * Refer/link to artifact(s) that show that a goal/task was met/completed.
- * If a goal/task was not part of the original iteration plan, please mention it.
+* From most to least important.
+* Refer/link to artifact(s) that show that a goal/task was met/completed.
+* If a goal/task was not part of the original iteration plan, please mention it.
+
+* Login & sign up
+* Event creation and browsing
+* Chat system
+* Forgotten password page
+* https://trello.com/b/xXJaCXI7/sumaria
 
 #### Goals and/or tasks that were planned but not met/completed:
 
- * From most to least important.
- * For each goal/task, explain why it was not met/completed.      
-   e.g. Did you change your mind, or did you just not get to it yet?
+* Profiles: Didn’t get around to it yet though there’s been a start.
 
 #### How was your product demo?
- * How did you prepare your demo?
- * What did you manage to demo to your partner?
- * Did your partner accept the features?
- * Were there change requests?
- * What did you learn from the demo from either a process or product perspective?
+
+* How did you prepare your demo?
+  We decided together what features we were ready to show him and went through the pages of the website one last time to make sure they worked correctly.
+* What did you manage to demo to your partner?
+  We showed him how to create an event and that the newly created event could be seen on the browse page. Then we demonstrated logging in and how one could access the chat page once you were logged in. We also demonstrated how one could create a chat with any number of people and use it as either a private chat or a group chat.
+  Did your partner accept the features?
+  Yes, he said it was fine. He liked the chat implementation. Better than the one described in the original plan.
+* Were there change requests?
+  No, though he had some suggestions on what to work on next (schedules, excel sheet upload, etc) and some discussions on realistic ways to implement features (e.g. file sharing, geolocation, etc.)
+* What did you learn from the demo from either a process or product perspective?
+  Sometimes viewing the product from a marketing perspective is quite different from viewing the product from a technical perspective.
 
 ## Meeting Highlights
 
 Going into the next iteration, our main insights are:
 
- * 2 - 4 items
- * Short (no more than one short paragraph per item)
- * High-level concepts that should guide your work for the next iteration.
- * These concepts should help you decide on where to focus your efforts.
- * Can be related to product and/or process.
+* Finish remaining features
