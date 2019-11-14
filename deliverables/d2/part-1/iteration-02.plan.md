@@ -2,8 +2,8 @@
 
 ## Iteration 1
 
- * Start date: Monday, October 28, 2019
- * End date: Monday, November 11, 2019
+* Start date: Monday, October 28, 2019
+* End date: Monday, November 11, 2019
 
 ## Process
 
@@ -73,7 +73,6 @@ Each sprint will be between one to two weeks. As noted below, we will meet in pe
 
 Due to the busy schedules of all team members, it is infeasible that we have daily stand up meetings face to face. Instead we will keep close communication using Facebook’s messenger between meetings, to ensure that no one is falling behind.
 
-
 ##### Communications:
 
 We will meet every two weeks as the minimum. We will maintain constant communication between the partner through email and also on Trello board (which allows communication using comments). We can notify the partner on a particular task when needed (on Trello board first for quick and short response) and if required we will send the details through email. Further discussions can take place either through emails or directly on the Trello board.
@@ -82,21 +81,19 @@ We will meet every two weeks as the minimum. We will maintain constant communica
 
 We will create strict timelines for action items, and will be tracking our progress using a Trello board. In the event of a missed deadline, we will communicate via our shared group chat to see what the issue is, and provide help if necessary. In the extreme event this does not work, or someone is unreachable, we will address the issue as a group with our TA. 
 
-
 ##### Conflict Resolution:
 
 1. Indecisions on the languages and frameworks for the product
 
-Everyone propose their selections, then proceed to investigate the pros and cons of each language/framework, after that each person comes up to explain the reasons for choosing a particular one over the rest, and then we make the decision by the majority rule (vote).
+    Everyone propose their selections, then proceed to investigate the pros and cons of each language/framework, after that each person comes up to explain the reasons for choosing a particular one over the rest, and then we make the decision by the majority rule (vote).
 
 2. Non-responsive team members.
 
-We have a consensus that if one of us is not responsive, everyone else can attempt to contact that person using the methods provided beforehand (which should not be used for normal contacts and should definitely not be abused but are a more guaranteed way(s) to get in touch with the person). If none of the above works, we will come up with a detailed plan for the person and unavoidably assign certain roles for that person depending on current progress of the team.
+    We have a consensus that if one of us is not responsive, everyone else can attempt to contact that person using the methods provided beforehand (which should not be used for normal contacts and should definitely not be abused but are a more guaranteed way(s) to get in touch with the person). If none of the above works, we will come up with a detailed plan for the person and unavoidably assign certain roles for that person depending on current progress of the team.
 
 3. If members fall behind on tasks.
 
-This may be a sign that certain tasks were too big to be done in one sprint. In this case we should try to break down the tasks further, or re-evaluate the importance of the task trying to be completed. Otherwise, more experienced members could try to help in finishing/guiding the process.
-
+    This may be a sign that certain tasks were too big to be done in one sprint. In this case we should try to break down the tasks further, or re-evaluate the importance of the task trying to be completed. Otherwise, more experienced members could try to help in finishing/guiding the process.
 
 #### Events
 
@@ -136,14 +133,6 @@ The tasks are assigned based on the working culture and our separation of roles.
 
 #### Deployment and Github Workflow
 
-Describe your Git / GitHub workflow. Essentially, we want to understand how your team members shares a codebase, avoid conflicts and deploys the application.
-
- * Be concise, yet precise. For example, "we use pull-requests" is not a precise statement since it leaves too many open questions - Pull-requests from where to where? Who reviews the pull-requests? Who is responsible for merging them? etc.
- * If applicable, specify any naming conventions or standards you decide to adopt.
- * Describe your overall deployment process from writing code to viewing a live applicatioon
- * What deployment tool(s) are you using and why
- * Don't forget to **explain why** you chose this workflow or particular aspects of it!
-
 Since we have divided the work in a way that allows each member of the team to work on a different section (i.e. front-end/back-end, different pages, different user stories) we have minimized the chance of conflicts. However if conflicts do occur between two individuals then they will use messenger or discord to discuss which changes should be kept.
 
 Concerning naming conventions, since we are using javascript/typescript we decided to stick to javascript’s naming conventions.
@@ -161,9 +150,10 @@ Concerning naming conventions, since we are using javascript/typescript we decid
     * The back-end needs to create/design a database, and api functions for accessing/maintaining security with this data on user information.
     * The front-end needs to create the pages for login/sign up, home page, user profile. As well as integrate the api functions with the pages.
 
-Our goals are structured around the following user stories (also listed on trello) ordered in terms of importance:
+    Our goals are structured around the following user stories (also listed on trello) ordered in terms of importance:
 
 2. “As a charity event planner, I would like to be able to create events so that I can share information with participants”
+
 3. “As a student looking for experience, I would like to be able to find volunteer opportunities so I can gain relevant skills.”
     * The back-end with the database from part 1 add api functions for accessing data relevant to events.
     * The front-end needs to create the pages for event creation and event browsing. As well as integrate the api functions with the pages.
@@ -175,9 +165,10 @@ Our goals are structured around the following user stories (also listed on trell
 #### Artifacts
 
 Our main artifact will be building a webpage and uploading it so that it can be publicly accessible. This webpage will contain features outlined in the goals above:
+
 * A page for login/sign ups.
 * A page for viewing one’s profile.
 * A page for creating/browsing events.
 * A page for users to chat amongst themselves.
 
-Our secondary artifact will be the trello page we would be maintaining as mentioned above. Although it is mainly a tool for organization, it would be a good tool for displaying currently working features on our project.
+Our secondary artifact will be the Trello page we would be maintaining as mentioned above. Although it is mainly a tool for organization, it would be a good tool for displaying currently working features on our project.
