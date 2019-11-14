@@ -1,0 +1,28 @@
+.profile-outer {
+    background-color:var(--main-bg-color);
+    padding:20px;
+    min-height:100%;
+}
+
+.profile-username {
+    margin-left:10px;
+}
+
+.profile-info {
+    background-color:white;
+    margin:10px;
+    margin-bottom:0px;
+    padding:20px;
+    border-radius:10px;
+}
+
+.profile-rows {
+    margin-bottom:5px;
+}
+
+.profile-event-container {
+    background-color:var(--main-bg-color);
+    margin:0px;
+    padding:5px;
+    border-radius:10px;
+}

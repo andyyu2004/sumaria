@@ -3,6 +3,9 @@ import { DisplayEvent } from '../components';
 import { useSelector } from 'react-redux';
 import API from '../api';
 import { Left } from '../types/Either';
+import './Profile.css'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 
 const Profile = props => {
   const errorUser = {
@@ -45,29 +48,41 @@ const Profile = props => {
   useEffect(() => { fetchEvents(); }, []);
 
   return (
-    <div>
-      <h1>User Profile</h1>
-      <h3>Username</h3>
-      <div> {userInfo["username"]} </div>
-      <h3>First Name</h3>
-      <div>Temporary First Name</div>
-      {/* <div> {userInfo["username"]} </div> */}
-      <h3>Last Name</h3>
-      <div>Temporary Last Name</div>
-      {/* <div> {userInfo["username"]} </div> */}
-      <h3>Telephone Number</h3>
-      <div>Temporary Telphone</div>
-      {/* <div> {userInfo["username"]} </div> */}
-      <h3>Email</h3>
-      <div>Temporary Email</div>
-      {/* <div> {userInfo["email"]} </div> */}
-      <h3>Description</h3>
-      <div>Temporary Description</div>
-      {/* <div> {userInfo["description"]} </div> */}
-      <h3>Your Upcoming Events</h3>
-      <ul>
-        {userEvents.map(event => <DisplayEvent key={event.id} event={event} />)}
-      </ul>
+    <div className='profile-outer'>
+      <h2 className='profile-username'> Username: {userInfo["username"]}'s Profile </h2>
+      <div className='profile-info'>
+        <Row className='profile-rows'>
+          <Col>
+            <h5>Name</h5>
+            <span>Temporary First Name</span>
+            {/* <div> {userInfo["username"]} </div> */}
+            <span> </span>
+            <span>Temporary Last Name</span>
+            {/* <div> {userInfo["username"]} </div> */}
+          </Col>
+        </Row>
+        <Row className='profile-rows'>
+          <Col>
+            <h5>Telephone Number</h5>
+            <span>Temporary Telephone</span>
+            {/* <div> {userInfo["username"]} </div> */}
+          </Col>
+          <Col>
+            <h5>Email</h5>
+            <span>Temporary Email</span>
+            {/* <div> {userInfo["email"]} </div> */}
+          </Col>
+        </Row>
+        <h5>Description</h5>
+        <div className='profile-rows'>Temporary Description</div>
+        {/* <div> {userInfo["description"]} </div> */}
+        <h4>Your Upcoming Events</h4>
+        <ul className='profile-event-container'>
+          {userEvents.length 
+            ? userEvents.map(event => <DisplayEvent key={event.id} event={event} />)
+            : <h6>No upcoming events</h6>}
+        </ul>
+      </div>
     </div>
     );
 };

@@ -10,3 +10,18 @@
     flex: 1;
     height: 100%;
 }
+
+.conversations-input {
+    width:65vw !important;
+}
+
+.conversations-input-box {
+    margin-left:5px;
+    margin-right:5px;
+}
+
+.conversations-label {
+    font-size:15px;
+    position:relative;
+    top:5px;
+}

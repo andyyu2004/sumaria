@@ -77,7 +77,7 @@ const Header: React.FC<PropTypes> = ({ title, subtitle }) => {
             </Dropdown.Menu>
           </Dropdown>
           <div>
-            <img src={usericon} className="small-icon" onClick={() => navigate(`/${usertype === UserType.Admin ? 'admin' : 'profile'}`)} alt="profilepic" /> 
+            <img id='profileIcon' src={usericon} className="small-icon" onClick={() => navigate(`/${usertype === UserType.Admin ? 'admin' : 'profile'}`)} alt="profilepic" /> 
             <Button id="logoutButton" type="button" className='header-button' onClick={handleLogout}>Logout</Button>
           </div></>)
         : <Link to="/login" className='header-text header-login'>Log In/Sign Up</Link>} 
