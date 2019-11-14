@@ -24,6 +24,11 @@
     color:black !important;
 }
 
+.header-button:hover {
+    background-color:var(--button-hover-color) !important;
+    border-color:var(--button-hover-color) !important;
+}
+
 .header-notification {
     margin-right:15px;
 }
@@ -58,19 +63,9 @@
     background-color: #1f9651;
     border:solid white 1px;
     transition:1s;
+    cursor:pointer;
 }
 
-#logoutButton {
-	margin: 10px;
-    border: none;
-    padding: 5px 12px;
-    text-align: center;
-    color: white;
-    font-size: 15px;
+#profileIcon:hover{
+    cursor:pointer;
 }
-
-#logoutButton:hover {
-    background-color: #deebfc;
-}
-
-#logoutButton:focus {outline:0;}

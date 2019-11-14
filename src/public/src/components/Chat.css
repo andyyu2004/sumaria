@@ -6,9 +6,9 @@
 .chat-container {
     flex: 4;
     /* height: 100%; */
-    border-top: light,grey 1px solid;
     display: flex;
     flex-direction: column;
+    background-color:white;
 }
 
 .chat-flex-container {
@@ -18,7 +18,9 @@
 }
 
 .chat-options-container {
-    background-color: lightgrey;
+    background-color: var(--success);
+    color:white;
+    padding:10px;
     flex: 1;
 }
 
@@ -30,15 +32,27 @@
     flex: 1;
     overflow-y: scroll;
     text-align: left;
+    padding-left:5px;
 }
 
 .message-input-form {
     bottom: 0;
     display: flex;
-    height: 30px;
-    width: 100%;
 }
 
 .message-input-box {
     width: 100%;
+    margin:0px;
+}
+
+.chat-button {
+    background-color:white !important;
+    border-color:white !important;
+    color:black !important;
+    margin-bottom:10px;
+}
+
+.chat-button:hover {
+    background-color:var(--button-hover-color)!important;
+    border-color:var(--button-hover-color) !important;
 }

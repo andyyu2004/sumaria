@@ -8,6 +8,7 @@ import { Conversation, Message } from '../types/Chat';
 import { AppState } from '../types/states';
 import { User } from '../types/User';
 import './Chat.css';
+import Button from 'react-bootstrap/Button';
 
 type PropType = {
   conversation: Conversation,
@@ -80,22 +81,22 @@ const Chat: React.FC<PropType> = ({ conversation }) => {
           const formatted = `${date.getHours()}:${date.getMinutes().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})}`;
           return <p className="chatmsg" key={_id}>{username}@{formatted}: {message}</p>
         })}
-        </div>
         <form onSubmit={sendMessage} key="message-form" className="message-input-form">
           <input 
             key="message-input"
-            className="message-input-box"
+            className="message-input-box form-control"
             value={message} 
             onChange={e => setMessage(e.target.value)} 
             placeholder="message..." />
-          <input type="submit" className='message-submit-button' value="Send Message" />
+          <input type="submit" className='btn message-submit-button chat-button' value="Send Message" />
         </form>
+        </div>
       </div>  
 
       <div className="chat-options-container">
         <h6>Chat Options</h6>
         <ToastContainer />
-        <button onClick={() => setAddPersonPopup(!addPersonPopup)}>Add Person</button>
+        <Button className='chat-button' onClick={() => setAddPersonPopup(!addPersonPopup)}>Add Person</Button>
         <div>
           <h4>Members</h4>
           {conversation.members.map(mem => <h5 key={mem}>{mem}</h5>)}

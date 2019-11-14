@@ -8,6 +8,10 @@ import { Conversation } from '../types/Chat';
 import { AppState } from '../types/states';
 import "./Conversations.css";
 import Sidebar from './Sidebar';
+import './Chat.css';
+import InputGroup from 'react-bootstrap/InputGroup';
+import Row from 'react-bootstrap/Row';
+import Form from 'react-bootstrap/Form';
 
 const Conversations = () => {
   const username = useSelector<AppState, string>(state => state.user.username!);
@@ -49,11 +53,13 @@ const Conversations = () => {
   return (
     <div className="conversations-container">
       <div>
-        <span>Chat Header</span>
+        <h4>Chat Header</h4>
         <form onSubmit={createConversation} name="newconversationform">
-          <label>Create new conversation</label>
-          <input onChange={e => setNewname(e.target.value)} value={newname} />
-          <input type="submit" value="submit" />
+          <InputGroup className='conversations-input'>
+            <label className='conversations-label'>Create new conversation</label>
+            <input onChange={e => setNewname(e.target.value)} value={newname} className='conversations-input-box form-control'/>
+            <input type="submit" value="submit" className='btn chat-button' />
+          </InputGroup>
         </form>
       </div>
       
