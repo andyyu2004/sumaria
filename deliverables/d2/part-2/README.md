@@ -1,19 +1,30 @@
-# YOUR PRODUCT/TEAM NAME
-
-> _Note:_ This document is intended to be relatively short. Be concise and precise. Assume the reader has no prior knowledge of your application and is non-technical. 
+# Sumaria
 
 ## Description 
- * Provide a high-level description of your application and it's value from an end-user's perspective
- * What is the problem you're trying to solve?
- * Is there any context required to understand **why** the application solves this problem?
+
 
 ## Key Features
- * Described the key features in the application that the user can access
- * Feel free to provide a breakdown or detail for each feature that is most appropriate for your application
+
 
 ## Instructions
- * Clear instructions for how to use the application from the end-user's perspective
- * How do you access it? Are accounts pre-created or does a user register? Where do you start? etc. 
- * Provide clear steps for using each feature described above
- * If you cannot deploy your application for technical reasons, please let your TA know at the beginning of the iteration. You will need to demo the application to your partner either way.
 
+### Prerequisite to run our app:
+
+Install node
+
+### Steps to run our app:
+ 
+1. Open the command console
+
+2. Start the backend by: 
+    * navigate to the folder /team-project-sumaria/src/
+    * Type in console “npm install” to install dependencies
+    * Type in console “node app.js” 
+    * Console should return “Listening on port ####”
+
+3. Start the frontend by:
+    * Open a new console
+    * Navigate to the folder /team-project-sumaria/src/public
+    * Type in console “npm install” to install dependencies
+    * Type in console “npm start”
+    * Our website should open on your internet browser.
