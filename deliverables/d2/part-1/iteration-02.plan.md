@@ -1,7 +1,5 @@
 # Sumaria
 
-This document is still being edited and will be done by Wednesday.
-
 ## Iteration 1
 
  * Start date: Monday, October 28, 2019
