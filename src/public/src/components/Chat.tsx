@@ -81,6 +81,7 @@ const Chat: React.FC<PropType> = ({ conversation }) => {
           const formatted = `${date.getHours()}:${date.getMinutes().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})}`;
           return <p className="chatmsg" key={_id}>{username}@{formatted}: {message}</p>
         })}
+        </div>
         <form onSubmit={sendMessage} key="message-form" className="message-input-form">
           <input 
             key="message-input"
@@ -90,7 +91,6 @@ const Chat: React.FC<PropType> = ({ conversation }) => {
             placeholder="message..." />
           <input type="submit" className='btn message-submit-button chat-button' value="Send Message" />
         </form>
-        </div>
       </div>  
 
       <div className="chat-options-container">
