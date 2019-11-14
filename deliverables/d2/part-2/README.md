@@ -20,15 +20,16 @@ Companies (non-profit organizations that need volunteers)
   * Event details include
     * Event Date
     * Number of volunteers needed
-    * Event Location
-    * Organization running the event
-    * Experience/skills needed to volunteer
-      * This still needs to be fixed to read from the database schema. Currently this field is blank.
+    * Event Location (work in progress)
+    * Organization running the event (work in progress)
+    * Experience/skills needed to volunteer (work in progress)
+    
 
-* Chat system:
+Users (Companies or individual volunteers) can:
+* use a chat system:
   * Creating a group of one or more users.
   * Able to add more users as the chat progresses if the user desires to.
-* Users can log in/sign up
+* log in/sign up
   * Users can also view their profile page and their personal information by clicking on their profile picture (which  is currently just a gray anonymous photo)
     * Currently the profile page only displays the user name and mock data of the possible events they signed up for.
 
@@ -54,3 +55,40 @@ Install node
     * Type in console “npm install” to install dependencies
     * Type in console “npm start”
     * Our website should open on your internet browser.
+
+### Instructions for the features mentioned above:
+#### The side bar contains the following options:
+* Home:
+  * The first page you see when opening the website.
+  * Currently it is just a shortcut to other pages in the sidebar.
+* Chat:
+  * The user must be currently logged in to use it.
+  * Users can view their existing conversations in a list on the left.
+  * Users can create new conversations by typing a new conversation name at the top.
+  * Users can add more members to a conversation using the button on the right (Need to know the other member’s username)
+* Browse:
+  * The user does not need to be logged in to use it.
+  * By typing into the two search bars at the top users can filter the events by skill and by name.
+  * Please note that none of the existing events in the database have any skill values, so typing anything will return no events.
+* Import:
+  * This page is incomplete and is meant in the future to allow users to import user information in the form of excel files and create user profiles immediately.
+  * Currently you can only upload excel files to view them.
+* Add Event:
+  * This page allows users to create a new event that can then be seen in the list of events in the browsing page.
+* API:
+  * Currently for debugging purposes. You can quickly log in/create an account from here.
+* Quick Login:
+  * Currently for debugging purposes. You can quickly log in without creating an account here and see the existing chats.
+
+#### The upper right corner contains a link to the proper login page.
+
+* On the login page users can first select “Create Your Account”, and be brought to a separate page to fill in their information.
+* Once logged in users can:
+  * Use the chat
+  * Logout using the upper right button.
+  * View their profile by selecting the upper right grey circle.
+    * This just displays their username and fake information at the moment.
+  * View their notifications selecting the bell button.
+    * This just displays mock data at the moment.
+
+
