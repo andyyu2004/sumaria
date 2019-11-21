@@ -6,7 +6,11 @@ var express = require("express");
         conv: require("../controllers/Conversation"),
         event: require("./../controllers/Event")
     },
-    cookieSession = require("cookie-session");
+    cookieSession = require("cookie-session"),
+    path = require("path"),
+    multer = require("multer"),
+    upload = multer({ dest: path.resolve(__dirname + "/../hosted_files") });
+
   
 router.use(
     // Random session key each start-up
@@ -71,13 +75,23 @@ router.post("/company", async (req,res) => {
 })
 
 router.post("/event", async (req,res) => {
-    console.log(req.body);
     if (!req.body.name || !req.body.date || !req.body.description) return res.status(400).json({error: true, message: "Bad Request"})
     try {
         var event = await controllers.event.create(req.body.name, req.body.organizer, req.body.date, req.body.description);
         res.json({error: false, event})
     } catch(e) {
-        console.log(e);
+        return res.status(500).json({error: true, message: "Server Error"})
+    }
+})
+
+router.post("/event/:id/file", upload.single("file"), async (req,res) => {
+    if (!req.file) return res.status(400).json({error: true, message: "Bad Request"})
+
+    try {
+        var file = await controllers.event.addFile(req.params.id, req.file);
+        res.json({error: false, file})
+    } catch(e) {
+        console.log(e)
         return res.status(500).json({error: true, message: "Server Error"})
     }
 })
@@ -132,7 +146,6 @@ router.get("/events", async(req,res) => {
         const events = await controllers.event.getAll();
         res.json({error: false, events})
     } catch(e) {
-        console.log("TEST");
         return res.status(500).json({error: true, message: "Server Error"})
     }
 })
@@ -143,6 +156,18 @@ router.get("/event/:id", async(req,res) => {
         res.json({error: false, event})
     } catch(e) {
         return res.status(500).json({error: true, message: "Server Error"})
+    }
+})
+
+router.get("/event/:id/file/:fileID",async (req,res) => {
+    try {
+        var file = await controllers.event.getFile(req.params.fileID);
+        res.header("content-disposition", "attachment; filename=\"" + file.file.name +"\"");
+        res.header("content-type", file.file.mimetype)
+        res.sendFile(path.resolve(file.file.path));
+    } catch(e) {
+        return res.status(500).json({error: true, message: "Server Error"})
+        
     }
 })
 

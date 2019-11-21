@@ -1,5 +1,6 @@
-let Event = require("./../models/Event"),
-    EventParticipant = require("./../models/EventParticipant");
+let Event               = require("./../models/Event"),
+    EventParticipant    = require("./../models/EventParticipant"),
+    EventFile           = require("./../models/EventFile");
 
 async function create(name, organizer, date, description) {
     var event = new Event({name, organizer, date, postDate: new Date(), description});
@@ -8,10 +9,7 @@ async function create(name, organizer, date, description) {
 }
 
 async function getAll() {
-	console.log("before getAll");
-	console.log(await Event.find({}).exec());
     return await Event.find({});
-
 }
 
 async function getById(eventID) {
@@ -28,4 +26,14 @@ async function getEventParticipants(eventID) {
     return users.map(u => u.user);
 }
 
-module.exports = {create, getAll, getById, getUserEvents, getEventParticipants}
+async function addFile(eventID, file) {
+    var event_file = new EventFile({event: eventID, file: {name: file.originalname, mimetype: file.mimetype, created: new Date(), path:file.path, size: file.size}});
+    await event_file.save();
+    return event_file;
+}
+
+async function getFile(id) {
+    return await EventFile.findOne({_id: id}).lean().exec()
+}
+
+module.exports = {create, getAll, getById, addFile, getFile, getUserEvents, getEventParticipants}
