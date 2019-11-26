@@ -26,17 +26,15 @@ const Conversations = () => {
   const createConversation = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!newname) return toast.info("Can't create chat with empty name");
-    (await API.createNewConversation(username, newname)).match(
-      err => toast.error(err),
-      addNewConversation(dispatch),
-    );
+    (await API.createNewConversation(username, newname))
+      .map(addNewConversation(dispatch))
+      .mapLeft(toast.error);
   };
 
   const refreshConversations = useCallback(async () => {
-    (await API.getConversations(username)).match(
-      err => toast.error(err),
-      setConversations(dispatch),
-    );
+    (await API.getConversations(username))
+      .map(setConversations(dispatch))
+      .mapLeft(toast.error);
     
   }, [dispatch, username]);
 

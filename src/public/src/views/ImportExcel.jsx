@@ -3,6 +3,7 @@ import { OutTable, ExcelRenderer } from 'react-excel-renderer';
 // import xlsx from 'xlsx';
 import "./ImportExcel.css";
 import { toast } from 'react-toastify';
+import { withProtection } from '../components/hoc';
 
 
 const ImportExcel = props => {
@@ -25,15 +26,22 @@ const ImportExcel = props => {
       }
       setSheet(res);
     });
-  }
+  };
+
+  const uploadFile = e => {
+    const { files } = e.target;
+    console.log(files);
+
+  };
 
   return (
     <div>
       <h1>Import Names For Events</h1>
       <input type="file" onChange={handleFile} multiple={false} />
+      <input type="file" onChange={uploadFile} />
       <OutTable data={sheet.rows} columns={sheet.cols} tableClassName="ExcelTable2007" tableHeaderRowClass="heading" />
     </div>
   );
 };
 
-export default ImportExcel;
+export default withProtection(ImportExcel);

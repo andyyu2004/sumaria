@@ -20,9 +20,7 @@ const Profile = props => {
 
   const [userInfo, setUserInfo] = useState(errorUser);
   const [userEvents, setUserEvents] = useState([]);
-  const state = useSelector(state => state);
-  const username = state.user.username;
-  console.log("TEST " + username);
+  const { username } = useSelector(state => state.user);
 
   async function fetchEvents() {
     const userEither = username ? await API.getUserByUsername(username) : new Left("");

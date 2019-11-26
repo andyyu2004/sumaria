@@ -11,6 +11,7 @@ import ReactTooltip from 'react-tooltip';
 import './AddEvent.css';
 import API from "../api";
 import { toast } from 'react-toastify';
+import { withProtection } from "../components/hoc";
 
 
 const AddEvent = props => {
@@ -116,4 +117,4 @@ const AddEvent = props => {
   );
 };
 
-export default AddEvent;
+export default withProtection(AddEvent);

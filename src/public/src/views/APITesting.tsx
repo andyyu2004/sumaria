@@ -17,28 +17,22 @@ const APITesting: React.FC<RouteComponentProps> = () => {
   const [message, setMessage] = useState<string>("");
 
   const handleSignup = async () => {
-    const res = await API.signup(username, password);
-    res.match(
-      (err: string) => setMessage(`${err} - Probably empty username/password`),
-      (user: UserResponse) => setMessage(`Signed up user: username = ${user.username}`),
-    );
+    (await API.signup(username, password))
+      .map((user: UserResponse) => setMessage(`Signed up user: username = ${user.username}`))
+      .mapLeft((err: string) => setMessage(`${err} - Probably empty username/password`));
   };
 
   const handleLogin = async () => {
-    const res = await API.login(username, password);
-    res.match(
-      err => setMessage(`${err} - Login Failed`),
-      user => {
-        setMessage(`Succesfully logged in: username = ${user.username}`);
-        dispatch(setUser({ 
-          username: user.username, 
-          usertype: UserType.Volunteer, 
-          _id: user._id,
-          events: [] 
-        }));
-        navigate("/");
-      },
-    );
+    (await API.login(username, password)).map(user => {
+      setMessage(`Succesfully logged in: username = ${user.username}`);
+      dispatch(setUser({ 
+        username: user.username, 
+        usertype: UserType.Volunteer, 
+        _id: user._id,
+        events: [] 
+      }));
+      navigate("/");
+    }).mapLeft(err => setMessage(`${err} - Login Failed`));
   };
 
 

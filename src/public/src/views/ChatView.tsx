@@ -5,6 +5,7 @@ import { Conversations } from '../components';
 import { AppState } from '../types/states';
 import { id } from '../util';
 import "./ChatView.css";
+import { withProtection } from '../components/hoc';
 
 const ChatView: React.FC<RouteComponentProps> = () => {
   // const { userid, firstname, surname } = state;
@@ -17,4 +18,4 @@ const ChatView: React.FC<RouteComponentProps> = () => {
   );
 }
 
-export default ChatView;
+export default withProtection(ChatView);

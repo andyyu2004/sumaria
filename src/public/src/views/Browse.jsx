@@ -5,6 +5,7 @@ import Col from 'react-bootstrap/Col'
 import { DisplayEvent } from '../components';
 import API from '../api';
 import './Browse.css'
+import { withProtection } from '../components/hoc';
 
 const Browse = props => {
   const [skill, setSkill] = useState("");
@@ -79,4 +80,4 @@ const Browse = props => {
   );
 };
 
-export default Browse;
+export default withProtection(Browse);

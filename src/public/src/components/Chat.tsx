@@ -9,6 +9,7 @@ import { AppState } from '../types/states';
 import { User } from '../types/User';
 import './Chat.css';
 import Button from 'react-bootstrap/Button';
+import { withProtection } from './hoc';
 
 type PropType = {
   conversation: Conversation,
@@ -26,7 +27,9 @@ const Chat: React.FC<PropType> = ({ conversation }) => {
 
   const fetchMessages = useCallback(async () => {
     // const { messages } = await apiGetMessages(conversation._id);
-    (await API.getMessages(conversation._id)).match(err => toast.error(err), setMessages);
+    (await API.getMessages(conversation._id))
+      .map(setMessages)
+      .mapLeft(toast.error);
 
     if (chatRef.current) chatRef.current.scrollTop = chatRef.current.scrollHeight;
   }, [conversation]);
