@@ -11,6 +11,7 @@ import { setUser, logout } from './actions/actionCreators';
 import { UserType } from './types/User';
 import API from './api';
 import { toast } from 'react-toastify';
+import MyCalendar from './views/Calendar';
 
 toast.configure({
   autoClose: 3000,
@@ -28,6 +29,7 @@ const App: React.FC = () => {
     ["Browse", () => navigate('/browse')],
     ["Import", () => navigate('/import')],
     ["Add Event", () => navigate('/addevent')],
+    ["My Calendar", () => navigate('/calendar')],
     ["API", () => navigate('/api')],
     ["Quick Login", async () => {
       dispatch(logout());
@@ -53,6 +55,7 @@ const App: React.FC = () => {
           <Profile path="profile" />
           <ResetSent path="reset/sent" />
           <AddEvent path="addevent" />
+          <MyCalendar path="calendar" />
           <Registration path="register" />
           <APITesting path="api" />
           <RegisterSuccess path="register/success" />
