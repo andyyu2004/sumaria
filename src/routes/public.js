@@ -3,7 +3,7 @@ const express = require("express"),
     path = require("path");
 
 router.use("/", (req,res) => {
-    res.sendFile(path.resolve(__dirname + "../public/public/index.html"));
+    res.sendFile(path.resolve(__dirname + "../public/build/index.html"));
 });
 
 router.use("/build", express.static(path.resolve(__dirname + "/../public/build")));
