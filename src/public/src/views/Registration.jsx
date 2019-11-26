@@ -10,40 +10,8 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import API from '../api';
 import { toast } from 'react-toastify';
-//import { signup } from '../api/user';
-//import { Either, Left, Right } from '../types/Either';
-
-
-//import { FormGroup, FormControl, InputGroup } from 'react-bootstrap';
-//import { navigate } from '@reach/router';
-//import algoliasearch from 'algoliasearch/lite';
-//import { InstantSearch, SearchBox, Hits } from 'react-instantsearch-dom';
-
-/*
-const searchClient = algoliasearch(
-  'plRG8O4KPXG0',
-  '01329a32171d4008387778134780906b',
-  {
-    _useRequestCache: true,
-  }
-);
-const searchClient = algoliasearch(
-  'latency',
-  '6be0576ff61c053d5f9a3225e2a90f76',
-  {
-    _useRequestCache: true,
-  }
-);*/
 
 const Registration = props => {
-
-  //const [orgNameD, setOrgNameD] = useState(false);
-  //const [authKeyD, setAuthKeyD] = useState(false);
-  //const [orgNamePH, setOrgNamePH] = useState('');
-  //const [authKeyPH, setAuthKeyPH] = useState('');
-
-  //const [orgName, setOrgName] = useState('');
-  //const [authKey, setAuthKey] = useState('');
 
   const [userType, setUserType] = useState('none');
   const [username, setUsername] = useState('');
@@ -82,6 +50,7 @@ const Registration = props => {
 
   const validateSignUp = async (e) => {
     e.preventDefault();
+
     let res = await saveUser();
     //console.log(res);
     res.match(
@@ -203,6 +172,128 @@ const Registration = props => {
     //setAddr2();
   }
 
+  const cityAB = ["Airdrie", "Brooks", "Calgary", "Camrose", "Chestermere", "Cold Lake",
+                  "Edmonton", "Fort Saskatchewan", "Grande Prairie", "Lacombe", "Leduc",
+                  "Lethbridge", "Lloydminster (part)", "Medicine Hat", "Red Deer",
+                  "Spruce Grove", "St. Albert", "Wetaskiwin"];
+  
+  const cityBC = ["Abbotsford", "Armstrong", "Burnaby", "Campbell River", "Castlegar",
+                  "Chilliwack", "Colwood", "Coquitlam", "Courtenay", "Cranbrook",
+                  "Dawson Creek", "Duncan", "Enderby", "Fernie", "Fort St. John",
+                  "Grand Forks", "Greenwood", "Kamloops", "Kelowna", "Kimberley",
+                  "Langford", "Langley", "Maple Ridge", "Merritt", "Nanaimo", "Nelson",
+                  "New Westminster", "North Vancouver", "Parksville", "Penticton",
+                  "Pitt Meadows", "Port Alberni", "Port Coquitlam", "Port Moody",
+                  "Powell River", "Prince George", "Prince Rupert", "Quesnel",
+                  "Revelstoke", "Richmond", "Rossland", "Salmon Arm", "Surrey",
+                  "Terrace", "Trail", "Vancouver", "Vernon", "Victoria",
+                  "White Rock", "Williams Lake"];
+
+  const cityMB = ["Brandon", "Dauphin", "Flin Flon (part)", "Morden",
+                  "Portage la Prairie", "Selkirk", "Steinbach", "Thompson",
+                  "Winkler", "Winnipeg"];
+
+  const cityNB = ["Bathurst", "Campbellton", "Dieppe", "Edmundston",
+                  "Fredericton", "Miramichi", "Moncton", "Saint John"];
+
+  const cityNL = ["Corner Brook", "Mount Pearl", "St. John's"];
+
+  const cityNS = ["Cape Breton", "Halifax", "Queens"];
+
+  const cityON = ["Barrie", "Belleville", "Brampton", "Brant", "Brantford", "Brockville",
+                  "Burlington", "Cambridge", "Clarence-Rockland", "Cornwall", "Dryden",
+                  "Elliot Lake", "Greater Sudbury", "Guelph", "Haldimand County",
+                  "Hamilton", "Kawartha Lakes", "Kenora", "Kingston", "Kitchener",
+                  "London", "Markham", "Mississauga", "Niagara Falls", "Norfolk County",
+                  "North Bay", "Orillia", "Oshawa", "Ottawa", "Owen Sound", "Pembroke",
+                  "Peterborough", "Pickering", "Port Colborne", "Prince Edward County",
+                  "Quinte West", "Sarnia", "Sault Ste. Marie", "St. Catharines",
+                  "St. Thomas", "Stratford", "Temiskaming Shores", "Thorold", "Thunder Bay",
+                  "Timmins", "Toronto", "Vaughan", "Waterloo", "Welland", "Windsor", "Woodstock"];
+  
+  const cityPE = ["Charlottetown", "Summerside"];
+
+  const cityQC = ["Acton Vale", "Alma", "Amos", "Amqui", "Asbestos", "Baie-Comeau", "Baie-D'Urfé",
+                  "Baie-Saint-Paul", "Barkmere", "Beaconsfield", "Beauceville", "Beauharnois", "Beaupré",
+                  "Bécancour", "Bedford", "Belleterre", "Beloeil", "Berthierville", "Blainville", "Boisbriand",
+                  "Bois-des-Filion", "Bonaventure", "Boucherville", "Brome Lake", "Bromont", "Brossard",
+                  "Brownsburg-Chatham", "Candiac", "Cap-Chat", "Cap-Santé", "Carignan", "Carleton-sur-Mer",
+                  "Causapscal", "Chambly", "Chandler", "Chapais", "Charlemagne", "Châteauguay", "Château-Richer",
+                  "Chibougamau", "Clermont", "Coaticook", "Contrecoeur", "Cookshire-Eaton", "Côte Saint-Luc",
+                  "Coteau-du-Lac", "Cowansville", "Danville", "Daveluyville", "Dégelis", "Delson", "Desbiens",
+                  "Deux-Montagnes", "Disraeli", "Dolbeau-Mistassini", "Dollard-des-Ormeaux", "Donnacona",
+                  "Dorval", "Drummondville", "Dunham", "Duparquet", "East Angus", "Estérel", "Farnham",
+                  "Fermont", "Forestville", "Fossambault-sur-le-Lac", "Gaspé", "Gatineau", "Gracefield",
+                  "Granby", "Grande-Rivière", "Hampstead", "Hudson", "Huntingdon", "Joliette", "Kingsey Falls",
+                  "Kirkland", "La Malbaie", "La Pocatière", "La Prairie", "La Sarre", "La Tuque", "Lac-Delage",
+                  "Lachute", "Lac-Mégantic", "Lac-Saint-Joseph", "Lac-Sergent", "L'Ancienne-Lorette", "L'Assomption",
+                  "Laval", "Lavaltrie", "Lebel-sur-Quévillon", "L'Épiphanie", "Léry", "Lévis", "L'Île-Cadieux",
+                  "L'Île-Dorval", "L'Île-Perrot", "Longueuil", "Lorraine", "Louiseville", "Macamic", "Magog",
+                  "Malartic", "Maniwaki", "Marieville", "Mascouche", "Matagami", "Matane", "Mercier",
+                  "Métabetchouan–Lac-à-la-Croix", "Métis-sur-Mer", "Mirabel", "Mont-Joli", "Mont-Laurier",
+                  "Montmagny", "Montreal", "Montreal West", "Montréal-Est", "Mont-Saint-Hilaire", "Mont-Tremblant",
+                  "Mount Royal", "Murdochville", "Neuville", "New Richmond", "Nicolet", "Normandin",
+                  "Notre-Dame-de-l'Île-Perrot", "Notre-Dame-des-Prairies", "Otterburn Park", "Paspébiac", "Percé",
+                  "Pincourt", "Plessisville", "Pohénégamook", "Pointe-Claire", "Pont-Rouge", "Port-Cartier",
+                  "Portneuf", "Prévost", "Princeville", "Québec", "Repentigny", "Richelieu", "Richmond", "Rimouski",
+                  "Rivière-du-Loup", "Rivière-Rouge", "Roberval", "Rosemère", "Rouyn-Noranda", "Saguenay",
+                  "Saint-Augustin-de-Desmaures", "Saint-Basile", "Saint-Basile-le-Grand", "Saint-Bruno-de-Montarville",
+                  "Saint-Césaire", "Saint-Colomban", "Saint-Constant", "Sainte-Adèle", "Sainte-Agathe-des-Monts",
+                  "Sainte-Anne-de-Beaupré", "Sainte-Anne-de-Bellevue", "Sainte-Anne-des-Monts",
+                  "Sainte-Anne-des-Plaines", "Sainte-Catherine", "Sainte-Catherine-de-la-Jacques-Cartier",
+                  "Sainte-Julie", "Sainte-Marguerite-du-Lac-Masson", "Sainte-Marie", "Sainte-Marthe-sur-le-Lac",
+                  "Sainte-Thérèse", "Saint-Eustache", "Saint-Félicien", "Saint-Gabriel", "Saint-Georges",
+                  "Saint-Hyacinthe", "Saint-Jean-sur-Richelieu", "Saint-Jérôme", "Saint-Joseph-de-Beauce",
+                  "Saint-Joseph-de-Sorel", "Saint-Lambert", "Saint-Lazare", "Saint-Lin-Laurentides",
+                  "Saint-Marc-des-Carrières", "Saint-Ours", "Saint-Pamphile", "Saint-Pascal", "Saint-Pie",
+                  "Saint-Raymond", "Saint-Rémi", "Saint-Sauveur", "Saint-Tite", "Salaberry-de-Valleyfield",
+                  "Schefferville", "Scotstown", "Senneterre", "Sept-Îles", "Shawinigan", "Sherbrooke", "Sorel-Tracy",
+                  "Stanstead", "Sutton", "Témiscaming", "Témiscouata-sur-le-Lac", "Terrebonne", "Thetford Mines",
+                  "Thurso", "Trois-Pistoles", "Trois-Rivières", "Valcourt", "Val-d'Or", "Varennes", "Vaudreuil-Dorion",
+                  "Victoriaville", "Ville-Marie", "Warwick", "Waterloo", "Waterville", "Westmount", "Windsor"];
+  
+  const citySK = ["Estevan", "Flin Flon (part)", "Humboldt", "Lloydminster (part)", "Martensville",
+                  "Meadow Lake", "Melfort", "Melville", "Moose Jaw", "North Battleford", "Prince Albert",
+                  "Regina", "Saskatoon", "Swift Current", "Warman", "Weyburn", "Yorkton"];
+  
+  const cityNT = ["Yellowknife"];
+
+  const cityNU = ["Iqaluit"];
+
+  const cityYT = ["Whitehorse"];
+
+  const cityTable = {
+    "AB": cityAB,
+    "BC": cityBC,
+    "MB": cityMB,
+    "NB": cityNB,
+    "NL": cityNL,
+    "NS": cityNS,
+    "NT": cityNT,
+    "NU": cityNU,
+    "ON": cityON,
+    "PE": cityPE,
+    "QC": cityQC,
+    "SK": citySK,
+    "YT": cityYT,
+    "none": ["(select a province first)"]
+
+    
+  }
+
+
+  const generateCityOptions = (province) => {
+    var cities = cityTable[province];
+    var constructOption = (city) => {
+      return <option key={city} value={city}>{city}</option>
+    }
+
+  return cities.map(constructOption)
+
+  }
+
+
+
   return (
     <div className='register-container'>
       <div id="page-content" className="row">
@@ -216,7 +307,7 @@ const Registration = props => {
             <Form.Row>
             <Form.Group as={Col} xs={3}>
               <Form.Label>Debug Only</Form.Label>
-              <select id="user_type" className="form-control" required value={userType} onChange={e => check_user_type(e.target.value)}>
+              <select id="user_type" className="form-control" value={userType} onChange={e => check_user_type(e.target.value)}>
                 <option value='none' disabled hidden>Choose here</option>
                 <option value="debug">This is for debugging only</option>
               </select>
@@ -275,7 +366,7 @@ const Registration = props => {
             <Form.Row>
               <Form.Group as={Col} xs={3}>
                 <Form.Label>Gender</Form.Label>
-                <select id="gender" className="form-control" required value={gender} onChange={e => setGender(e.target.value)} >
+                <select id="gender" className="form-control" value={gender} onChange={e => setGender(e.target.value)} >
                       <option value="none" disabled hidden>Choose here</option>
                       <option value="male">Male</option>
                       <option value="female">Female</option>
@@ -311,16 +402,18 @@ const Registration = props => {
               <Form.Group as={Col}>
                 <Form.Label>Street</Form.Label>
                 <input id="address-street" type="text" className="form-control" placeholder="123 Street Name" 
-                required value={street} onChange={e => setStreet(e.target.value)} />
+                value={street} onChange={e => setStreet(e.target.value)} />
               </Form.Group>
               <Form.Group as={Col} xs={3}>
               <Form.Label>City</Form.Label>
-                <input id="address-city" type="text" className="form-control" placeholder="City" 
-                required value={city} onChange={e => setCity(e.target.value)} />
+                <select id="address-city" className="form-control" placeholder="City" 
+                value={city} onChange={e => setCity(e.target.value)}>
+                  {generateCityOptions(province)}
+                </select>
               </Form.Group>
               <Form.Group as={Col} xs={2}>
               <Form.Label>Province</Form.Label>
-                <select id="province" className="form-control" required value={province} onChange={e => setProvince(e.target.value)} >
+                <select id="province" className="form-control" value={province} onChange={e => setProvince(e.target.value)} >
                       <option value="none" disabled hidden>Province</option>
                       <option value="AB">Alberta</option>
                       <option value="BC">British Columbia</option>
@@ -328,12 +421,12 @@ const Registration = props => {
                       <option value="NB">New Brunswick</option>
                       <option value="NL">Newfoundland and Labrador</option>
                       <option value="NS">Nova Scotia</option>
+                      <option value="NT">Northwest Territories</option>
+                      <option value="NU">Nunavut</option>
                       <option value="ON">Ontario</option>
                       <option value="PE">Prince Edward Island</option>
                       <option value="QC">Quebec</option>
                       <option value="SK">Saskatchewan</option>
-                      <option value="NT">Northwest Territories</option>
-                      <option value="NU">Nunavut</option>
                       <option value="YT">Yukon</option>
                     </select>
               </Form.Group>
@@ -351,27 +444,5 @@ const Registration = props => {
 
   );
 };
-
-/*
-          <InstantSearch indexName="instant_search" searchClient={searchClient} >
-                        <SearchBox />
-                        <Hits />
-          </InstantSearch>
-
-            <Form.Group as={Col}>
-              <Form.Label>Organization Name</Form.Label>
-              <input disabled={orgNameD} placeholder={orgNamePH} type="text" className="form-control" name="organization_name" 
-              id="organization_name" pattern="^[a-zA-Z0-9!@#\$%\^&\*\)\(+=._-]{1,64}$" value={orgName} onChange={e => setOrgName(e.target.value)} />
-            </Form.Group>
-            </Form.Row>
-            <Form.Group>
-              <Form.Label>Authentication Key</Form.Label>
-              <MDBIcon icon="question" className="pointer text register-icon" 
-                data-tip="Admin only. If you are an admin of an organization but you have not obtained one, please contact Sumaria Support." />
-                <input disabled={authKeyD} placeholder={authKeyPH} type="text" className="form-control" name="auth_key" 
-                id="auth_key" pattern="^[a-zA-Z0-9]{32}$" value={authKey} onChange={e => setAuthKey(e.target.value)} />
-            </Form.Group>
-
-*/
 
 export default Registration;

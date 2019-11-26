@@ -1,4 +1,4 @@
-# YOUR PRODUCT/TEAM NAME
+# Sumaria
 
 ## Iteration 03
 
