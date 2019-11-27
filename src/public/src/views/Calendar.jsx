@@ -57,8 +57,9 @@ const events = [
   {
     id: 3.3,
     title: 'International Student Fund Raising',
-    start: new Date(2019, 10, 17, 10, 0, 0),
-    end: new Date(2019, 10, 19, 18, 30, 0),
+    allDay: true,
+    start: new Date(2019, 10, 18),
+    end: new Date(2019, 10, 19),
     desc: 'GOAL: 100000000000000000000000000000',
     url: '/'
   },
@@ -72,13 +73,35 @@ const events = [
   }
 ];
 
+function eventStyleGetter(event, start, end, isSelected) {
+  var duration = end - start;
+  var bgColor = event.allDay ? 'rgba(51, 204, 204, 0.95)' : 'rgba(102, 153, 255, 0.95)';
+  if (duration > 86520000) {
+    bgColor = 'rgba(153, 153, 227, 0.95)';
+  }
+  if (event.title == 'Today') {
+    bgColor = 'rgba(69, 157, 129, 0.95)';
+  }
+  var style = {
+    backgroundColor: bgColor,
+    borderRadius: '8px',
+    opacity: 0.86,
+    color: 'black',
+    border: '0px',
+    display: 'block'
+  };
+  return {
+    style: style
+  };
+}
+
 function Event({ event }) {
   return (
     <span>
       <ReactTooltip place="top" />
       <div data-tip={event.desc}>
-      <strong>{event.title}</strong>
-      {event.desc && ':  ' + event.desc}
+        <strong>{event.title}</strong>
+        {event.desc && ':  ' + event.desc}
       </div>
     </span>
   )
@@ -109,15 +132,16 @@ const MyCalendar = props => (
       startAccessor="start"
       endAccessor="end"
       defaultDate={new Date()}
-      style={{height: 600}}
+      style={{ height: 600 }}
       defaultView={Views.MONTH}
+      eventPropGetter={eventStyleGetter}
       components={{
         event: Event,
         agenda: {
           event: EventAgenda,
         },
       }}
-      
+
     />
   </div>
 )
