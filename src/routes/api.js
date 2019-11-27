@@ -184,16 +184,16 @@ router.post('/createconversation', async (req, res) => {
 });
 
 /** Changed userid -> username as username should be unique anyway */
-router.get('/conversations/:username', async (req, res) => {
+router.get('/conversation/user/:username', async (req, res) => {
     const { username } = req.params;
     const conversations = await controllers.conv.getConversations(username);
     res.status(200).json({ conversations });
 });
 
 /** Returns messages in the conversationId */
-router.get('/messages/:conversationId', async (req, res) => {
-    const { conversationId } = req.params;
-    const messages = await controllers.conv.getMessages(conversationId);
+router.get('/conversation/:id/messages', async (req, res) => {
+    const { id } = req.params;
+    const messages = await controllers.conv.getMessages(id);
     res.status(200).json({ messages });
 });
 
