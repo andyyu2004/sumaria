@@ -28,7 +28,7 @@ router.use(
 
 router.use(require("body-parser").json())
 
-router.post("/account/login", async (req,res) => {
+router.post("/user/login", async (req,res) => {
     if (!req.body.username || !req.body.password) return res.status(400).end("Bad Request");
     try {
         var user = await controllers.user.login(req.body.username, req.body.password);
@@ -51,7 +51,7 @@ router.post("/account/login", async (req,res) => {
 
 })
 
-router.post("/account", async (req,res) => {
+router.post("/user", async (req,res) => {
     if (!req.body.username || !req.body.password) return res.status(400).json({error: true, message: "Bad Request"});
     try {
         var user = await controllers.user.create(req.body.username, req.body.password);
