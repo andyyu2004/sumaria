@@ -243,16 +243,16 @@ const Registration = props => {
                 value={firstName} onChange={e => setFirstName(e.target.value)} required />
               </Form.Group>
               <Form.Group as={Col}>
-                <Form.Label>Preferred Name</Form.Label>
-                <input type="text" className="form-control" name="prefer_name" id="prefer_name" pattern="^[a-zA-Z]{1,64}$" 
-                value={preferName} onChange={e => setPreferName(e.target.value)} />
-              </Form.Group>
-              <Form.Group as={Col}>
                 <Form.Label>Last Name</Form.Label>
                 <MDBIcon icon="asterisk" className="pointer text register-icon" 
                 data-tip="Your surname" />
                 <input type="text" className="form-control" name="last_name" id="last_name" pattern="^[a-zA-Z]{1,64}$" 
                 value={lastName} onChange={e => setLastName(e.target.value)} required />
+              </Form.Group>
+              <Form.Group as={Col}>
+                <Form.Label>Preferred Name</Form.Label>
+                <input type="text" className="form-control" name="prefer_name" id="prefer_name" pattern="^[a-zA-Z]{1,64}$" 
+                value={preferName} onChange={e => setPreferName(e.target.value)} />
               </Form.Group>
             </Form.Row>
             <Form.Row>

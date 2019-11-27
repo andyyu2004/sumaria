@@ -20,6 +20,10 @@
     margin-bottom:5px;
 }
 
+.row-spacer {
+    margin-bottom:30px;
+}
+
 .profile-event-container {
     background-color:var(--main-bg-color);
     margin:0px;

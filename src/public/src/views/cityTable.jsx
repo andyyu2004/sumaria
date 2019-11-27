@@ -1,5 +1,3 @@
-import React from 'react';
-
 const cityAB = ["Airdrie", "Brooks", "Calgary", "Camrose", "Chestermere", "Cold Lake",
   "Edmonton", "Fort Saskatchewan", "Grande Prairie", "Lacombe", "Leduc",
   "Lethbridge", "Lloydminster (part)", "Medicine Hat", "Red Deer",

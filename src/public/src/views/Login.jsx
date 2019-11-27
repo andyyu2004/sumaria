@@ -29,7 +29,7 @@ const Login = props => {
         position: toast.POSITION.TOP_CENTER
       });
       setInputs({
-        username: "",
+        username: u,
         password: "",
       });
       return false;
@@ -39,7 +39,7 @@ const Login = props => {
           position: toast.POSITION.TOP_CENTER
         });
         setInputs({
-          username: "",
+          username: u,
           password: "",
         });
         return false;
