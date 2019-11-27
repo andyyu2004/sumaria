@@ -108,10 +108,7 @@ router.post("/sessioninfo", async (req,res) => {
 
 router.get("/userinfobyusername/:username", async (req,res) => {
     try {
-        // console.log("Getting Username Outside");
-        // console.log(req.params.username)
         var user = await controllers.user.getByUsername(req.params.username);
-        console.log(user);
         if (!user) return res.status(404).json({error: true, message: "User not found"})
         res.json({error: false, user});
     } catch(e){
@@ -121,9 +118,7 @@ router.get("/userinfobyusername/:username", async (req,res) => {
 
 router.get("/userinfo/:id", async (req,res) => {
     try {
-        // console.log("Getting User Outside");
         var user = await controllers.user.getBy(req.params.id);
-        // console.log(user);
         if (!user) return res.status(404).json({error: true, message: "User not found"})
         res.json({error: false, user});
     } catch(e){
@@ -184,7 +179,6 @@ router.get("/event/:id/participants", async (req,res) => {
 
 router.post('/createconversation', async (req, res) => {
     const { name, userid } = req.body;
-    // console.log("create conversation");
     const conversation = await controllers.conv.createConversation(name, userid);
     res.status(200).json({ conversation });
 });
@@ -199,9 +193,7 @@ router.get('/conversations/:username', async (req, res) => {
 /** Returns messages in the conversationId */
 router.get('/messages/:conversationId', async (req, res) => {
     const { conversationId } = req.params;
-    // console.log("getting messages");
     const messages = await controllers.conv.getMessages(conversationId);
-    // console.log(messages);
     res.status(200).json({ messages });
 });
 
