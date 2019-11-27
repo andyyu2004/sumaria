@@ -177,7 +177,7 @@ router.get("/event/:id/participants", async (req,res) => {
 
 /* TODO Needs some error handling probably */
 
-router.post('/createconversation', async (req, res) => {
+router.post('/conversation', async (req, res) => {
     const { name, userid } = req.body;
     const conversation = await controllers.conv.createConversation(name, userid);
     res.status(200).json({ conversation });
