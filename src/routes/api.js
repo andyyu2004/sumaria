@@ -96,7 +96,7 @@ router.post("/event/:id/file", upload.single("file"), async (req,res) => {
     }
 })
 
-router.post("/sessioninfo", async (req,res) => {
+router.post("/session", async (req,res) => {
     if (!req.session.user) return res.status(400).json({error: true, message: "Bad Request"})
     try {
         var session = req.session.user
@@ -106,7 +106,7 @@ router.post("/sessioninfo", async (req,res) => {
     }
 })
 
-router.get("/userinfobyusername/:username", async (req,res) => {
+router.get("/user/:username", async (req,res) => {
     try {
         var user = await controllers.user.getByUsername(req.params.username);
         if (!user) return res.status(404).json({error: true, message: "User not found"})
@@ -116,7 +116,7 @@ router.get("/userinfobyusername/:username", async (req,res) => {
     }
 })
 
-router.get("/userinfo/:id", async (req,res) => {
+router.get("/user/:id", async (req,res) => {
     try {
         var user = await controllers.user.getBy(req.params.id);
         if (!user) return res.status(404).json({error: true, message: "User not found"})
