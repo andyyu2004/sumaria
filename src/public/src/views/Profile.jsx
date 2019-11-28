@@ -144,8 +144,8 @@ const Profile = props => {
     // TODO: save the modified info
 
     // if save succeed
-    var suc = "Changes Saved";
-    toast.success(suc, {
+    var msg = "Changes Saved";
+    toast.success(msg, {
       position: toast.POSITION.BOTTOM_RIGHT
     });
     return true;
@@ -191,17 +191,17 @@ const Profile = props => {
 
   return (
     <div className='profile-outer'>
-      <h2 className='profile-username'> Username: {userInfo["username"]}'s Profile <i class="fas fa-user"></i> </h2>
+      <h2 className='profile-username'> Username: {userInfo["username"]}'s Profile <i className="fas fa-user"></i> </h2>
       <div className='profile-info'>
         <Row className='profile-rows'>
           <Col>
-            <h5>First Name &nbsp;<button id='i-firstName' style={editIcon} class="fas fa-pen fa-xs" onClick={() => { editProfile('firstName') }}></button></h5>
+            <h5>First Name &nbsp;<button id='i-firstName' style={editIcon} className="fas fa-pen fa-xs" onClick={() => { editProfile('firstName') }}></button></h5>
             <input type="text" className="form-control" name="first_name" id="firstName" pattern="^[a-zA-Z]{1,64}$"
               value={firstName} onChange={e => setFirstName(e.target.value)} required disabled />
             {/* <div> {userInfo["lastName"]} </div> */}
           </Col>
           <Col>
-            <h5>Last Name &nbsp;<button id='i-lastName' style={editIcon} class="fas fa-pen fa-xs" onClick={() => { editProfile('lastName') }}></button></h5>
+            <h5>Last Name &nbsp;<button id='i-lastName' style={editIcon} className="fas fa-pen fa-xs" onClick={() => { editProfile('lastName') }}></button></h5>
             <input type="text" className="form-control" name="last_name" id="lastName" pattern="^[a-zA-Z]{1,64}$"
               value={lastName} onChange={e => setLastName(e.target.value)} required disabled />
             {/* <div> {userInfo["firstName"]} </div> */}
@@ -211,13 +211,13 @@ const Profile = props => {
         </Row>
         <Row className='profile-rows'>
           <Col>
-            <h5>Prefer Name &nbsp;<button id='i-preferName' style={editIcon} class="fas fa-pen fa-xs" onClick={() => { editProfile('preferName') }}></button></h5>
+            <h5>Prefer Name &nbsp;<button id='i-preferName' style={editIcon} className="fas fa-pen fa-xs" onClick={() => { editProfile('preferName') }}></button></h5>
             <input type="text" className="form-control" name="prefer_name" id="preferName" pattern="^[a-zA-Z]{1,64}$"
               value={preferName} onChange={e => setPreferName(e.target.value)} disabled />
             {/* <div> {userInfo["preferName"]} </div> */}
           </Col>
           <Col>
-            <h5>Gender &nbsp;<button id='i-gender' style={editIcon} class="fas fa-pen fa-xs" onClick={() => { editProfile('gender') }}></button></h5>
+            <h5>Gender &nbsp;<button id='i-gender' style={editIcon} className="fas fa-pen fa-xs" onClick={() => { editProfile('gender') }}></button></h5>
             <select id="gender" className="form-control" value={gender} onChange={e => setGender(e.target.value)} disabled >
               <option value="none" disabled hidden>Choose here</option>
               <option value="male">Male</option>
@@ -231,13 +231,13 @@ const Profile = props => {
         </Row>
         <Row className='profile-rows'>
           <Col>
-            <h5>Phone Number &nbsp;<button id='i-phone' style={editIcon} class="fas fa-pen fa-xs" onClick={() => { editProfile('phone') }}></button></h5>
+            <h5>Phone Number &nbsp;<button id='i-phone' style={editIcon} className="fas fa-pen fa-xs" onClick={() => { editProfile('phone') }}></button></h5>
             <input type="text" className="form-control" name="phone_number" id="phone" placeholder="416-1234567"
               pattern="^\d+-?\d+$" value={phone} onChange={e => setPhone(e.target.value)} disabled />
             {/* <div> {userInfo["phone"]} </div> */}
           </Col>
           <Col>
-            <h5>Email &nbsp;<button id='i-email' style={editIcon} class="fas fa-pen fa-xs" onClick={() => { editProfile('email') }}></button></h5>
+            <h5>Email &nbsp;<button id='i-email' style={editIcon} className="fas fa-pen fa-xs" onClick={() => { editProfile('email') }}></button></h5>
             <input type="email" className="form-control" name="email" id="email"
               required pattern="^(([^<>()\[\]\\.,;:\s@&quot;]+(\.[^<>()\[\]\\.,;:\s@&quot;]+)*)|(&quot;.+&quot;))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$"
               value={email} onChange={e => setEmail(e.target.value)} disabled />
@@ -246,7 +246,7 @@ const Profile = props => {
         </Row>
         <Row className='row-spacer'>
         </Row>
-        <h5>Address &nbsp;<button id='i-address' style={editIcon} class="fas fa-pen fa-xs" onClick={() => { editProfile('address') }}></button></h5>
+        <h5>Address &nbsp;<button id='i-address' style={editIcon} className="fas fa-pen fa-xs" onClick={() => { editProfile('address') }}></button></h5>
         <Form.Row>
           <Form.Group as={Col}>
             <Form.Label>Street</Form.Label>

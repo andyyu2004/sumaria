@@ -5,7 +5,7 @@ import './App.css';
 import { Header } from './components';
 import ChatView from './views/ChatView';
 import Sidebar from './components/Sidebar';
-import Footer from './components/Footer';
+//import Footer from './components/Footer';
 import { useDispatch } from 'react-redux';
 import { setUser, logout } from './actions/actionCreators';
 import { UserType } from './types/User';

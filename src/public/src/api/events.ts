@@ -14,7 +14,7 @@ export async function addEvent(event: Event): Promise<Either<string, Event>> {
 //     return new Right(mockdata.events);
 // }
 
-/** Given an eventid, return all the participants */
+/** Return all events */
 export async function getEvents(): Promise<Either<string, Event[]>> {
     const { data } = await axios.get(`/api/events`);
     console.log(data.events);

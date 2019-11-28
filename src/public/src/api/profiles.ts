@@ -14,5 +14,5 @@ export async function getUserById(id: string): Promise<IEither<string, User>> {
 
 export async function getUserByUsername(username: string): Promise<IEither<string, User>> {
     const { data } = await axios.get(`/api/userinfobyusername/${username}`);
-    return data.error ? new Left(`Could not find user with id ${username}`) : new Right(data.user);
+    return data.error ? new Left(`Could not find user with username ${username}`) : new Right(data.user);
 }
