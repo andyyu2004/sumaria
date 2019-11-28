@@ -13,22 +13,30 @@ import '../views/Browse.css'
  * @returns {JSX.Element}
  */
 const DisplayEvent = ({ event }) => {
-    const { date, description, name, postDate, skills, address, organizer } = event;
-    const tempAddress = "temp";
-    const tempOrganizer = "temp";
+    const { date, description, name, postDate, endDate, skills, address, city, province, unit, organizer } = event;
     return (
         <div className='browse-post'>
         <h4>{name}</h4>
         <ul>
           <Row>
-            <Col>Event Date: {new Date(date).toDateString()}</Col>
-            <Col className='browse-post-date'>Posted Date: {new Date(postDate).toDateString()}</Col>
+            <Col>Event Start Date: {new Date(date).toString()}</Col>
+            <Col>Event End Date: {new Date(endDate).toString()}</Col>
+            <Col className='browse-post-date'>Posted Date: {new Date(postDate).toString()}</Col>
           </Row>
           <Row>
-            <Col>Organizer: {tempOrganizer}</Col>
+            <Col>Organizer: {organizer}</Col>
           </Row>
           <Row>
-            <Col>Address: {tempAddress}</Col>
+            <Col>Address: {address}</Col>
+          </Row>
+          <Row>
+            <Col>City: {city}</Col>
+          </Row>
+          <Row>
+            <Col>Province: {province}</Col>
+          </Row>
+          <Row>
+            <Col>Unit: {unit}</Col>
           </Row>
           Skills Required:
           <Row>

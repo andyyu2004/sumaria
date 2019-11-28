@@ -1,4 +1,5 @@
 import axios from 'axios';
+// import mockdata from '../mockdata.json';
 import { UserResponse } from '../types/api';
 import { IEither, Right } from '../types/Either';
 import { apiErrorHandler } from './util';

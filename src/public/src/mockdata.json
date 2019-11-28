@@ -7,6 +7,9 @@
         "postDate": "2019-10-05T09:00:00.000Z",
         "skills": [],
         "address": "N/A",
+        "city": "N/A",
+        "province": "N/A",
+        "apartmentunit": "N/A",
         "description": "N/A",
         "organizer": "N/A"
       },
@@ -18,7 +21,10 @@
         "skills": [
           "leadership"
         ],
-        "address": "290 Bremner Blvd, Toronto, ON M5V 3L9",
+        "address": "290 Bremner Blvd",
+        "city": "Toronto",
+        "province": "Ontario",
+        "apartmentunit": "N/A",
         "description": "A maration to support ABC",
         "organizer": "123 Foundation"
       },
@@ -33,7 +39,10 @@
           "leadership",
           "writing"
         ],
-        "address": "290 Bremner Blvd, Toronto, ON M5V 3L9",
+        "address": "290 Bremner Blvd",
+        "city": "Toronto",
+        "province": "Ontario",
+        "apartmentunit": "N/A",
         "description": "A learning experience to empower students.",
         "organizer": "456 schools"
       },
@@ -47,7 +56,10 @@
           "communication",
           "leadership"
         ],
-        "address": "123 Cavendish Blvd, Montreal, Quebec H4T 1M8",
+        "address": "123 Cavendish Blvd",
+        "city": "Montreal",
+        "province": "Quebec",
+        "apartmentunit": "N/A",
         "description": "Collecting cans for EFG",
         "organizer": "789 Organization"
       },
@@ -62,7 +74,10 @@
           "German",
           "writing"
         ],
-        "address": "290 Bremner Blvd, Toronto, ON M5V 3L9",
+        "address": "290 Bremner Blvd",
+        "city": "Toronto",
+        "province": "Ontario",
+        "apartmentunit": "N/A",
         "description": "A learning experience to empower students.",
         "organizer": "456 schools"
       }

@@ -1,4 +1,4 @@
-import { getEvents, getEventsByIds, addEvent, getEventById } from './events';
+import { getEvents, addEvent, getEventById } from './events';
 import { getUsers, getUserById, getUserByUsername } from './profiles';
 import { signup, login } from './user';
 import { createCompany, getCompanyById } from './company';
@@ -14,7 +14,8 @@ const API = {
     getUsers,
     signup,
     login,
-    getEventsByIds,
+    // getEventsByIds,
+    // getEventsByUsername,
     addEvent,
     getEventById,
     createCompany,

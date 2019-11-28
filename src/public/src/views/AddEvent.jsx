@@ -36,16 +36,19 @@ const AddEvent = props => {
     e.preventDefault();
     const event = {
       name: eventName,
-      organizer: organizer,
+      organizer: orgName,
       date: startDate,
       enddate: endDate,
-      // address: eventAddress,
-      // skills: skills.split(",").map(s => s.trim()),
+      address: street,
+      skills: skills.split(",").map(s => s.trim()),
+      city: city,
+      province: province,
       description: description,
-      // numVolunteers: parseInt(numV),
+      unit: unit,
+      numVolunteers: parseInt(numV),
     };
-    // console.log(event);
     const res = await API.addEvent(event);
+    console.log(event);
     res.match(
       err => {
         console.log(err);
@@ -54,8 +57,8 @@ const AddEvent = props => {
         });
       },
       event => {
-        console.log(`Successfully added event: returned event = ${event}`);
-        toast.success("Successfully added event: " + event, {
+        console.log(`Successfully added event: returned event = ${event.name}`);
+        toast.success("Successfully added event: " + event.name, {
           position: toast.POSITION.TOP_CENTER
         });
       }
@@ -89,6 +92,7 @@ const AddEvent = props => {
 
   }
 
+  // console.log(event);
 
   return (
     <div className='add-event-outer'>
@@ -146,11 +150,11 @@ const AddEvent = props => {
         <Form.Row>
           <Form.Group as={Col} controlId="formStartDate">
             <Form.Label>Start Date</Form.Label>
-            <input type="date" className="form-control" value={startDate} onChange={e => setStartDate(e.target.value)} onBlur={checkDate} required />
+            <input type="datetime-local" className="form-control" value={startDate} onChange={e => setStartDate(e.target.value)} onBlur={checkDate} required />
           </Form.Group>
           <Form.Group as={Col} controlId="formEndDate">
             <Form.Label>End Date</Form.Label>
-            <input type="date" className="form-control" value={endDate} onChange={e => setEndDate(e.target.value)} onBlur={checkDate} />
+            <input type="datetime-local" className="form-control" value={endDate} onChange={e => setEndDate(e.target.value)} onBlur={checkDate} />
           </Form.Group>
           <Form.Group as={Col} controlId="formVolunteerNum">
             <Form.Label>Number of Volunteers Needed</Form.Label>

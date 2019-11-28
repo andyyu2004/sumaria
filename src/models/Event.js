@@ -27,10 +27,16 @@ var schema = mongoose.Schema({
     numVolunteers: {
         type: Number
     },
-    Address: {
+    address: {
         type: String
     },
-    City: {
+    city: {
+        type: String
+    },
+    province: {
+        type: String
+    },
+    unit: {
         type: String
     }
 

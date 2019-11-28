@@ -1,4 +1,4 @@
-import mockdata from '../mockdata.json';
+// import mockdata from '../mockdata.json';
 import { Right, Left, Either } from '../types/Either';
 import { Event } from '../types/events';
 import axios from 'axios';
@@ -17,6 +17,7 @@ export async function addEvent(event: Event): Promise<Either<string, Event>> {
 /** Given an eventid, return all the participants */
 export async function getEvents(): Promise<Either<string, Event[]>> {
     const { data } = await axios.get(`/api/events`);
+    console.log(data.events);
     return data.error ? new Left(data.message) : new Right(data.events);
 }
 
@@ -32,10 +33,10 @@ export async function getEventById(id: string): Promise<Either<string, Event>> {
 }
 
 /** Given a list of event ids, return the events in order of the closest upcoming one first */
-export async function getEventsByIds(ids: number[]): Promise<Either<string, Event[]>> {
-    const events = mockdata.events.filter(event => ids.includes(event.id));
-    events.sort((x, y) => x.date.localeCompare(y.date));
-    return new Right(events);
-}
+// export async function getEventsByIds(ids: number[]): Promise<Either<string, Event[]>> {
+//     const events = mockdata.events.filter(event => ids.includes(event.id));
+//     events.sort((x, y) => x.date.localeCompare(y.date));
+//     return new Right(events);
+// }
 
 
