@@ -1,43 +1,22 @@
 import axios from 'axios';
-import { User } from '../types/User';
-import { Left, Right, Either } from '../types/Either';
 import { Conversation, Message } from '../types/Chat';
-
-// export async function apilogin(username: string, firstname: string, surname: string): Promise<User> {
-//     console.log("Before login")
-//     const res = await axios.post('/api/login', {
-//         firstname,
-//         surname,
-//         username,
-//     });
-//     console.log("After login")
-//     console.log(res);
-//     // return res.data.user;
-//     return res.data;
-// }
+import { Either, Right } from '../types/Either';
+import { apiErrorHandler } from './util';
 
 export async function createNewConversation(userid: string, name: string): Promise<Either<string, Conversation>> {
-    const { data } = await axios.post('/api/createconversation', {
-        userid,
-        name,
-    });
-    return data.error ? new Left(data.message) : new Right(data.conversation);
+    return axios.post('/api/conversation', { userid, name })
+        .then<any>(({ data }) => new Right(data.conversation))
+        .catch(apiErrorHandler);
 }
 
 export async function getConversations(userid: string): Promise<Either<string, Conversation[]>> {
-    const { data } = await axios.get(`/api/conversations/${userid}`);
-    return data.error ? new Left(data.message) : new Right(data.conversations);
+    return axios.get(`/api/conversation/user/${userid}`)
+        .then<any>(({ data }) => new Right(data.conversations))
+        .catch(apiErrorHandler);
 }
 
 export async function getMessages(conversationId: string): Promise<Either<string, Message[]>> {
-    const { data } = await axios.get(`/api/messages/${conversationId}`);
-    return data.error ? new Left(data.message) : new Right(data.messages);
+    return axios.get(`/api/conversation/${conversationId}/messages`)
+        .then<any>(({ data }) => new Right(data.messages))
+        .catch(apiErrorHandler);
 }
-
-// export async function addUserToConversation(conversationId: string, username: string) {
-//     const { data } = await axios.post('api/conversations/add', {
-//         conversationId,
-//         username,
-//     });
-//     return data.error ? new Left(data.message) : new Right(data.messages);
-// }

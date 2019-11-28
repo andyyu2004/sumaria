@@ -1,26 +1,12 @@
 import axios from 'axios';
-import mockdata from '../mockdata.json';
 import { UserResponse } from '../types/api';
-import { IEither, Left, Right } from '../types/Either';
-import { User } from '../types/User';
-
-/** Don't want an error to be thrown on client side error */
-axios.defaults.validateStatus = status => status >= 200 && status < 500;
+import { IEither, Right } from '../types/Either';
+import { apiErrorHandler } from './util';
 
 export async function signup(username: string, password: string): Promise<IEither<string, UserResponse>> {
-    try {
-        const { data } = await axios.post("/api/account", {
-            username,
-            password,
-        });
-        return data.error
-            ? new Left(data.message)
-            : new Right(data.user);
-
-    } catch (err) {
-        console.log("Signup request failed", err);
-        return new Left(err.message);
-    }
+    return axios.post("/api/user", { username, password })
+        .then<any>(({ data }) => new Right(data.user))
+        .catch(apiErrorHandler);
 }
 
 // export async function signup(username: string, password: string): Promise<UserResponse | string> {
@@ -29,19 +15,9 @@ export async function signup(username: string, password: string): Promise<IEithe
 
 /** Currently the response is identical from the server as signup */
 export async function login(username: string, password: string): Promise<IEither<string, UserResponse>> {
-    try {
-        const { data } = await axios.post("/api/account/login", {
-            username,
-            password,
-        });
-        console.log(data);
-        return data.error
-            ? new Left(data.message)
-            : new Right(data.user);
-    } catch (err) {
-        console.log("Login request failed", err);
-        return new Left(err.message); 
-    }
+    return axios.post("/api/user/login", { username, password })
+        .then<any>(({ data }) => new Right(data.user))
+        .catch(apiErrorHandler);
 }
 
 

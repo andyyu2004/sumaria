@@ -20,11 +20,6 @@ export async function getEvents(): Promise<Either<string, Event[]>> {
     return data.error ? new Left(data.message) : new Right(data.events);
 }
 
-/** Given a username, return all the events the user is participating in */
-export async function getEventsByUsername(username: string): Promise<Either<string, Event[]>> {
-    return new Left("unimplemented");
-}
-
 /** Given an eventid, return all the participants */
 export async function getEventParticipantsByEventId(id: string): Promise<Either<string, User[]>> {
     const { data } = await axios.get(`/api/event/${id}/participants`);
