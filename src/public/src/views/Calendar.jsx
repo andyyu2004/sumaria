@@ -7,6 +7,7 @@ import 'react-big-calendar/lib/css/react-big-calendar.css';
 import { Calendar, momentLocalizer, Views } from 'react-big-calendar';
 import moment from 'moment';
 import ReactTooltip from 'react-tooltip';
+import { withProtection } from '../components/hoc';
 
 const localizer = momentLocalizer(moment);
 
@@ -117,7 +118,6 @@ function EventAgenda({ event }) {
 }
 
 const onEventClick = event => {
-
   navigate(event.url || '/calendar');
 }
 
@@ -126,7 +126,7 @@ const MyCalendar = props => (
   <div>
     <Calendar
       popup
-      onSelectEvent={event => onEventClick(event)}
+      onSelectEvent={onEventClick}
       localizer={localizer}
       events={events}
       startAccessor="start"
@@ -141,9 +141,8 @@ const MyCalendar = props => (
           event: EventAgenda,
         },
       }}
-
     />
   </div>
 )
 
-export default MyCalendar;
+export default withProtection(Calendar);
