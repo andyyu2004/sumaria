@@ -7,7 +7,7 @@ import './registerSuccess.css';
 
 const RegisterSuccess = props => {
 
-  const [sec, setSec] = useState(5);
+  //const [sec, setSec] = useState(5);
 
   
   const redirectLogin = e => {
@@ -28,7 +28,7 @@ const RegisterSuccess = props => {
     <div className="container bg">
       <h1 className="display-3">Thank You for Joining Us!</h1>
       <p className="lead"><strong>Please check your email</strong> to activate your account.</p>
-      <p>Redirect to <a href="/login">login page</a> in {sec} seconds...</p>
+      <p>Redirect to <a href="/login">login page</a> in 5 seconds...</p>
     </div>
 
   );

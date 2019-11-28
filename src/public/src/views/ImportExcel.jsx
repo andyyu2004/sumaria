@@ -18,7 +18,7 @@ const ImportExcel = props => {
   const handleFile = e => {
     const file = e.target.files[0];
     ExcelRenderer(file, (err, res) => {
-      if (err){
+      if (err) {
         //return console.log(err);
         return toast.error(err, {
           position: toast.POSITION.TOP_CENTER

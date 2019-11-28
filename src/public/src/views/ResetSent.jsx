@@ -4,7 +4,7 @@ import './Reset.css'
 
 const ResetSent = props => {
 
-  const [sec, setSec] = useState(5);
+  //const [sec, setSec] = useState(5);
 
 
   const redirectLogin = e => {
@@ -31,7 +31,7 @@ const ResetSent = props => {
             <h2 className="text-center">Dear user:</h2>
             <p>Your password reset email has been sent.</p>
             <p>You should receive a password reset link shortly.</p>
-            <p>Redirect to <a href="/login">home</a> page in {sec} seconds...</p>
+            <p>Redirect to <a href="/login">home</a> page in 5 seconds...</p>
             <div className="panel-body">
             </div>
           </div>

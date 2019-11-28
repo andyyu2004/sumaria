@@ -10,7 +10,7 @@ import cityTable from './cityTable.jsx';
 
 const Browse = props => {
   const [skill, setSkill] = useState("");
-  const [keyword, setKeyword] = useState("");   
+  const [keyword, setKeyword] = useState("");
   const [startDate, setStartDate] = useState("1000-01-1T00:00:00.000Z");
   const [endDate, setEndDate] = useState("9999-01-1T00:00:00.000Z");
   const [province, setProvince] = useState('none');
@@ -29,7 +29,7 @@ const Browse = props => {
    */
 
   const [events, setEvents] = useState([]);
-  
+
   const fetchEvents = async () => {
     const eventInfo = await API.getEvents();
     eventInfo.match(
@@ -37,7 +37,7 @@ const Browse = props => {
       events => setEvents(events),
     );
   };
-  
+
   useEffect(() => { fetchEvents(); }, []);
 
   const optionsName = {
@@ -75,10 +75,10 @@ const Browse = props => {
   }
 
   let eventsFiltered = skill ? (new fuse(events, optionsSkills)).search(skill) : events;
-      eventsFiltered = keyword ? (new fuse(eventsFiltered, optionsName)).search(keyword) : eventsFiltered;
-      eventsFiltered = eventsFiltered.filter(event => ((event.date) > startDate))
-      eventsFiltered = eventsFiltered.filter(event => ((event.date) < endDate))
-      eventsFiltered = city ? eventsFiltered.filter(event => ((event.city) === city)) : eventsFiltered
+  eventsFiltered = keyword ? (new fuse(eventsFiltered, optionsName)).search(keyword) : eventsFiltered;
+  eventsFiltered = eventsFiltered.filter(event => ((event.date) > startDate))
+  eventsFiltered = eventsFiltered.filter(event => ((event.date) < endDate))
+  eventsFiltered = city ? eventsFiltered.filter(event => ((event.city) === city)) : eventsFiltered
 
   // console.log(province);
 
@@ -88,47 +88,47 @@ const Browse = props => {
       <Form.Row>
         <Form.Group as={Col} xs={3} className='browse-input'>
           <Form.Label>Skill Name</Form.Label>
-          <Form.Control placeholder="Search for a skill..." onChange={e => setSkill(e.target.value)}/>
+          <Form.Control placeholder="Search for a skill..." onChange={e => setSkill(e.target.value)} />
         </Form.Group>
         <Form.Group as={Col} xs={3}>
-        <Form.Label>Event Name</Form.Label>
-          <Form.Control placeholder="Search for an event..." onChange={e => setKeyword(e.target.value)}/>
+          <Form.Label>Event Name</Form.Label>
+          <Form.Control placeholder="Search for an event..." onChange={e => setKeyword(e.target.value)} />
         </Form.Group>
         <Form.Group as={Col} controlId="formStartDate">
           <Form.Label>After this date:</Form.Label>
-          <input type="date" className="form-control" value={startDate} onChange={e => setStartDate(e.target.value)}/>
+          <input type="date" className="form-control" value={startDate} onChange={e => setStartDate(e.target.value)} />
         </Form.Group>
         <Form.Group as={Col} controlId="formEndDate">
           <Form.Label>Before this date</Form.Label>
-          <input type="date" className="form-control" value={endDate} onChange={e => setEndDate(e.target.value)}/>
+          <input type="date" className="form-control" value={endDate} onChange={e => setEndDate(e.target.value)} />
         </Form.Group>
       </Form.Row>
       <Form.Row>
         <Form.Group as={Col}>
           <Form.Label>City</Form.Label>
-            <select id="address-city" className="form-control" placeholder="City"
-              value={city} onChange={e => setCity(e.target.value)}>
-              {generateCityOptions(province)}
-            </select>
+          <select id="address-city" className="form-control" placeholder="City"
+            value={city} onChange={e => setCity(e.target.value)}>
+            {generateCityOptions(province)}
+          </select>
         </Form.Group>
         <Form.Group as={Col}>
-            <Form.Label>Province</Form.Label>
-            <select id="province" className="form-control" value={province} onChange={e => setProvince(e.target.value)} >
-              <option value="none" disabled hidden>Province</option>
-              <option value="AB">Alberta</option>
-              <option value="BC">British Columbia</option>
-              <option value="MB">Manitoba</option>
-              <option value="NB">New Brunswick</option>
-              <option value="NL">Newfoundland and Labrador</option>
-              <option value="NS">Nova Scotia</option>
-              <option value="NT">Northwest Territories</option>
-              <option value="NU">Nunavut</option>
-              <option value="ON">Ontario</option>
-              <option value="PE">Prince Edward Island</option>
-              <option value="QC">Quebec</option>
-              <option value="SK">Saskatchewan</option>
-              <option value="YT">Yukon</option>
-            </select>
+          <Form.Label>Province</Form.Label>
+          <select id="province" className="form-control" value={province} onChange={e => setProvince(e.target.value)} >
+            <option value="none" disabled hidden>Province</option>
+            <option value="AB">Alberta</option>
+            <option value="BC">British Columbia</option>
+            <option value="MB">Manitoba</option>
+            <option value="NB">New Brunswick</option>
+            <option value="NL">Newfoundland and Labrador</option>
+            <option value="NS">Nova Scotia</option>
+            <option value="NT">Northwest Territories</option>
+            <option value="NU">Nunavut</option>
+            <option value="ON">Ontario</option>
+            <option value="PE">Prince Edward Island</option>
+            <option value="QC">Quebec</option>
+            <option value="SK">Saskatchewan</option>
+            <option value="YT">Yukon</option>
+          </select>
         </Form.Group>
       </Form.Row>
       {/* <Form.Row>
@@ -137,7 +137,7 @@ const Browse = props => {
         </Form.Group>
       </Form.Row> */}
       <div>
-        {eventsFiltered.map(event => <DisplayEvent key={event._id} event={event}/>)}
+        {eventsFiltered.map(event => <DisplayEvent key={event._id} event={event} />)}
       </div>
     </div>
   );

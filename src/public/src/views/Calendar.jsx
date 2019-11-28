@@ -76,10 +76,10 @@ const MyCalendar = props => {
     console.log("UNWRAP " + user);
     console.log(user);
 
-    const mockTemp = [2, 3]; // Currently this is mock data for the events that the user is a part of.
+    //const mockTemp = [2, 3]; // Currently this is mock data for the events that the user is a part of.
     // const userEvents = await API.getEventsByIds(user.events); // Uncomment when user event enrollment is implemented.
-    const userEvents = await API.getEventsByIds(mockTemp);
-    userEvents.match(err => console.log(err), setUserEvents);
+    //const userEvents = await API.getEventsByIds(mockTemp);
+    //userEvents.match(err => console.log(err), setUserEvents);
   }
 
   useEffect(() => { fetchEvents(); }, []);
@@ -93,7 +93,7 @@ const MyCalendar = props => {
 
   let events = [];
 
-  if (userEvents.length > 0){
+  if (userEvents.length > 0) {
     events = userEvents;
     // TODO: check event fields and map them to the required fields
     events.push({
@@ -103,7 +103,7 @@ const MyCalendar = props => {
       end: new Date(new Date().setHours(new Date().getHours() + 3)),
       url: '/calendar'
     });
-  } else{
+  } else {
     events = [
       {
         id: 0,
@@ -162,7 +162,7 @@ const MyCalendar = props => {
         desc: 'Tri-campus',
         url: '/'
       }
-    ];  
+    ];
   }
 
 

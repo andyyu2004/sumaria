@@ -53,10 +53,10 @@ const Profile = props => {
     console.log(user);
 
     /** Moved the brunt work into the API, as you want to retrieve every user and event etc on client side, let server and db do the hard stuff */
-    const mockTemp = [2, 3]; // Currently this is mock data for the events that the user is a part of.
+    //const mockTemp = [2, 3]; // Currently this is mock data for the events that the user is a part of.
     // const userEvents = await API.getEventsByIds(user.events); // Uncomment when user event enrollment is implemented.
-    const userEvents = await API.getEventsByIds(mockTemp);
-    userEvents.match(err => console.log(err), setUserEvents);
+    //const userEvents = await API.getEventsByIds(mockTemp);
+    //userEvents.match(err => console.log(err), setUserEvents);
   }
 
   // Not sure of useEffect is needed. But it doesn't work with it.
