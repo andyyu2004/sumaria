@@ -4,6 +4,10 @@ var schema = mongoose.Schema({
     name: {
         type: String
     },
+    creatorid: {
+        type: mongoose.Types.ObjectId,
+        required: true,
+    },
     organizer: {
         type: String
         // type: mongoose.Types.ObjectId,

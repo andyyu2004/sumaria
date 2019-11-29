@@ -3,10 +3,12 @@ import { Right, Left, Either } from '../types/Either';
 import { Event } from '../types/events';
 import axios from 'axios';
 import { User } from '../types/User.js';
+import { apiErrorHandler } from './util';
 
 export async function addEvent(event: Event): Promise<Either<string, Event>> {
-    const { data } = await axios.post('/api/event', { ...event });
-    return data.error ? new Left(data.message) : new Right(data.event);
+    return axios.post('/api/event', { ...event })
+        .then<any>(res => new Right(res.data.event))
+        .catch(apiErrorHandler);
 }
 
 // /** Return all events */

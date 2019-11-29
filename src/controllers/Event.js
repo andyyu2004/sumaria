@@ -2,8 +2,8 @@ let Event               = require("./../models/Event"),
     EventParticipant    = require("./../models/EventParticipant"),
     EventFile           = require("./../models/EventFile");
 
-async function create(name, organizer, date, endDate, description, numVolunteers, address, city, province, unit = "N/A", skills) {
-    var event = new Event({name, organizer, date, endDate, postDate: new Date(), description, numVolunteers, address, city, province, unit, skills});
+async function create(creatorid, name, organizer, date, endDate, description, numVolunteers, address, city, province, unit = "N/A", skills) {
+    var event = new Event({ creatorid, name, organizer, date, endDate, postDate: new Date(), description, numVolunteers, address, city, province, unit, skills});
     await event.save();
     return event;
 }

@@ -11,6 +11,18 @@ import { withProtection } from '../components/hoc';
 //import globalize from 'globalize';
 //const localizer = globalizeLocalizer(globalize)
 
+function renameProperty(obj, oldName, newName) {
+  if (oldName === newName) {
+      return this;
+  }
+  // Check for the old property name to avoid ReferenceError
+  if (obj.hasOwnProperty(oldName)) {
+  obj[newName] = obj[oldName];
+    delete obj[oldName];
+  }
+  return obj;
+};
+
 const localizer = momentLocalizer(moment);
 
 function eventStyleGetter(event, start, end, isSelected) {
@@ -37,7 +49,7 @@ function eventStyleGetter(event, start, end, isSelected) {
 
 function Event({ event }) {
   return (
-    <span>
+    <span onClick={() => {onEventClick(event)}}>
       <ReactTooltip place="top" />
       <div data-tip={event.desc}>
         <strong>{event.title}</strong>
@@ -56,8 +68,9 @@ function EventAgenda({ event }) {
   )
 }
 
-const onEventClick = event => {
-  navigate(event.url || '/calendar');
+const onEventClick = (event) => {
+  navigate( event.title ? `/event/${event.title}` : '/calendar', { state: { event } })
+  //navigate(event.url || '/calendar');
 }
 
 
@@ -66,6 +79,7 @@ const MyCalendar = props => {
   const { username } = useSelector(state => state.user);
   const [userEvents, setUserEvents] = useState([]);
   // same as in profile
+  /*
   async function fetchEvents() {
     const userEither = username ? await API.getUserByUsername(username) : new Left("");
     if (userEither.isLeft()) return console.log(`Failed to fetch user ${username}; err: ${userEither.err()}`);
@@ -80,28 +94,41 @@ const MyCalendar = props => {
     // const userEvents = await API.getEventsByIds(user.events); // Uncomment when user event enrollment is implemented.
     //const userEvents = await API.getEventsByIds(mockTemp);
     //userEvents.match(err => console.log(err), setUserEvents);
-  }
+  }*/
+
+  // testing actual data using API
+  const fetchEvents = async () => {
+    const eventInfo = await API.getEvents();
+    eventInfo.match(
+      err => console.log(err),
+      events => setUserEvents(events),
+    );
+  };
 
   useEffect(() => { fetchEvents(); }, []);
-
-
 
   /*
   need to get the list of events for current logged in user
   (unique id, title, start time, end time, description, unique url, etc.)
   */
 
+  // { date, description, name, postDate, endDate, skills, address, city, province, unit, organizer }
   let events = [];
 
   if (userEvents.length > 0) {
     events = userEvents;
+    events.map((event) => {
+      renameProperty(event, 'name', 'title');
+      renameProperty(event, 'description', 'desc');
+      renameProperty(event, 'postDate', 'end');
+      renameProperty(event, 'date', 'start');
+    })
     // TODO: check event fields and map them to the required fields
     events.push({
       id: 0,
       title: 'Today',
       start: new Date(new Date().setHours(new Date().getHours() - 3)),
-      end: new Date(new Date().setHours(new Date().getHours() + 3)),
-      url: '/calendar'
+      end: new Date(new Date().setHours(new Date().getHours() + 3))
     });
   } else {
     events = [
@@ -111,39 +138,34 @@ const MyCalendar = props => {
         allDay: true,
         start: new Date(2019, 11, 1),
         end: new Date(2019, 11, 2),
-        desc: 'MVP DEMO (to Mike)',
-        url: '/0.5'
+        desc: 'MVP DEMO (to Mike)'
       },
       {
         id: 1,
         title: 'Team 24 Meeting',
         start: new Date(2019, 10, 25),
         end: new Date(2019, 10, 29),
-        desc: 'Daily Metting',
-        url: '/1'
+        desc: 'Daily Metting'
       },
       {
         id: 1.5,
         title: 'Volunteer Party',
         start: new Date(2019, 10, 26, 19, 30, 0),
         end: new Date(2019, 10, 26, 23, 30, 0),
-        desc: 'Everyone with 4.0 is welcome',
-        url: '/event/1.5'
+        desc: 'Everyone with 4.0 is welcome'
       },
       {
         id: 0,
         title: 'Today',
         start: new Date(new Date().setHours(new Date().getHours() - 3)),
-        end: new Date(new Date().setHours(new Date().getHours() + 3)),
-        url: '/calendar'
+        end: new Date(new Date().setHours(new Date().getHours() + 3))
       },
       {
         id: 2.1,
         title: 'Volunteer Exam',
         start: new Date(2019, 10, 18, 18, 0, 0),
         end: new Date(2019, 10, 18, 20, 5, 0),
-        desc: 'Try not to fail!',
-        url: '/2.1'
+        desc: 'Try not to fail!'
       },
       {
         id: 3.3,
@@ -151,16 +173,14 @@ const MyCalendar = props => {
         allDay: true,
         start: new Date(2019, 10, 18),
         end: new Date(2019, 10, 19),
-        desc: 'GOAL: 100000000000000000000000000000',
-        url: '/3.3'
+        desc: 'GOAL: 100000000000000000000000000000'
       },
       {
         id: 4.7,
         title: 'UofT Beach Cleanup',
         start: new Date(2019, 10, 26, 6, 30, 0),
         end: new Date(2019, 10, 26, 22, 30, 0),
-        desc: 'Tri-campus',
-        url: '/4.7'
+        desc: 'Tri-campus'
       }
     ];
   }
@@ -169,7 +189,6 @@ const MyCalendar = props => {
   return (<div>
     <Calendar
       popup
-      onSelectEvent={onEventClick}
       localizer={localizer}
       events={events}
       startAccessor="start"
@@ -186,6 +205,7 @@ const MyCalendar = props => {
       }}
     />
   </div>)
-}
+};
+// onSelectEvent={onEventClick}
 
 export default withProtection(MyCalendar);

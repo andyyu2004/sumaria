@@ -9,7 +9,7 @@ import SumariaLogo from '../assets/images/logos/sumaria_logo.png'
 import './Login.css'
 import { UserType } from '../types/User'
 import { setUser } from '../actions/actionCreators'
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 //import 'react-toastify/dist/ReactToastify.minimal.css';
 
 

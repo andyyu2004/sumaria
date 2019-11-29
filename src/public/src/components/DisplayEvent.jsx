@@ -3,6 +3,8 @@ import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import '../views/Browse.css'
+import { Button } from 'react-bootstrap';
+import { navigate } from '@reach/router';
 
 /**
  * Formats the list of events in an unordered list.
@@ -15,7 +17,7 @@ import '../views/Browse.css'
 const DisplayEvent = ({ event }) => {
     const { date, description, name, postDate, endDate, skills, address, city, province, unit, organizer } = event;
     return (
-        <div className='browse-post'>
+      <div className='browse-post'>
         <h4>{name}</h4>
         <ul>
           <Row>
@@ -49,8 +51,10 @@ const DisplayEvent = ({ event }) => {
           <Row>
             <Col>Description: {description}</Col>
           </Row>
+          <Button onClick={() => navigate(`/event/${name}`, { state: { event } })}>View Details</Button>
         </ul>
-      </div>)
+      </div>
+    );
   };
 
   export default DisplayEvent;
