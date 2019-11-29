@@ -11,14 +11,19 @@ import { withProtection } from '../components/hoc';
 //import globalize from 'globalize';
 //const localizer = globalizeLocalizer(globalize)
 
+function dateFromISO8601(ISOString) {
+  var s = ISOString.match(/\d+/g);
+  return new Date(s[0], s[1] - 1, s[2], s[3], s[4], s[5]);
+}
+
 function renameProperty(obj, oldName, newName) {
   if (oldName === newName) {
       return this;
   }
   // Check for the old property name to avoid ReferenceError
   if (obj.hasOwnProperty(oldName)) {
-  obj[newName] = obj[oldName];
-    delete obj[oldName];
+    obj[newName] = obj[oldName];
+    //delete obj[oldName];
   }
   return obj;
 };
@@ -69,7 +74,9 @@ function EventAgenda({ event }) {
 }
 
 const onEventClick = (event) => {
-  navigate( event.title ? `/event/${event.title}` : '/calendar', { state: { event } })
+  if (event.title !== 'Today'){
+    navigate( event.title ? `/event/${event.title}` : '/calendar', { state: { event } })
+  }
   //navigate(event.url || '/calendar');
 }
 
@@ -117,18 +124,21 @@ const MyCalendar = props => {
 
   if (userEvents.length > 0) {
     events = userEvents;
+    // alter event (obj) props
     events.map((event) => {
       renameProperty(event, 'name', 'title');
       renameProperty(event, 'description', 'desc');
-      renameProperty(event, 'postDate', 'end');
-      renameProperty(event, 'date', 'start');
+      //renameProperty(event, 'endDate', 'end');
+      //renameProperty(event, 'date', 'start');
+      event['start'] = new Date(event['date']);
+      event['end'] = new Date(event['endDate']);
     })
-    // TODO: check event fields and map them to the required fields
     events.push({
       id: 0,
       title: 'Today',
-      start: new Date(new Date().setHours(new Date().getHours() - 3)),
-      end: new Date(new Date().setHours(new Date().getHours() + 3))
+      start: new Date(new Date().setHours(new Date().getHours() - 1)),
+      end: new Date(new Date().setHours(new Date().getHours())),
+      description: 'Today'
     });
   } else {
     events = [
@@ -157,8 +167,8 @@ const MyCalendar = props => {
       {
         id: 0,
         title: 'Today',
-        start: new Date(new Date().setHours(new Date().getHours() - 3)),
-        end: new Date(new Date().setHours(new Date().getHours() + 3))
+        start: new Date(new Date().setHours(new Date().getHours() - 1)),
+        end: new Date(new Date().setHours(new Date().getHours()))
       },
       {
         id: 2.1,
@@ -183,6 +193,13 @@ const MyCalendar = props => {
         desc: 'Tri-campus'
       }
     ];
+    // alter event (obj) props
+    events.map((event) => {
+      renameProperty(event, 'title', 'name');
+      renameProperty(event, 'desc', 'description');
+      renameProperty(event, 'end', 'endDate');
+      renameProperty(event, 'start', 'date');
+    })
   }
 
 
