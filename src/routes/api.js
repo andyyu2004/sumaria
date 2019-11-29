@@ -128,7 +128,6 @@ router.get("/company/:id", async (req,res) => {
 
 router.get("/events", async(req,res) => {
     try {
-        console.log(req.session.user);
         const events = await controllers.event.getAll();
         res.json({error: false, events})
     } catch(e) {
