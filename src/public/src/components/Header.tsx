@@ -11,6 +11,7 @@ import './Header.css';
 import Notification from './Notification';
 import { newNotification } from '../actions/actionCreators';
 import uuid from 'uuid/v4';
+import { ToastContainer } from 'react-toastify';
 
 type PropTypes = {
   title: string,
@@ -56,7 +57,7 @@ const Header: React.FC<PropTypes> = ({ title, subtitle }) => {
       <Navbar variant="light">
       <Navbar.Brand className='header-text' id="navbar-brand" onClick={() => navigate("/")}><b>{title}</b></Navbar.Brand>
       <Navbar.Text>{subtitle}</Navbar.Text>
-
+      <ToastContainer />
       {/* This creates the spacing, don't remove */}
       <Nav className="mr-auto">
         {/* <Nav.Link href="#home">Home</Nav.Link>*/}

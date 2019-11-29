@@ -16,18 +16,6 @@ const Browse = props => {
   const [province, setProvince] = useState('none');
   const [city, setCity] = useState("");
 
-  /** An example how to fetch async data */
-  // Old code: const events = data.events;
-  /**
-   * A few notes
-   * You must define the async function outside of useEffect
-   * useEffect(async () => ... ) is not allowed
-   * Also, the use effect usually needs to be wrapped in curly braces
-   * i.e.
-   * useEffect(() => fetchEvents(), []);
-   * is not so good, as useEffect is not allowed to return anything except cleanup.
-   */
-
   const [events, setEvents] = useState([]);
 
   const fetchEvents = async () => {

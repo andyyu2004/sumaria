@@ -13,6 +13,7 @@ import API from "../api";
 import { toast } from 'react-toastify';
 import { withProtection } from "../components/hoc";
 import cityTable from './cityTable.jsx';
+import { useSelector } from "react-redux";
 
 
 const AddEvent = props => {
@@ -24,46 +25,44 @@ const AddEvent = props => {
   const [numV, setNumV] = useState('');
   const [skills, setSkills] = useState('');
   const [description, setDescription] = useState('');
-  const organizer = "randomname";
   const [street, setStreet] = useState('');
   const [city, setCity] = useState('');
   const [province, setProvince] = useState('none');
   const [unit, setUnit] = useState('');
   const [orgName, setOrgName] = useState('');
 
+  const user = useSelector(state => state.user);
 
   const handleSubmit = async e => {
     e.preventDefault();
     const event = {
+      creatorid: user._id,
       name: eventName,
       organizer: orgName,
       date: startDate,
       enddate: endDate,
       address: street,
       skills: skills.split(",").map(s => s.trim()),
-      city: city,
-      province: province,
-      description: description,
-      unit: unit,
+      city,
+      province,
+      description,
+      unit,
       numVolunteers: parseInt(numV),
     };
-    const res = await API.addEvent(event);
-    console.log(event);
-    res.match(
-      err => {
-        console.log(err);
-        toast.error(err, {
-          position: toast.POSITION.TOP_CENTER
-        });
-      },
-      event => {
-        console.log(`Successfully added event: returned event = ${event.name}`);
-        toast.success("Successfully added event: " + event.name, {
-          position: toast.POSITION.TOP_CENTER
-        });
-      }
-    );
 
+    const res = await API.addEvent(event);
+    console.log('event', event);
+    res.map(event => {
+      console.log(`Successfully added event: returned event = ${event.name}`);
+      toast.success("Successfully added event: " + event.name, {
+        position: toast.POSITION.TOP_CENTER
+      });
+    }).mapLeft(err => {
+      console.log(err);
+      toast.error(err, {
+        position: toast.POSITION.TOP_CENTER
+      });
+    });
   };
 
   const checkDate = () => {

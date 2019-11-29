@@ -8,3 +8,5 @@ export { default as Registration} from './Registration';
 export { default as RegisterSuccess} from './RegisterSuccess';
 export { default as APITesting } from './APITesting';
 export { default as MyCalendar } from './Calendar';
+export { default as ChatView } from './ChatView';
+export { default as ViewEvent } from './ViewEvent';

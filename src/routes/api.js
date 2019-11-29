@@ -38,7 +38,7 @@ router.post("/user/login", async (req,res) => {
         if (user == false) return res.status(401).json({error: true, message: "Invalid username or password"})
         // Login success
         
-        res.session = {user};
+        res.session = { user };
         res.status(200).json({error: false, user})
 
 
@@ -75,23 +75,13 @@ router.post("/company", async (req,res) => {
 })
 
 router.post("/event", async (req,res) => {
-    if (!req.body.name || !req.body.organizer || !req.body.date || !req.body.enddate || !req.body.description || !req.body.city || !req.body.province || !req.body.numVolunteers || !req.body.address || !req.body.skills) return res.status(400).json({error: true, message: "Bad Request"})
+    const { creatorid, name, organizer, date, enddate, description, city, province, numVolunteers, address, skills } = req.body;
+    if (!creatorid || !name || !organizer || !date || !enddate || !description || !numVolunteers || !address || !skills) return res.status(400).json({error: true, message: "Missing fields"})
     try {
-        var event = await controllers.event.create(req.body.name, req.body.organizer, req.body.date, req.body.enddate, req.body.description, req.body.numVolunteers, req.body.address, req.body.city, req.body.province, req.body.unit, req.body.skills);
+        var event = await controllers.event.create(creatorid, req.body.name, req.body.organizer, req.body.date, req.body.enddate, req.body.description, req.body.numVolunteers, req.body.address, req.body.city, req.body.province, req.body.unit, req.body.skills);
         res.json({error: false, event})
     } catch(e) {
-        return res.status(500).json({error: true, message: "Server Error"})
-    }
-})
-
-router.post("/event/:id/file", upload.single("file"), async (req,res) => {
-    if (!req.file) return res.status(400).json({error: true, message: "Bad Request"})
-
-    try {
-        var file = await controllers.event.addFile(req.params.id, req.file);
-        res.json({error: false, file})
-    } catch(e) {
-        console.log(e)
+        console.log(e);
         return res.status(500).json({error: true, message: "Server Error"})
     }
 })
@@ -99,7 +89,7 @@ router.post("/event/:id/file", upload.single("file"), async (req,res) => {
 router.post("/session", async (req,res) => {
     if (!req.session.user) return res.status(400).json({error: true, message: "Bad Request"})
     try {
-        var session = req.session.user
+        var session = req.session.user;
         res.json({error: false, session})
     } catch(e){
         return res.status(500).json({error: true, message: "Server Error"})
@@ -138,6 +128,7 @@ router.get("/company/:id", async (req,res) => {
 
 router.get("/events", async(req,res) => {
     try {
+        console.log(req.session.user);
         const events = await controllers.event.getAll();
         res.json({error: false, events})
     } catch(e) {
@@ -163,6 +154,17 @@ router.get("/event/:id/file/:fileID",async (req,res) => {
     } catch(e) {
         return res.status(500).json({error: true, message: "Server Error"})
         
+    }
+})
+
+router.post("/event/:id/file", upload.single("file"), async (req,res) => {
+    if (!req.file) return res.status(400).json({error: true, message: "Bad Request"})
+    try {
+        var file = await controllers.event.addFile(req.params.id, req.file);
+        res.json({error: false, file})
+    } catch(e) {
+        console.log(e)
+        return res.status(500).json({error: true, message: "Server Error"})
     }
 })
 

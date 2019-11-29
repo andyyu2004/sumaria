@@ -1,6 +1,6 @@
 import React, { FormEvent, useCallback, useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Popup from 'reactjs-popup';
 import API from '../api';
@@ -98,7 +98,6 @@ const Chat: React.FC<PropType> = ({ conversation }) => {
 
       <div className="chat-options-container">
         <h6>Chat Options</h6>
-        <ToastContainer />
         <Button className='chat-button' onClick={() => setAddPersonPopup(!addPersonPopup)}>Add Person</Button>
         <div>
           <h4>Members</h4>
