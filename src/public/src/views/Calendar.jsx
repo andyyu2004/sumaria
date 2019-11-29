@@ -106,13 +106,13 @@ const MyCalendar = props => {
   } else {
     events = [
       {
-        id: 0,
+        id: 0.5,
         title: 'CSC301 Presentation',
         allDay: true,
         start: new Date(2019, 11, 1),
         end: new Date(2019, 11, 2),
         desc: 'MVP DEMO (to Mike)',
-        url: '/'
+        url: '/0.5'
       },
       {
         id: 1,
@@ -120,7 +120,7 @@ const MyCalendar = props => {
         start: new Date(2019, 10, 25),
         end: new Date(2019, 10, 29),
         desc: 'Daily Metting',
-        url: '/'
+        url: '/1'
       },
       {
         id: 1.5,
@@ -128,10 +128,10 @@ const MyCalendar = props => {
         start: new Date(2019, 10, 26, 19, 30, 0),
         end: new Date(2019, 10, 26, 23, 30, 0),
         desc: 'Everyone with 4.0 is welcome',
-        url: '/'
+        url: '/event/1.5'
       },
       {
-        id: 2,
+        id: 0,
         title: 'Today',
         start: new Date(new Date().setHours(new Date().getHours() - 3)),
         end: new Date(new Date().setHours(new Date().getHours() + 3)),
@@ -143,7 +143,7 @@ const MyCalendar = props => {
         start: new Date(2019, 10, 18, 18, 0, 0),
         end: new Date(2019, 10, 18, 20, 5, 0),
         desc: 'Try not to fail!',
-        url: '/'
+        url: '/2.1'
       },
       {
         id: 3.3,
@@ -152,7 +152,7 @@ const MyCalendar = props => {
         start: new Date(2019, 10, 18),
         end: new Date(2019, 10, 19),
         desc: 'GOAL: 100000000000000000000000000000',
-        url: '/'
+        url: '/3.3'
       },
       {
         id: 4.7,
@@ -160,7 +160,7 @@ const MyCalendar = props => {
         start: new Date(2019, 10, 26, 6, 30, 0),
         end: new Date(2019, 10, 26, 22, 30, 0),
         desc: 'Tri-campus',
-        url: '/'
+        url: '/4.7'
       }
     ];
   }

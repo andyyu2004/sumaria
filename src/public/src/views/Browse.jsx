@@ -76,11 +76,14 @@ const Browse = props => {
 
   let eventsFiltered = skill ? (new fuse(events, optionsSkills)).search(skill) : events;
   eventsFiltered = keyword ? (new fuse(eventsFiltered, optionsName)).search(keyword) : eventsFiltered;
-  eventsFiltered = eventsFiltered.filter(event => ((event.date) > startDate))
-  eventsFiltered = eventsFiltered.filter(event => ((event.date) < endDate))
-  eventsFiltered = city ? eventsFiltered.filter(event => ((event.city) === city)) : eventsFiltered
+  eventsFiltered = eventsFiltered.filter(event => (event.date >= startDate && event.date <= endDate ));
+  //eventsFiltered = eventsFiltered.filter(event => (event.date > startDate ));
+  //eventsFiltered = eventsFiltered.filter(event => ((event.date) < endDate));
+  if (province !== 'none') {
+    eventsFiltered = eventsFiltered.filter(event => ((event.province) === province));
+  }
+  eventsFiltered = city ? eventsFiltered.filter(event => ((event.city) === city)) : eventsFiltered;
 
-  // console.log(province);
 
   return (
     <div className='browse-container'>

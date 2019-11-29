@@ -1,5 +1,5 @@
 import React from 'react';
-import { Home, Login, Browse, AddEvent, Registration, ImportExcel, Profile, APITesting, RegisterSuccess } from './views';
+import { Home, Login, Browse, Event, AddEvent, Registration, ImportExcel, Profile, APITesting, RegisterSuccess } from './views';
 import { Router, navigate } from '@reach/router';
 import './App.css';
 import { Header } from './components';
@@ -49,6 +49,7 @@ const App: React.FC = () => {
           <Home path="/" />
           <Login path="login" />
           <Browse path="browse" />
+          <Event path="event/:eventId" />
           <ChatView path="chat" />
           <ImportExcel path="import" />
           <Profile path="profile" />
