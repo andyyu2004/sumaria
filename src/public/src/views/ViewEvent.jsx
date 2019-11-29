@@ -3,6 +3,10 @@ import { withProtection } from '../components/hoc';
 import { useUser } from '../hooks/useUser';
 import { uploadFileForEvent } from '../api/files';
 import { toast } from 'react-toastify';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
+import { Button } from 'react-bootstrap';
+import './viewEvent.css';
 
 /** Component for viewing a specific event in detail */
 const ViewEvent = props => {
@@ -22,17 +26,71 @@ const ViewEvent = props => {
       .mapLeft(toast.error);
   };
 
-  return (
-    <div>
-      <h4>{name}</h4>
-      {/* Just temporary debugging displays */}
-      <h5>organizer: {creatorid}</h5>
-      <h5>me: {user._id}</h5>
-      <p>etc....</p>
+  const registerEvent = () => {
+    // API.registerEvent(eventId or eventName, user.username or id)
+    toast.success('Event Registered Successfully: ' + name, {
+      position: toast.POSITION.TOP_CENTER
+    });
+  }
 
+  const checkRegistered = () => {
+    // check if user already registered this event
+    // if not
+    return (<Button onClick={() => registerEvent()}>Register</Button>);
+  }
+
+  return (
+    <div className="event-container">
+      <Row>
+      <Col><h4>{name}</h4></Col>
+      </Row>
+      {/* Just temporary debugging displays */}
+      <Row>
+      <Col><h5>organizer: {creatorid}</h5></Col>
+      </Row>
+      <h5>me: {user._id}</h5>
+      <ul>
+        <Row>
+          <Col>Event Start Date: {new Date(date).toString()}</Col>
+        </Row>
+        <Row>
+          <Col>Event End Date: {new Date(endDate).toString()}</Col>
+        </Row>
+        <Row>
+          <Col>Posted Date: {new Date(postDate).toString()}</Col>
+        </Row>
+        <Row>
+          <Col>Organizer: {organizer}</Col>
+        </Row>
+        <Row>
+          <Col>Address: {address}</Col>
+        </Row>
+        <Row>
+          <Col>City: {city}</Col>
+        </Row>
+        <Row>
+          <Col>Province: {province}</Col>
+        </Row>
+        <Row>
+          <Col>Unit: {unit}</Col>
+        </Row>
+        Skills Required:
+          <Row>
+          <Col>
+            <ul>
+              {skills.map(skill => <li key={skill}>{skill}</li>)}
+            </ul>
+          </Col>
+        </Row>
+        <Row>
+          <Col>Description: {description}</Col>
+        </Row>
+      </ul>
+      <br/>
+      {checkRegistered()}
       {/* Show button to add event file if the user is the creator of the event */}
       {/* /api/event/event_id/file/file_id */}
-      {creatorid === user._id && <input type="file" onChange={uploadFile} multiple/>}
+      {creatorid === user._id && <input type="file" onChange={uploadFile} multiple />}
     </div>
   );
 };
