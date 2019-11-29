@@ -19,7 +19,7 @@ const Conversations = () => {
 
   const [newname, setNewname] = useState("");
   const dispatch = useDispatch();
-  const socket = useSelector<AppState, SocketIOClient.Socket>(state => state.socket!);
+  const socket = useSelector<AppState, SocketIOClient.Socket | undefined>(state => state.socket);
   
   const createConversation = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -39,9 +39,9 @@ const Conversations = () => {
   /** Refresh conversations on page load and on 'refresh-conversations' event */
   useEffect(() => { 
     refreshConversations();
-    socket.on('refresh-conversations', refreshConversations);
+    socket && socket.on('refresh-conversations', refreshConversations);
     return () => {
-      socket.removeListener('refresh-conversations', refreshConversations);
+      socket && socket.removeListener('refresh-conversations', refreshConversations);
     };
   }, [refreshConversations, socket]);
 

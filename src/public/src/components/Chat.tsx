@@ -1,4 +1,5 @@
 import React, { FormEvent, useCallback, useEffect, useRef, useState } from 'react';
+import Button from 'react-bootstrap/Button';
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -8,8 +9,6 @@ import { Conversation, Message } from '../types/Chat';
 import { AppState } from '../types/states';
 import { User } from '../types/User';
 import './Chat.css';
-import Button from 'react-bootstrap/Button';
-import { withProtection } from './hoc';
 
 type PropType = {
   conversation: Conversation,
@@ -20,7 +19,7 @@ const Chat: React.FC<PropType> = ({ conversation }) => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [personToAdd, setPersonToAdd] = useState<string>("");
   const [addPersonPopup, setAddPersonPopup] = useState<boolean>(false);
-  const socket = useSelector<AppState, SocketIOClient.Socket>(state => state.socket!);
+  const socket = useSelector<AppState, SocketIOClient.Socket | undefined>(state => state.socket);
   const user = useSelector<AppState, User>(state => state.user!);
 
   const chatRef: any = useRef();
@@ -40,15 +39,15 @@ const Chat: React.FC<PropType> = ({ conversation }) => {
 
   /** Socket listener initialization and destruction */
   useEffect(() => {
-    socket.emit('enter-conversation', conversation._id);
-    socket.on('refresh-messages', fetchMessages);
+    socket && socket.emit('enter-conversation', conversation._id);
+    socket && socket.on('refresh-messages', fetchMessages);
   
-    socket.on('err', (err: string) => toast.error(err));
+    socket && socket.on('err', (err: string) => toast.error(err));
 
     return () => { 
-      socket.emit('leave-conversation', conversation._id); 
-      socket.removeListener('refresh-messages', fetchMessages);
-      socket.removeListener('err'); 
+      socket && socket.emit('leave-conversation', conversation._id); 
+      socket && socket.removeListener('refresh-messages', fetchMessages);
+      socket && socket.removeListener('err'); 
     };
     
   }, [conversation, socket, fetchMessages]);
@@ -56,7 +55,7 @@ const Chat: React.FC<PropType> = ({ conversation }) => {
   const sendMessage = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!message.length) return;
-    socket.emit('new-message', { 
+    socket && socket.emit('new-message', { 
       senderid: user._id, 
       sender: user.username, 
       message,
@@ -68,7 +67,7 @@ const Chat: React.FC<PropType> = ({ conversation }) => {
   const handleAddPersonToConversation = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setAddPersonPopup(false);
-    socket.emit('add-user', {
+    socket && socket.emit('add-user', {
       username: personToAdd,
       conversationId: conversation._id,
     });
