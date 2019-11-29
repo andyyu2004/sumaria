@@ -44,7 +44,7 @@ io.on('connection', socket => {
     const { username } = socket.handshake.query;
 
     socketmap[username] = socket.id;
-    // console.log("connected", username, userid);
+    console.log("connected", username);
 
     socket.on('enter-conversation', conversationId => {
         // console.log(`entering conversation ${conversationId}`);
@@ -79,7 +79,7 @@ io.on('connection', socket => {
     });
 
     socket.on('disconnect', () => {
-        // console.log('user disconnected');
+        console.log('user disconnected', username);
         delete socketmap[username];
         socket.leaveAll();
     });
