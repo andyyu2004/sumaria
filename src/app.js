@@ -43,10 +43,6 @@ io.on('connection', socket => {
     const { username } = socket.handshake.query;
 
     socketmap[username] = socket.id;
-<<<<<<< HEAD
-    console.log("connected", username);
-=======
->>>>>>> 1f459a22c3848dc4b31dd3c4478cc26efaa7a141
 
     socket.on('enter-conversation', conversationId => {
         socket.join(conversationId);
@@ -76,10 +72,6 @@ io.on('connection', socket => {
     });
 
     socket.on('disconnect', () => {
-<<<<<<< HEAD
-        console.log('user disconnected', username);
-=======
->>>>>>> 1f459a22c3848dc4b31dd3c4478cc26efaa7a141
         delete socketmap[username];
         socket.leaveAll();
     });
