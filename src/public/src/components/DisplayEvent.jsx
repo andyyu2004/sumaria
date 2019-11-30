@@ -28,17 +28,11 @@ const DisplayEvent = ({ event }) => {
           <Row>
             <Col>Organizer: {organizer}</Col>
           </Row>
-          <Row>
-            <Col>Address: {address}</Col>
-          </Row>
-          <Row>
-            <Col>City: {city}</Col>
-          </Row>
-          <Row>
-            <Col>Province: {province}</Col>
-          </Row>
-          <Row>
-            <Col>Unit: {unit}</Col>
+          <Row noGutters={true}>
+            <Col xs='auto'>Location: {address}</Col>
+            <Col xs='auto' className='browse-fix-spacing'>{unit ? ' ' + unit : ''}</Col>
+            <Col xs='auto'>{city ? ', ' + city : ''}</Col>
+            <Col xs='auto'>{province ? ', ' + province: ''}</Col>
           </Row>
           Skills Required:
           <Row>
@@ -49,9 +43,9 @@ const DisplayEvent = ({ event }) => {
             </Col>
           </Row>
           <Row>
-            <Col>Description: {description}</Col>
+            <Col className='browse-description'>Description: {description}</Col>
+            <Col xs="auto"><Button onClick={() => navigate(`/event/${name}`, { state: { event } })} className='view-details-button'>View Details</Button></Col>
           </Row>
-          <Button onClick={() => navigate(`/event/${name}`, { state: { event } })}>View Details</Button>
         </ul>
       </div>
     );

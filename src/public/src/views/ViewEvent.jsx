@@ -41,38 +41,31 @@ const ViewEvent = props => {
 
   return (
     <div className="event-container">
+      <div className="event-details-container">
       <Row>
       <Col><h4>{name}</h4></Col>
       </Row>
       {/* Just temporary debugging displays */}
       <Row>
-      <Col><h5>organizer: {creatorid}</h5></Col>
+      <Col><h5>Organizer: {creatorid}</h5></Col>
       </Row>
       <h5>me: {user._id}</h5>
       <ul>
         <Row>
           <Col>Event Start Date: {new Date(date).toString()}</Col>
-        </Row>
-        <Row>
           <Col>Event End Date: {new Date(endDate).toString()}</Col>
-        </Row>
-        <Row>
           <Col>Posted Date: {new Date(postDate).toString()}</Col>
         </Row>
         <Row>
           <Col>Organizer: {organizer}</Col>
         </Row>
         <Row>
-          <Col>Address: {address}</Col>
-        </Row>
-        <Row>
-          <Col>City: {city}</Col>
-        </Row>
-        <Row>
-          <Col>Province: {province}</Col>
-        </Row>
-        <Row>
-          <Col>Unit: {unit}</Col>
+        <Row noGutters={true}>
+          <Col xs='auto'>Location: {address}</Col>
+          <Col xs='auto' className='event-fix-spacing'>{unit ? ' ' + unit : ''}</Col>
+          <Col xs='auto'>{city ? ', ' + city : ''}</Col>
+          <Col xs='auto'>{province ? ', ' + province: ''}</Col>
+          </Row>
         </Row>
         Skills Required:
           <Row>
@@ -92,6 +85,7 @@ const ViewEvent = props => {
       {/* /api/event/event_id/file/file_id */}
       {creatorid === user._id && <input type="file" onChange={uploadFile} multiple />}
     </div>
+  </div>
   );
 };
 
