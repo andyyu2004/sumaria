@@ -12,6 +12,23 @@ import { toast } from 'react-toastify';
 //import globalize from 'globalize';
 //const localizer = globalizeLocalizer(globalize)
 
+function dateFromISO8601(ISOString) {
+  var s = ISOString.match(/\d+/g);
+  return new Date(s[0], s[1] - 1, s[2], s[3], s[4], s[5]);
+}
+
+function renameProperty(obj, oldName, newName) {
+  if (oldName === newName) {
+      return this;
+  }
+  // Check for the old property name to avoid ReferenceError
+  if (obj.hasOwnProperty(oldName)) {
+    obj[newName] = obj[oldName];
+    //delete obj[oldName];
+  }
+  return obj;
+};
+
 const localizer = momentLocalizer(moment);
 
 function eventStyleGetter(event, start, end, isSelected) {
@@ -38,7 +55,7 @@ function eventStyleGetter(event, start, end, isSelected) {
 
 function Event({ event }) {
   return (
-    <span>
+    <span onClick={() => {onEventClick(event)}}>
       <ReactTooltip place="top" />
       <div data-tip={event.desc}>
         <strong>{event.title}</strong>
@@ -57,8 +74,11 @@ function EventAgenda({ event }) {
   )
 }
 
-const onEventClick = event => {
-  navigate(event.url || '/calendar');
+const onEventClick = (event) => {
+  if (event.title !== 'Today'){
+    navigate( event.title ? `/event/${event.title}` : '/calendar', { state: { event } })
+  }
+  //navigate(event.url || '/calendar');
 }
 
 
@@ -83,59 +103,63 @@ const MyCalendar = props => {
   (unique id, title, start time, end time, description, unique url, etc.)
   */
 
+  // { date, description, name, postDate, endDate, skills, address, city, province, unit, organizer }
   let events = [];
 
   if (userEvents.length > 0) {
     events = userEvents;
-    // TODO: check event fields and map them to the required fields
+    // alter event (obj) props
+    events.map((event) => {
+      renameProperty(event, 'name', 'title');
+      renameProperty(event, 'description', 'desc');
+      //renameProperty(event, 'endDate', 'end');
+      //renameProperty(event, 'date', 'start');
+      event['start'] = new Date(event['date']);
+      event['end'] = new Date(event['endDate']);
+    })
     events.push({
       id: 0,
       title: 'Today',
-      start: new Date(new Date().setHours(new Date().getHours() - 3)),
-      end: new Date(new Date().setHours(new Date().getHours() + 3)),
-      url: '/calendar'
+      start: new Date(new Date().setHours(new Date().getHours() - 1)),
+      end: new Date(new Date().setHours(new Date().getHours())),
+      description: 'Today'
     });
   } else {
     events = [
       {
-        id: 0,
+        id: 0.5,
         title: 'CSC301 Presentation',
         allDay: true,
         start: new Date(2019, 11, 1),
         end: new Date(2019, 11, 2),
-        desc: 'MVP DEMO (to Mike)',
-        url: '/'
+        desc: 'MVP DEMO (to Mike)'
       },
       {
         id: 1,
         title: 'Team 24 Meeting',
         start: new Date(2019, 10, 25),
         end: new Date(2019, 10, 29),
-        desc: 'Daily Metting',
-        url: '/'
+        desc: 'Daily Metting'
       },
       {
         id: 1.5,
         title: 'Volunteer Party',
         start: new Date(2019, 10, 26, 19, 30, 0),
         end: new Date(2019, 10, 26, 23, 30, 0),
-        desc: 'Everyone with 4.0 is welcome',
-        url: '/'
+        desc: 'Everyone with 4.0 is welcome'
       },
       {
-        id: 2,
+        id: 0,
         title: 'Today',
-        start: new Date(new Date().setHours(new Date().getHours() - 3)),
-        end: new Date(new Date().setHours(new Date().getHours() + 3)),
-        url: '/calendar'
+        start: new Date(new Date().setHours(new Date().getHours() - 1)),
+        end: new Date(new Date().setHours(new Date().getHours()))
       },
       {
         id: 2.1,
         title: 'Volunteer Exam',
         start: new Date(2019, 10, 18, 18, 0, 0),
         end: new Date(2019, 10, 18, 20, 5, 0),
-        desc: 'Try not to fail!',
-        url: '/'
+        desc: 'Try not to fail!'
       },
       {
         id: 3.3,
@@ -143,25 +167,29 @@ const MyCalendar = props => {
         allDay: true,
         start: new Date(2019, 10, 18),
         end: new Date(2019, 10, 19),
-        desc: 'GOAL: 100000000000000000000000000000',
-        url: '/'
+        desc: 'GOAL: 100000000000000000000000000000'
       },
       {
         id: 4.7,
         title: 'UofT Beach Cleanup',
         start: new Date(2019, 10, 26, 6, 30, 0),
         end: new Date(2019, 10, 26, 22, 30, 0),
-        desc: 'Tri-campus',
-        url: '/'
+        desc: 'Tri-campus'
       }
     ];
+    // alter event (obj) props
+    events.map((event) => {
+      renameProperty(event, 'title', 'name');
+      renameProperty(event, 'desc', 'description');
+      renameProperty(event, 'end', 'endDate');
+      renameProperty(event, 'start', 'date');
+    })
   }
 
 
   return (<div>
     <Calendar
       popup
-      onSelectEvent={onEventClick}
       localizer={localizer}
       events={events}
       startAccessor="start"
@@ -178,6 +206,7 @@ const MyCalendar = props => {
       }}
     />
   </div>)
-}
+};
+// onSelectEvent={onEventClick}
 
 export default withProtection(MyCalendar);

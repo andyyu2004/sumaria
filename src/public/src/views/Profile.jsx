@@ -67,57 +67,58 @@ const Profile = props => {
 
   const validateEditThenSave = (prop) => {
     // validate and save
+    var err;
     switch (prop) {
       case 'firstName':
         if (!/^[a-zA-Z]{1,64}$/.test(firstName)) {
-          var err = 'Invalid First Name';
+          err = 'Invalid First Name';
           displayError(err);
           return;
         }
         break;
       case 'lastName':
         if (!/^[a-zA-Z]{1,64}$/.test(lastName)) {
-          var err = 'Invalid Last Name';
+          err = 'Invalid Last Name';
           displayError(err);
           return;
         }
         break;
       case 'preferName':
         if (!/^[a-zA-Z]{1,64}$/.test(preferName)) {
-          var err = 'Invalid Prefer Name';
+          err = 'Invalid Prefer Name';
           displayError(err);
           return;
         }
         break;
       case 'phone':
         if (!/^\d+-?\d+$/.test(phone)) {
-          var err = 'Invalid Phone Number';
+          err = 'Invalid Phone Number';
           displayError(err);
           return;
         }
         break;
       case 'email':
         if (!/^(([^<>()\[\]\\.,;:\s@&quot;]+(\.[^<>()\[\]\\.,;:\s@&quot;]+)*)|(&quot;.+&quot;))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)) {
-          var err = 'Invalid Email';
+          err = 'Invalid Email';
           displayError(err);
           return;
         }
         break;
       case 'address':
         if (street && street.length > 200) {
-          var err = 'Invalid Street (exceed max length)';
+          err = 'Invalid Street (exceed max length)';
           displayError(err);
           return;
         }
         if (unit && unit.length > 20) {
-          var err = 'Invalid Department/Unit (exceed max length)';
+          err = 'Invalid Department/Unit (exceed max length)';
           displayError(err);
           return;
         }
         break;
       case 'birthDate':
         if (!/^(0?[1-9]|1[012])[\/\-](0?[1-9]|[12][0-9]|3[01])[\/\-]\d{4}$/.test(bdate)) {
-          var err = 'Invalid Birth Date';
+          err = 'Invalid Birth Date';
           displayError(err);
           return;
         }

@@ -29,7 +29,6 @@ mongoose.connect(DB_CONNECTION_STRING, {
         console.error(e);
         return;
     }
-    // mongoose.connection.db.dropDatabase();
     server.listen(PORT, () => console.log(`Listening on port ${PORT}`));
 });
 
@@ -44,30 +43,28 @@ io.on('connection', socket => {
     const { username } = socket.handshake.query;
 
     socketmap[username] = socket.id;
+<<<<<<< HEAD
     console.log("connected", username);
+=======
+>>>>>>> 1f459a22c3848dc4b31dd3c4478cc26efaa7a141
 
     socket.on('enter-conversation', conversationId => {
-        // console.log(`entering conversation ${conversationId}`);
         socket.join(conversationId);
     });
 
     socket.on('leave-conversation', conversationId => {
-        // console.log(`Leaving conversation ${conversationId}`);
         socket.leave(conversationId);
     });
 
     socket.on('new-message', async ({ sender, message, conversationId }) => {
-        // console.log("new message", message);
         await controllers.conv.appendMessage(conversationId, sender, message);
         io.in(conversationId).emit("refresh-messages", sender, message, conversationId);
     });
 
     socket.on('add-user', async ({ conversationId, username }) => {
-        console.log(`adding user ${username} to ${conversationId}`);
         try {
             const conversation = await controllers.conv.addUser(conversationId, username);
             /** Send refresh all to everyone in the conversation including the newly added member*/
-            // io.in(conversation._id).emit("refresh-conversations");
             conversation.members.forEach(username => {
                 if (!socketmap[username]) return;
                 console.log("Emitting to", username, socketmap[username]);
@@ -79,7 +76,10 @@ io.on('connection', socket => {
     });
 
     socket.on('disconnect', () => {
+<<<<<<< HEAD
         console.log('user disconnected', username);
+=======
+>>>>>>> 1f459a22c3848dc4b31dd3c4478cc26efaa7a141
         delete socketmap[username];
         socket.leaveAll();
     });

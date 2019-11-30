@@ -1,9 +1,9 @@
-const cityAB = ["Airdrie", "Brooks", "Calgary", "Camrose", "Chestermere", "Cold Lake",
+const cityAB = ["City", "Airdrie", "Brooks", "Calgary", "Camrose", "Chestermere", "Cold Lake",
   "Edmonton", "Fort Saskatchewan", "Grande Prairie", "Lacombe", "Leduc",
   "Lethbridge", "Lloydminster (part)", "Medicine Hat", "Red Deer",
   "Spruce Grove", "St. Albert", "Wetaskiwin"];
 
-const cityBC = ["Abbotsford", "Armstrong", "Burnaby", "Campbell River", "Castlegar",
+const cityBC = ["City", "Abbotsford", "Armstrong", "Burnaby", "Campbell River", "Castlegar",
   "Chilliwack", "Colwood", "Coquitlam", "Courtenay", "Cranbrook",
   "Dawson Creek", "Duncan", "Enderby", "Fernie", "Fort St. John",
   "Grand Forks", "Greenwood", "Kamloops", "Kelowna", "Kimberley",
@@ -15,18 +15,18 @@ const cityBC = ["Abbotsford", "Armstrong", "Burnaby", "Campbell River", "Castleg
   "Terrace", "Trail", "Vancouver", "Vernon", "Victoria",
   "White Rock", "Williams Lake"];
 
-const cityMB = ["Brandon", "Dauphin", "Flin Flon (part)", "Morden",
+const cityMB = ["City", "Brandon", "Dauphin", "Flin Flon (part)", "Morden",
   "Portage la Prairie", "Selkirk", "Steinbach", "Thompson",
   "Winkler", "Winnipeg"];
 
-const cityNB = ["Bathurst", "Campbellton", "Dieppe", "Edmundston",
+const cityNB = ["City", "Bathurst", "Campbellton", "Dieppe", "Edmundston",
   "Fredericton", "Miramichi", "Moncton", "Saint John"];
 
-const cityNL = ["Corner Brook", "Mount Pearl", "St. John's"];
+const cityNL = ["City", "Corner Brook", "Mount Pearl", "St. John's"];
 
-const cityNS = ["Cape Breton", "Halifax", "Queens"];
+const cityNS = ["City", "Cape Breton", "Halifax", "Queens"];
 
-const cityON = ["Barrie", "Belleville", "Brampton", "Brant", "Brantford", "Brockville",
+const cityON = ["City", "Barrie", "Belleville", "Brampton", "Brant", "Brantford", "Brockville",
   "Burlington", "Cambridge", "Clarence-Rockland", "Cornwall", "Dryden",
   "Elliot Lake", "Greater Sudbury", "Guelph", "Haldimand County",
   "Hamilton", "Kawartha Lakes", "Kenora", "Kingston", "Kitchener",
@@ -37,9 +37,9 @@ const cityON = ["Barrie", "Belleville", "Brampton", "Brant", "Brantford", "Brock
   "St. Thomas", "Stratford", "Temiskaming Shores", "Thorold", "Thunder Bay",
   "Timmins", "Toronto", "Vaughan", "Waterloo", "Welland", "Windsor", "Woodstock"];
 
-const cityPE = ["Charlottetown", "Summerside"];
+const cityPE = ["City", "Charlottetown", "Summerside"];
 
-const cityQC = ["Acton Vale", "Alma", "Amos", "Amqui", "Asbestos", "Baie-Comeau", "Baie-D'Urfé",
+const cityQC = ["City", "Acton Vale", "Alma", "Amos", "Amqui", "Asbestos", "Baie-Comeau", "Baie-D'Urfé",
   "Baie-Saint-Paul", "Barkmere", "Beaconsfield", "Beauceville", "Beauharnois", "Beaupré",
   "Bécancour", "Bedford", "Belleterre", "Beloeil", "Berthierville", "Blainville", "Boisbriand",
   "Bois-des-Filion", "Bonaventure", "Boucherville", "Brome Lake", "Bromont", "Brossard",
@@ -78,15 +78,15 @@ const cityQC = ["Acton Vale", "Alma", "Amos", "Amqui", "Asbestos", "Baie-Comeau"
   "Thurso", "Trois-Pistoles", "Trois-Rivières", "Valcourt", "Val-d'Or", "Varennes", "Vaudreuil-Dorion",
   "Victoriaville", "Ville-Marie", "Warwick", "Waterloo", "Waterville", "Westmount", "Windsor"];
 
-const citySK = ["Estevan", "Flin Flon (part)", "Humboldt", "Lloydminster (part)", "Martensville",
+const citySK = ["City", "Estevan", "Flin Flon (part)", "Humboldt", "Lloydminster (part)", "Martensville",
   "Meadow Lake", "Melfort", "Melville", "Moose Jaw", "North Battleford", "Prince Albert",
   "Regina", "Saskatoon", "Swift Current", "Warman", "Weyburn", "Yorkton"];
 
-const cityNT = ["Yellowknife"];
+const cityNT = ["City", "Yellowknife"];
 
-const cityNU = ["Iqaluit"];
+const cityNU = ["City", "Iqaluit"];
 
-const cityYT = ["Whitehorse"];
+const cityYT = ["City", "Whitehorse"];
 
 const cityTable = {
   "AB": cityAB,
