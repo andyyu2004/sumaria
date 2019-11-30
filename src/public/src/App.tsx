@@ -7,7 +7,7 @@ import API from './api';
 import './App.css';
 import { Header } from './components';
 import Sidebar from './components/Sidebar';
-import { AddEvent, APITesting, Browse, Home, ImportExcel, Login, Profile, RegisterSuccess, Registration, ChatView, ViewEvent, MyCalendar } from './views';
+import { AddEvent, APITesting, Browse, Home, ImportExcel, Login, Profile, RegisterSuccess, Registration, ChatView, ViewEvent, MyCalendar, ErrorView } from './views';
 
 toast.configure({
   autoClose: 3000,
@@ -56,6 +56,7 @@ const App: React.FC = () => {
           <Registration path="register" />
           <APITesting path="api" />
           <RegisterSuccess path="register/success" />
+          <ErrorView path="*" error="Page not found (404)" />
         </Router>
       </div>
     </div>

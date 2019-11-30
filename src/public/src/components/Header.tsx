@@ -46,7 +46,6 @@ const Header: React.FC<PropTypes> = ({ title, subtitle }) => {
   }, [dispatch, user.username]);
 
   useEffect(() => {
-    console.log('socket', socket);
     socket && socket.on('refresh-messages', newMessageNotification);
     return () => {
       socket && socket.removeListener('refresh-message', newMessageNotification);

@@ -10,3 +10,4 @@ export { default as APITesting } from './APITesting';
 export { default as MyCalendar } from './Calendar';
 export { default as ChatView } from './ChatView';
 export { default as ViewEvent } from './ViewEvent';
+export { default as ErrorView } from './ErrorView';
