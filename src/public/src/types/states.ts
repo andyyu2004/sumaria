@@ -7,5 +7,4 @@ export type AppState = {
     conversations: Conversation[];
     notifications: TNotification[];
     socket?: SocketIOClient.Socket;
-    test?: number;
 };

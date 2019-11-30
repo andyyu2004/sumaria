@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import API from '../api';
 import { Left } from '../types/Either';
@@ -8,6 +8,7 @@ import { Calendar, momentLocalizer, Views } from 'react-big-calendar';
 import moment from 'moment';
 import ReactTooltip from 'react-tooltip';
 import { withProtection } from '../components/hoc';
+import { toast } from 'react-toastify';
 //import globalize from 'globalize';
 //const localizer = globalizeLocalizer(globalize)
 
@@ -66,25 +67,16 @@ const MyCalendar = props => {
   const { username } = useSelector(state => state.user);
   const [userEvents, setUserEvents] = useState([]);
   // same as in profile
-  async function fetchEvents() {
-    const userEither = username ? await API.getUserByUsername(username) : new Left("");
-    if (userEither.isLeft()) return console.log(`Failed to fetch user ${username}; err: ${userEither.err()}`);
-    console.log("TEST Another " + username);
 
+  const fetchEvents = useCallback(async () => {
+    (await API.getUserByUsername(username))
+      .map(user => {
+        // Get events
+      })
+      .mapLeft(toast.error);
+  }, [username]);
 
-    const user = userEither.unwrap(); // Safely unwrap now that we know its a Right
-    console.log("UNWRAP " + user);
-    console.log(user);
-
-    //const mockTemp = [2, 3]; // Currently this is mock data for the events that the user is a part of.
-    // const userEvents = await API.getEventsByIds(user.events); // Uncomment when user event enrollment is implemented.
-    //const userEvents = await API.getEventsByIds(mockTemp);
-    //userEvents.match(err => console.log(err), setUserEvents);
-  }
-
-  useEffect(() => { fetchEvents(); }, []);
-
-
+  useEffect(() => { fetchEvents(); }, [fetchEvents]);
 
   /*
   need to get the list of events for current logged in user

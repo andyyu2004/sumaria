@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { DisplayEvent } from '../components';
 import { useSelector } from 'react-redux';
 import API from '../api';
@@ -41,28 +41,13 @@ const Profile = props => {
   const [userEvents, setUserEvents] = useState([]);
   const { username } = useSelector(state => state.user);
 
-  async function fetchEvents() {
-    const userEither = username ? await API.getUserByUsername(username) : new Left("");
-    if (userEither.isLeft()) return console.log(`Failed to fetch user ${username}; err: ${userEither.err()}`);
-    console.log("TEST Another " + username);
+  const fetchEvents = useCallback(async () => {
+    (await API.getUserByUsername(username))
+      .map(setUserInfo)
+      .mapLeft(toast.error);
+  }, [username]);
 
-
-    const user = userEither.unwrap(); // Safely unwrap now that we know its a Right
-    setUserInfo(user);
-    console.log("UNWRAP " + user);
-    console.log(user);
-
-    /** Moved the brunt work into the API, as you want to retrieve every user and event etc on client side, let server and db do the hard stuff */
-    //const mockTemp = [2, 3]; // Currently this is mock data for the events that the user is a part of.
-    // const userEvents = await API.getEventsByIds(user.events); // Uncomment when user event enrollment is implemented.
-    //const userEvents = await API.getEventsByIds(mockTemp);
-    //userEvents.match(err => console.log(err), setUserEvents);
-  }
-
-  // Not sure of useEffect is needed. But it doesn't work with it.
-  // If you don't use useEffect it gets run every render, potentially very inefficient
-  // I the problem you were having is that the setState is not completely synchronous or something?
-  useEffect(() => { fetchEvents(); }, []);
+  useEffect(() => { fetchEvents(); }, [fetchEvents]);
 
   const generateCityOptions = (province) => {
     var cities = cityTable[province];
@@ -287,7 +272,7 @@ const Profile = props => {
         </Form.Row>
         <Row className='profile-rows'>
           <Col>
-            <h5>Birth Date &nbsp;<button id='i-birthDate' style={editIcon} class="fas fa-pen fa-xs" onClick={() => { editProfile('birthDate') }}></button></h5>
+            <h5>Birth Date &nbsp;<button id='i-birthDate' style={editIcon} className="fas fa-pen fa-xs" onClick={() => { editProfile('birthDate') }}></button></h5>
             <input type="text" className="form-control" name="birth_date" id="birthDate" placeholder="MM-DD-YYYY"
               pattern="^(0?[1-9]|1[012])[\/\-](0?[1-9]|[12][0-9]|3[01])[\/\-]\d{4}$" value={bdate} onChange={e => setBdate(e.target.value)} disabled />
             {/* <div> {userInfo["birthDate"]} </div> */}
@@ -297,7 +282,7 @@ const Profile = props => {
         </Row>
         <Row className='profile-rows'>
           <Col>
-            <h5>Description &nbsp;<button id='i-description' style={editIcon} class="fas fa-pen fa-xs" onClick={() => { editProfile('description') }}></button></h5>
+            <h5>Description &nbsp;<button id='i-description' style={editIcon} className="fas fa-pen fa-xs" onClick={() => { editProfile('description') }}></button></h5>
             <textarea style={{ width: '100%', height: '100px' }} id='description' placeholder="Description" value={description} onChange={e => setDescription(e.target.value)} maxLength={512} disabled />
           </Col>
         </Row>

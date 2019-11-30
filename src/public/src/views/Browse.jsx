@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import * as fuse from 'fuse.js';
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col'
@@ -7,6 +7,7 @@ import API from '../api';
 import './Browse.css'
 import { withProtection } from '../components/hoc';
 import cityTable from './cityTable.jsx';
+import { toast } from 'react-toastify';
 
 const Browse = props => {
   const [skill, setSkill] = useState("");
@@ -18,15 +19,13 @@ const Browse = props => {
 
   const [events, setEvents] = useState([]);
 
-  const fetchEvents = async () => {
-    const eventInfo = await API.getEvents();
-    eventInfo.match(
-      err => console.log(err),
-      events => setEvents(events),
-    );
-  };
+  const fetchEvents = useCallback(async () => {
+    (await API.getEvents())
+      .map(setEvents)
+      .mapLeft(toast.error)
+  }, []);
 
-  useEffect(() => { fetchEvents(); }, []);
+  useEffect(() => { fetchEvents(); }, [fetchEvents]);
 
   const optionsName = {
     shouldSort: false,

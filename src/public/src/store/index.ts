@@ -29,8 +29,8 @@ export const persistor = persistStore(store, {}, () => {
     state.socket = socketio('/', {
         query: `username=${state.user.username}`
     });
-    state.test = 99;
-    console.log('done hydration', state);
+    // state.test = 99;
+    // console.log('done hydration', state);
 });
 
 export default store;
