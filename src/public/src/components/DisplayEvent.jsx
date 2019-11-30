@@ -15,7 +15,7 @@ import { navigate } from '@reach/router';
  * @returns {JSX.Element}
  */
 const DisplayEvent = ({ event }) => {
-    const { date, description, name, postDate, endDate, skills, address, city, province, unit, organizer } = event;
+    const { _id, date, description, name, postDate, endDate, skills, address, city, province, unit, organizer } = event;
     return (
       <div className='browse-post'>
         <h4>{name}</h4>
@@ -44,14 +44,14 @@ const DisplayEvent = ({ event }) => {
           <Row>
             <Col>
             <ul> 
-              {skills.map(skill => <li key={skill}>{skill}</li>)}
+              {skills ? skills.map(skill => <li key={skill}>{skill}</li>) : null}
             </ul>
             </Col>
           </Row>
           <Row>
             <Col>Description: {description}</Col>
           </Row>
-          <Button onClick={() => navigate(`/event/${name}`, { state: { event } })}>View Details</Button>
+          <Button onClick={() => navigate(`/event/${_id}`, { state: { event } })}>View Details</Button>
         </ul>
       </div>
     );

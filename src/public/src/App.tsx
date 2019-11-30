@@ -47,7 +47,7 @@ const App: React.FC = () => {
           <Home path="/" />
           <Login path="login" />
           <Browse path="browse" />
-          <ViewEvent path="event/:eventname" />
+          <ViewEvent path="event/:eventId" />
           <ChatView path="chat" />
           <ImportExcel path="import" />
           <Profile path="profile" />

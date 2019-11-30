@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { withProtection } from '../components/hoc';
 import { useUser } from '../hooks/useUser';
 import { uploadFileForEvent } from '../api/files';
@@ -7,10 +7,23 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import { Button } from 'react-bootstrap';
 import './viewEvent.css';
+import API from '../api';
+import { navigate } from '@reach/router';
 
-/** Component for viewing a specific event in detail */
+
+/* Component for viewing a specific event in detail */
 const ViewEvent = props => {
-  const { event } = props.location.state;
+
+  const [event, setEvent] = useState({});
+
+  const fetchEvent = useCallback(async () => {
+    (await API.getEventById(props.eventId))
+      .map(setEvent)
+      .mapLeft(_ => navigate('/404'))
+  }, [props.eventId]);
+
+  useEffect(() => { fetchEvent() }, [fetchEvent]);
+
   const { _id, creatorid, date, description, name, postDate, endDate, skills, address, city, province, unit, organizer } = event;
 
   const user = useUser();
@@ -27,7 +40,7 @@ const ViewEvent = props => {
   };
 
   const registerEvent = () => {
-    // API.registerEvent(eventId or eventName, user.username or id)
+    // await API.registerEvent(eventId or eventName, user.username or id)
     toast.success('Event Registered Successfully: ' + name, {
       position: toast.POSITION.TOP_CENTER
     });
@@ -42,11 +55,11 @@ const ViewEvent = props => {
   return (
     <div className="event-container">
       <Row>
-      <Col><h4>{name}</h4></Col>
+        <Col><h4>{name}</h4></Col>
       </Row>
       {/* Just temporary debugging displays */}
       <Row>
-      <Col><h5>organizer: {creatorid}</h5></Col>
+        <Col><h5>organizer: {creatorid}</h5></Col>
       </Row>
       <h5>me: {user._id}</h5>
       <ul>
@@ -64,21 +77,15 @@ const ViewEvent = props => {
         </Row>
         <Row>
           <Col>Address: {address}</Col>
-        </Row>
-        <Row>
           <Col>City: {city}</Col>
-        </Row>
-        <Row>
           <Col>Province: {province}</Col>
-        </Row>
-        <Row>
           <Col>Unit: {unit}</Col>
         </Row>
         Skills Required:
           <Row>
           <Col>
             <ul>
-              {skills.map(skill => <li key={skill}>{skill}</li>)}
+              {skills ? skills.map(skill => <li key={skill}>{skill}</li>) : null}
             </ul>
           </Col>
         </Row>
@@ -86,7 +93,7 @@ const ViewEvent = props => {
           <Col>Description: {description}</Col>
         </Row>
       </ul>
-      <br/>
+      <br />
       {checkRegistered()}
       {/* Show button to add event file if the user is the creator of the event */}
       {/* /api/event/event_id/file/file_id */}

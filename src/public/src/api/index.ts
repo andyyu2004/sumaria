@@ -1,5 +1,5 @@
 import { getEvents, addEvent, getEventById } from './events';
-import { getUsers, getUserById, getUserByUsername } from './profiles';
+import { getUserById, getUserByUsername } from './profiles';
 import { signup, login } from './user';
 import { createCompany, getCompanyById } from './company';
 import { createNewConversation, getConversations, getMessages } from './chat';
@@ -11,7 +11,6 @@ axios.defaults.withCredentials = true;
 
 const API = {
     getEvents,
-    getUsers,
     signup,
     login,
     // getEventsByIds,

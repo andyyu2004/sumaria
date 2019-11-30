@@ -30,8 +30,9 @@ export async function getEventParticipantsByEventId(id: string): Promise<Either<
 }
 
 export async function getEventById(id: string): Promise<Either<string, Event>> {
-    const { data } = await axios.get(`/api/event/${id}`);
-    return data.error ? new Left(data.message) : new Right(data.event);
+    return axios.get(`/api/event/${id}`)
+        .then<any>(res => new Right(res.data.event))
+        .catch(apiErrorHandler);
 }
 
 /** Given a list of event ids, return the events in order of the closest upcoming one first */
