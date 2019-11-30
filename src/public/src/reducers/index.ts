@@ -30,6 +30,14 @@ const rootReducer = (state: AppState = initialState, action: Action) => {
             };
         }
 
+        case "UPDATE_USER": {
+            const { user } = action;
+            return {
+                ...state,
+                user
+            };
+        }
+
         case "ADD_CONVERSATION": {
             const { conv } = action;
             return {

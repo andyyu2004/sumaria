@@ -17,7 +17,7 @@ const APITesting: React.FC<RouteComponentProps> = () => {
   const [message, setMessage] = useState<string>("");
 
   const handleSignup = async () => {
-    (await API.signup(username, password))
+    (await API.signup({username, password}))
       .map((user: UserResponse) => setMessage(`Signed up user: username = ${user.username}`))
       .mapLeft((err: string) => setMessage(`${err} - Probably empty username/password`));
   };

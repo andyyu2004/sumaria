@@ -7,7 +7,10 @@ var schema = mongoose.Schema({
     firstname: {
         type: String,
     },
-    surname: {
+    lastname: {
+        type: String,
+    },
+    prefername: {
         type: String,
     },
     username: {
@@ -26,8 +29,35 @@ var schema = mongoose.Schema({
     email: {
         type: String
     },
-    telephone: {
+    phone: {
+        type: String,
+        default: ''
+    },
+    event: {
+        type: [mongoose.Schema.Types.ObjectId]
+    },
+    gender: {
         type: String
+    },
+    street: {
+        type: String,
+        default: ''
+    },
+    city: {
+        type: String,
+        default: ''
+    },
+    province: {
+        type: String,
+        default: ''
+    },
+    unit: {
+        type: String,
+        default: ''
+    },
+    birthDate: {
+        type: String,
+        default: ''
     }
 })
 

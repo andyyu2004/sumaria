@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { DisplayEvent } from '../components';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import API from '../api';
 import { Left } from '../types/Either';
 import './Profile.css';
@@ -10,6 +10,8 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import { toast } from 'react-toastify';
 import cityTable from './cityTable.jsx';
 import Form from 'react-bootstrap/Form';
+import { useUser } from '../hooks/useUser';
+import { updateUser } from '../actions/actionCreators';
 
 const editIcon = { fontSize: "0.89rem", padding: "0", border: "none", background: "none" };
 
@@ -23,32 +25,34 @@ const Profile = props => {
     "type": "N/A",
     "events": [0]
   };
-
-  const [firstName, setFirstName] = useState('');
-  const [preferName, setPreferName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [gender, setGender] = useState('none');
-  const [bdate, setBdate] = useState('');
-  const [phone, setPhone] = useState('');
-  const [email, setEmail] = useState('');
-  const [street, setStreet] = useState('');
-  const [city, setCity] = useState('');
-  const [province, setProvince] = useState('none');
-  const [unit, setUnit] = useState('');
+  const user = useUser();
+  const [firstName, setFirstName] = useState(user.firstname);
+  const [preferName, setPreferName] = useState(user.prefername);
+  const [lastName, setLastName] = useState(user.lastname);
+  const [gender, setGender] = useState(user.gender);
+  const [bdate, setBdate] = useState(user.birthDate);
+  const [phone, setPhone] = useState(user.phone);
+  const [email, setEmail] = useState(user.email);
+  const [street, setStreet] = useState(user.street);
+  const [city, setCity] = useState(user.city);
+  const [province, setProvince] = useState(user.province);
+  const [unit, setUnit] = useState(user.unit);
   const [description, setDescription] = useState('');
 
-  const [userInfo, setUserInfo] = useState(errorUser);
-  const [userEvents, setUserEvents] = useState([]);
-  const { username } = useSelector(state => state.user);
-
+  //const [userInfo, setUserInfo] = useState(errorUser);
+  //const [userEvents, setUserEvents] = useState([]);
+  const username = user.username;
+  const dispatch = useDispatch();
+  /*
   const fetchEvents = useCallback(async () => {
-    (await API.getUserByUsername(username))
+    (await API.g(username))
       .map(setUserInfo)
       .mapLeft(toast.error);
+      console.log(userInfo);
   }, [username]);
 
-  useEffect(() => { fetchEvents(); }, [fetchEvents]);
-
+  useEffect(()=>{fetchEvents()}, [fetchEvents]);
+*/
   const generateCityOptions = (province) => {
     var cities = cityTable[province];
     var constructOption = (city) => {
@@ -65,7 +69,7 @@ const Profile = props => {
     });
   }
 
-  const validateEditThenSave = (prop) => {
+  const validateEditThenSave = async prop => {
     // validate and save
     var err;
     switch (prop) {
@@ -128,6 +132,18 @@ const Profile = props => {
         break;
     }
     // TODO: save the modified info
+    let newUser = {
+      _id: user._id,
+      username: username,
+      password: user.password,
+      firstname: firstName,
+      prefername: preferName,
+      lastname: lastName,
+      gender, birthDate: bdate,
+      phone, email, street, city, province, unit
+    };
+    (await API.updateUser(newUser)).map(user => dispatch(updateUser(user)))
+    .mapLeft(toast.error);
 
     // if save succeed
     var msg = "Changes Saved";
@@ -177,20 +193,18 @@ const Profile = props => {
 
   return (
     <div className='profile-outer'>
-      <h2 className='profile-username'> Username: {userInfo["username"]}'s Profile <i className="fas fa-user"></i> </h2>
+      <h2 className='profile-username'> Username: {username}'s Profile <i className="fas fa-user"></i> </h2>
       <div className='profile-info'>
         <Row className='profile-rows'>
           <Col>
             <h5>First Name &nbsp;<button id='i-firstName' style={editIcon} className="fas fa-pen fa-xs" onClick={() => { editProfile('firstName') }}></button></h5>
             <input type="text" className="form-control" name="first_name" id="firstName" pattern="^[a-zA-Z]{1,64}$"
               value={firstName} onChange={e => setFirstName(e.target.value)} required disabled />
-            {/* <div> {userInfo["lastName"]} </div> */}
           </Col>
           <Col>
             <h5>Last Name &nbsp;<button id='i-lastName' style={editIcon} className="fas fa-pen fa-xs" onClick={() => { editProfile('lastName') }}></button></h5>
             <input type="text" className="form-control" name="last_name" id="lastName" pattern="^[a-zA-Z]{1,64}$"
               value={lastName} onChange={e => setLastName(e.target.value)} required disabled />
-            {/* <div> {userInfo["firstName"]} </div> */}
           </Col>
         </Row>
         <Row className='row-spacer'>
@@ -200,7 +214,6 @@ const Profile = props => {
             <h5>Prefer Name &nbsp;<button id='i-preferName' style={editIcon} className="fas fa-pen fa-xs" onClick={() => { editProfile('preferName') }}></button></h5>
             <input type="text" className="form-control" name="prefer_name" id="preferName" pattern="^[a-zA-Z]{1,64}$"
               value={preferName} onChange={e => setPreferName(e.target.value)} disabled />
-            {/* <div> {userInfo["preferName"]} </div> */}
           </Col>
           <Col>
             <h5>Gender &nbsp;<button id='i-gender' style={editIcon} className="fas fa-pen fa-xs" onClick={() => { editProfile('gender') }}></button></h5>
@@ -210,7 +223,6 @@ const Profile = props => {
               <option value="female">Female</option>
               <option value="other">Other</option>
             </select>
-            {/* <div> {userInfo["gender"]} </div> */}
           </Col>
         </Row>
         <Row className='row-spacer'>
@@ -220,14 +232,12 @@ const Profile = props => {
             <h5>Phone Number &nbsp;<button id='i-phone' style={editIcon} className="fas fa-pen fa-xs" onClick={() => { editProfile('phone') }}></button></h5>
             <input type="text" className="form-control" name="phone_number" id="phone" placeholder="416-1234567"
               pattern="^\d+-?\d+$" value={phone} onChange={e => setPhone(e.target.value)} disabled />
-            {/* <div> {userInfo["phone"]} </div> */}
           </Col>
           <Col>
             <h5>Email &nbsp;<button id='i-email' style={editIcon} className="fas fa-pen fa-xs" onClick={() => { editProfile('email') }}></button></h5>
             <input type="email" className="form-control" name="email" id="email"
               required pattern="^(([^<>()\[\]\\.,;:\s@&quot;]+(\.[^<>()\[\]\\.,;:\s@&quot;]+)*)|(&quot;.+&quot;))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$"
               value={email} onChange={e => setEmail(e.target.value)} disabled />
-            {/* <div> {userInfo["email"]} </div> */}
           </Col>
         </Row>
         <Row className='row-spacer'>
@@ -276,7 +286,6 @@ const Profile = props => {
             <h5>Birth Date &nbsp;<button id='i-birthDate' style={editIcon} className="fas fa-pen fa-xs" onClick={() => { editProfile('birthDate') }}></button></h5>
             <input type="text" className="form-control" name="birth_date" id="birthDate" placeholder="MM-DD-YYYY"
               pattern="^(0?[1-9]|1[012])[\/\-](0?[1-9]|[12][0-9]|3[01])[\/\-]\d{4}$" value={bdate} onChange={e => setBdate(e.target.value)} disabled />
-            {/* <div> {userInfo["birthDate"]} </div> */}
           </Col>
         </Row>
         <Row className='row-spacer'>
@@ -288,14 +297,6 @@ const Profile = props => {
           </Col>
         </Row>
         {/* <div> {userInfo["description"]} </div> */}
-        <Row className='row-spacer'>
-        </Row>
-        <h4>Your Upcoming Events</h4>
-        <ul className='profile-event-container'>
-          {userEvents.length
-            ? userEvents.map(event => <DisplayEvent key={event.id} event={event} />)
-            : <h6>No upcoming events</h6>}
-        </ul>
       </div>
     </div>
   );

@@ -42,9 +42,11 @@ const Registration = props => {
   }
 
   const saveUser = () => {
-    console.log(username, password);
-    // TODO: save other user related info
-    let resp = API.signup(username, password);
+    const registerInfo = { username, password, firstname: firstName,
+                           prefername: preferName, lastname: lastName, gender, birthDate: bdate, phone, email,
+                           street, city, province, unit };
+    console.log(registerInfo);
+    let resp = API.signup(registerInfo);
     //console.log(resp);
     return resp;
   }

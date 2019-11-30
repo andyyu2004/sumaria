@@ -35,22 +35,22 @@ const Header: React.FC<PropTypes> = ({ title, subtitle }) => {
       // console.log(socket);
   };
 
-  const newMessageNotification = useCallback((sender: string, message: string, convId: string) => {
-    /* Don't need own message notification */
-    if (sender === user.username) return;
-    dispatch(newNotification({
-      id: uuid(),
-      message: `Message '${message}' from ${sender}`,
-      // cb, use the convId and redirect user to that conversation or something
-    }));
-  }, [dispatch, user.username]);
+  // const newMessageNotification = useCallback((sender: string, message: string, convId: string) => {
+  //   /* Don't need own message notification */
+  //   if (sender === user.username) return;
+  //   dispatch(newNotification({
+  //     id: uuid(),
+  //     message: `Message '${message}' from ${sender}`,
+  //     // cb, use the convId and redirect user to that conversation or something
+  //   }));
+  // }, [dispatch, user.username]);
 
-  useEffect(() => {
-    socket && socket.on('refresh-messages', newMessageNotification);
-    return () => {
-      socket && socket.removeListener('refresh-message', newMessageNotification);
-    };
-  }, [socket, newMessageNotification]);
+  // useEffect(() => {
+  //   socket && socket.on('refresh-messages', newMessageNotification);
+  //   return () => {
+  //     socket && socket.removeListener('refresh-message', newMessageNotification);
+  //   };
+  // }, [socket, newMessageNotification]);
 
   return (
     <div className="header-container">
@@ -65,7 +65,7 @@ const Header: React.FC<PropTypes> = ({ title, subtitle }) => {
       {usertype !== UserType.None
         /** If logged in, then take user to dashboard if admin else take to profile, else redirect to login screen */
         ? (<><h5 className='header-username'>{user.username}</h5>
-          <Dropdown>
+          {/* <Dropdown>
             <Dropdown.Toggle className='header-button header-notification' id="notification-toggle">
               <img src={notificationicon} alt="Notifications" className="small-generic-icon" />
               <span>{notifications.length}</span>
@@ -76,7 +76,7 @@ const Header: React.FC<PropTypes> = ({ title, subtitle }) => {
                 : <h6 className='notification-message'>No notifications</h6>
               }
             </Dropdown.Menu>
-          </Dropdown>
+          </Dropdown> */}
           <div>
             <img id='profileIcon' src={usericon} className="small-icon" onClick={() => navigate(`/${usertype === UserType.Admin ? 'admin' : 'profile'}`)} alt="profilepic" /> 
             <Button id="logoutButton" type="button" className='header-button' onClick={handleLogout}>Logout</Button>

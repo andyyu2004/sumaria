@@ -52,9 +52,10 @@ router.post("/user/login", async (req,res) => {
 })
 
 router.post("/user", async (req,res) => {
-    if (!req.body.username || !req.body.password) return res.status(400).json({error: true, message: "Bad Request"});
+    const {username, password, firstname, lastname, prefername, email, phone, gender, street, city, province, unit, birthDate} = req.body;
+    if (!username || !password || !firstname || !lastname || !email) return res.status(400).json({error: true, message: "Bad Request"});
     try {
-        var user = await controllers.user.create(req.body.username, req.body.password);
+        var user = await controllers.user.create(username, password, firstname, lastname, prefername, email, phone, gender, street, city, province, unit, birthDate);
         if (!user) return res.status(422).json({ error: true, message: "User already exists" });
         return res.json({error: false, user});
     } catch(e) {
@@ -76,6 +77,7 @@ router.post("/company", async (req,res) => {
 
 router.post("/event", async (req,res) => {
     const { creatorid, name, organizer, date, enddate, description, city, province, numVolunteers, address, skills } = req.body;
+    console.log(req.body);
     if (!creatorid || !name || !organizer || !date || !enddate || !description || !numVolunteers || !address || !skills) return res.status(400).json({error: true, message: "Missing fields"})
     try {
         var event = await controllers.event.create(creatorid, req.body.name, req.body.organizer, req.body.date, req.body.enddate, req.body.description, req.body.numVolunteers, req.body.address, req.body.city, req.body.province, req.body.unit, req.body.skills);
@@ -92,6 +94,18 @@ router.post("/session", async (req,res) => {
         var session = req.session.user;
         res.json({error: false, session})
     } catch(e){
+        return res.status(500).json({error: true, message: "Server Error"})
+    }
+})
+
+router.patch("/user/:id", async (req,res) => {
+    try {
+        console.log(req.body);
+        var user = await controllers.user.patchUser(req.body);
+        if (!user) return res.status(404).json({error: true, message: "User not found"})
+        res.json({error: false, user});
+    } catch(e){
+        console.log('error', e);
         return res.status(500).json({error: true, message: "Server Error"})
     }
 })

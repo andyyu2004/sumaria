@@ -60,7 +60,6 @@ const Browse = props => {
     return cities.map(constructOption)
 
   }
-
   let eventsFiltered = skill ? (new fuse(events, optionsSkills)).search(skill) : events;
   eventsFiltered = keyword ? (new fuse(eventsFiltered, optionsName)).search(keyword) : eventsFiltered;
   eventsFiltered = eventsFiltered.filter(event => (event.date >= startDate && event.date <= endDate ));
