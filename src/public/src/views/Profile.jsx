@@ -47,7 +47,7 @@ const Profile = props => {
       .mapLeft(toast.error);
   }, [username]);
 
-  useEffect(() => { fetchEvents(); }, [fetchEvents]);
+  useEffect(()=>{fetchEvents()}, [fetchEvents]);
 
   const generateCityOptions = (province) => {
     var cities = cityTable[province];
