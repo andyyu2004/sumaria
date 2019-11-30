@@ -1,4 +1,5 @@
 import React, { FormEvent, useCallback, useEffect, useState } from 'react';
+import InputGroup from 'react-bootstrap/InputGroup';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { addNewConversation, setConversations } from '../actions/actionCreators';
@@ -6,12 +7,9 @@ import API from '../api';
 import { Chat } from '../components';
 import { Conversation } from '../types/Chat';
 import { AppState } from '../types/states';
+import './Chat.css';
 import "./Conversations.css";
 import Sidebar from './Sidebar';
-import './Chat.css';
-import InputGroup from 'react-bootstrap/InputGroup';
-import Row from 'react-bootstrap/Row';
-import Form from 'react-bootstrap/Form';
 
 const Conversations = () => {
   const username = useSelector<AppState, string>(state => state.user.username!);
@@ -21,7 +19,7 @@ const Conversations = () => {
 
   const [newname, setNewname] = useState("");
   const dispatch = useDispatch();
-  const socket = useSelector<AppState, SocketIOClient.Socket>(state => state.socket!);
+  const socket = useSelector<AppState, SocketIOClient.Socket | undefined>(state => state.socket);
   
   const createConversation = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -41,9 +39,9 @@ const Conversations = () => {
   /** Refresh conversations on page load and on 'refresh-conversations' event */
   useEffect(() => { 
     refreshConversations();
-    socket.on('refresh-conversations', refreshConversations);
+    socket && socket.on('refresh-conversations', refreshConversations);
     return () => {
-      socket.removeListener('refresh-conversations', refreshConversations);
+      socket && socket.removeListener('refresh-conversations', refreshConversations);
     };
   }, [refreshConversations, socket]);
 

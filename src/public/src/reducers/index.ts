@@ -5,7 +5,7 @@ import { UserType } from "../types/User";
 import uuid from 'uuid/v4';
 
 const initialState: AppState = {
-    user: { usertype: UserType.None, id: -1, events: [] },
+    user: { usertype: UserType.None, _id: "", events: [] },
     conversations: [],
     notifications: [
         { message: "Test Notification 0", id: uuid() },
@@ -15,12 +15,11 @@ const initialState: AppState = {
 
 // const rootReducer = combineReducers(user)
 const rootReducer = (state: AppState = initialState, action: Action) => {
-    const { conversations, notifications, user } = state;
+    const { conversations, notifications } = state;
 
     switch (action.type) {
         case "SET_USER": {
             const { user } = action;
-            /* How to not hard cost the url for socket*/
             const socket = socketio('/', {
                 query: `username=${user.username}`
             });

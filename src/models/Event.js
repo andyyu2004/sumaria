@@ -4,6 +4,10 @@ var schema = mongoose.Schema({
     name: {
         type: String
     },
+    creatorid: {
+        type: mongoose.Types.ObjectId,
+        required: true,
+    },
     organizer: {
         type: String
         // type: mongoose.Types.ObjectId,
@@ -27,10 +31,16 @@ var schema = mongoose.Schema({
     numVolunteers: {
         type: Number
     },
-    Address: {
+    address: {
         type: String
     },
-    City: {
+    city: {
+        type: String
+    },
+    province: {
+        type: String
+    },
+    unit: {
         type: String
     }
 

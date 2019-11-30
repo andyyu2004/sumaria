@@ -10,40 +10,9 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import API from '../api';
 import { toast } from 'react-toastify';
-//import { signup } from '../api/user';
-//import { Either, Left, Right } from '../types/Either';
-
-
-//import { FormGroup, FormControl, InputGroup } from 'react-bootstrap';
-//import { navigate } from '@reach/router';
-//import algoliasearch from 'algoliasearch/lite';
-//import { InstantSearch, SearchBox, Hits } from 'react-instantsearch-dom';
-
-/*
-const searchClient = algoliasearch(
-  'plRG8O4KPXG0',
-  '01329a32171d4008387778134780906b',
-  {
-    _useRequestCache: true,
-  }
-);
-const searchClient = algoliasearch(
-  'latency',
-  '6be0576ff61c053d5f9a3225e2a90f76',
-  {
-    _useRequestCache: true,
-  }
-);*/
+import cityTable from './cityTable.jsx';
 
 const Registration = props => {
-
-  //const [orgNameD, setOrgNameD] = useState(false);
-  //const [authKeyD, setAuthKeyD] = useState(false);
-  //const [orgNamePH, setOrgNamePH] = useState('');
-  //const [authKeyPH, setAuthKeyPH] = useState('');
-
-  //const [orgName, setOrgName] = useState('');
-  //const [authKey, setAuthKey] = useState('');
 
   const [userType, setUserType] = useState('none');
   const [username, setUsername] = useState('');
@@ -82,6 +51,7 @@ const Registration = props => {
 
   const validateSignUp = async (e) => {
     e.preventDefault();
+
     let res = await saveUser();
     //console.log(res);
     res.match(
@@ -203,6 +173,19 @@ const Registration = props => {
     //setAddr2();
   }
 
+
+  const generateCityOptions = (province) => {
+    var cities = cityTable[province];
+    var constructOption = (city) => {
+      return <option key={city} value={city}>{city}</option>
+    }
+
+  return cities.map(constructOption)
+
+  }
+
+
+
   return (
     <div className='register-container'>
       <div id="page-content" className="row">
@@ -216,7 +199,7 @@ const Registration = props => {
             <Form.Row>
             <Form.Group as={Col} xs={3}>
               <Form.Label>Debug Only</Form.Label>
-              <select id="user_type" className="form-control" required value={userType} onChange={e => check_user_type(e.target.value)}>
+              <select id="user_type" className="form-control" value={userType} onChange={e => check_user_type(e.target.value)}>
                 <option value='none' disabled hidden>Choose here</option>
                 <option value="debug">This is for debugging only</option>
               </select>
@@ -260,22 +243,22 @@ const Registration = props => {
                 value={firstName} onChange={e => setFirstName(e.target.value)} required />
               </Form.Group>
               <Form.Group as={Col}>
-                <Form.Label>Preferred Name</Form.Label>
-                <input type="text" className="form-control" name="prefer_name" id="prefer_name" pattern="^[a-zA-Z]{1,64}$" 
-                value={preferName} onChange={e => setPreferName(e.target.value)} />
-              </Form.Group>
-              <Form.Group as={Col}>
                 <Form.Label>Last Name</Form.Label>
                 <MDBIcon icon="asterisk" className="pointer text register-icon" 
                 data-tip="Your surname" />
                 <input type="text" className="form-control" name="last_name" id="last_name" pattern="^[a-zA-Z]{1,64}$" 
                 value={lastName} onChange={e => setLastName(e.target.value)} required />
               </Form.Group>
+              <Form.Group as={Col}>
+                <Form.Label>Preferred Name</Form.Label>
+                <input type="text" className="form-control" name="prefer_name" id="prefer_name" pattern="^[a-zA-Z]{1,64}$" 
+                value={preferName} onChange={e => setPreferName(e.target.value)} />
+              </Form.Group>
             </Form.Row>
             <Form.Row>
               <Form.Group as={Col} xs={3}>
                 <Form.Label>Gender</Form.Label>
-                <select id="gender" className="form-control" required value={gender} onChange={e => setGender(e.target.value)} >
+                <select id="gender" className="form-control" value={gender} onChange={e => setGender(e.target.value)} >
                       <option value="none" disabled hidden>Choose here</option>
                       <option value="male">Male</option>
                       <option value="female">Female</option>
@@ -311,16 +294,18 @@ const Registration = props => {
               <Form.Group as={Col}>
                 <Form.Label>Street</Form.Label>
                 <input id="address-street" type="text" className="form-control" placeholder="123 Street Name" 
-                required value={street} onChange={e => setStreet(e.target.value)} />
+                value={street} onChange={e => setStreet(e.target.value)} />
               </Form.Group>
               <Form.Group as={Col} xs={3}>
               <Form.Label>City</Form.Label>
-                <input id="address-city" type="text" className="form-control" placeholder="City" 
-                required value={city} onChange={e => setCity(e.target.value)} />
+                <select id="address-city" className="form-control" placeholder="City" 
+                value={city} onChange={e => setCity(e.target.value)}>
+                  {generateCityOptions(province)}
+                </select>
               </Form.Group>
               <Form.Group as={Col} xs={2}>
               <Form.Label>Province</Form.Label>
-                <select id="province" className="form-control" required value={province} onChange={e => setProvince(e.target.value)} >
+                <select id="province" className="form-control" value={province} onChange={e => setProvince(e.target.value)} >
                       <option value="none" disabled hidden>Province</option>
                       <option value="AB">Alberta</option>
                       <option value="BC">British Columbia</option>
@@ -328,12 +313,12 @@ const Registration = props => {
                       <option value="NB">New Brunswick</option>
                       <option value="NL">Newfoundland and Labrador</option>
                       <option value="NS">Nova Scotia</option>
+                      <option value="NT">Northwest Territories</option>
+                      <option value="NU">Nunavut</option>
                       <option value="ON">Ontario</option>
                       <option value="PE">Prince Edward Island</option>
                       <option value="QC">Quebec</option>
                       <option value="SK">Saskatchewan</option>
-                      <option value="NT">Northwest Territories</option>
-                      <option value="NU">Nunavut</option>
                       <option value="YT">Yukon</option>
                     </select>
               </Form.Group>
@@ -351,27 +336,5 @@ const Registration = props => {
 
   );
 };
-
-/*
-          <InstantSearch indexName="instant_search" searchClient={searchClient} >
-                        <SearchBox />
-                        <Hits />
-          </InstantSearch>
-
-            <Form.Group as={Col}>
-              <Form.Label>Organization Name</Form.Label>
-              <input disabled={orgNameD} placeholder={orgNamePH} type="text" className="form-control" name="organization_name" 
-              id="organization_name" pattern="^[a-zA-Z0-9!@#\$%\^&\*\)\(+=._-]{1,64}$" value={orgName} onChange={e => setOrgName(e.target.value)} />
-            </Form.Group>
-            </Form.Row>
-            <Form.Group>
-              <Form.Label>Authentication Key</Form.Label>
-              <MDBIcon icon="question" className="pointer text register-icon" 
-                data-tip="Admin only. If you are an admin of an organization but you have not obtained one, please contact Sumaria Support." />
-                <input disabled={authKeyD} placeholder={authKeyPH} type="text" className="form-control" name="auth_key" 
-                id="auth_key" pattern="^[a-zA-Z0-9]{32}$" value={authKey} onChange={e => setAuthKey(e.target.value)} />
-            </Form.Group>
-
-*/
 
 export default Registration;

@@ -19,7 +19,7 @@ app.use("/", routes.public);
 const server = http.createServer(app);
 const io = socketio.listen(server);
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 80;
 
 mongoose.connect(DB_CONNECTION_STRING, { 
     useUnifiedTopology: true,
@@ -29,7 +29,6 @@ mongoose.connect(DB_CONNECTION_STRING, {
         console.error(e);
         return;
     }
-    // mongoose.connection.db.dropDatabase();
     server.listen(PORT, () => console.log(`Listening on port ${PORT}`));
 });
 
@@ -44,30 +43,24 @@ io.on('connection', socket => {
     const { username } = socket.handshake.query;
 
     socketmap[username] = socket.id;
-    // console.log("connected", username, userid);
 
     socket.on('enter-conversation', conversationId => {
-        // console.log(`entering conversation ${conversationId}`);
         socket.join(conversationId);
     });
 
     socket.on('leave-conversation', conversationId => {
-        // console.log(`Leaving conversation ${conversationId}`);
         socket.leave(conversationId);
     });
 
     socket.on('new-message', async ({ sender, message, conversationId }) => {
-        // console.log("new message", message);
         await controllers.conv.appendMessage(conversationId, sender, message);
         io.in(conversationId).emit("refresh-messages", sender, message, conversationId);
     });
 
     socket.on('add-user', async ({ conversationId, username }) => {
-        console.log(`adding user ${username} to ${conversationId}`);
         try {
             const conversation = await controllers.conv.addUser(conversationId, username);
             /** Send refresh all to everyone in the conversation including the newly added member*/
-            // io.in(conversation._id).emit("refresh-conversations");
             conversation.members.forEach(username => {
                 if (!socketmap[username]) return;
                 console.log("Emitting to", username, socketmap[username]);
@@ -79,7 +72,6 @@ io.on('connection', socket => {
     });
 
     socket.on('disconnect', () => {
-        // console.log('user disconnected');
         delete socketmap[username];
         socket.leaveAll();
     });

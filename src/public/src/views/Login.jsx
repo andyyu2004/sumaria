@@ -9,7 +9,7 @@ import SumariaLogo from '../assets/images/logos/sumaria_logo.png'
 import './Login.css'
 import { UserType } from '../types/User'
 import { setUser } from '../actions/actionCreators'
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 //import 'react-toastify/dist/ReactToastify.minimal.css';
 
 
@@ -24,22 +24,22 @@ const Login = props => {
   const dispatch = useDispatch();
 
   const validateLoginParams = (u, p) => {
-    if (u.length < 3 || u.length > 15 || !/^[A-Za-z][A-Za-z0-9]*(?:[ _-][A-Za-z0-9]+)*$/.test(u)){
+    if (u.length < 3 || u.length > 15 || !/^[A-Za-z][A-Za-z0-9]*(?:[ _-][A-Za-z0-9]+)*$/.test(u)) {
       toast.error('Invalid username!', {
         position: toast.POSITION.TOP_CENTER
       });
       setInputs({
-        username: "",
+        username: u,
         password: "",
       });
       return false;
-    } else{
-      if (!/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,64}$/.test(p)){
+    } else {
+      if (!/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,64}$/.test(p)) {
         toast.error('Invalid password!', {
           position: toast.POSITION.TOP_CENTER
         });
         setInputs({
-          username: "",
+          username: u,
           password: "",
         });
         return false;
@@ -51,7 +51,7 @@ const Login = props => {
   const onSubmit = async e => {
     e.preventDefault();
     console.log(username, password);
-    if (!validateLoginParams(username, password)){
+    if (!validateLoginParams(username, password)) {
       return false;
     }
 
@@ -80,33 +80,34 @@ const Login = props => {
   };
 
   return (
-    <div className='login-container'>
-      <div>
-        <img src={SumariaLogo} alt="Sumaria" className='login-logo'/>
-        <Form className='login-form' onSubmit={onSubmit}>
-          <Form.Group>
-            <InputGroup>
-              <i className="fas fa-user login-icon"/>
-              <input className="form-control" type="text" name="username" placeholder="username" value={username} 
-              onChange={e => setInputs({ ...inputs, username: e.target.value })} required />
-            </InputGroup>
-          </Form.Group>
-          <Form.Group>
-            <InputGroup>
-              <i className="fa fa-lock login-icon" />
-              <input className="form-control" type="password" name="pass" placeholder="password" value={password} 
-              onChange={e => setInputs({ ...inputs, password: e.target.value })} required />
-            </InputGroup>
-          </Form.Group>
-          <Button type="submit" block variant='success'>Login</Button>
-          <div className='login-links-container'>
-            Forgot <a href="/reset">Username / Password?</a>
-            <a href="/register">Create Your Account</a>
-          </div>
-        </Form>
+    <div>
+      <div className='login-container'>
+        <div>
+          <img src={SumariaLogo} alt="Sumaria" className='login-logo' />
+          <Form className='login-form' onSubmit={onSubmit}>
+            <Form.Group>
+              <InputGroup>
+                <i className="fas fa-user login-icon" />
+                <input className="form-control" type="text" name="username" placeholder="username" value={username}
+                  onChange={e => setInputs({ ...inputs, username: e.target.value })} required />
+              </InputGroup>
+            </Form.Group>
+            <Form.Group>
+              <InputGroup>
+                <i className="fa fa-lock login-icon" />
+                <input className="form-control" type="password" name="pass" placeholder="password" value={password}
+                  onChange={e => setInputs({ ...inputs, password: e.target.value })} required />
+              </InputGroup>
+            </Form.Group>
+            <Button type="submit" block variant='success'>Login</Button>
+            <div className='login-links-container'>
+              <a href="/register">Create Your Account</a>
+            </div>
+          </Form>
+        </div>
       </div>
     </div>
   );
 };
-
+// Forgot <a href="/reset">Username / Password?</a>
 export default Login;

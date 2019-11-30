@@ -1,16 +1,13 @@
+import { navigate, Router } from '@reach/router';
 import React from 'react';
-import { Home, Login, Reset, Browse, ResetSent, AddEvent, Registration, ImportExcel, Profile, APITesting, RegisterSuccess } from './views';
-import { Router, navigate } from '@reach/router';
+import { useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
+import { logout, setUser } from './actions/actionCreators';
+import API from './api';
 import './App.css';
 import { Header } from './components';
-import ChatView from './views/ChatView';
 import Sidebar from './components/Sidebar';
-import Footer from './components/Footer';
-import { useDispatch } from 'react-redux';
-import { setUser, logout } from './actions/actionCreators';
-import { UserType } from './types/User';
-import API from './api';
-import { toast } from 'react-toastify';
+import { AddEvent, APITesting, Browse, Home, ImportExcel, Login, Profile, RegisterSuccess, Registration, ChatView, ViewEvent, MyCalendar, ErrorView } from './views';
 
 toast.configure({
   autoClose: 3000,
@@ -28,13 +25,16 @@ const App: React.FC = () => {
     ["Browse", () => navigate('/browse')],
     ["Import", () => navigate('/import')],
     ["Add Event", () => navigate('/addevent')],
+    ["My Calendar", () => navigate('/calendar')],
     ["API", () => navigate('/api')],
     ["Quick Login", async () => {
       dispatch(logout());
       await API.signup("sdf", "sdf");
-      await API.login("sdf", "sdf");
-      dispatch(setUser({ username: "sdf", usertype: "volunteer", id: 100, events: [] }));
-      navigate("/chat");
+      (await API.login("sdf", "sdf"))
+        .map(({ _id, username }) => {
+          dispatch(setUser({ username, usertype: "volunteer", _id, events: [] }));
+          navigate("/event/");
+        });
     }],
   ];
 
@@ -46,19 +46,19 @@ const App: React.FC = () => {
         <Router className="app-main">
           <Home path="/" />
           <Login path="login" />
-          <Reset path="reset" />
           <Browse path="browse" />
+          <ViewEvent path="event/:eventname" />
           <ChatView path="chat" />
           <ImportExcel path="import" />
           <Profile path="profile" />
-          <ResetSent path="reset/sent" />
+          <MyCalendar path="calendar" />
           <AddEvent path="addevent" />
           <Registration path="register" />
           <APITesting path="api" />
           <RegisterSuccess path="register/success" />
+          <ErrorView path="*" error="Page not found (404)" />
         </Router>
-      </div> 
-      {/* <Footer />  Do we really need this? */}
+      </div>
     </div>
   );
 };

@@ -104,8 +104,3 @@ export class Left<L, R> implements IEither<L, R> {
     }
 
 }
-
-
-function testEither() {
-
-}

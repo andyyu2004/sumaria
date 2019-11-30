@@ -31,7 +31,7 @@ const APITesting: React.FC<RouteComponentProps> = () => {
         _id: user._id,
         events: [] 
       }));
-      navigate("/");
+      return navigate("/");
     }).mapLeft(err => setMessage(`${err} - Login Failed`));
   };
 

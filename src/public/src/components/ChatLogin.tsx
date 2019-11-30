@@ -1,7 +1,4 @@
-import React, { useState, FormEvent } from 'react'
-// import { apilogin } from '../api/chat';
-import { setUserAsync } from '../actions/actionCreators';
-import { useDispatch } from 'react-redux';
+import React from 'react';
 
 type PropType = {
   
