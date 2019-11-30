@@ -7,7 +7,7 @@ export type User = {
     description?: string,
     password?: string,
     email?: string,
-    events: number[],
+    events: string[],
 };
 
 export enum UserType {

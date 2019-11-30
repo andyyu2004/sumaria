@@ -1,11 +1,6 @@
-import mockdata from '../mockdata.json';
 import { IEither, Left, Right } from '../types/Either';
 import { User } from '../types/User.js';
 import axios from 'axios';
-
-export async function getUsers(): Promise<IEither<string, User[]>> {
-    return new Right(mockdata.users);
-}
 
 export async function getUserById(id: string): Promise<IEither<string, User>> {
     const { data } = await axios.get(`/api/userinfo/${id}`);
