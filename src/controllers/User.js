@@ -17,13 +17,12 @@ function generateSalt() {
     .join("")
 }
 
-async function create(username, password) {
+async function create(username, password, firstname, lastname, prefername, email, phone, gender, street, city, province, unit, birthDate) {
     const prevUser = await User.findOne({ username });
     if (prevUser) return false;
-
     var salt = generateSalt();
     password = hash(password + salt);
-    var user = new User({username, password, salt})
+    var user = new User({username, password, event: [], firstname, lastname, prefername, creationDate: new Date(), email, phone, gender, street, city, province, unit, salt})
     await user.save();
     return {username}
 }
@@ -50,4 +49,9 @@ async function getByUsername(username){
     return await User.findOne({"username": username });
 }
 
-module.exports = {login, create, getById, getByUsername}
+async function patchUser(user){
+    console.log('patch', user);
+    return await User.findOneAndUpdate({_id: user._id}, user, {new: true});
+}
+
+module.exports = {login, create, getById, getByUsername, patchUser}

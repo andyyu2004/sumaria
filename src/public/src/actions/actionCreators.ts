@@ -1,5 +1,5 @@
 import { Conversation } from "../types/Chat";
-import { SetUserAction, AddConversationAction, SetConversationsAction, LogoutAction, NewNotificationAction, DismissNotificationAction } from ".";
+import { SetUserAction, AddConversationAction, SetConversationsAction, LogoutAction, NewNotificationAction, DismissNotificationAction, UpdateUserAction } from ".";
 import { User } from "../types/User";
 import { TNotification } from "../types/notifications";
 
@@ -11,6 +11,11 @@ export const setUserAsync: (dispatch: any) => (user: User) => SetUserAction = di
 
 export const setUser: (user: User) => SetUserAction = user => ({
     type: "SET_USER",
+    user,
+});
+
+export const updateUser: (user: User) => UpdateUserAction = user => ({
+    type: "UPDATE_USER",
     user,
 });
 

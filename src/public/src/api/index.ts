@@ -1,6 +1,6 @@
 import { getEvents, addEvent, getEventById } from './events';
 import { getUserById, getUserByUsername } from './profiles';
-import { signup, login } from './user';
+import { signup, login, updateUser } from './user';
 import { createCompany, getCompanyById } from './company';
 import { createNewConversation, getConversations, getMessages } from './chat';
 import axios from 'axios';
@@ -13,6 +13,7 @@ const API = {
     getEvents,
     signup,
     login,
+    updateUser,
     // getEventsByIds,
     // getEventsByUsername,
     addEvent,

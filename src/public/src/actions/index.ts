@@ -8,7 +8,8 @@ export type Action
     | SetConversationsAction
     | NewNotificationAction
     | DismissNotificationAction
-    | LogoutAction;
+    | LogoutAction
+    | UpdateUserAction;
 
 export type NewNotificationAction = {
     type: "NEW_NOTIFICATION",
@@ -22,6 +23,11 @@ export type DismissNotificationAction = {
 
 export type SetUserAction = {
     type: "SET_USER",
+    user: User,
+};
+
+export type UpdateUserAction = {
+    type: "UPDATE_USER",
     user: User,
 };
 

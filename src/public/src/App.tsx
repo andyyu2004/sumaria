@@ -29,7 +29,6 @@ const App: React.FC = () => {
     ["API", () => navigate('/api')],
     ["Quick Login", async () => {
       dispatch(logout());
-      await API.signup("sdf", "sdf");
       (await API.login("sdf", "sdf"))
         .map(({ _id, username }) => {
           dispatch(setUser({ username, usertype: "volunteer", _id, events: [] }));
@@ -37,6 +36,7 @@ const App: React.FC = () => {
         });
     }],
   ];
+  
 
   return (
     <div className="app">

@@ -56,27 +56,26 @@ const Login = props => {
     }
 
     const res = await API.login(username, password);
-    res.match(
-      err => {
-        console.log(err);
-        // setMessage(`${err} - Login Failed`),
-        toast.error(err, {
-          position: toast.POSITION.TOP_CENTER
-        });
-        setInputs({
-          username: "",
-          password: "",
-        });
-      },
-      user => {
-        // setMessage(`Succesfully logged in: username = ${user.username}`);
-        toast.success('Successfully logged in: ' + user.username, {
-          position: toast.POSITION.TOP_CENTER
-        });
-        dispatch(setUser({ username: user.username, usertype: UserType.Volunteer, events: [] }));
-        navigate("/");
-      },
-    );
+
+    res.map(user => {
+      console.log(user);
+      // setMessage(`Succesfully logged in: username = ${user.username}`);
+      toast.success('Successfully logged in: ' + user.username, {
+        position: toast.POSITION.TOP_CENTER
+      });
+      dispatch(setUser(user));
+      navigate("/");
+    }).mapLeft(err => {
+      console.log(err);
+      // setMessage(`${err} - Login Failed`),
+      toast.error(err, {
+        position: toast.POSITION.TOP_CENTER
+      });
+      setInputs({
+        username: "",
+        password: "",
+      });
+    });
   };
 
   return (
