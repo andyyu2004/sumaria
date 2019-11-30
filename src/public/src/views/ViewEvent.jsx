@@ -10,7 +10,8 @@ import './viewEvent.css';
 
 /** Component for viewing a specific event in detail */
 const ViewEvent = props => {
-  const { event } = props.location.state;
+  const { event } = props.location && props.location.state || {};
+    
   const { _id, creatorid, date, description, name, postDate, endDate, skills, address, city, province, unit, organizer } = event;
 
   const user = useUser();
