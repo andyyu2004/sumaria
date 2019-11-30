@@ -9,8 +9,11 @@ import moment from 'moment';
 import ReactTooltip from 'react-tooltip';
 import { withProtection } from '../components/hoc';
 import { toast } from 'react-toastify';
+//import { useUser } from '../hooks/useUser';
 //import globalize from 'globalize';
 //const localizer = globalizeLocalizer(globalize)
+
+//const user = useUser();
 
 function dateFromISO8601(ISOString) {
   var s = ISOString.match(/\d+/g);
@@ -91,7 +94,8 @@ const MyCalendar = props => {
   const fetchEvents = useCallback(async () => {
     (await API.getUserByUsername(username))
       .map(user => {
-        // Get events
+        console.log(user);
+        // Get events of an user
       })
       .mapLeft(toast.error);
   }, [username]);

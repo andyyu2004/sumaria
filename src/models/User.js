@@ -58,6 +58,10 @@ var schema = mongoose.Schema({
     birthDate: {
         type: String,
         default: ''
+    },
+    description: {
+        type: String,
+        default: ''
     }
 })
 
