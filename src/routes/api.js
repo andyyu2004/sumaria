@@ -170,6 +170,15 @@ router.get("/event/:id/file/:fileID",async (req,res) => {
     }
 })
 
+router.get("/event/:id/file", async (req,res) => {
+    try {
+        var file = await controllers.event.getById(req.params.id);
+        res.send({error: false, file})
+    } catch(e) {
+        return res.status(500).json({error: true, message: "Server Error"})
+    }
+})
+
 router.post("/event/:id/file", upload.single("file"), async (req,res) => {
     if (!req.file) return res.status(400).json({error: true, message: "Bad Request"})
     try {
@@ -185,6 +194,15 @@ router.get("/event/:id/participants", async (req,res) => {
     try {
         var participants = await controllers.event.getEventParticipants(req.params.id)
         res.json({error: false, participants})
+    } catch(e) {
+        return res.status(500).json({error: true, message: "Server Error"})
+    }
+})
+
+router.post("/event/:id/participants", async (req,res) => {
+    try {
+        var participant = await controllers.event.register(req.session.user._id, req.params.id);
+        res.json({error: false})
     } catch(e) {
         return res.status(500).json({error: true, message: "Server Error"})
     }

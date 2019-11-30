@@ -25,7 +25,7 @@ const Profile = props => {
     "type": "N/A",
     "events": [0]
   };
-  const user = useUser();
+  let user = useUser();
   const [firstName, setFirstName] = useState(user.firstname);
   const [preferName, setPreferName] = useState(user.prefername);
   const [lastName, setLastName] = useState(user.lastname);
@@ -37,7 +37,7 @@ const Profile = props => {
   const [city, setCity] = useState(user.city);
   const [province, setProvince] = useState(user.province);
   const [unit, setUnit] = useState(user.unit);
-  const [description, setDescription] = useState('');
+  const [description, setDescription] = useState(user.description);
 
   //const [userInfo, setUserInfo] = useState(errorUser);
   //const [userEvents, setUserEvents] = useState([]);
@@ -69,61 +69,115 @@ const Profile = props => {
     });
   }
 
+  const displayNoChange = () => {
+    toast.info('No change made', {
+      position: toast.POSITION.BOTTOM_RIGHT
+    });
+  }
+
   const validateEditThenSave = async prop => {
     // validate and save
-    var err;
+    let err;
     switch (prop) {
+      case 'description':
+        if (description === user.description) {
+          displayNoChange();
+          return;
+        }
+        break;
+      case 'gender':
+        if (gender === user.gender) {
+          displayNoChange();
+          return;
+        }
+        break;
       case 'firstName':
+        if (firstName === user.firstname) {
+          displayNoChange();
+          return;
+        }
         if (!/^[a-zA-Z]{1,64}$/.test(firstName)) {
           err = 'Invalid First Name';
           displayError(err);
+          setFirstName(user.firstname);
           return;
         }
         break;
       case 'lastName':
+        if (lastName === user.lastname) {
+          displayNoChange();
+          return;
+        }
         if (!/^[a-zA-Z]{1,64}$/.test(lastName)) {
           err = 'Invalid Last Name';
+          setLastName(user.lastname);
           displayError(err);
           return;
         }
         break;
       case 'preferName':
+        if (preferName === user.prefername) {
+          displayNoChange();
+          return;
+        }
         if (!/^[a-zA-Z]{1,64}$/.test(preferName)) {
           err = 'Invalid Prefer Name';
           displayError(err);
+          setPreferName(user.prefername);
           return;
         }
         break;
       case 'phone':
+        if (phone === user.phone) {
+          displayNoChange();
+          return;
+        }
         if (!/^\d+-?\d+$/.test(phone)) {
           err = 'Invalid Phone Number';
           displayError(err);
+          setPhone(user.phone);
           return;
         }
         break;
       case 'email':
+        if (email === user.email) {
+          displayNoChange();
+          return;
+        }
         if (!/^(([^<>()\[\]\\.,;:\s@&quot;]+(\.[^<>()\[\]\\.,;:\s@&quot;]+)*)|(&quot;.+&quot;))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)) {
           err = 'Invalid Email';
           displayError(err);
+          setEmail(user.email);
           return;
         }
         break;
       case 'address':
+        if (street === user.street && city === user.city && province === user.province && user.unit === user.unit) {
+          displayNoChange();
+          return;
+        }
         if (street && street.length > 200) {
           err = 'Invalid Street (exceed max length)';
           displayError(err);
+          setStreet(user.street);
           return;
         }
         if (unit && unit.length > 20) {
           err = 'Invalid Department/Unit (exceed max length)';
           displayError(err);
+          setUnit(user.unit);
           return;
         }
         break;
       case 'birthDate':
+        if (bdate === user.birthDate) {
+          displayNoChange();
+          return;
+        }
         if (!/^(0?[1-9]|1[012])[\/\-](0?[1-9]|[12][0-9]|3[01])[\/\-]\d{4}$/.test(bdate)) {
           err = 'Invalid Birth Date';
           displayError(err);
+          setBdate(user.birthDate);
           return;
         }
         break;
@@ -131,7 +185,6 @@ const Profile = props => {
         // check for any non-standard characters
         break;
     }
-    // TODO: save the modified info
     let newUser = {
       _id: user._id,
       username: username,
@@ -140,10 +193,10 @@ const Profile = props => {
       prefername: preferName,
       lastname: lastName,
       gender, birthDate: bdate,
-      phone, email, street, city, province, unit
+      phone, email, street, city, province, unit, description
     };
     (await API.updateUser(newUser)).map(user => dispatch(updateUser(user)))
-    .mapLeft(toast.error);
+      .mapLeft(toast.error);
 
     // if save succeed
     var msg = "Changes Saved";
@@ -296,7 +349,6 @@ const Profile = props => {
             <textarea style={{ width: '100%', height: '100px' }} id='description' placeholder="Description" value={description} onChange={e => setDescription(e.target.value)} maxLength={512} disabled />
           </Col>
         </Row>
-        {/* <div> {userInfo["description"]} </div> */}
       </div>
     </div>
   );
