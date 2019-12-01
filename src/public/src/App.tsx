@@ -7,7 +7,7 @@ import API from './api';
 import './App.css';
 import { Header } from './components';
 import Sidebar from './components/Sidebar';
-import { AddEvent, APITesting, Browse, Home, ImportExcel, Login, Profile, RegisterSuccess, Registration, ChatView, ViewEvent, MyCalendar, ErrorView } from './views';
+import { PublicProfile, AddEvent, APITesting, Browse, Home, ImportExcel, Login, Profile, RegisterSuccess, Registration, ChatView, ViewEvent, MyCalendar, ErrorView } from './views';
 
 toast.configure({
   autoClose: 2000,
@@ -52,6 +52,7 @@ const App: React.FC = () => {
           <ChatView path="chat" />
           <ImportExcel path="import" />
           <Profile path="profile" />
+          <PublicProfile path="profile/:username/public" />
           <MyCalendar path="calendar" />
           <AddEvent path="addevent" />
           <Registration path="register" />

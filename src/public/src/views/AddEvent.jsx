@@ -14,6 +14,7 @@ import { toast } from 'react-toastify';
 import { withProtection } from "../components/hoc";
 import cityTable from './cityTable.jsx';
 import { useSelector } from "react-redux";
+import { navigate } from "@reach/router";
 
 
 const AddEvent = props => {
@@ -50,35 +51,37 @@ const AddEvent = props => {
       numVolunteers: parseInt(numV),
     };
 
-    const res = await API.addEvent(event);
-    //console.log('event', event);
-    res.map(event => {
-      //console.log(`Successfully added event: returned event = ${event.name}`);
-      toast.success("Successfully added event: " + event.name, {
-        position: toast.POSITION.TOP_CENTER
+    if (checkDate()){
+      const res = await API.addEvent(event);
+      //console.log('event', event);
+      res.map(event => {
+        //console.log(`Successfully added event: returned event = ${event.name}`);
+        toast.success("Successfully added event: " + event.name, {
+          position: toast.POSITION.TOP_CENTER
+        });
+        navigate('/browse');
+        return null;
+      }).mapLeft(err => {
+        console.log(err);
+        toast.error(err, {
+          position: toast.POSITION.TOP_CENTER
+        });
       });
-      return null;
-    }).mapLeft(err => {
-      console.log(err);
-      toast.error(err, {
-        position: toast.POSITION.TOP_CENTER
-      });
-    });
+    }
   };
 
   const checkDate = () => {
-    //startDate, endDate
     if (startDate && endDate) {
-      var s = startDate.split("-");
-      var e = endDate.split("-");
-      var sy = s[0], sm = s[1], sd = s[2];
-      var ey = e[0], em = e[1], ed = e[2];
-      if (sy > ey || (sy === ey && sm > em) || (sy === ey && sm === em && sd > ed)) {
+      let start = new Date(startDate);
+      let end = new Date(endDate);
+      if (start > end){
         //alert('End date cannot be earlier than start date!');
         toast.error('End date cannot be earlier than start date!', {
           position: toast.POSITION.TOP_CENTER
         });
+        return false;
       }
+      return true;
     }
   };
 
