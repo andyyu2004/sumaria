@@ -1,4 +1,4 @@
-import { getEvents, addEvent, getEventById, registerForEvent, getEventFileIds, downloadFile } from './events';
+import { getEvents, addEvent, getEventById, registerForEvent, getEventParticipantsByEventId, getEventFileIds, downloadFile } from './events';
 import { getUserById, getUserByUsername } from './profiles';
 import { signup, login, updateUser } from './user';
 import { createCompany, getCompanyById } from './company';
@@ -14,6 +14,7 @@ const API = {
     signup,
     login,
     updateUser,
+    getEventParticipantsByEventId,
     // getEventsByIds,
     // getEventsByUsername,
     addEvent,
