@@ -17,7 +17,7 @@ const ViewEvent = props => {
 
   const [event, setEvent] = useState({});
   const [files, setFiles] = useState([]);
-  console.log(files);
+  const [isRegistered, setIsRegistered] = useState(false);
 
   const fetchEvent = useCallback(async () => {
     (await API.getEventById(eventId))
@@ -49,22 +49,29 @@ const ViewEvent = props => {
 
   const registerEvent = async () => {
     (await API.registerForEvent(eventId))
-      .map(toast.success)
+      .map( msg => {
+        toast.success(msg);
+        setIsRegistered(true);
+      })
       .mapLeft(toast.error);
   }
 
-  const checkRegistered = () => {
+  const checkIsUserRegistered = (participants) => {
+    console.log(participants);
+    console.log(user._id);
+    if (participants.find(x => x._id === user._id)) {
+      setIsRegistered(true);
+    }
+  }
+
+  const checkRegistered = async () => {
     // check if user already registered this event
-    // if not
-    return (<Button onClick={() => registerEvent()}>Register</Button>);
+    (await API.getEventParticipantsByEventId(eventId))
+    .map(participants => checkIsUserRegistered(participants))
+    .mapLeft(toast.error);
   }
 
-  const downloadFile = async fid => {
-    console.log("IDS", fid, eventId);
-    (await API.downloadFile(eventId, fid))
-      .map(toast.success)
-      .mapLeft(toast.error);
-  };
+  useEffect(() => { checkRegistered(); }, [checkRegistered]);
 
   return (
     <div className="event-container">
@@ -107,9 +114,9 @@ const ViewEvent = props => {
         </Row>
       </ul>
       <br />
-      {checkRegistered()}
       {/* {files.map(f => <div key={f._id} onClick={() => downloadFile(f._id)}>{f.file.name}</div>)} */}
       {files.map(f => <div key={f._Id}><a href={`/api/event/${eventId}/file/${f._id}`}>{f.file.name}</a><br /></div>)}
+      { isRegistered ? <h5>Registered!</h5> : <Button onClick={() => registerEvent()}>Register</Button>}
       {/* Show button to add event file if the user is the creator of the event */}
       {/* /api/event/event_id/file/file_id */}
       {creatorid === user._id && <input type="file" onChange={uploadFile} multiple />}
