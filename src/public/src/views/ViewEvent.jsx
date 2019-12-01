@@ -15,12 +15,18 @@ import { navigate } from '@reach/router';
 const ViewEvent = props => {
 
   const [event, setEvent] = useState({});
+  
+  const { eventId } = props;
 
   const fetchEvent = useCallback(async () => {
-    (await API.getEventById(props.eventId))
-      .map(setEvent)
+    (await API.getEventById(eventId))
+      .map(async event => {
+        console.log("SDFLSJKHSDF");
+        setEvent(event);
+        console.log('files', await API.getEventFileIds(eventId));
+      })
       .mapLeft(_ => navigate('/404'))
-  }, [props.eventId]);
+  }, [eventId]);
 
   useEffect(() => { fetchEvent() }, [fetchEvent]);
 
@@ -30,20 +36,15 @@ const ViewEvent = props => {
 
   const uploadFile = async e => {
     const { files } = e.target;
-    console.log(Array.from(files));
     (await uploadFileForEvent(_id, Array.from(files)))
-      .map(x => {
-        console.log('file', x);
-        toast.success("succesfully uploaded files")
-      })
+      .map(x => toast.success("succesfully uploaded files"))
       .mapLeft(toast.error);
   };
 
-  const registerEvent = () => {
-    // await API.registerEvent(eventId or eventName, user.username or id)
-    toast.success('Event Registered Successfully: ' + name, {
-      position: toast.POSITION.TOP_CENTER
-    });
+  const registerEvent = async () => {
+    (await API.registerForEvent(eventId))
+      .map(toast.success)
+      .mapLeft(toast.error);
   }
 
   const checkRegistered = () => {

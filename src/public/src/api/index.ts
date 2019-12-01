@@ -1,4 +1,4 @@
-import { getEvents, addEvent, getEventById } from './events';
+import { getEvents, addEvent, getEventById, registerForEvent, getEventFileIds } from './events';
 import { getUserById, getUserByUsername } from './profiles';
 import { signup, login, updateUser } from './user';
 import { createCompany, getCompanyById } from './company';
@@ -22,9 +22,11 @@ const API = {
     getCompanyById,
     createNewConversation,
     getConversations,
+    getEventFileIds,
     getMessages,
     getUserById,
     getUserByUsername,
+    registerForEvent,
 };
 
 export default API;

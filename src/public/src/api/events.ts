@@ -35,6 +35,18 @@ export async function getEventById(id: string): Promise<Either<string, Event>> {
         .catch(apiErrorHandler);
 }
 
+export async function getEventFileIds(eventid: string) {
+    return axios.get(`/api/event/${eventid}/file`)
+        .then(res => new Right(res.data.file))
+        .catch(apiErrorHandler);
+}
+
+export async function registerForEvent(eventid: string) {
+    return axios.post(`/api/event/${eventid}/participants`)
+        .then(_ => new Right("Successfully registered"))
+        .catch(apiErrorHandler);
+}
+
 /** Given a list of event ids, return the events in order of the closest upcoming one first */
 // export async function getEventsByIds(ids: number[]): Promise<Either<string, Event[]>> {
 //     const events = mockdata.events.filter(event => ids.includes(event.id));
