@@ -29,7 +29,7 @@
 }
 
 .browse-square:hover {
-    background-color:var(--success);
+    background-color:var(--button-hover-color);
     transition:0.5s;
 }
 

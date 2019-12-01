@@ -2,8 +2,8 @@
 
 :root {
   --main-bg-color: #cce9cb;
-  --secondary-color: #063969;
-  --button-hover-color: #a2d6e6;
+  --secondary-color: hsl(209, 89%, 22%);
+  --button-hover-color: #b3e9ff;
 }
 
 body {

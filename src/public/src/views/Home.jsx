@@ -28,12 +28,32 @@ const Home = props => {
     <div className='home-container'>
       <div className='home-body'>
         <div className='home-title'>Sumaria</div>
-        <h3>Welcome!</h3>
-        <h6>Recent Posts:</h6>
+        <div>
+      <div class="row mx-3">
+        <Link to="browse" className="col-4">
+          <div className="mx-1 mb-3 shadow-sm text-center justify-content-center align-items-center d-flex bg-light">
+            <h4><i className="fa fa-calendar-alt mr-2"></i>Browse for events</h4>
+          </div>
+        </Link>
+        <Link to="import" className="col-4">
+          <div className="mx-1 mb-3 shadow-sm text-center justify-content-center align-items-center d-flex bg-light">
+            <h4><i className="fa fa-upload mr-2"></i>Import Excel file</h4>
+          </div>
+        </Link>
+        <Link to="addevent" className="col-4">
+          <div className="mx-1 mb-3 shadow-sm text-center justify-content-center align-items-center d-flex bg-light">
+            <h4><i className="fa fa-plus mr-2"></i>Add event</h4>
+          </div>
+        </Link>
+      </div>
+      <Col>
+        <h6 className='home-subtitle'>Recent Posts:</h6>
+        </Col>
         <Row>
           {events.slice(-3).map(event => <Col><DisplayEventSquare key={event._id} event={event} /></Col>)}
         </Row>
-      </div>
+    </div>
+    </div>
     </div>
   );
 }

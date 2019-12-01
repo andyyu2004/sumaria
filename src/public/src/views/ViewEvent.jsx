@@ -13,16 +13,28 @@ import { navigate } from '@reach/router';
 
 /* Component for viewing a specific event in detail */
 const ViewEvent = props => {
+  const { eventId } = props;
 
   const [event, setEvent] = useState({});
+  const [files, setFiles] = useState([]);
+  const [isRegistered, setIsRegistered] = useState(false);
 
   const fetchEvent = useCallback(async () => {
-    (await API.getEventById(props.eventId))
+    (await API.getEventById(eventId))
       .map(setEvent)
       .mapLeft(_ => navigate('/404'))
-  }, [props.eventId]);
+  }, [eventId]);
 
-  useEffect(() => { fetchEvent() }, [fetchEvent]);
+  const fetchFiles = useCallback(async () => {
+    (await API.getEventFileIds(eventId))
+      .map(setFiles)
+      .mapLeft(() => toast.error("Failed to fetch files for event"));
+  }, [eventId]);
+
+  useEffect(() => { 
+    fetchEvent();
+    fetchFiles();
+  }, [fetchEvent]);
 
   const { _id, creatorid, date, description, name, postDate, endDate, skills, address, city, province, unit, organizer } = event;
 
@@ -30,44 +42,53 @@ const ViewEvent = props => {
 
   const uploadFile = async e => {
     const { files } = e.target;
-    console.log(Array.from(files));
     (await uploadFileForEvent(_id, Array.from(files)))
-      .map(x => {
-        console.log('file', x);
-        toast.success("succesfully uploaded files")
-      })
+      .map(x => toast.success("succesfully uploaded files"))
       .mapLeft(toast.error);
   };
 
-  const registerEvent = () => {
-    // await API.registerEvent(eventId or eventName, user.username or id)
-    toast.success('Event Registered Successfully: ' + name, {
-      position: toast.POSITION.TOP_CENTER
-    });
+  const registerEvent = async () => {
+    (await API.registerForEvent(eventId))
+      .map( msg => {
+        toast.success(msg);
+        setIsRegistered(true);
+      })
+      .mapLeft(toast.error);
   }
 
-  const checkRegistered = () => {
-    // check if user already registered this event
-    // if not
-    return (<Button onClick={() => registerEvent()}>Register</Button>);
+  const checkIsUserRegistered = (participants) => {
+    console.log(participants);
+    console.log(user._id);
+    if (participants.find(x => x._id === user._id)) {
+      setIsRegistered(true);
+    }
   }
+
+  const checkRegistered = async () => {
+    // check if user already registered this event
+    (await API.getEventParticipantsByEventId(eventId))
+    .map(participants => checkIsUserRegistered(participants))
+    .mapLeft(toast.error);
+  }
+
+  useEffect(() => { checkRegistered(); }, [checkRegistered]);
 
   return (
     <div className="event-container">
       <div className="event-details-container">
       <Row>
         <Col><h4>{name}</h4></Col>
-        <Col xs='auto'>Posted Date: {new Date(postDate).toDateString()}</Col>
       </Row>
       {/* Just temporary debugging displays */}
       <Row>
-        <Col><h5>Organizer: {creatorid}</h5></Col>
+        <Col><h5>organizer: {creatorid}</h5></Col>
       </Row>
       <h5>me: {user._id}</h5>
       <ul>
         <Row>
-          <Col>Event Start Date: {new Date(date).toLocaleString()}</Col>
-          <Col>Event End Date: {new Date(endDate).toLocaleString()}</Col>
+          <Col>Event Start Date: {new Date(date).toString()}</Col>
+          <Col>Event End Date: {new Date(endDate).toString()}</Col>
+          <Col>Posted Date: {new Date(postDate).toString()}</Col>
         </Row>
         <Row>
           <Col>Organizer: {organizer}</Col>
@@ -75,23 +96,25 @@ const ViewEvent = props => {
         <Row noGutters={true}>
           <Col xs='auto'>Location: {address + (unit ? ' ' + unit : '') + (city ? ', ' + city : '') + (province ? ', ' + province: '')}</Col>
         </Row>
-        Skills Required:
-          <Row>
+        <Row>
           <Col>
+            Skills Required:
             <ul>
               {skills ? skills.map(skill => <li key={skill}>{skill}</li>) : null}
             </ul>
           </Col>
         </Row>
         <Row>
-          <Col>Description: {<div className='event-description'> {description} </div>}</Col>
+          <Col>Description: {description}</Col>
         </Row>
       </ul>
       <br />
+      {/* {files.map(f => <div key={f._id} onClick={() => downloadFile(f._id)}>{f.file.name}</div>)} */}
+      {files.map(f => <div key={f._Id}><a href={`/api/event/${eventId}/file/${f._id}`}>{f.file.name}</a><br /></div>)}
+      { isRegistered ? <h5>Registered!</h5> : <Button onClick={() => registerEvent()}>Register</Button>}
       {/* Show button to add event file if the user is the creator of the event */}
       {/* /api/event/event_id/file/file_id */}
-      {checkRegistered()}
-      {creatorid === user._id && <input type="file" onChange={uploadFile} multiple className='event-file-upload'/>}
+      {creatorid === user._id && <input type="file" onChange={uploadFile} multiple />}
     </div>
   </div>
   );
