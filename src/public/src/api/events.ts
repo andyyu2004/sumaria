@@ -41,13 +41,16 @@ export async function getEventFileIds(eventid: string) {
         .catch(apiErrorHandler);
 }
 
-export function getEventsByUserId(userid: string) {
-    // temp code until api is done
-    return new Right([]);
-    /*
-    const { data } = axios.get(`/api/events/${userid}`)
-    return data.error ? new Left(data.message) : new Right(data.events);
-    */
+export async function getEventsForUser() {
+    return axios.get(`/api/user/events`)
+        .then(res => new Right(res.data.file))
+        .catch(apiErrorHandler);
+}
+
+export async function deleteEvent(eventid: string) {
+    return axios.delete(`/api/event/${eventid}`)
+    .then(_ => new Right("Event deleted"))
+    .catch(apiErrorHandler);
 }
 
 export async function registerForEvent(eventid: string) {

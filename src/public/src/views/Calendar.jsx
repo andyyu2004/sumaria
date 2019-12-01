@@ -87,15 +87,8 @@ const MyCalendar = props => {
   // same as in profile
 
   const fetchEvents = useCallback(async () => {
-    (await API.getUserByUsername(username))
-      .map(async user => {
-        // console.log(user);
-        // Get events of an user
-        (await API.getEventsByUserId(user._id))
-        .map(setEvents)
-        .mapLeft(toast.error);
-        return null;
-      })
+      (await API.getEventsForUser())
+      .map(setEvents)
       .mapLeft(toast.error);
   }, [username]);
 

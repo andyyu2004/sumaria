@@ -1,4 +1,4 @@
-import { getEvents, addEvent, cancelEventRegistration, getEventById, getEventsByUserId, registerForEvent, getEventParticipantsByEventId, getEventFileIds, downloadFile } from './events';
+import { getEvents, deleteEvent, addEvent, cancelEventRegistration, getEventById, getEventsForUser, registerForEvent, getEventParticipantsByEventId, getEventFileIds, downloadFile } from './events';
 import { getUserById, getUserByUsername } from './profiles';
 import { signup, login, updateUser } from './user';
 import { createCompany, getCompanyById } from './company';
@@ -10,7 +10,8 @@ import axios from 'axios';
 axios.defaults.withCredentials = true;
 
 const API = {
-    getEventsByUserId,
+    deleteEvent,
+    getEventsForUser,
     cancelEventRegistration,
     getEvents,
     signup,
