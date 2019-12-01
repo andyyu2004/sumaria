@@ -25,3 +25,8 @@
 .event-file-upload {
     margin-left:10px;
 }
+
+.event-hr {
+    margin-top:5px;
+    border-top: solid 2px lightgray;
+}

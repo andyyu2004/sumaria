@@ -24,8 +24,7 @@ const DisplayEvent = ({ event }) => {
         <hr className='display-event-hr'/>
         <ul>
           <Row>
-            <Col>Event Start Date: {new Date(date).toLocaleString()}</Col>
-            <Col>Event End Date: {new Date(endDate).toLocaleString()}</Col>
+          <Col>Event Date: {new Date(date).toLocaleString() + ' - ' + new Date(endDate).toLocaleString()}</Col>
           </Row>
           <Row>
             <Col>Organizer: {organizer}</Col>

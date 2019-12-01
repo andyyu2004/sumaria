@@ -96,7 +96,9 @@ const ViewEvent = props => {
       <div className="event-details-container">
       <Row>
         <Col><h4>{name}</h4></Col>
+        <Col xs='auto'>Posted Date: {new Date(postDate).toLocaleString()}</Col>
       </Row>
+      <hr className='event-hr'/>
       {/* Just temporary debugging displays */}
       <Row>
         <Col><h5>organizer: {creatorid}</h5></Col>
@@ -104,9 +106,7 @@ const ViewEvent = props => {
       <h5>me: {user._id}</h5>
       <ul>
         <Row>
-          <Col>Event Start Date: {new Date(date).toString()}</Col>
-          <Col>Event End Date: {new Date(endDate).toString()}</Col>
-          <Col>Posted Date: {new Date(postDate).toString()}</Col>
+          <Col>Event Date: {new Date(date).toLocaleString() + ' - ' + new Date(endDate).toLocaleString()}</Col>
         </Row>
         <Row>
           <Col>Organizer: {organizer}</Col>
