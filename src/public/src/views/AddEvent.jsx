@@ -51,12 +51,13 @@ const AddEvent = props => {
     };
 
     const res = await API.addEvent(event);
-    console.log('event', event);
+    //console.log('event', event);
     res.map(event => {
-      console.log(`Successfully added event: returned event = ${event.name}`);
+      //console.log(`Successfully added event: returned event = ${event.name}`);
       toast.success("Successfully added event: " + event.name, {
         position: toast.POSITION.TOP_CENTER
       });
+      return null;
     }).mapLeft(err => {
       console.log(err);
       toast.error(err, {
@@ -72,7 +73,7 @@ const AddEvent = props => {
       var e = endDate.split("-");
       var sy = s[0], sm = s[1], sd = s[2];
       var ey = e[0], em = e[1], ed = e[2];
-      if (sy > ey || (sy == ey && sm > em) || (sy == ey && sm == em && sd > ed)) {
+      if (sy > ey || (sy === ey && sm > em) || (sy === ey && sm === em && sd > ed)) {
         //alert('End date cannot be earlier than start date!');
         toast.error('End date cannot be earlier than start date!', {
           position: toast.POSITION.TOP_CENTER

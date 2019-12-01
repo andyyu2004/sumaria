@@ -52,6 +52,7 @@ const ViewEvent = props => {
       .map( msg => {
         toast.success(msg);
         setIsRegistered(true);
+        return null;
       })
       .mapLeft(toast.error);
   }
@@ -61,6 +62,7 @@ const ViewEvent = props => {
     .map( msg => {
       toast.success(msg);
       setIsRegistered(false);
+      return null;
     })
     .mapLeft(toast.error);
   }

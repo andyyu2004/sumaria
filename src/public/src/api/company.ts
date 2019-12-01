@@ -1,6 +1,7 @@
 import { Company } from "../types/Company";
 import axios from "axios";
-import { Right, Left, Either } from "../types/Either";
+// unused: Left
+import { Right, Either } from "../types/Either";
 import { apiErrorHandler } from "./util";
 
 export async function createCompany(company: Company): Promise<Either<string, Company>> {

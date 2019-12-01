@@ -7,7 +7,7 @@ import { withProtection } from '../components/hoc';
 
 
 const ImportExcel = props => {
-  const [excel, setExcel] = useState([["firstname", "lastname"], ["a", "b"]]);
+  //const [excel, setExcel] = useState([["firstname", "lastname"], ["a", "b"]]);
   const [sheet, setSheet] = useState({
     cols: [],
     rows: [],

@@ -1,7 +1,8 @@
 import { createStore, applyMiddleware } from 'redux';
 import rootReducer from '../reducers';
 import logger from 'redux-logger';
-import { persistStore, persistReducer, createTransform } from 'redux-persist';
+// unused: createTransform
+import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import socketio from 'socket.io-client';
 

@@ -1,5 +1,6 @@
 import { Conversation } from "../types/Chat";
-import { SetUserAction, AddConversationAction, SetConversationsAction, LogoutAction, NewNotificationAction, DismissNotificationAction, UpdateUserAction } from ".";
+// unused AddConversationAction, SetConversationsAction,
+import { SetUserAction, LogoutAction, NewNotificationAction, DismissNotificationAction, UpdateUserAction } from ".";
 import { User } from "../types/User";
 import { TNotification } from "../types/notifications";
 

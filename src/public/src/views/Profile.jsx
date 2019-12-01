@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { DisplayEvent } from '../components';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useState } from 'react';
+//import { DisplayEvent } from '../components';
+import { useDispatch } from 'react-redux';
 import API from '../api';
-import { Left } from '../types/Either';
+//import { Left } from '../types/Either';
 import './Profile.css';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -16,15 +16,7 @@ import { updateUser } from '../actions/actionCreators';
 const editIcon = { fontSize: "0.89rem", padding: "0", border: "none", background: "none" };
 
 const Profile = props => {
-  const errorUser = {
-    "id": -1,
-    "username": "Unknown",
-    "description": "N/A",
-    "password": "N/A",
-    "email": "N/A",
-    "type": "N/A",
-    "events": [0]
-  };
+
   let user = useUser();
   const [firstName, setFirstName] = useState(user.firstname);
   const [preferName, setPreferName] = useState(user.prefername);
@@ -152,7 +144,7 @@ const Profile = props => {
         }
         break;
       case 'address':
-        if (street === user.street && city === user.city && province === user.province && user.unit === user.unit) {
+        if (street === user.street && city === user.city && province === user.province && unit === user.unit) {
           displayNoChange();
           return;
         }
@@ -207,7 +199,7 @@ const Profile = props => {
   }
 
   const editProfile = (prop) => {
-    if (prop == 'address') {
+    if (prop === 'address') {
       var inputStreet = document.getElementById('address-street');
       var inputCity = document.getElementById('address-city');
       var inputProvince = document.getElementById('province');

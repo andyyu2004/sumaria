@@ -1,16 +1,18 @@
 import { Link, navigate } from '@reach/router';
-import React, { MouseEvent, useEffect, useCallback } from 'react';
-import { Button, Nav, Navbar, Dropdown } from 'react-bootstrap';
+// unused: useEffect, useCallback
+import React, { MouseEvent } from 'react';
+// unused: Dropdown
+import { Button, Nav, Navbar } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import usericon from '../assets/images/profile_pic_placeholder.png';
 import { AppState } from '../types/states';
 import { UserType } from '../types/User';
-import Select from 'react-select';
-import notificationicon from '../assets/images/notification_icon.png';
+//import Select from 'react-select';
+//import notificationicon from '../assets/images/notification_icon.png';
 import './Header.css';
-import Notification from './Notification';
-import { newNotification } from '../actions/actionCreators';
-import uuid from 'uuid/v4';
+//import Notification from './Notification';
+//import { newNotification } from '../actions/actionCreators';
+//import uuid from 'uuid/v4';
 import { ToastContainer } from 'react-toastify';
 
 type PropTypes = {
@@ -22,8 +24,8 @@ const Header: React.FC<PropTypes> = ({ title, subtitle }) => {
   
   // const { userType } = useSelector<AppState, UserState>(state => state.user)
   const dispatch = useDispatch();
-
-  const { user, socket, notifications } = useSelector<AppState, AppState>(state => state);
+  // unused: notifications
+  const { user, socket } = useSelector<AppState, AppState>(state => state);
   const usertype: UserType = user.usertype as UserType;
 
   const handleLogout = (e: MouseEvent<HTMLElement>) => {

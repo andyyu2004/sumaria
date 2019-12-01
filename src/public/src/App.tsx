@@ -33,6 +33,7 @@ const App: React.FC = () => {
         .map(({ _id, username }) => {
           dispatch(setUser({ username, usertype: "volunteer", _id, events: [] }));
           navigate("/event/");
+          return null;
         });
     }],
   ];
