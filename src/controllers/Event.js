@@ -51,4 +51,7 @@ async function deRegister(userID, eventID) {
     return await EventParticipant.remove({user: userID, event: eventID})
 }
 
-module.exports = {create, getAll, getById, addFile, getAllFiles, getFile, getUserEvents, getEventParticipants,getEventParticipant,register,deRegister}
+async function deleteEvent(eventID) {
+    return await Event.remove({_id: eventID});
+}
+module.exports = {create, getAll, getById, addFile, getAllFiles, getFile, getUserEvents, getEventParticipants,getEventParticipant,register,deRegister,deleteEvent}
