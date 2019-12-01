@@ -77,7 +77,6 @@ router.post("/company", async (req,res) => {
 
 router.post("/event", async (req,res) => {
     const { creatorid, name, organizer, date, enddate, description, city, province, numVolunteers, address, skills } = req.body;
-    console.log(req.body);
     if (!creatorid || !name || !organizer || !date || !enddate || !description || !numVolunteers || !address || !skills) return res.status(400).json({error: true, message: "Missing fields"})
     try {
         var event = await controllers.event.create(creatorid, req.body.name, req.body.organizer, req.body.date, req.body.enddate, req.body.description, req.body.numVolunteers, req.body.address, req.body.city, req.body.province, req.body.unit, req.body.skills);
@@ -214,7 +213,7 @@ router.delete("/event/:id/participants", async (req,res) => {
     try {
         var participant = await controllers.event.getEventParticipant(req.params.id, req.session.user._id)
         if (!participant) return res.json({error: true, message: "Not registered for this event"})
-        await controllers.event.deRegister(req.session.user._id, req.params.id);
+        var a = await controllers.event.deRegister(req.session.user._id, req.params.id);
         res.json({error: false})
     } catch(e) {
         console.log(e);

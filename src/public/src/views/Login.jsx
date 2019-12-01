@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux'
 import API from '../api'
 import SumariaLogo from '../assets/images/logos/sumaria_logo.png'
 import './Login.css'
-import { UserType } from '../types/User'
+//import { UserType } from '../types/User'
 import { setUser } from '../actions/actionCreators'
 import { toast } from 'react-toastify';
 //import 'react-toastify/dist/ReactToastify.minimal.css';
@@ -65,6 +65,7 @@ const Login = props => {
       });
       dispatch(setUser(user));
       navigate("/");
+      return null;
     }).mapLeft(err => {
       console.log(err);
       // setMessage(`${err} - Login Failed`),
