@@ -15,11 +15,7 @@ const express = require("express"),
 
 app.use("/api", routes.api);
 
-// app.use("/", routes.public);
-
-// The routes.public is just serving an empty page for me for some reason. Temporarily hot fix
-app.use(express.static('public/build'));
-app.get('/', (req, res) => res.sendFile('public/build/index.html'));
+app.use("/", routes.public);
 
 const server = http.createServer(app);
 const io = socketio.listen(server);
