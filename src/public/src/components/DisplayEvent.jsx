@@ -1,5 +1,4 @@
 import React from 'react';
-import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import '../views/Browse.css'
@@ -31,10 +30,7 @@ const DisplayEvent = ({ event }) => {
             <Col>Organizer: {organizer}</Col>
           </Row>
           <Row noGutters={true}>
-            <Col xs='auto'>Location: {address}</Col>
-            <Col xs='auto' className='browse-fix-spacing'>{unit ? ' ' + unit : ''}</Col>
-            <Col xs='auto'>{city ? ', ' + city : ''}</Col>
-            <Col xs='auto'>{province ? ', ' + province: ''}</Col>
+            <Col xs='auto'>Location: {address + (unit ? ' ' + unit : '') + (city ? ', ' + city : '') + (province ? ', ' + province: '')}</Col>
           </Row>
           Skills Required:
           <Row>

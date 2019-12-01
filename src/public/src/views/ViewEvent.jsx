@@ -73,10 +73,7 @@ const ViewEvent = props => {
           <Col>Organizer: {organizer}</Col>
         </Row>
         <Row noGutters={true}>
-          <Col xs='auto'>Location: {address}</Col>
-          <Col xs='auto' className='event-fix-spacing'>{unit ? ' ' + unit : ''}</Col>
-          <Col xs='auto'>{city ? ', ' + city : ''}</Col>
-          <Col xs='auto'>{province ? ', ' + province: ''}</Col>
+          <Col xs='auto'>Location: {address + (unit ? ' ' + unit : '') + (city ? ', ' + city : '') + (province ? ', ' + province: '')}</Col>
         </Row>
         Skills Required:
           <Row>
@@ -94,7 +91,7 @@ const ViewEvent = props => {
       {/* Show button to add event file if the user is the creator of the event */}
       {/* /api/event/event_id/file/file_id */}
       {checkRegistered()}
-      {creatorid === user._id && <input type="file" onChange={uploadFile} multiple />}
+      {creatorid === user._id && <input type="file" onChange={uploadFile} multiple className='event-file-upload'/>}
     </div>
   </div>
   );

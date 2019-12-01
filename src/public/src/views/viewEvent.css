@@ -21,3 +21,7 @@
 .event-fix-spacing {
     white-space: pre;
 }
+
+.event-file-upload {
+    margin-left:10px;
+}
