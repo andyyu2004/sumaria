@@ -74,20 +74,20 @@ const ViewEvent = props => {
     navigate(`/profile/${userName}/public`);
   }
 
-  const checkIsUserRegistered = (participants) => {
+  const checkIsUserRegistered = useCallback(participants => {
     //console.log(participants);
     setRegisteredParticipants(participants);
     if (participants.find(x => x._id === user._id) && !isRegistered) {
       setIsRegistered(true);
     }
-  }
+  }, [isRegistered, user._id]);
 
-  const checkRegistered = async () => {
+  const checkRegistered = useCallback(async () => {
     // check if user already registered this event
     (await API.getEventParticipantsByEventId(eventId))
     .map(participants => checkIsUserRegistered(participants))
     .mapLeft(toast.error);
-  }
+  }, [checkIsUserRegistered, eventId]);
 
   useEffect(() => { checkRegistered(); }, [checkRegistered]);
 

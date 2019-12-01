@@ -17,7 +17,7 @@ const PublicProfile = props => {
     (await API.getUserByUsername(username))
       .map(setUser)
       .mapLeft(toast.error)
-  }, []);
+  }, [username]);
 
   useEffect(() => { getUser(); }, [getUser]);
 

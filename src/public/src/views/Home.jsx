@@ -47,7 +47,7 @@ const Home = props => {
         <h6 className='home-subtitle'>Recent Posts:</h6>
       </div>
       <div className="row mx-3">
-        {events.slice(-3).map(event => <Col><DisplayEventSquare key={event._id} event={event} /></Col>)}
+        {events.slice(-3).map(event => <Col key={event._id}><DisplayEventSquare key={event._id} event={event} /></Col>)}
       </div>
     </div>
   );
