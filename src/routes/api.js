@@ -172,7 +172,7 @@ router.get("/event/:id/file/:fileID",async (req,res) => {
 
 router.get("/event/:id/file", async (req,res) => {
     try {
-        var file = await controllers.event.getById(req.params.id);
+        var file = await controllers.event.getAllFiles(req.params.id);
         res.send({error: false, file})
     } catch(e) {
         return res.status(500).json({error: true, message: "Server Error"})
