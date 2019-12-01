@@ -26,11 +26,11 @@ const Home = props => {
 
   return (
     <div>
-      <h2 className="m-3 text-center">Home</h2>
+      <h2 className="m-3 text-center ">Home</h2>
       <div className="row mx-3">
-        <Link to="browse" className="col-6">
-          <div className="py-5 mx-1 mb-3 shadow-sm text-center justify-content-center align-items-center d-flex bg-light">
-            <h4 className="py-5"><i className="fa fa-calendar-alt mr-2"></i>Browse for events</h4>
+        <Link to="browse" className="col-4">
+          <div className="mx-1 mb-3 shadow-sm text-center justify-content-center align-items-center d-flex bg-light">
+            <h4><i className="fa fa-calendar-alt mr-2"></i>Browse for events</h4>
           </div>
         </Link>
         <Link to="import" className="col-4">
@@ -44,12 +44,12 @@ const Home = props => {
           </div>
         </Link>
       </div>
-      <Col>
+      <div className="row mx-3">
         <h6 className='home-subtitle'>Recent Posts:</h6>
-      </Col>
-      <Row>
+      </div>
+      <div className="row mx-3">
         {events.slice(-3).map(event => <Col><DisplayEventSquare key={event._id} event={event} /></Col>)}
-      </Row>
+      </div>
     </div>
   );
 }
