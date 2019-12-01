@@ -57,28 +57,26 @@ const ViewEvent = props => {
       <div className="event-details-container">
       <Row>
         <Col><h4>{name}</h4></Col>
+        <Col xs='auto'>Posted Date: {new Date(postDate).toDateString()}</Col>
       </Row>
       {/* Just temporary debugging displays */}
       <Row>
-        <Col><h5>organizer: {creatorid}</h5></Col>
+        <Col><h5>Organizer: {creatorid}</h5></Col>
       </Row>
       <h5>me: {user._id}</h5>
       <ul>
         <Row>
-          <Col>Event Start Date: {new Date(date).toString()}</Col>
-          <Col>Event End Date: {new Date(endDate).toString()}</Col>
-          <Col>Posted Date: {new Date(postDate).toString()}</Col>
+          <Col>Event Start Date: {new Date(date).toLocaleString()}</Col>
+          <Col>Event End Date: {new Date(endDate).toLocaleString()}</Col>
         </Row>
         <Row>
           <Col>Organizer: {organizer}</Col>
         </Row>
-        <Row>
         <Row noGutters={true}>
           <Col xs='auto'>Location: {address}</Col>
           <Col xs='auto' className='event-fix-spacing'>{unit ? ' ' + unit : ''}</Col>
           <Col xs='auto'>{city ? ', ' + city : ''}</Col>
           <Col xs='auto'>{province ? ', ' + province: ''}</Col>
-          </Row>
         </Row>
         Skills Required:
           <Row>
@@ -89,13 +87,13 @@ const ViewEvent = props => {
           </Col>
         </Row>
         <Row>
-          <Col>Description: {description}</Col>
+          <Col>Description: {<div className='event-description'> {description} </div>}</Col>
         </Row>
       </ul>
       <br />
-      {checkRegistered()}
       {/* Show button to add event file if the user is the creator of the event */}
       {/* /api/event/event_id/file/file_id */}
+      {checkRegistered()}
       {creatorid === user._id && <input type="file" onChange={uploadFile} multiple />}
     </div>
   </div>

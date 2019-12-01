@@ -76,7 +76,7 @@ const Chat: React.FC<PropType> = ({ conversation }) => {
   return (
     <div className="chat-flex-container">
       <div className="chat-container" key="chat-view-container">
-        <h5>{conversation.name} ({conversation._id})</h5>
+        <div className='chat-title'><h5>{conversation.name} ({conversation._id})</h5></div>
       <div className="message-container" ref={chatRef}>
         {messages.map(({ message, _id, username, createdAt }) => {
           const date = new Date(createdAt);

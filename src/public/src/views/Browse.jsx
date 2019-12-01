@@ -60,6 +60,7 @@ const Browse = props => {
     return cities.map(constructOption)
 
   }
+
   let eventsFiltered = skill ? (new fuse(events, optionsSkills)).search(skill) : events;
   eventsFiltered = keyword ? (new fuse(eventsFiltered, optionsName)).search(keyword) : eventsFiltered;
   eventsFiltered = eventsFiltered.filter(event => (event.date >= startDate && event.date <= endDate ));
@@ -77,32 +78,32 @@ const Browse = props => {
       <Form.Row>
         <Form.Group as={Col} xs={3} className='browse-input'>
           <Form.Label>Skill Name</Form.Label>
-          <Form.Control placeholder="Search for a skill..." onChange={e => setSkill(e.target.value)} />
+          <Form.Control className='browse-filters' placeholder="Search for a skill..." onChange={e => setSkill(e.target.value)} />
         </Form.Group>
         <Form.Group as={Col} xs={3}>
           <Form.Label>Event Name</Form.Label>
-          <Form.Control placeholder="Search for an event..." onChange={e => setKeyword(e.target.value)} />
+          <Form.Control className='browse-filters' placeholder="Search for an event..." onChange={e => setKeyword(e.target.value)} />
         </Form.Group>
         <Form.Group as={Col} controlId="formStartDate">
           <Form.Label>After this date:</Form.Label>
-          <input type="date" className="form-control" value={startDate} onChange={e => setStartDate(e.target.value)} />
+          <input type="date" className="form-control browse-filters" value={startDate} onChange={e => setStartDate(e.target.value)} />
         </Form.Group>
         <Form.Group as={Col} controlId="formEndDate">
           <Form.Label>Before this date</Form.Label>
-          <input type="date" className="form-control" value={endDate} onChange={e => setEndDate(e.target.value)} />
+          <input type="date" className="form-control browse-filters" value={endDate} onChange={e => setEndDate(e.target.value)} />
         </Form.Group>
       </Form.Row>
       <Form.Row>
         <Form.Group as={Col}>
           <Form.Label>City</Form.Label>
-          <select id="address-city" className="form-control" placeholder="City"
+          <select className='browse-filters' id="address-city" className="form-control" placeholder="City"
             value={city} onChange={e => setCity(e.target.value)}>
             {generateCityOptions(province)}
           </select>
         </Form.Group>
         <Form.Group as={Col}>
           <Form.Label>Province</Form.Label>
-          <select id="province" className="form-control" value={province} onChange={e => setProvince(e.target.value)} >
+          <select className='browse-filters' id="province" className="form-control" value={province} onChange={e => setProvince(e.target.value)} >
             <option value="none" disabled hidden>Province</option>
             <option value="AB">Alberta</option>
             <option value="BC">British Columbia</option>

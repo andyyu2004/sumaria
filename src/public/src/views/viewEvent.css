@@ -10,6 +10,12 @@
     padding:12px;
     background-color:white;
     border-radius:10px;
+    width:80vw;
+}
+
+.event-description {
+    margin-right:15px;
+    overflow:hidden;
 }
 
 .event-fix-spacing {
