@@ -165,16 +165,19 @@ router.get("/event/:id", async(req,res) => {
         return res.status(500).json({error: true, message: "Server Error"})
     }
 })
+
 router.delete("/event/:id", async (req,res) => {
     try {
         var event = await controllers.event.getById(req.params.id);
-        if (event.creatorid != req.user._id) return res.status(401).json({error: true, message: "You are not the owner of this event"})
+        if (event.creatorid != req.session.user._id) return res.status(401).json({error: true, message: "You are not the owner of this event"})
         await controllers.event.deleteEvent(req.params.id);
         res.json({error: false})
     } catch(e) {
+        console.log(e);
         return res.status(500).json({error: true, message: "Server Error"})
     }
 })
+
 router.get("/event/:id/file/:fileID",async (req,res) => {
     try {
         var file = await controllers.event.getFile(req.params.fileID);
