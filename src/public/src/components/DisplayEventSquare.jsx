@@ -20,9 +20,9 @@ const DisplayEventSquare = ({ event }) => {
         <Row>
           <Col><h4>{name}</h4></Col>
         </Row>
+        <hr className='display-event-hr'/>
         <Row>
-        <Col>Start Date: {new Date(date).toLocaleString()}</Col>
-        <Col>End Date: {new Date(endDate).toLocaleString()}</Col>
+        <Col>Event Date: {new Date(date).toLocaleString() + ' - ' + new Date(endDate).toLocaleString()}</Col>
         </Row>
         <Row>
         <Col>Organizer: {organizer}</Col>

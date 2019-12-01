@@ -35,6 +35,11 @@
     transition:0.5s;
 }
 
+.browse-square:hover hr {
+    border-top: solid 2px #90c0d3;
+    transition:0.5s;
+}
+
 .browse-info {
     overflow: hidden;
     text-overflow: ellipsis;
@@ -66,5 +71,4 @@
 .display-event-hr {
     margin-top:5px;
     border-top: solid 2px lightgray;
-
 }
