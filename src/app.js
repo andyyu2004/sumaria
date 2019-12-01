@@ -19,7 +19,7 @@ app.use("/", routes.public);
 const server = http.createServer(app);
 const io = socketio.listen(server);
 
-const PORT = process.env.PORT || 80;
+const PORT = process.env.PORT || 3001;
 
 mongoose.connect(DB_CONNECTION_STRING, { 
     useUnifiedTopology: true,
