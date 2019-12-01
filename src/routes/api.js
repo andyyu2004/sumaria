@@ -38,7 +38,7 @@ router.post("/user/login", async (req,res) => {
         if (user == false) return res.status(401).json({error: true, message: "Invalid username or password"})
         // Login success
         
-        res.session = { user };
+        req.session = { user };
         res.status(200).json({error: false, user})
 
 
@@ -165,6 +165,7 @@ router.get("/event/:id/file/:fileID",async (req,res) => {
         res.header("content-type", file.file.mimetype)
         res.sendFile(path.resolve(file.file.path));
     } catch(e) {
+        console.log(e);
         return res.status(500).json({error: true, message: "Server Error"})
         
     }
@@ -204,6 +205,7 @@ router.post("/event/:id/participants", async (req,res) => {
         var participant = await controllers.event.register(req.session.user._id, req.params.id);
         res.json({error: false})
     } catch(e) {
+        console.log(e);
         return res.status(500).json({error: true, message: "Server Error"})
     }
 })

@@ -13,22 +13,28 @@ import { navigate } from '@reach/router';
 
 /* Component for viewing a specific event in detail */
 const ViewEvent = props => {
+  const { eventId } = props;
 
   const [event, setEvent] = useState({});
-  
-  const { eventId } = props;
+  const [files, setFiles] = useState([]);
+  console.log(files);
 
   const fetchEvent = useCallback(async () => {
     (await API.getEventById(eventId))
-      .map(async event => {
-        console.log("SDFLSJKHSDF");
-        setEvent(event);
-        console.log('files', await API.getEventFileIds(eventId));
-      })
+      .map(setEvent)
       .mapLeft(_ => navigate('/404'))
   }, [eventId]);
 
-  useEffect(() => { fetchEvent() }, [fetchEvent]);
+  const fetchFiles = useCallback(async () => {
+    (await API.getEventFileIds(eventId))
+      .map(setFiles)
+      .mapLeft(() => toast.error("Failed to fetch files for event"));
+  }, [eventId]);
+
+  useEffect(() => { 
+    fetchEvent();
+    fetchFiles();
+  }, [fetchEvent]);
 
   const { _id, creatorid, date, description, name, postDate, endDate, skills, address, city, province, unit, organizer } = event;
 
@@ -52,6 +58,12 @@ const ViewEvent = props => {
     // if not
     return (<Button onClick={() => registerEvent()}>Register</Button>);
   }
+
+  const downloadFile = async fid => {
+    (await API.downloadFile(eventId, fid))
+      .map(toast.success)
+      .mapLeft(toast.error);
+  };
 
   return (
     <div className="event-container">
@@ -95,6 +107,7 @@ const ViewEvent = props => {
       </ul>
       <br />
       {checkRegistered()}
+      {files.map(f => <div key={f._id} onClick={() => downloadFile(f._id)}>{f.file.name}</div>)}
       {/* Show button to add event file if the user is the creator of the event */}
       {/* /api/event/event_id/file/file_id */}
       {creatorid === user._id && <input type="file" onChange={uploadFile} multiple />}

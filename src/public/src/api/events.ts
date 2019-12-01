@@ -47,6 +47,13 @@ export async function registerForEvent(eventid: string) {
         .catch(apiErrorHandler);
 }
 
+export async function downloadFile(eventid: string, fileid: string) {
+    // http://localhost:3001/api/event/5de2f86d231f8a11ac910c3b/file/5de31c302ac3222a4a186274
+    return axios.get(`/api/event/${eventid}/file/${fileid}`)
+        .then(_ => new Right("Successfully downloaded file"))
+        .catch(apiErrorHandler);
+}
+
 /** Given a list of event ids, return the events in order of the closest upcoming one first */
 // export async function getEventsByIds(ids: number[]): Promise<Either<string, Event[]>> {
 //     const events = mockdata.events.filter(event => ids.includes(event.id));
