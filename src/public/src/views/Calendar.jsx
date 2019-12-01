@@ -90,7 +90,7 @@ const MyCalendar = props => {
       (await API.getEventsForUser())
       .map(setEvents)
       .mapLeft(toast.error);
-  }, [username]);
+  }, []);
 
   useEffect(() => { fetchEvents(); }, [fetchEvents]);
 

@@ -61,7 +61,7 @@ export async function registerForEvent(eventid: string) {
 
 export async function cancelEventRegistration(eventid: string) {
     return axios.delete(`/api/event/${eventid}/participants`)
-        .then(_ => {return new Right("Registration Canceled");})
+        .then(_ => new Right("Registration Canceled"))
         .catch(apiErrorHandler);
 }
 

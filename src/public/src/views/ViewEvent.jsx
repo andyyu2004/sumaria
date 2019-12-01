@@ -72,47 +72,39 @@ const ViewEvent = props => {
 
   const registerEvent = async () => {
     (await API.registerForEvent(eventId))
-      .map( msg => {
-        toast.success(msg);
+      .map(msg => {
         setIsRegistered(true);
-        return null;
+        return toast.success(msg);
       })
       .mapLeft(toast.error);
   }
 
   const cancelEventRegistration = async () => {
     (await API.cancelEventRegistration(eventId))
-    .map( msg => {
-      toast.success(msg);
-      setIsRegistered(false);
-      return null;
-    })
-    .mapLeft(toast.error);
-  }
+      .map(msg => {
+        toast.success(msg);
+        return setIsRegistered(false);
+      })
+      .mapLeft(toast.error);
+  };
 
-  const publicProfile = userName => {
-    navigate(`/profile/${userName}/public`);
-  }
+  const publicProfile = userName => navigate(`/profile/${userName}/public`);
 
   const confirmDelete = async () => {
     var confirmed = window.confirm("Are you sure you want to delete this event?");
     if (confirmed) {
       (await API.deleteEvent(eventId))
-      .map( msg => {
-        toast.success(msg);
-        return null;
-      })
-    .mapLeft(toast.error);
+        .map(toast.success)
+        .mapLeft(toast.error);
     }
-  }
+  };
 
   const checkIsUserRegistered = useCallback(participants => {
     //console.log(participants);
     setRegisteredParticipants(participants);
     let userRegisterIndex = participants.findIndex(x => x._id === user._id);
-    if (userRegisterIndex >= 0 && !isRegistered) {
+    if (userRegisterIndex >= 0 && !isRegistered) 
       setIsRegistered(userRegisterIndex + 1);
-    }
   }, [isRegistered, user._id]);
 
   const checkRegistered = useCallback(async () => {
@@ -161,9 +153,9 @@ const ViewEvent = props => {
       </ul>
       <br />
       {/* {files.map(f => <div key={f._id} onClick={() => downloadFile(f._id)}>{f.file.name}</div>)} */}
-      {files.map(f => <div key={f._Id}><a href={`/api/event/${eventId}/file/${f._id}`}>{f.file.name}</a><br /></div>)}
+      {files.map(f => <div key={f._id}><a href={`/api/event/${eventId}/file/${f._id}`}>{f.file.name}</a><br /></div>)}
       {isCreator && <input type="file" onChange={uploadFile} multiple />}
-      { isRegistered ? <Button style={{float: 'right'}} onClick={() => cancelEventRegistration()}>{(isRegistered - numVolunteers) ? 'Cencel Waitlist' : 'Cancel'}</Button> : <Button style={{float: 'right'}} onClick={() => registerEvent()}>{waitlisted ? 'Waitlist' : 'Register'}</Button>}
+      { isRegistered ? <Button style={{float: 'right'}} onClick={() => cancelEventRegistration()}>{(isRegistered - numVolunteers) ? 'Cancel Waitlist' : 'Cancel'}</Button> : <Button style={{float: 'right'}} onClick={() => registerEvent()}>{waitlisted ? 'Waitlist' : 'Register'}</Button>}
       <br/><br/>{ isCreator && <Button style={{float: 'right'}} onClick={() => confirmDelete()} className="btn btn-secondary">Delete</Button>}
       {/* Show button to add event file if the user is the creator of the event */}
       <br/><br/><br/>
