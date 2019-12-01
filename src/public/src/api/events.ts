@@ -49,7 +49,7 @@ export async function registerForEvent(eventid: string) {
 
 export async function downloadFile(eventid: string, fileid: string) {
     // http://localhost:3001/api/event/5de2f86d231f8a11ac910c3b/file/5de31c302ac3222a4a186274
-    return axios.get(`/api/event/${eventid}/file/${fileid}`)
+    return axios.get(`/api/event/${eventid}/file/${fileid}`, { responseType: "blob" })
         .then(_ => new Right("Successfully downloaded file"))
         .catch(apiErrorHandler);
 }

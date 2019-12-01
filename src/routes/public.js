@@ -5,6 +5,7 @@ const express = require("express"),
 router.use("/build", express.static(path.resolve(__dirname + "/../public/build")));
 
 router.use("/", (req,res) => {
+    console.log("Serving root");
     res.sendFile(path.resolve(__dirname + "/../public/build/index.html"));
 });
 

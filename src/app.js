@@ -14,7 +14,12 @@ const express = require("express"),
         DB_CONNECTION_STRING = "mongodb+srv://" + DB_USERNAME + ":" + DB_PASSWORD + "@sumaria-fcieh.mongodb.net/test?retryWrites=true&w=majority";
 
 app.use("/api", routes.api);
-app.use("/", routes.public);
+
+// app.use("/", routes.public);
+
+// The routes.public is just serving an empty page for me for some reason. Temporarily hot fix
+app.use(express.static('public/build'));
+app.get('/', (req, res) => res.sendFile('public/build/index.html'));
 
 const server = http.createServer(app);
 const io = socketio.listen(server);
