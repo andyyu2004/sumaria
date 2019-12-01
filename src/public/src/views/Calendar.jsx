@@ -88,14 +88,17 @@ const onEventClick = (event) => {
 const MyCalendar = props => {
 
   const { username } = useSelector(state => state.user);
-  const [userEvents, setUserEvents] = useState([]);
+  const [userEvents, setEvents] = useState([]);
   // same as in profile
 
   const fetchEvents = useCallback(async () => {
     (await API.getUserByUsername(username))
-      .map(user => {
+      .map(async user => {
         console.log(user);
         // Get events of an user
+        (await API.getEventsByUserId(user._id))
+        .map(setEvents)
+        .mapLeft(toast.error);
       })
       .mapLeft(toast.error);
   }, [username]);
@@ -129,6 +132,7 @@ const MyCalendar = props => {
       description: 'Today'
     });
   } else {
+    // examples
     events = [
       {
         id: 0.5,
@@ -181,6 +185,14 @@ const MyCalendar = props => {
         desc: 'Tri-campus'
       }
     ];
+    events = [];
+    events.push({
+      id: 0,
+      title: 'Today',
+      start: new Date(new Date().setHours(new Date().getHours() - 1)),
+      end: new Date(new Date().setHours(new Date().getHours())),
+      description: 'Today'
+    });
     // alter event (obj) props
     events.map((event) => {
       renameProperty(event, 'title', 'name');

@@ -34,7 +34,7 @@ const ViewEvent = props => {
   useEffect(() => { 
     fetchEvent();
     fetchFiles();
-  }, [fetchEvent]);
+  }, [fetchEvent, fetchFiles]);
 
   const { _id, creatorid, date, description, name, postDate, endDate, skills, address, city, province, unit, organizer } = event;
 
@@ -56,10 +56,18 @@ const ViewEvent = props => {
       .mapLeft(toast.error);
   }
 
+  const cancelEventRegistration = async () => {
+    (await API.cancelEventRegistration(eventId))
+    .map( msg => {
+      toast.success(msg);
+      setIsRegistered(false);
+    })
+    .mapLeft(toast.error);
+  }
+
   const checkIsUserRegistered = (participants) => {
-    console.log(participants);
-    console.log(user._id);
-    if (participants.find(x => x._id === user._id)) {
+    //console.log(participants);
+    if (participants.find(x => x._id === user._id) && !isRegistered) {
       setIsRegistered(true);
     }
   }
@@ -111,7 +119,7 @@ const ViewEvent = props => {
       <br />
       {/* {files.map(f => <div key={f._id} onClick={() => downloadFile(f._id)}>{f.file.name}</div>)} */}
       {files.map(f => <div key={f._Id}><a href={`/api/event/${eventId}/file/${f._id}`}>{f.file.name}</a><br /></div>)}
-      { isRegistered ? <h5>Registered!</h5> : <Button onClick={() => registerEvent()}>Register</Button>}
+      { isRegistered ? <button onClick={() => cancelEventRegistration()}>Cancel</button> : <Button onClick={() => registerEvent()}>Register</Button>}
       {/* Show button to add event file if the user is the creator of the event */}
       {/* /api/event/event_id/file/file_id */}
       {creatorid === user._id && <input type="file" onChange={uploadFile} multiple />}

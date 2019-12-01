@@ -41,9 +41,24 @@ export async function getEventFileIds(eventid: string) {
         .catch(apiErrorHandler);
 }
 
+export function getEventsByUserId(userid: string) {
+    // temp code until api is done
+    return new Right([]);
+    /*
+    const { data } = axios.get(`/api/events/${userid}`)
+    return data.error ? new Left(data.message) : new Right(data.events);
+    */
+}
+
 export async function registerForEvent(eventid: string) {
     return axios.post(`/api/event/${eventid}/participants`)
         .then(_ => new Right("Successfully registered"))
+        .catch(apiErrorHandler);
+}
+
+export async function cancelEventRegistration(eventid: string) {
+    return axios.delete(`/api/event/${eventid}/participants`)
+        .then(_ => {return new Right("Registration Canceled");})
         .catch(apiErrorHandler);
 }
 
