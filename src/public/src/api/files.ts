@@ -2,7 +2,7 @@ import axios from "axios";
 import { Right, Left } from "../types/Either";
 
 export async function uploadFileForEvent(eventid: string, files: File[]) {
-    const formData = new FormData();
+    //const formData = new FormData();
     // const config = { headers: { 'Content-Type': 'multipart/form-data' } };
     // formData.append('file', files[0]);
     // const promises = [axios.post(`/api/event/${eventid}/file`, formData)];

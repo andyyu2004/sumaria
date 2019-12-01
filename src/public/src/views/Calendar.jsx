@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import API from '../api';
-import { Left } from '../types/Either';
+//import { Left } from '../types/Either';
 import { navigate } from '@reach/router';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import { Calendar, momentLocalizer, Views } from 'react-big-calendar';
@@ -14,11 +14,6 @@ import { toast } from 'react-toastify';
 //const localizer = globalizeLocalizer(globalize)
 
 //const user = useUser();
-
-function dateFromISO8601(ISOString) {
-  var s = ISOString.match(/\d+/g);
-  return new Date(s[0], s[1] - 1, s[2], s[3], s[4], s[5]);
-}
 
 function renameProperty(obj, oldName, newName) {
   if (oldName === newName) {
@@ -40,7 +35,7 @@ function eventStyleGetter(event, start, end, isSelected) {
   if (duration > 86520000) {
     bgColor = 'rgba(153, 153, 227, 0.95)';
   }
-  if (event.title == 'Today') {
+  if (event.title === 'Today') {
     bgColor = 'rgba(69, 157, 129, 0.95)';
   }
   var style = {
@@ -94,11 +89,12 @@ const MyCalendar = props => {
   const fetchEvents = useCallback(async () => {
     (await API.getUserByUsername(username))
       .map(async user => {
-        console.log(user);
+        // console.log(user);
         // Get events of an user
         (await API.getEventsByUserId(user._id))
         .map(setEvents)
         .mapLeft(toast.error);
+        return null;
       })
       .mapLeft(toast.error);
   }, [username]);
@@ -123,6 +119,7 @@ const MyCalendar = props => {
       //renameProperty(event, 'date', 'start');
       event['start'] = new Date(event['date']);
       event['end'] = new Date(event['endDate']);
+      return null;
     })
     events.push({
       id: 0,
@@ -199,6 +196,7 @@ const MyCalendar = props => {
       renameProperty(event, 'desc', 'description');
       renameProperty(event, 'end', 'endDate');
       renameProperty(event, 'start', 'date');
+      return null;
     })
   }
 

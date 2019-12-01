@@ -14,7 +14,8 @@ import { navigate } from '@reach/router';
  * @returns {JSX.Element}
  */
 const DisplayEventSquare = ({ event }) => {
-    const { _id, date, name, description, postDate, endDate, skills, address, city, province, unit, organizer } = event;
+  // unused const: postDate, skills
+    const { _id, date, name, description, endDate, address, city, province, unit, organizer } = event;
     return (
       <div className='browse-square'>
         <Row>

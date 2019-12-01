@@ -1,15 +1,14 @@
 import { Link } from '@reach/router'
 import './Home.css'
 import React, { useState, useEffect, useCallback } from 'react';
-import * as fuse from 'fuse.js';
-import Form from 'react-bootstrap/Form';
+//import * as fuse from 'fuse.js';
+//import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col'
-import Row from 'react-bootstrap/Row'
+//import Row from 'react-bootstrap/Row'
 import DisplayEventSquare from '../components/DisplayEventSquare.jsx';
 import API from '../api';
 import './Browse.css'
-import { withProtection } from '../components/hoc';
-import cityTable from './cityTable.jsx';
+//import { withProtection } from '../components/hoc';
 import { toast } from 'react-toastify';
 
 const Home = props => {
@@ -44,7 +43,7 @@ const Home = props => {
           </div>
         </Link>
       </div>
-      <div className="row mx-3">
+      <div className="row mx-3 subtitle">
         <h6 className='home-subtitle'>Recent Posts:</h6>
       </div>
       <div className="row mx-3">

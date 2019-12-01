@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { navigate } from '@reach/router';
 import './registerSuccess.css';
 
@@ -27,11 +27,11 @@ const RegisterSuccess = props => {
   return (
     <div className="container bg">
       <h1 className="display-3">Thank You for Joining Us!</h1>
-      <p className="lead"><strong>Please check your email</strong> to activate your account.</p>
       <p>Redirect to <a href="/login">login page</a> in 5 seconds...</p>
     </div>
 
   );
 };
-
+// After setting up SMTP server and related email handlings:
+// <p className="lead"><strong>Please check your email</strong> to activate your account.</p>
 export default RegisterSuccess;
