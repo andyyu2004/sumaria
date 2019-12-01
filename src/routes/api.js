@@ -173,7 +173,6 @@ router.delete("/event/:id", async (req,res) => {
         await controllers.event.deleteEvent(req.params.id);
         res.json({error: false})
     } catch(e) {
-        console.log(e);
         return res.status(500).json({error: true, message: "Server Error"})
     }
 })
@@ -185,7 +184,6 @@ router.get("/event/:id/file/:fileID",async (req,res) => {
         res.header("content-type", file.file.mimetype)
         res.sendFile(path.resolve(file.file.path));
     } catch(e) {
-        console.log(e);
         return res.status(500).json({error: true, message: "Server Error"})
         
     }
@@ -206,7 +204,6 @@ router.post("/event/:id/file", upload.single("file"), async (req,res) => {
         var file = await controllers.event.addFile(req.params.id, req.file);
         res.json({error: false, file})
     } catch(e) {
-        console.log(e)
         return res.status(500).json({error: true, message: "Server Error"})
     }
 })
@@ -225,7 +222,6 @@ router.post("/event/:id/participants", async (req,res) => {
         var participant = await controllers.event.register(req.session.user._id, req.params.id);
         res.json({error: false})
     } catch(e) {
-        console.log(e);
         return res.status(500).json({error: true, message: "Server Error"})
     }
 })
@@ -237,7 +233,6 @@ router.delete("/event/:id/participants", async (req,res) => {
         var a = await controllers.event.deRegister(req.session.user._id, req.params.id);
         res.json({error: false})
     } catch(e) {
-        console.log(e);
         return res.status(500).json({error: true, message: "Server Error"})
     }
 })
