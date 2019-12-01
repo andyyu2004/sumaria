@@ -25,3 +25,15 @@
     text-align:right;
     margin-right:40px;
 }
+
+.view-details-button {
+    margin-right:20px;
+}
+
+.browse-description {
+    overflow:hidden;
+}
+
+.browse-test {
+    white-space: pre;
+}

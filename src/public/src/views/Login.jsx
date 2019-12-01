@@ -79,31 +79,29 @@ const Login = props => {
   };
 
   return (
-    <div>
-      <div className='login-container'>
-        <div>
-          <img src={SumariaLogo} alt="Sumaria" className='login-logo' />
-          <Form className='login-form' onSubmit={onSubmit}>
-            <Form.Group>
-              <InputGroup>
-                <i className="fas fa-user login-icon" />
-                <input className="form-control" type="text" name="username" placeholder="username" value={username}
-                  onChange={e => setInputs({ ...inputs, username: e.target.value })} required />
-              </InputGroup>
-            </Form.Group>
-            <Form.Group>
-              <InputGroup>
-                <i className="fa fa-lock login-icon" />
-                <input className="form-control" type="password" name="pass" placeholder="password" value={password}
-                  onChange={e => setInputs({ ...inputs, password: e.target.value })} required />
-              </InputGroup>
-            </Form.Group>
-            <Button type="submit" block variant='success'>Login</Button>
-            <div className='login-links-container'>
-              <a href="/register">Create Your Account</a>
-            </div>
-          </Form>
-        </div>
+    <div className='login-container'>
+      <div>
+        <img src={SumariaLogo} alt="Sumaria" className='login-logo' />
+        <Form className='login-form' onSubmit={onSubmit}>
+          <Form.Group>
+            <InputGroup>
+              <i className="fas fa-user login-icon" />
+              <input className="form-control" type="text" name="username" placeholder="username" value={username}
+                onChange={e => setInputs({ ...inputs, username: e.target.value })} required />
+            </InputGroup>
+          </Form.Group>
+          <Form.Group>
+            <InputGroup>
+              <i className="fa fa-lock login-icon" />
+              <input className="form-control" type="password" name="pass" placeholder="password" value={password}
+                onChange={e => setInputs({ ...inputs, password: e.target.value })} required />
+            </InputGroup>
+          </Form.Group>
+          <Button type="submit" block variant='success'>Login</Button>
+          <div className='login-links-container'>
+            <a href="/register">Create Your Account</a>
+          </div>
+        </Form>
       </div>
     </div>
   );
