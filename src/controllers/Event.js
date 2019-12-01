@@ -35,5 +35,13 @@ async function addFile(eventID, file) {
 async function getFile(id) {
     return await EventFile.findOne({_id: id}).lean().exec()
 }
+async function getAllFiles(event_id) {
+    return await EventFile.find({event: event_id})
+}
+async function register(userID, eventID) {
+    var participant = new EventParticipant({user: userID, event: eventID})
+    await participant.save();
+    return participant;
+}
 
-module.exports = {create, getAll, getById, addFile, getFile, getUserEvents, getEventParticipants}
+module.exports = {create, getAll, getById, addFile, getAllFiles, getFile, getUserEvents, getEventParticipants,register}
