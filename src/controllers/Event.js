@@ -25,6 +25,9 @@ async function getEventParticipants(eventID) {
     var users = await EventParticipant.find({event: eventID}).populate("user").exec();
     return users.map(u => u.user);
 }
+async function getEventParticipant(eventID, userID) {
+    return await EventParticipant.findOne({event: eventID, user: userID})
+}
 
 async function addFile(eventID, file) {
     var event_file = new EventFile({event: eventID, file: {name: file.originalname, mimetype: file.mimetype, created: new Date(), path:file.path, size: file.size}});
@@ -44,4 +47,8 @@ async function register(userID, eventID) {
     return participant;
 }
 
-module.exports = {create, getAll, getById, addFile, getAllFiles, getFile, getUserEvents, getEventParticipants,register}
+async function deRegister(userID, eventID) {
+    return await EventParticipant.remove({user: userID, event: eventID})
+}
+
+module.exports = {create, getAll, getById, addFile, getAllFiles, getFile, getUserEvents, getEventParticipants,getEventParticipant,register,deRegister}

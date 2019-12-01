@@ -210,6 +210,18 @@ router.post("/event/:id/participants", async (req,res) => {
     }
 })
 
+router.delete("/event/:id/participants", async (req,res) => {
+    try {
+        var participant = await controllers.event.getEventParticipant(req.params.id, req.session.user._id)
+        if (!participant) return res.json({error: true, message: "Not registered for this event"})
+        await controllers.event.deRegister(req.session.user._id, req.params.id);
+        res.json({error: false})
+    } catch(e) {
+        console.log(e);
+        return res.status(500).json({error: true, message: "Server Error"})
+    }
+})
+
 /* TODO Needs some error handling probably */
 
 router.post('/conversation', async (req, res) => {
