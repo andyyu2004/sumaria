@@ -60,6 +60,7 @@ const ViewEvent = props => {
   }
 
   const downloadFile = async fid => {
+    console.log("IDS", fid, eventId);
     (await API.downloadFile(eventId, fid))
       .map(toast.success)
       .mapLeft(toast.error);
@@ -70,26 +71,28 @@ const ViewEvent = props => {
       <div className="event-details-container">
       <Row>
         <Col><h4>{name}</h4></Col>
-        <Col xs='auto'>Posted Date: {new Date(postDate).toDateString()}</Col>
       </Row>
       {/* Just temporary debugging displays */}
       <Row>
-        <Col><h5>Organizer: {creatorid}</h5></Col>
+        <Col><h5>organizer: {creatorid}</h5></Col>
       </Row>
       <h5>me: {user._id}</h5>
       <ul>
         <Row>
-          <Col>Event Start Date: {new Date(date).toLocaleString()}</Col>
-          <Col>Event End Date: {new Date(endDate).toLocaleString()}</Col>
+          <Col>Event Start Date: {new Date(date).toString()}</Col>
+          <Col>Event End Date: {new Date(endDate).toString()}</Col>
+          <Col>Posted Date: {new Date(postDate).toString()}</Col>
         </Row>
         <Row>
           <Col>Organizer: {organizer}</Col>
         </Row>
+        <Row>
         <Row noGutters={true}>
           <Col xs='auto'>Location: {address}</Col>
           <Col xs='auto' className='event-fix-spacing'>{unit ? ' ' + unit : ''}</Col>
           <Col xs='auto'>{city ? ', ' + city : ''}</Col>
           <Col xs='auto'>{province ? ', ' + province: ''}</Col>
+          </Row>
         </Row>
         Skills Required:
           <Row>
@@ -100,12 +103,13 @@ const ViewEvent = props => {
           </Col>
         </Row>
         <Row>
-          <Col>Description: {<div className='event-description'> {description} </div>}</Col>
+          <Col>Description: {description}</Col>
         </Row>
       </ul>
       <br />
       {checkRegistered()}
-      {files.map(f => <div key={f._id} onClick={() => downloadFile(f._id)}>{f.file.name}</div>)}
+      {/* {files.map(f => <div key={f._id} onClick={() => downloadFile(f._id)}>{f.file.name}</div>)} */}
+      {files.map(f => <div key={f._Id}><a href={`/api/event/${eventId}/file/${f._id}`}>{f.file.name}</a><br /></div>)}
       {/* Show button to add event file if the user is the creator of the event */}
       {/* /api/event/event_id/file/file_id */}
       {creatorid === user._id && <input type="file" onChange={uploadFile} multiple />}
