@@ -18,12 +18,14 @@ const DisplayEvent = ({ event }) => {
     const { _id, date, description, name, postDate, endDate, skills, address, city, province, unit, organizer } = event;
     return (
       <div className='browse-post'>
-        <h4>{name}</h4>
+        <Row>
+          <Col><h4>{name}</h4></Col>
+          <Col xs='auto' className='browse-post-date'>Posted Date: {new Date(postDate).toDateString()}</Col>
+        </Row>
         <ul>
           <Row>
-            <Col>Event Start Date: {new Date(date).toString()}</Col>
-            <Col>Event End Date: {new Date(endDate).toString()}</Col>
-            <Col className='browse-post-date'>Posted Date: {new Date(postDate).toString()}</Col>
+            <Col>Event Start Date: {new Date(date).toLocaleString()}</Col>
+            <Col>Event End Date: {new Date(endDate).toLocaleString()}</Col>
           </Row>
           <Row>
             <Col>Organizer: {organizer}</Col>
@@ -44,8 +46,8 @@ const DisplayEvent = ({ event }) => {
           </Row>
           <Row>
             <Col className='browse-description'>Description: {description}</Col>
-            <Col xs="auto"><Button onClick={() => navigate(`/event/${_id}`, { state: { event } })}>View Details</Button></Col>
           </Row>
+          <Button onClick={() => navigate(`/event/${_id}`, { state: { event } })} className='view-details-button'>View Details</Button>
         </ul>
       </div>
     );

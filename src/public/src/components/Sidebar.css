@@ -6,6 +6,10 @@
     height: auto;
 }
 
+.sidebar-title {
+    padding-top:10px;
+}
+
 .tabs { 
     text-align: center;
     background-color: white;

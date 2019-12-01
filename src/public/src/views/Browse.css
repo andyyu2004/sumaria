@@ -23,17 +23,18 @@
 
 .browse-post-date {
     text-align:right;
-    margin-right:40px;
 }
 
 .view-details-button {
+    margin-top:10px;
     margin-right:20px;
 }
 
 .browse-description {
     overflow:hidden;
+    margin-right:15px;
 }
 
-.browse-test {
+.browse-fix-spacing {
     white-space: pre;
 }

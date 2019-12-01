@@ -49,12 +49,12 @@ const Conversations = () => {
   return (
     <div className="conversations-container">
       <div>
-        <h4>Chat Header</h4>
+        <h4>Chat</h4>
         <form onSubmit={createConversation} name="newconversationform">
           <InputGroup className='conversations-input'>
             <label className='conversations-label'>Create new conversation</label>
             <input onChange={e => setNewname(e.target.value)} value={newname} className='conversations-input-box form-control'/>
-            <input type="submit" value="submit" className='btn chat-button' />
+            <input type="submit" value="Submit" className='btn chat-button' />
           </InputGroup>
         </form>
       </div>
