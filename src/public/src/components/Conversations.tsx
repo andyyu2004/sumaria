@@ -49,7 +49,7 @@ const Conversations = () => {
   return (
     <div className="conversations-container">
       <div>
-        <h4>Chat</h4>
+        <h3>Chat</h3>
         <form onSubmit={createConversation} name="newconversationform">
           <InputGroup className='conversations-input'>
             <label className='conversations-label'>Create new conversation</label>

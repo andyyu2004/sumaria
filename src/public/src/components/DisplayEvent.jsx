@@ -21,6 +21,7 @@ const DisplayEvent = ({ event }) => {
           <Col><h4>{name}</h4></Col>
           <Col xs='auto' className='browse-post-date'>Posted Date: {new Date(postDate).toDateString()}</Col>
         </Row>
+        <hr className='display-event-hr'/>
         <ul>
           <Row>
             <Col>Event Start Date: {new Date(date).toLocaleString()}</Col>

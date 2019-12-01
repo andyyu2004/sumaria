@@ -22,14 +22,16 @@
     padding:12px;
     background-color:white;
     border-radius:10px;
-    background-color:lightgray;
+    background-color:var(--container-color);
     width:20vw;
     height:20vw;
     float:left;
+    box-shadow: 3px 3px 3px var(--shadow-color);
 }
 
 .browse-square:hover {
     background-color:var(--button-hover-color);
+    box-shadow: 3px 3px 3px #c4e9f7;
     transition:0.5s;
 }
 
@@ -59,4 +61,10 @@
 
 .browse-fix-spacing {
     white-space: pre;
+}
+
+.display-event-hr {
+    margin-top:5px;
+    border-top: solid 2px lightgray;
+
 }

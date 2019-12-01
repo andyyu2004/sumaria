@@ -3,7 +3,10 @@
 :root {
   --main-bg-color: #cce9cb;
   --secondary-color: hsl(209, 89%, 22%);
-  --button-hover-color: #b3e9ff;
+  --button-hover-color: #cdf1ff;
+  --container-color: #f8f9fa;
+  --shadow-color: #f4f4f4;
+  --shadow-color-bg: #b6d3b5;
 }
 
 body {
