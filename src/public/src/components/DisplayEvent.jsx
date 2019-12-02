@@ -4,7 +4,7 @@ import Row from 'react-bootstrap/Row';
 import '../views/Browse.css'
 import { Button } from 'react-bootstrap';
 import { navigate } from '@reach/router';
-
+import { useUser } from '../hooks/useUser';
 /**
  * Formats the list of events in an unordered list.
  * 
@@ -14,9 +14,17 @@ import { navigate } from '@reach/router';
  * @returns {JSX.Element}
  */
 const DisplayEvent = ({ event }) => {
+    const user = useUser();
+    const postStyle = () => {
+      if (event.creatorid && user._id === event.creatorid){
+        return {backgroundColor: 'lightblue'};
+      } else{
+        return {backgroundColor: 'white'};
+      }
+    }
     const { _id, date, description, name, postDate, endDate, skills, address, city, province, unit, organizer } = event;
     return (
-      <div className='browse-post'>
+      <div className='browse-post' style={postStyle()}>
         <Row>
           <Col><h4>{name}</h4></Col>
           <Col xs='auto' className='browse-post-date'>Posted Date: {new Date(postDate).toDateString()}</Col>
