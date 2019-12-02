@@ -30,6 +30,7 @@ const PublicProfile = props => {
         if (username === user.username) {
           setIsMyProfile(true);
         }
+        return null;
       })
       .mapLeft(msg => {
         toast.error(msg);

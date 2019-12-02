@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { useSelector } from 'react-redux';
+//import { useSelector } from 'react-redux';
 import API from '../api';
 //import { Left } from '../types/Either';
 import { navigate } from '@reach/router';
@@ -19,7 +19,7 @@ import { useUser } from '../hooks/useUser';
 const localizer = momentLocalizer(moment);
 
 const Event = ({ event }) => (
-  <span onClick={() => {onEventClick(event)}}>
+  <span onClick={() => { onEventClick(event) }}>
     <ReactTooltip place="top" />
     <div data-tip={event.desc}>
       <strong>{event.title}</strong>
@@ -38,7 +38,7 @@ const EventAgenda = ({ event }) => (
 
 const onEventClick = (event) => {
   if (event.title !== 'Today')
-    navigate( event.title ? `/event/${event._id}` : '/calendar', { state: { event } })
+    navigate(event.title ? `/event/${event._id}` : '/calendar', { state: { event } })
 };
 
 
@@ -47,36 +47,35 @@ const MyCalendar = props => {
 
   const user = useUser();
 
-function eventStyleGetter(event, start, end, isSelected) {
+  function eventStyleGetter(event, start, end, isSelected) {
 
 
-  var duration = end - start;
-  var bgColor = event.allDay ? 'rgba(51, 204, 204, 0.95)' : 'rgba(102, 153, 255, 0.95)';
-  if (duration > 86520000) {
-    bgColor = 'rgba(153, 153, 227, 0.95)';
-  }
-  if (event.title === 'Today') {
-    bgColor = 'rgba(69, 157, 129, 0.95)';
-  }
+    var duration = end - start;
+    var bgColor = event.allDay ? 'rgba(51, 204, 204, 0.95)' : 'rgba(102, 153, 255, 0.95)';
+    if (duration > 86520000) {
+      bgColor = 'rgba(153, 153, 227, 0.95)';
+    }
+    if (event.title === 'Today') {
+      bgColor = 'rgba(69, 157, 129, 0.95)';
+    }
 
-  if (event.creatorid === user._id){
-    bgColor = 'rgba(209, 107, 159, 0.95)';
+    if (event.creatorid === user._id) {
+      bgColor = 'rgba(209, 107, 159, 0.95)';
+    }
+    var style = {
+      backgroundColor: bgColor,
+      borderRadius: '8px',
+      opacity: 0.86,
+      color: 'black',
+      border: '0px',
+      display: 'block'
+    };
+    return {
+      style: style
+    };
   }
-  var style = {
-    backgroundColor: bgColor,
-    borderRadius: '8px',
-    opacity: 0.86,
-    color: 'black',
-    border: '0px',
-    display: 'block'
-  };
-  return {
-    style: style
-  };
-}
 
   const [userEvents, setEvents] = useState([]);
-  // same as in profile
 
   const fetchEvents = useCallback(async () => {
     (await API.getEventsForUser())
@@ -97,12 +96,13 @@ function eventStyleGetter(event, start, end, isSelected) {
   events = events.filter(function (event) {
     return event != null;
   });
-  // map event (obj) props for calendar to render
+  // map/alter event (obj) props for calendar to render
   events.map(event => {
     event['title'] = event.name;
     event['desc'] = event.description;
     event['start'] = new Date(event['date']);
     event['end'] = new Date(event['endDate']);
+    return null;
   })
   events.push({
     id: 0,

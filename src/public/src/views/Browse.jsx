@@ -68,9 +68,8 @@ const Browse = props => {
   //eventsFiltered = eventsFiltered.filter(event => ((event.date) < endDate));
   if (province !== 'none') {
     eventsFiltered = eventsFiltered.filter(event => ((event.province) === province));
+    eventsFiltered = city ? eventsFiltered.filter(event => ((event.city) === city)) : eventsFiltered;
   }
-  eventsFiltered = city ? eventsFiltered.filter(event => ((event.city) === city)) : eventsFiltered;
-
 
   return (
     <div className='browse-container'>
@@ -104,7 +103,7 @@ const Browse = props => {
         <Form.Group as={Col}>
           <Form.Label>Province</Form.Label>
           <select id="province" className="form-control" value={province} onChange={e => setProvince(e.target.value)} >
-            <option value="none" disabled hidden>Province</option>
+            <option value="none">Province</option>
             <option value="AB">Alberta</option>
             <option value="BC">British Columbia</option>
             <option value="MB">Manitoba</option>

@@ -64,7 +64,7 @@ io.on('connection', socket => {
             /** Send refresh all to everyone in the conversation including the newly added member*/
             conversation.members.forEach(username => {
                 if (!socketmap[username]) return;
-                console.log("Emitting to", username, socketmap[username]);
+                //console.log("Emitting to", username, socketmap[username]);
                 io.to(socketmap[username]).emit("refresh-conversations");
             });
         } catch (err) {

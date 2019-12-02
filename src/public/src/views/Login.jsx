@@ -58,16 +58,13 @@ const Login = props => {
     const res = await API.login(username, password);
 
     res.map(user => {
-      //console.log(user);
-      // setMessage(`Succesfully logged in: username = ${user.username}`);
       toast.success('Successfully logged in! Welcome ' + user.username + '!', {
         position: toast.POSITION.TOP_CENTER
       });
       dispatch(setUser(user));
-      navigate("/");
+      navigate("/login");
+      return null;
     }).mapLeft(err => {
-      //console.log(err);
-      // setMessage(`${err} - Login Failed`),
       toast.error(err, {
         position: toast.POSITION.TOP_CENTER
       });

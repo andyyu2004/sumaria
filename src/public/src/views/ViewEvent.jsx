@@ -176,7 +176,7 @@ const ViewEvent = props => {
         <br /><br />{isCreator && <Button style={{ float: 'right' }} onClick={() => confirmDelete()} className="btn btn-secondary">Delete</Button>}
         {/* Show button to add event file if the user is the creator of the event */}
         <br /><br /><br />
-        {<h3>{waitlistStart ? registeredParticipants.length - numVolunteers : registeredParticipants.length}/{numVolunteers} Participants {waitlisted ? '(' + (registeredParticipants.length - numVolunteers) + ' Waitlisted)' : null}</h3>}
+        {<h3>{waitlistStart ? numVolunteers : registeredParticipants.length}/{numVolunteers} Participants {waitlisted ? '(' + (registeredParticipants.length - numVolunteers) + ' Waitlisted)' : null}</h3>}
         <ol type="1">
           {isCreator ? (registeredParticipants.map(p => <li key={p._id}>{p.firstname + ' ' + p.lastname}<i style={{ marginLeft: '5px', cursor: 'pointer' }} className="fas fa-user" onClick={() => publicProfile(p.username)}></i><br /></li>)) : null}
         </ol>

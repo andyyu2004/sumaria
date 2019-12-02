@@ -14,47 +14,47 @@ import { useUser } from '../hooks/useUser';
  * @returns {JSX.Element}
  */
 const DisplayEvent = ({ event }) => {
-    const user = useUser();
-    const postStyle = () => {
-      if (event.creatorid && user._id === event.creatorid){
-        return {backgroundColor: 'lightblue'};
-      } else{
-        return {backgroundColor: 'white'};
-      }
+  const user = useUser();
+  const postStyle = () => {
+    if (event.creatorid && user._id === event.creatorid) {
+      return { backgroundColor: 'lightblue' };
+    } else {
+      return { backgroundColor: 'white' };
     }
-    const { _id, date, description, name, postDate, endDate, skills, address, city, province, unit, organizer } = event;
-    return (
-      <div className='browse-post' style={postStyle()}>
+  }
+  const { _id, date, description, name, postDate, endDate, skills, address, city, province, unit, organizer } = event;
+  return (
+    <div className='browse-post' style={postStyle()}>
+      <Row>
+        <Col><h4>{name}</h4></Col>
+        <Col xs='auto' className='browse-post-date'>Posted Date: {new Date(postDate).toDateString()}</Col>
+      </Row>
+      <hr className='display-event-hr' />
+      <ul>
         <Row>
-          <Col><h4>{name}</h4></Col>
-          <Col xs='auto' className='browse-post-date'>Posted Date: {new Date(postDate).toDateString()}</Col>
-        </Row>
-        <hr className='display-event-hr'/>
-        <ul>
-          <Row>
           <Col>Event Date: {new Date(date).toLocaleString() + ' - ' + new Date(endDate).toLocaleString()}</Col>
-          </Row>
+        </Row>
+        <Row>
+          <Col>Organizer: {organizer}</Col>
+        </Row>
+        <Row noGutters={true}>
+          <Col xs='auto'>Location: {address + (unit ? ' ' + unit : '') + (city ? ', ' + city : '') + (province ? ', ' + province : '')}</Col>
+        </Row>
+        Skills Required:
           <Row>
-            <Col>Organizer: {organizer}</Col>
-          </Row>
-          <Row noGutters={true}>
-            <Col xs='auto'>Location: {address + (unit ? ' ' + unit : '') + (city ? ', ' + city : '') + (province ? ', ' + province: '')}</Col>
-          </Row>
-          Skills Required:
-          <Row>
-            <Col>
-            <ul> 
+          <Col>
+            <ul>
               {skills ? skills.map(skill => <li key={skill}>{skill}</li>) : null}
             </ul>
-            </Col>
-          </Row>
-          <Row>
-            <Col className='browse-description'>Description: {description}</Col>
-          </Row>
-          <Button onClick={() => navigate(`/event/${_id}`, { state: { event } })} className='view-details-button'>View Details</Button>
-        </ul>
-      </div>
-    );
-  };
+          </Col>
+        </Row>
+        <Row>
+          <Col className='browse-description'>Description: {description}</Col>
+        </Row>
+        <Button onClick={() => navigate(`/event/${_id}`, { state: { event } })} className='view-details-button'>View Details</Button>
+      </ul>
+    </div>
+  );
+};
 
-  export default DisplayEvent;
+export default DisplayEvent;

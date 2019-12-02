@@ -2,12 +2,12 @@ import { navigate, Router } from '@reach/router';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
-import { logout, setUser } from './actions/actionCreators';
-import API from './api';
+//import { logout, setUser } from './actions/actionCreators';
+//import API from './api';
 import './App.css';
 import { Header } from './components';
 import Sidebar from './components/Sidebar';
-import { PublicProfile, AddEvent, APITesting, Browse, Home, ImportExcel, Login, Profile, RegisterSuccess, Registration, ChatView, ViewEvent, MyCalendar, ErrorView } from './views';
+import { PublicProfile, AddEvent, Browse, Home, ImportExcel, Login, Profile, RegisterSuccess, Registration, ChatView, ViewEvent, MyCalendar, ErrorView } from './views';
 
 toast.configure({
   autoClose: 1500,
@@ -17,7 +17,7 @@ toast.configure({
 
 const App: React.FC = () => {
 
-  const dispatch = useDispatch();
+  useDispatch();
   /* Pass some nullary function as callback */
   const sidebarEntries: [string, () => void][] = [
     ["Home", () => navigate('/')],
