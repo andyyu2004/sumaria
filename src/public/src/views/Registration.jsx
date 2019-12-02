@@ -13,8 +13,8 @@ import { toast } from 'react-toastify';
 import cityTable from './cityTable.jsx';
 
 const Registration = props => {
-
-  const [userType, setUserType] = useState('none');
+  // used for testing
+  //const [userType, setUserType] = useState('none');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [rePassword, setRePassword] = useState('');
@@ -31,7 +31,8 @@ const Registration = props => {
   const [province, setProvince] = useState('none');
   const [unit, setUnit] = useState('');
 
-  
+  /*
+  // used to quickly generate mock data that meets the validation requirement
   const check_user_type = option => {
     //console.log(option);
     setUserType(option);
@@ -39,13 +40,13 @@ const Registration = props => {
     if (option === "debug") {
       generateFormData();
     }
-  }
+  }*/
 
   const saveUser = () => {
     const registerInfo = { username, password, firstname: firstName,
                            prefername: preferName, lastname: lastName, gender, birthDate: bdate, phone, email,
                            street, city, province, unit };
-    console.log(registerInfo);
+    //console.log(registerInfo);
     let resp = API.signup(registerInfo);
     //console.log(resp);
     return resp;
@@ -58,7 +59,7 @@ const Registration = props => {
     //console.log(res);
     res.match(
       err => {
-        console.log(err);
+        //console.log(err);
         toast.error(err, {
           position: toast.POSITION.TOP_CENTER
         });
@@ -67,7 +68,7 @@ const Registration = props => {
         toast.success('Registration successful: ' + user.username, {
           position: toast.POSITION.TOP_CENTER
         });
-        console.log(user);
+        //console.log(user);
         navigate('/register/success');
       },
     );
@@ -151,7 +152,8 @@ const Registration = props => {
     ];
     return randomAddress[Math.floor(Math.random()*randomAddress.length)];
   }
-
+  /*
+  // used to generate required form data
   const generateFormData = () => {
     setUserType('regular');
     setUsername('Test' + Math.floor(Math.random() * 1191 + Math.random() * 322 - Math.random() * 673));
@@ -173,7 +175,7 @@ const Registration = props => {
     setCity(addr[1]);
     setProvince(addr[2]);
     //setAddr2();
-  }
+  }*/
 
 
   const generateCityOptions = (province) => {
@@ -198,15 +200,6 @@ const Registration = props => {
               <ReactTooltip place="right" />
               <MDBIcon className='register-icon' icon="info-circle" data-tip="Use this for quick registration with valid data" />
             </div>
-            <Form.Row>
-            <Form.Group as={Col} xs={3}>
-              <Form.Label>Debug Only</Form.Label>
-              <select id="user_type" className="form-control" value={userType} onChange={e => check_user_type(e.target.value)}>
-                <option value='none' disabled hidden>Choose here</option>
-                <option value="debug">This is for debugging only</option>
-              </select>
-            </Form.Group>
-            </Form.Row>
             <div className='register-header'>Login Info</div>
             <Form.Group>
               <Form.Label>Username</Form.Label>
@@ -338,5 +331,18 @@ const Registration = props => {
 
   );
 };
+
+/*
+// debugging option (select to fill all required fields)
+            <Form.Row>
+            <Form.Group as={Col} xs={3}>
+              <Form.Label>Debug Only</Form.Label>
+              <select id="user_type" className="form-control" value={userType} onChange={e => check_user_type(e.target.value)}>
+                <option value='none' disabled hidden>Choose here</option>
+                <option value="debug">This is for debugging only</option>
+              </select>
+            </Form.Group>
+            </Form.Row>
+*/
 
 export default Registration;

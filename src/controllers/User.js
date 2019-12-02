@@ -50,7 +50,7 @@ async function getByUsername(username){
 }
 
 async function patchUser(user){
-    console.log('patch', user);
+    //console.log('patch', user);
     return await User.findOneAndUpdate({_id: user._id}, user, {new: true});
 }
 

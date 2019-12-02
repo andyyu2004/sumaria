@@ -51,7 +51,7 @@ const AddEvent = props => {
       numVolunteers: parseInt(numV),
     };
 
-    if (checkDate()){
+    if (checkDate()) {
       const res = await API.addEvent(event);
       //console.log('event', event);
       res.map(event => {
@@ -62,7 +62,7 @@ const AddEvent = props => {
         navigate('/browse');
         return null;
       }).mapLeft(err => {
-        console.log(err);
+        //console.log(err);
         toast.error(err, {
           position: toast.POSITION.TOP_CENTER
         });
@@ -74,7 +74,7 @@ const AddEvent = props => {
     if (startDate && endDate) {
       let start = new Date(startDate);
       let end = new Date(endDate);
-      if (start > end){
+      if (start > end) {
         //alert('End date cannot be earlier than start date!');
         toast.error('End date cannot be earlier than start date!', {
           position: toast.POSITION.TOP_CENTER

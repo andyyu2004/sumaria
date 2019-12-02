@@ -5,7 +5,7 @@ import { IEither, Right } from '../types/Either';
 import { apiErrorHandler } from './util';
 
 export async function signup(registerInfo: any): Promise<IEither<string, UserResponse>> {
-    console.log('api: ', registerInfo);
+    //console.log('api: ', registerInfo);
     return axios.post("/api/user", registerInfo)
         .then<any>(({ data }) => new Right(data.user))
         .catch(apiErrorHandler);

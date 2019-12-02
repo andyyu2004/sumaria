@@ -45,7 +45,7 @@ router.post("/user/login", async (req,res) => {
     } catch(e) {
         // Error condition
         // Something failed (DB or other)
-        console.log(e);
+        //console.log(e);
         res.status(500).json({error: true, message: "Server error, please try again later"})
     }
 
@@ -59,7 +59,7 @@ router.post("/user", async (req,res) => {
         if (!user) return res.status(422).json({ error: true, message: "User already exists" });
         return res.json({error: false, user});
     } catch(e) {
-        console.log(e);
+        //console.log(e);
         return res.status(500).json({error: true, message: "Server Error"})
     }
 })
@@ -82,7 +82,7 @@ router.post("/event", async (req,res) => {
         var event = await controllers.event.create(creatorid, req.body.name, req.body.organizer, req.body.date, req.body.enddate, req.body.description, req.body.numVolunteers, req.body.address, req.body.city, req.body.province, req.body.unit, req.body.skills);
         res.json({error: false, event})
     } catch(e) {
-        console.log(e);
+        //console.log(e);
         return res.status(500).json({error: true, message: "Server Error"})
     }
 })
@@ -108,12 +108,12 @@ router.get("/user/event", async (req,res) => {
 
 router.patch("/user/:id", async (req,res) => {
     try {
-        console.log(req.body);
+        //console.log(req.body);
         var user = await controllers.user.patchUser(req.body);
         if (!user) return res.status(404).json({error: true, message: "User not found"})
         res.json({error: false, user});
     } catch(e){
-        console.log('error', e);
+        //console.log('error', e);
         return res.status(500).json({error: true, message: "Server Error"})
     }
 })
