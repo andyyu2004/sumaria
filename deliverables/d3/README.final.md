@@ -45,7 +45,7 @@ Users (Organizations or individual volunteers) can:
       * Email Address
     * Optional
       * Address
-      * Prefered name, gender, birth date
+      * Preferred name, gender, birth date
       * Phone Number
 * View their profile page and their personal information by clicking on their profile picture (In the top right corner)
   * On the profile page they can edit and update their stored user information.
@@ -63,30 +63,33 @@ Users (Organizations or individual volunteers) can:
 
 #### The side bar contains the following options:
 
-* Note the user must be logged in to use any site features.
+* Note the user must be logged in to use any of the site features.
 * Home:
   * The first page you see when opening the website.
   * Through the login/signup button on the upper right corner users can create an account and login.
   * Users can see new events that were posted.
-  * As well as navigate to adding and browsing for events.
+  * As well as navigate to adding and browsing for events (after logged in).
 * Chat:
   * Users can view their existing conversations in a list on the left.
   * Users can create new conversations by typing a new conversation name at the top.
   * Users can add more members to a conversation using the button on the right (Need to know the other member’s username)
 * Browse:
-  * Events can be filtered by; Skill required, Name, Date, Location
-  * Each event contains an details button:
+  * Events can be filtered by; Skill required, Name, Date, and Location
+  * Each event contains an view details button:
     * Users can view information about the event.
-    * Users can register or cancel going to the event.
-    * The user who created the event can add files.
+    * Users can see the number of participants and the number of people waitlisted.
+    * Users can register or waitlist an the event.
+    * Users can cancel registration or cancel waitlist of an event.
+    * The user who created the event can add files, see the names of the participants (including people waitlisted) and the links to their public profile, and delete the event (with confirmation required)
 * Import:
   * This page is incomplete and is meant in the future to allow users to import user information in the form of excel files and create user profiles immediately.
   * Currently you can only upload excel files to view them.
 * Add Event:
   * This page allows users to create a new event that can then be seen in the list of events in the browsing page.
 * My Calendar:
-  * View events the current user is registered by day, week, month.
+  * View events the current user is registered by day, week, or month.
   * Or view a list of events the user is registered for using the agenda button.
+  * Clicking the event will direct you to the event details page
 
 ## Development requirements
 
@@ -98,21 +101,23 @@ Users (Organizations or individual volunteers) can:
 Install node
 
 ### Steps to run our app
- 
+
 1. Open the command console
 
 2. Start the backend by:
     * navigate to the folder /team-project-sumaria/src/
-    * Type in console “npm install” to install dependencies
-    * Type in console “node app.js”
-    * Console should return “Listening on port ####”
+    * Type in console `npm install` to install dependencies
+    * Type in console `node app.js`
+    * Console should return "Listening on port ####"
+    * (can specify the port by `PORT=#### node app.js`)
 
 3. Start the frontend by:
     * Open a new console
     * Navigate to the folder /team-project-sumaria/src/public
-    * Type in console “npm install” to install dependencies
-    * Type in console “npm start”
-    * Our website should open on your internet browser.
+    * Type in console `npm install` to install dependencies
+    * Type in console `npm start`
+    * Our website should open on your internet browser (localhost).
+    * (example: http://localhost:####, can switch between the default port above or the server port specified in the backend part)
 
 ### Technical requirements
 

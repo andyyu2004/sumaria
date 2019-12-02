@@ -32,7 +32,7 @@ const Header: React.FC<PropTypes> = ({ title, subtitle }) => {
       e.preventDefault();
       console.log(socket);
       socket && socket.close();
-      navigate('/');
+      navigate('/login');
       dispatch({ type: "LOGOUT" });
       // console.log(socket);
   };
