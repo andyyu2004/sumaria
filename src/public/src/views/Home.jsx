@@ -8,7 +8,7 @@ import Col from 'react-bootstrap/Col'
 import DisplayEventSquare from '../components/DisplayEventSquare.jsx';
 import API from '../api';
 import './Browse.css'
-//import { withProtection } from '../components/hoc';
+import { withProtection } from '../components/hoc';
 import { toast } from 'react-toastify';
 
 const Home = props => {
@@ -53,4 +53,4 @@ const Home = props => {
   );
 }
 
-export default Home;
+export default withProtection(Home);

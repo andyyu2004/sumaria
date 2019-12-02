@@ -50,7 +50,7 @@ const Login = props => {
 
   const onSubmit = async e => {
     e.preventDefault();
-    console.log(username, password);
+    //console.log(username, password);
     if (!validateLoginParams(username, password)) {
       return false;
     }
@@ -58,16 +58,16 @@ const Login = props => {
     const res = await API.login(username, password);
 
     res.map(user => {
-      console.log(user);
+      //console.log(user);
       // setMessage(`Succesfully logged in: username = ${user.username}`);
-      toast.success('Successfully logged in: ' + user.username, {
+      toast.success('Successfully logged in! Welcome ' + user.username + '!', {
         position: toast.POSITION.TOP_CENTER
       });
       dispatch(setUser(user));
       navigate("/");
       return null;
     }).mapLeft(err => {
-      console.log(err);
+      //console.log(err);
       // setMessage(`${err} - Login Failed`),
       toast.error(err, {
         position: toast.POSITION.TOP_CENTER

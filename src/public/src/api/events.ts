@@ -42,7 +42,7 @@ export async function getEventFileIds(eventid: string) {
 }
 
 export async function getEventsForUser() {
-    return axios.get(`/api/user/events`)
+    return axios.get(`/api/user/event`)
         .then(res => new Right(res.data.file))
         .catch(apiErrorHandler);
 }

@@ -14,7 +14,10 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 
 /* Component for viewing a specific event in detail */
 const ViewEvent = props => {
-  const { eventId } = props;
+
+
+
+  let eventId = props ? props.event : -1;
   const [registeredParticipants, setRegisteredParticipants] = useState([]);
   const [event, setEvent] = useState({});
   const [files, setFiles] = useState([]);
@@ -29,15 +32,19 @@ const ViewEvent = props => {
   const fetchFiles = useCallback(async () => {
     (await API.getEventFileIds(eventId))
       .map(setFiles)
-      .mapLeft(() => toast.error("Failed to fetch files for event"));
+      .mapLeft(() => {
+        toast.error("Failed to fetch files for event");
+        navigate('/404');
+      });
   }, [eventId]);
 
-  useEffect(() => { 
+  useEffect(() => {
     fetchEvent();
     fetchFiles();
   }, [fetchEvent, fetchFiles]);
 
-  const { numVolunteers, _id, creatorid, date, description, name, postDate, endDate, skills, address, city, province, unit, organizer } = event;
+
+  let { numVolunteers, _id, creatorid, date, description, name, postDate, endDate, skills, address, city, province, unit, organizer } = event;
 
   const user = useUser();
 
@@ -46,14 +53,16 @@ const ViewEvent = props => {
   const [waitlistNum, setWaitlistNum] = useState(0);
   const [waitlisted, setWaitlisted] = useState(false);
   */
-  
+
   let registeredNum = registeredParticipants.length;
   let waitlisted = false;
   let waitlistStart = false;
-  
-  if (registeredNum >= numVolunteers){
+
+ 
+
+  if (numVolunteers && registeredNum >= numVolunteers) {
     waitlisted = true;
-    if (registeredNum > numVolunteers){
+    if (registeredNum > numVolunteers) {
       waitlistStart = true;
     }
     registeredNum = numVolunteers;
@@ -94,24 +103,32 @@ const ViewEvent = props => {
     var confirmed = window.confirm("Are you sure you want to delete this event?");
     if (confirmed) {
       (await API.deleteEvent(eventId))
-        .map(toast.success)
+        .map( msg => {
+          toast.success(msg);
+          navigate('/browse');
+          return null;
+        })
         .mapLeft(toast.error);
     }
   };
+
+  const closeEvent = () => {
+    navigate('/browse');
+  }
 
   const checkIsUserRegistered = useCallback(participants => {
     //console.log(participants);
     setRegisteredParticipants(participants);
     let userRegisterIndex = participants.findIndex(x => x._id === user._id);
-    if (userRegisterIndex >= 0 && !isRegistered) 
+    if (userRegisterIndex >= 0 && !isRegistered)
       setIsRegistered(userRegisterIndex + 1);
   }, [isRegistered, user._id]);
 
   const checkRegistered = useCallback(async () => {
     // check if user already registered this event
     (await API.getEventParticipantsByEventId(eventId))
-    .map(participants => checkIsUserRegistered(participants))
-    .mapLeft(toast.error);
+      .map(participants => checkIsUserRegistered(participants))
+      .mapLeft(toast.error);
   }, [checkIsUserRegistered, eventId]);
 
   useEffect(() => { checkRegistered(); }, [checkRegistered]);
@@ -119,52 +136,52 @@ const ViewEvent = props => {
   return (
     <div className="event-container">
       <div className="event-details-container">
-      <Row>
-        <Col><h4>{name}</h4></Col>
-        <Col xs='auto'>Posted Date: {new Date(postDate).toLocaleString()}</Col>
-      </Row>
-      <hr className='event-hr'/>
-      {/* Just temporary debugging displays */}
-      <Row>
-        <Col><h5>organizer: {creatorid}</h5></Col>
-      </Row>
-      <h5>me: {user._id}</h5>
-      <ul>
         <Row>
-          <Col>Event Date: {new Date(date).toLocaleString() + ' - ' + new Date(endDate).toLocaleString()}</Col>
+          <Col><h4><i style={{ position: 'fixed', marginTop: '-24px', marginLeft: '-24px', fontSize: '20px', cursor: 'pointer' }} className="fas fa-times-circle" onClick={() => closeEvent()}></i>{name}</h4></Col>
+          <Col xs='auto'>Posted Date: {new Date(postDate).toLocaleString()}</Col>
         </Row>
+        <hr className='event-hr' />
+        {/* Just temporary debugging displays */}
         <Row>
-          <Col>Organizer: {organizer}</Col>
+          <Col><h5>organizer: {creatorid}</h5></Col>
         </Row>
-        <Row noGutters={true}>
-          <Col xs='auto'>Location: {address + (unit ? ' ' + unit : '') + (city ? ', ' + city : '') + (province ? ', ' + province: '')}</Col>
-        </Row>
-        <Row>
-          <Col>
-            Skills Required:
+        <h5>me: {user._id}</h5>
+        <ul>
+          <Row>
+            <Col>Event Date: {new Date(date).toLocaleString() + ' - ' + new Date(endDate).toLocaleString()}</Col>
+          </Row>
+          <Row>
+            <Col>Organizer: {organizer}</Col>
+          </Row>
+          <Row noGutters={true}>
+            <Col xs='auto'>Location: {address + (unit ? ' ' + unit : '') + (city ? ', ' + city : '') + (province ? ', ' + province : '')}</Col>
+          </Row>
+          <Row>
+            <Col>
+              Skills Required:
             <ul>
-              {skills ? skills.map(skill => <li key={skill}>{skill}</li>) : null}
-            </ul>
-          </Col>
-        </Row>
-        <Row>
-          <Col>Description: {description}</Col>
-        </Row>
-      </ul>
-      <br />
-      {/* {files.map(f => <div key={f._id} onClick={() => downloadFile(f._id)}>{f.file.name}</div>)} */}
-      {files.map(f => <div key={f._id}><a href={`/api/event/${eventId}/file/${f._id}`}>{f.file.name}</a><br /></div>)}
-      {isCreator && <input type="file" onChange={uploadFile} multiple />}
-      { isRegistered ? <Button style={{float: 'right'}} onClick={() => cancelEventRegistration()}>{(isRegistered - numVolunteers) ? 'Cancel Waitlist' : 'Cancel'}</Button> : <Button style={{float: 'right'}} onClick={() => registerEvent()}>{waitlisted ? 'Waitlist' : 'Register'}</Button>}
-      <br/><br/>{ isCreator && <Button style={{float: 'right'}} onClick={() => confirmDelete()} className="btn btn-secondary">Delete</Button>}
-      {/* Show button to add event file if the user is the creator of the event */}
-      <br/><br/><br/>
-      {<h3>{waitlistStart ? registeredParticipants.length - numVolunteers : registeredParticipants.length}/{numVolunteers} Participants {waitlisted ? '(' + (registeredParticipants.length - numVolunteers) + ' Waitlisted)' : null}</h3>}
-      <ol type="1">
-      {isCreator ? (registeredParticipants.map(p => <li key={p._id}>{p.firstname + ' ' + p.lastname}<i style={{marginLeft: '5px', cursor: 'pointer'}} className="fas fa-user" onClick={()=>publicProfile(p.username)}></i><br /></li>)) : null}
-      </ol>
+                {skills ? skills.map(skill => <li key={skill}>{skill}</li>) : null}
+              </ul>
+            </Col>
+          </Row>
+          <Row>
+            <Col>Description: {description}</Col>
+          </Row>
+        </ul>
+        <br />
+        {/* {files.map(f => <div key={f._id} onClick={() => downloadFile(f._id)}>{f.file.name}</div>)} */}
+        {files.map(f => <div key={f._id}><a href={`/api/event/${eventId}/file/${f._id}`}>{f.file.name}</a><br /></div>)}
+        {isCreator && <input type="file" onChange={uploadFile} multiple />}
+        {isRegistered ? <Button style={{ float: 'right' }} onClick={() => cancelEventRegistration()}>{(isRegistered - numVolunteers) ? 'Cancel Waitlist' : 'Cancel'}</Button> : <Button style={{ float: 'right' }} onClick={() => registerEvent()}>{waitlisted ? 'Waitlist' : 'Register'}</Button>}
+        <br /><br />{isCreator && <Button style={{ float: 'right' }} onClick={() => confirmDelete()} className="btn btn-secondary">Delete</Button>}
+        {/* Show button to add event file if the user is the creator of the event */}
+        <br /><br /><br />
+        {<h3>{waitlistStart ? registeredParticipants.length - numVolunteers : registeredParticipants.length}/{numVolunteers} Participants {waitlisted ? '(' + (registeredParticipants.length - numVolunteers) + ' Waitlisted)' : null}</h3>}
+        <ol type="1">
+          {isCreator ? (registeredParticipants.map(p => <li key={p._id}>{p.firstname + ' ' + p.lastname}<i style={{ marginLeft: '5px', cursor: 'pointer' }} className="fas fa-user" onClick={() => publicProfile(p.username)}></i><br /></li>)) : null}
+        </ol>
+      </div>
     </div>
-  </div>
   );
 };
 
