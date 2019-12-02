@@ -17,7 +17,7 @@ const ViewEvent = props => {
 
 
 
-  let eventId = props ? props.event : -1;
+  const eventId = props ? props.eventId : -1;
   const [registeredParticipants, setRegisteredParticipants] = useState([]);
   const [event, setEvent] = useState({});
   const [files, setFiles] = useState([]);
