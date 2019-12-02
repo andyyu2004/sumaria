@@ -97,6 +97,15 @@ router.post("/session", async (req,res) => {
     }
 })
 
+router.get("/user/event", async (req,res) => {
+    try {
+        var events = await controllers.event.getUserEvents(req.session.user._id);
+        res.json({error: false, events})
+    } catch(e) {
+        return res.status(500).json({error:true, message: "Server Error"})
+    }
+})
+
 router.patch("/user/:id", async (req,res) => {
     try {
         console.log(req.body);
@@ -126,15 +135,6 @@ router.get("/user/:id", async (req,res) => {
         res.json({error: false, user});
     } catch(e){
         return res.status(500).json({error: true, message: "Server Error"})
-    }
-})
-
-router.get("/user/event", async (req,res) => {
-    try {
-        var events = await controllers.event.getUserEvents(req.session.user._id);
-        res.json({error: false, events})
-    } catch(e) {
-        return res.status(500).json({error:true, message: "Server Error"})
     }
 })
 
