@@ -24,11 +24,17 @@ This design change was also made due to time constraints, since file handling wi
 Describe your plan for handing off your product and all technical assets to your partner
 
  * Will you have a handoff meeting? If so, what will be discussed?
+ 
  We will have a handoff meeting after our final demo in class. We will discuss all the assets associated with our product and also how our partner can access them in the future.
+ 
  * What assets/artifacts will you be handing off to your partner (e.g. codebase, deployment tools, running application, task tracker, etc.)? 
+ 
  We will be handing off our codebase (on a Github Repository) and a google cloud account associated with hosting the Sumaria website.
+ 
  * How will you hand off these assets/artifacts?
+ 
  We will give our partner a document that includes detailed instruction on how to utilize the assets associated with our product. Furthermore, the document will include all account credentials he will need to continue the development of our product.
+ 
  * Does your partner have the technical capacity to manage/maintain/develop your product? How will that impact how you handoff the product?
 
 Our partner Odane does not have the technical capacity to manage/maintain/develop our product but he has a plan in place to continue the development of our product.  He has a significant number of perspective users that are interested in our product.  After getting the aforementioned users on board on our product, Odane plans to pitch our product to investors.  After getting funding from investors, our partner will hire technical people to develop our product further.
