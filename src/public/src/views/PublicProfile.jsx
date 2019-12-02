@@ -16,10 +16,9 @@ const PublicProfile = props => {
   const getUser = useCallback(async () => {
     (await API.getUserByUsername(username))
       .map(setUser)
-      .mapLeft( msg => {
+      .mapLeft(msg => {
         toast.error(msg);
-        navigate('404');
-        return null;
+        return navigate('404');
       })
   }, [username]);
 
