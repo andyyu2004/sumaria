@@ -26,15 +26,15 @@ const App: React.FC = () => {
     ["Import", () => navigate('/import')],
     ["Add Event", () => navigate('/addevent')],
     ["My Calendar", () => navigate('/calendar')],
-    ["API", () => navigate('/api')],
-    ["Quick Login", async () => {
-      dispatch(logout());
-      (await API.login("sdf", "sdf"))
-        .map(({ _id, username }) => {
-          dispatch(setUser({ username, usertype: "volunteer", _id, events: [] }));
-          return navigate("/event/");
-        });
-    }],
+    // ["API", () => navigate('/api')],
+    // ["Quick Login", async () => {
+    //   dispatch(logout());
+    //   (await API.login("sdf", "sdf"))
+    //     .map(({ _id, username }) => {
+    //       dispatch(setUser({ username, usertype: "volunteer", _id, events: [] }));
+    //       return navigate("/event/");
+    //     });
+    // }],
   ];
   
 
@@ -55,7 +55,7 @@ const App: React.FC = () => {
           <MyCalendar path="calendar" />
           <AddEvent path="addevent" />
           <Registration path="register" />
-          <APITesting path="api" />
+          {/* <APITesting path="api" /> */}
           <RegisterSuccess path="register/success" />
           <ErrorView path="*" error="Page not found (404)" />
         </Router>
