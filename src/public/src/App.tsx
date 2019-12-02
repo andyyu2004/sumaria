@@ -32,8 +32,7 @@ const App: React.FC = () => {
       (await API.login("sdf", "sdf"))
         .map(({ _id, username }) => {
           dispatch(setUser({ username, usertype: "volunteer", _id, events: [] }));
-          navigate("/event/");
-          return null;
+          return navigate("/event/");
         });
     }],
   ];
