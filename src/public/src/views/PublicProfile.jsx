@@ -7,22 +7,31 @@ import Col from 'react-bootstrap/Col';
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import { toast } from 'react-toastify';
 import { navigate } from "@reach/router";
+import ReactTooltip from 'react-tooltip';
 
 
 const PublicProfile = props => {
   const { username } = props;
-  const [user, setUser] = useState({});
   const [isMyProfile, setIsMyProfile] = useState(false);
+  const [firstName, setFirstName] = useState('');
+  const [preferName, setPreferName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [description, setDescription] = useState('');
 
   const getUser = useCallback(async () => {
     (await API.getUserByUsername(username))
-      .map( user => {
-        setUser(user);
-        if (username === user.username){
+      .map(user => {
+        setFirstName(user.firstname);
+        setLastName(user.lastname);
+        setPreferName(user.prefername);
+        setEmail(user.email);
+        setDescription(user.description);
+        if (username === user.username) {
           setIsMyProfile(true);
         }
       })
-      .mapLeft( msg => {
+      .mapLeft(msg => {
         toast.error(msg);
         navigate('404');
         return null;
@@ -32,19 +41,20 @@ const PublicProfile = props => {
   useEffect(() => { getUser(); }, [getUser]);
 
   const privateProfile = () => navigate(`/profile`);
-  
+
   return (
     <div className='profile-outer'>
-<h2 className='profile-username'> Username: {username}'s Profile { isMyProfile ? <i style={{cursor: 'pointer'}} className="far fa-user" onClick={()=>privateProfile()}></i> : <i className="fas fa-user"></i>} </h2>
+      <ReactTooltip place="right" />
+      <h2 className='profile-username'> Username: {username}'s Profile {isMyProfile ? <i data-tip="Edit my profile" style={{ cursor: 'pointer' }} className="far fa-user" onClick={() => privateProfile()}></i> : <i className="fas fa-user"></i>} </h2>
       <div className='profile-info'>
         <Row className='profile-rows'>
           <Col>
             <h5>First Name</h5>
-            <input type="text" className="form-control" name="first_name" id="firstName" value={user.firstname} readOnly />
+            <input type="text" className="form-control" name="first_name" id="firstName" value={firstName} readOnly />
           </Col>
           <Col>
             <h5>Last Name</h5>
-            <input type="text" className="form-control" name="last_name" id="lastName" value={user.lastname} readOnly />
+            <input type="text" className="form-control" name="last_name" id="lastName" value={lastName} readOnly />
           </Col>
         </Row>
         <Row className='row-spacer'>
@@ -52,7 +62,7 @@ const PublicProfile = props => {
         <Row className='profile-rows'>
           <Col>
             <h5>Prefer Name</h5>
-            <input type="text" className="form-control" name="prefer_name" id="preferName" value={user.prefername} readOnly />
+            <input type="text" className="form-control" name="prefer_name" id="preferName" value={preferName} readOnly />
           </Col>
         </Row>
         <Row className='row-spacer'>
@@ -60,7 +70,7 @@ const PublicProfile = props => {
         <Row className='profile-rows'>
           <Col>
             <h5>Email</h5>
-            <input type="email" className="form-control" name="email" id="email" value={user.email} readOnly />
+            <input type="email" className="form-control" name="email" id="email" value={email} readOnly />
           </Col>
         </Row>
         <Row className='row-spacer'>
@@ -68,7 +78,7 @@ const PublicProfile = props => {
         <Row className='profile-rows'>
           <Col>
             <h5>Description</h5>
-            <textarea style={{ width: '100%', height: '100px' }} id='description' placeholder="Description" value={user.description} readOnly />
+            <textarea style={{ width: '100%', height: '100px' }} id='description' placeholder="Description" value={description} readOnly />
           </Col>
         </Row>
       </div>

@@ -13,6 +13,7 @@ import Form from 'react-bootstrap/Form';
 import { useUser } from '../hooks/useUser';
 import { updateUser } from '../actions/actionCreators';
 import { navigate } from '@reach/router';
+import ReactTooltip from 'react-tooltip';
 
 const editIcon = { fontSize: "0.89rem", padding: "0", border: "none", background: "none" };
 
@@ -241,7 +242,8 @@ const Profile = props => {
 
   return (
     <div className='profile-outer'>
-      <h2 className='profile-username'> Username: {username}'s Profile <i style={{cursor: 'pointer'}} className="fas fa-user" onClick={() => publicProfile(username)}></i> </h2>
+      <ReactTooltip place="right" />
+      <h2 className='profile-username'> Username: {username}'s Profile <i data-tip="Preview my public profile" style={{ cursor: 'pointer' }} className="fas fa-user" onClick={() => publicProfile(username)}></i> </h2>
       <div className='profile-info'>
         <Row className='profile-rows'>
           <Col>
