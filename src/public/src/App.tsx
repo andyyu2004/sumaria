@@ -21,8 +21,8 @@ const App: React.FC = () => {
   /* Pass some nullary function as callback */
   const sidebarEntries: [string, () => void][] = [
     ["Home", () => navigate('/')],
-    ["Chat", () => navigate('/chat')],
     ["Browse", () => navigate('/browse')],
+    ["Chat", () => navigate('/chat')],
     ["Import", () => navigate('/import')],
     ["Add Event", () => navigate('/addevent')],
     ["My Calendar", () => navigate('/calendar')],

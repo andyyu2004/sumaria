@@ -60,7 +60,7 @@ const Login = props => {
     res.map(user => {
       //console.log(user);
       // setMessage(`Succesfully logged in: username = ${user.username}`);
-      toast.success('Successfully logged in! Welcome ' + user.username + '!', {
+      toast.success('Successfully logged in! Welcome ' + user.username + '!', {
         position: toast.POSITION.TOP_CENTER
       });
       dispatch(setUser(user));
