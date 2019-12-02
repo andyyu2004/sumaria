@@ -1,14 +1,16 @@
-import { IEither, Left, Right } from '../types/Either';
+import { Either, Right } from '../types/Either';
 import { User } from '../types/User.js';
 import axios from 'axios';
+import { apiErrorHandler } from './util';
 
-export async function getUserById(id: string): Promise<IEither<string, User>> {
-    const { data } = await axios.get(`/api/userinfo/${id}`);
-    return data.error ? new Left(`Could not find user with id ${id}`) : new Right(data.user);
+export async function getUserById(id: string): Promise<Either<string, User>> {
+    return axios.get(`/api/userinfo/${id}`)
+        .then<any>(res => new Right(res.data.user))
+        .catch(apiErrorHandler);
 }
 
-export async function getUserByUsername(username: string): Promise<IEither<string, User>> {
-    //const { data } = await axios.get(`/api/userinfobyusername/${username}`);
-    const { data } = await axios.get(`/api/user/${username}`);
-    return data.error ? new Left(`Could not find user with username ${username}`) : new Right(data.user);
+export async function getUserByUsername(username: string): Promise<Either<string, User>> {
+    return axios.get(`/api/user/${username}`)
+        .then<any>(res => new Right(res.data.user))
+        .catch(apiErrorHandler);
 }

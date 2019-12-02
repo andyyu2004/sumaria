@@ -6,7 +6,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import { toast } from 'react-toastify';
-
+import { navigate } from "@reach/router";
 
 
 const PublicProfile = props => {
@@ -16,7 +16,11 @@ const PublicProfile = props => {
   const getUser = useCallback(async () => {
     (await API.getUserByUsername(username))
       .map(setUser)
-      .mapLeft(toast.error)
+      .mapLeft( msg => {
+        toast.error(msg);
+        navigate('404');
+        return null;
+      })
   }, [username]);
 
   useEffect(() => { getUser(); }, [getUser]);
@@ -29,11 +33,11 @@ const PublicProfile = props => {
         <Row className='profile-rows'>
           <Col>
             <h5>First Name</h5>
-            <input type="text" className="form-control" name="first_name" id="firstName" value={user.firstname} readonly />
+            <input type="text" className="form-control" name="first_name" id="firstName" value={user.firstname} readOnly />
           </Col>
           <Col>
             <h5>Last Name</h5>
-            <input type="text" className="form-control" name="last_name" id="lastName" value={user.lastname} readonly />
+            <input type="text" className="form-control" name="last_name" id="lastName" value={user.lastname} readOnly />
           </Col>
         </Row>
         <Row className='row-spacer'>
@@ -41,7 +45,7 @@ const PublicProfile = props => {
         <Row className='profile-rows'>
           <Col>
             <h5>Prefer Name</h5>
-            <input type="text" className="form-control" name="prefer_name" id="preferName" value={user.prefername} readonly />
+            <input type="text" className="form-control" name="prefer_name" id="preferName" value={user.prefername} readOnly />
           </Col>
         </Row>
         <Row className='row-spacer'>
@@ -49,7 +53,7 @@ const PublicProfile = props => {
         <Row className='profile-rows'>
           <Col>
             <h5>Email</h5>
-            <input type="email" className="form-control" name="email" id="email" value={user.email} readonly />
+            <input type="email" className="form-control" name="email" id="email" value={user.email} readOnly />
           </Col>
         </Row>
         <Row className='row-spacer'>
@@ -57,7 +61,7 @@ const PublicProfile = props => {
         <Row className='profile-rows'>
           <Col>
             <h5>Description</h5>
-            <textarea style={{ width: '100%', height: '100px' }} id='description' placeholder="Description" value={user.description} readonly />
+            <textarea style={{ width: '100%', height: '100px' }} id='description' placeholder="Description" value={user.description} readOnly />
           </Col>
         </Row>
       </div>

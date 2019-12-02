@@ -137,7 +137,7 @@ const ViewEvent = props => {
     <div className="event-container">
       <div className="event-details-container">
         <Row>
-          <Col><h4><i style={{ position: 'fixed', marginTop: '-24px', marginLeft: '-24px', fontSize: '20px', cursor: 'pointer' }} className="fas fa-times-circle" onClick={() => closeEvent()}></i>{name}</h4></Col>
+          <Col><h4><i style={{ position: 'absolute', marginTop: '-24px', marginLeft: '-24px', fontSize: '20px', cursor: 'pointer' }} className="fas fa-times-circle" onClick={() => closeEvent()}></i>{name}</h4></Col>
           <Col xs='auto'>Posted Date: {new Date(postDate).toLocaleString()}</Col>
         </Row>
         <hr className='event-hr' />
