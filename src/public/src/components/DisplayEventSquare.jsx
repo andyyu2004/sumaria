@@ -25,7 +25,7 @@ const DisplayEventSquare = ({ event }) => {
         <Row>
         <Col>Event Date: {new Date(date).toLocaleString() + ' - ' + new Date(endDate).toLocaleString()}</Col>
         </Row>
-        <Row>
+        <Row className='browse-info'>
         <Col>Organizer: {organizer}</Col>
         </Row>
         <Row noGutters={true} className='browse-info'>

@@ -17,14 +17,14 @@ const DisplayEvent = ({ event }) => {
   const user = useUser();
   const postStyle = () => {
     if (event.creatorid && user._id === event.creatorid) {
-      return { backgroundColor: 'lightblue' };
+      return ' own-post';
     } else {
-      return { backgroundColor: 'white' };
+      return '';
     }
   }
   const { _id, date, description, name, postDate, endDate, skills, address, city, province, unit, organizer } = event;
   return (
-    <div className='browse-post' style={postStyle()}>
+    <div className={'browse-post' + postStyle()}>
       <Row>
         <Col><h4>{name}</h4></Col>
         <Col xs='auto' className='browse-post-date'>Posted Date: {new Date(postDate).toDateString()}</Col>

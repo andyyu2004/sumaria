@@ -72,3 +72,12 @@
     margin-top:5px;
     border-top: solid 2px lightgray;
 }
+
+.own-post {
+    background-color:var(--button-hover-color);
+    border: solid 2px #90c0d3;
+}
+
+.own-post hr {
+    border-top: solid 2px #90c0d3;
+}

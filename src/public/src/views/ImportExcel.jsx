@@ -24,7 +24,7 @@ const ImportExcel = props => {
   };
 
   return (
-    <div>
+    <div className='import-container'>
       <h1>Import Names For Events</h1>
       <input type="file" onChange={handleFile} multiple={false} />
       <OutTable data={sheet.rows} columns={sheet.cols} tableClassName="ExcelTable2007" tableHeaderRowClass="heading" />
