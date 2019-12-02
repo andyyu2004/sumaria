@@ -12,6 +12,7 @@ import cityTable from './cityTable.jsx';
 import Form from 'react-bootstrap/Form';
 import { useUser } from '../hooks/useUser';
 import { updateUser } from '../actions/actionCreators';
+import { navigate } from '@reach/router';
 
 const editIcon = { fontSize: "0.89rem", padding: "0", border: "none", background: "none" };
 
@@ -198,6 +199,8 @@ const Profile = props => {
     return true;
   }
 
+  const publicProfile = userName => navigate(`/profile/${userName}/public`);
+
   const editProfile = (prop) => {
     if (prop === 'address') {
       var inputStreet = document.getElementById('address-street');
@@ -238,7 +241,7 @@ const Profile = props => {
 
   return (
     <div className='profile-outer'>
-      <h2 className='profile-username'> Username: {username}'s Profile <i className="fas fa-user"></i> </h2>
+      <h2 className='profile-username'> Username: {username}'s Profile <i style={{cursor: 'pointer'}} className="fas fa-user" onClick={() => publicProfile(username)}></i> </h2>
       <div className='profile-info'>
         <Row className='profile-rows'>
           <Col>

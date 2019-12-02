@@ -10,7 +10,7 @@ import Sidebar from './components/Sidebar';
 import { PublicProfile, AddEvent, APITesting, Browse, Home, ImportExcel, Login, Profile, RegisterSuccess, Registration, ChatView, ViewEvent, MyCalendar, ErrorView } from './views';
 
 toast.configure({
-  autoClose: 2000,
+  autoClose: 1500,
   draggable: true,
   draggablePercent: 50
 });

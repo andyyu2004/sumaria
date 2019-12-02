@@ -172,7 +172,7 @@ const ViewEvent = props => {
         {/* {files.map(f => <div key={f._id} onClick={() => downloadFile(f._id)}>{f.file.name}</div>)} */}
         {files.map(f => <div key={f._id}><a href={`/api/event/${eventId}/file/${f._id}`}>{f.file.name}</a><br /></div>)}
         {isCreator && <input type="file" onChange={uploadFile} multiple />}
-        {isRegistered ? <Button style={{ float: 'right' }} onClick={() => cancelEventRegistration()}>{(isRegistered - numVolunteers) ? 'Cancel Waitlist' : 'Cancel'}</Button> : <Button style={{ float: 'right' }} onClick={() => registerEvent()}>{waitlisted ? 'Waitlist' : 'Register'}</Button>}
+        {isRegistered ? <Button style={{ float: 'right' }} onClick={() => cancelEventRegistration()}>{(isRegistered - numVolunteers > 0) ? 'Cancel Waitlist' : 'Cancel'}</Button> : <Button style={{ float: 'right' }} onClick={() => registerEvent()}>{waitlisted ? 'Waitlist' : 'Register'}</Button>}
         <br /><br />{isCreator && <Button style={{ float: 'right' }} onClick={() => confirmDelete()} className="btn btn-secondary">Delete</Button>}
         {/* Show button to add event file if the user is the creator of the event */}
         <br /><br /><br />

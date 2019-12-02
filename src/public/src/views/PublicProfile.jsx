@@ -12,10 +12,16 @@ import { navigate } from "@reach/router";
 const PublicProfile = props => {
   const { username } = props;
   const [user, setUser] = useState({});
+  const [isMyProfile, setIsMyProfile] = useState(false);
 
   const getUser = useCallback(async () => {
     (await API.getUserByUsername(username))
-      .map(setUser)
+      .map( user => {
+        setUser(user);
+        if (username === user.username){
+          setIsMyProfile(true);
+        }
+      })
       .mapLeft( msg => {
         toast.error(msg);
         navigate('404');
@@ -25,10 +31,11 @@ const PublicProfile = props => {
 
   useEffect(() => { getUser(); }, [getUser]);
 
+  const privateProfile = () => navigate(`/profile`);
   
   return (
     <div className='profile-outer'>
-      <h2 className='profile-username'> Username: {username}'s Profile <i className="fas fa-user"></i> </h2>
+<h2 className='profile-username'> Username: {username}'s Profile { isMyProfile ? <i style={{cursor: 'pointer'}} className="far fa-user" onClick={()=>privateProfile()}></i> : <i className="fas fa-user"></i>} </h2>
       <div className='profile-info'>
         <Row className='profile-rows'>
           <Col>
