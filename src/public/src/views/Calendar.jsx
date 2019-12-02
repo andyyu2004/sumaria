@@ -9,6 +9,7 @@ import moment from 'moment';
 import ReactTooltip from 'react-tooltip';
 import { withProtection } from '../components/hoc';
 import { toast } from 'react-toastify';
+import { useUser } from '../hooks/useUser';
 //import { useUser } from '../hooks/useUser';
 //import globalize from 'globalize';
 //const localizer = globalizeLocalizer(globalize)
@@ -16,28 +17,6 @@ import { toast } from 'react-toastify';
 //const user = useUser();
 
 const localizer = momentLocalizer(moment);
-
-function eventStyleGetter(event, start, end, isSelected) {
-  var duration = end - start;
-  var bgColor = event.allDay ? 'rgba(51, 204, 204, 0.95)' : 'rgba(102, 153, 255, 0.95)';
-  if (duration > 86520000) {
-    bgColor = 'rgba(153, 153, 227, 0.95)';
-  }
-  if (event.title === 'Today') {
-    bgColor = 'rgba(69, 157, 129, 0.95)';
-  }
-  var style = {
-    backgroundColor: bgColor,
-    borderRadius: '8px',
-    opacity: 0.86,
-    color: 'black',
-    border: '0px',
-    display: 'block'
-  };
-  return {
-    style: style
-  };
-}
 
 const Event = ({ event }) => (
   <span onClick={() => {onEventClick(event)}}>
@@ -64,6 +43,37 @@ const onEventClick = (event) => {
 
 
 const MyCalendar = props => {
+
+
+  const user = useUser();
+
+function eventStyleGetter(event, start, end, isSelected) {
+
+
+  var duration = end - start;
+  var bgColor = event.allDay ? 'rgba(51, 204, 204, 0.95)' : 'rgba(102, 153, 255, 0.95)';
+  if (duration > 86520000) {
+    bgColor = 'rgba(153, 153, 227, 0.95)';
+  }
+  if (event.title === 'Today') {
+    bgColor = 'rgba(69, 157, 129, 0.95)';
+  }
+
+  if (event.creatorid === user._id){
+    bgColor = 'rgba(209, 107, 159, 0.95)';
+  }
+  var style = {
+    backgroundColor: bgColor,
+    borderRadius: '8px',
+    opacity: 0.86,
+    color: 'black',
+    border: '0px',
+    display: 'block'
+  };
+  return {
+    style: style
+  };
+}
 
   const [userEvents, setEvents] = useState([]);
   // same as in profile
