@@ -14,7 +14,10 @@ List the most significant changes you made to your product (if any). It's normal
  * For each change, explain why you are making it and what you are hoping to achieve from it
 
  > *Note:* If you are not making (or haven't made) any changes to your product, it means you successfully scoped, planned and executed the development of your application.This is a very rare occurrence - describe what you believed enabled your team to do so and why. 
-
+ 
+ * We reduced the scope of User Story 3: "As a volunteer organizer, I would like to be able to add volunteers via an Excel document so I can send out invites faster."
+   * At the current moment, a volunteer organizer is able to import a CSV or XLSX file and see all the information within the spreadsheet. But we have not implemented the functionality that pulls selected volunteer's emails from the imported file and sends out invitations to those volunteers.
+   
 ### Handoff plan
 
 Describe your plan for handing off your product and all technical assets to your partner

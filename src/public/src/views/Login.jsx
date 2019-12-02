@@ -65,7 +65,6 @@ const Login = props => {
       });
       dispatch(setUser(user));
       navigate("/");
-      return null;
     }).mapLeft(err => {
       //console.log(err);
       // setMessage(`${err} - Login Failed`),

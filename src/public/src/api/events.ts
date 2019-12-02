@@ -19,7 +19,6 @@ export async function addEvent(event: Event): Promise<Either<string, Event>> {
 /** Return all events */
 export async function getEvents(): Promise<Either<string, Event[]>> {
     const { data } = await axios.get(`/api/events`);
-    console.log(data.events);
     return data.error ? new Left(data.message) : new Right(data.events);
 }
 
@@ -42,8 +41,8 @@ export async function getEventFileIds(eventid: string) {
 }
 
 export async function getEventsForUser() {
-    return axios.get(`/api/user/event`)
-        .then(res => new Right(res.data.file))
+    return axios.get('/api/user/event')
+        .then(res => new Right(res.data.events))
         .catch(apiErrorHandler);
 }
 

@@ -51,43 +51,37 @@ function eventStyleGetter(event, start, end, isSelected) {
   };
 }
 
-function Event({ event }) {
-  return (
-    <span onClick={() => {onEventClick(event)}}>
-      <ReactTooltip place="top" />
-      <div data-tip={event.desc}>
-        <strong>{event.title}</strong>
-        {event.desc && ':  ' + event.desc}
-      </div>
-    </span>
-  )
-}
+const Event = ({ event }) => (
+  <span onClick={() => {onEventClick(event)}}>
+    <ReactTooltip place="top" />
+    <div data-tip={event.desc}>
+      <strong>{event.title}</strong>
+      {event.desc && ':  ' + event.desc}
+    </div>
+  </span>
+);
 
-function EventAgenda({ event }) {
-  return (
-    <span>
-      <em>{event.title}</em>
-      <p>{event.desc}</p>
-    </span>
-  )
-}
+const EventAgenda = ({ event }) => (
+  <span>
+    <em>{event.title}</em>
+    <p>{event.desc}</p>
+  </span>
+);
+
 
 const onEventClick = (event) => {
-  if (event.title !== 'Today'){
+  if (event.title !== 'Today')
     navigate( event.title ? `/event/${event.title}` : '/calendar', { state: { event } })
-  }
-  //navigate(event.url || '/calendar');
-}
+};
 
 
 const MyCalendar = props => {
 
-  const { username } = useSelector(state => state.user);
   const [userEvents, setEvents] = useState([]);
   // same as in profile
 
   const fetchEvents = useCallback(async () => {
-      (await API.getEventsForUser())
+    (await API.getEventsForUser())
       .map(setEvents)
       .mapLeft(toast.error);
   }, []);
@@ -105,14 +99,13 @@ const MyCalendar = props => {
   if (userEvents.length > 0) {
     events = userEvents;
     // alter event (obj) props
-    events.map((event) => {
+    events.map(event => {
       renameProperty(event, 'name', 'title');
       renameProperty(event, 'description', 'desc');
       //renameProperty(event, 'endDate', 'end');
       //renameProperty(event, 'date', 'start');
       event['start'] = new Date(event['date']);
       event['end'] = new Date(event['endDate']);
-      return null;
     })
     events.push({
       id: 0,
@@ -184,12 +177,11 @@ const MyCalendar = props => {
       description: 'Today'
     });
     // alter event (obj) props
-    events.map((event) => {
+    events.map(event => {
       renameProperty(event, 'title', 'name');
       renameProperty(event, 'desc', 'description');
       renameProperty(event, 'end', 'endDate');
       renameProperty(event, 'start', 'date');
-      return null;
     })
   }
 
