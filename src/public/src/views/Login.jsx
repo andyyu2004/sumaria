@@ -62,7 +62,7 @@ const Login = props => {
         position: toast.POSITION.TOP_CENTER
       });
       dispatch(setUser(user));
-      navigate("/login");
+      navigate("/");
       return null;
     }).mapLeft(err => {
       toast.error(err, {
