@@ -142,10 +142,10 @@ const ViewEvent = props => {
         </Row>
         <hr className='event-hr' />
         {/* Just temporary debugging displays */}
-        <Row>
+        {/* <Row>
           <Col><h5>organizer: {creatorid}</h5></Col>
         </Row>
-        <h5>me: {user._id}</h5>
+        <h5>me: {user._id}</h5> */}
         <ul>
           <Row>
             <Col>Event Date: {new Date(date).toLocaleString() + ' - ' + new Date(endDate).toLocaleString()}</Col>

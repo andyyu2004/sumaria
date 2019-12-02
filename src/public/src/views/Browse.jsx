@@ -64,8 +64,6 @@ const Browse = props => {
   let eventsFiltered = skill ? (new fuse(events, optionsSkills)).search(skill) : events;
   eventsFiltered = keyword ? (new fuse(eventsFiltered, optionsName)).search(keyword) : eventsFiltered;
   eventsFiltered = eventsFiltered.filter(event => (event.date >= startDate && event.date <= endDate ));
-  //eventsFiltered = eventsFiltered.filter(event => (event.date > startDate ));
-  //eventsFiltered = eventsFiltered.filter(event => ((event.date) < endDate));
   if (province !== 'none') {
     eventsFiltered = eventsFiltered.filter(event => ((event.province) === province));
     eventsFiltered = city ? eventsFiltered.filter(event => ((event.city) === city)) : eventsFiltered;
@@ -120,11 +118,6 @@ const Browse = props => {
           </select>
         </Form.Group>
       </Form.Row>
-      {/* <Form.Row>
-        <Form.Group as={Col}>
-          <button type="reset" class="btn btn-primary" onClick={setProvince("none")}>Clear</button>
-        </Form.Group>
-      </Form.Row> */}
       <div>
         {eventsFiltered.map(event => <DisplayEvent key={event._id} event={event} />)}
       </div>
